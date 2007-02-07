@@ -1,0 +1,406 @@
+#!/usr/bin/perl -d:ptkdb -w
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb -w
+#
+
+use strict;
+
+
+BEGIN
+{
+    push @INC, '.';
+
+    push @INC, '/usr/local/glue/swig/perl';
+}
+
+
+use Data::Dumper;
+
+use Heccer;
+
+use Neurospaces;
+
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+$ENV{NEUROSPACES_MODELS} = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
+
+
+sub main
+{
+    my $neurospaces = Neurospaces->new();
+
+    my $args = [ "$0", "-P", "segments/purkinje_maind_passive.ndf" ];
+
+    # my $args = [ "$0", "-P", "cells/golgi.ndf" ];
+
+    my $success = $neurospaces->read($args);
+
+    my $setup = $neurospaces->setup("/Purk_maind", "Heccer");
+}
+
+
+main();
+
+
+exit 0;
+
+
+# packages below
+
+package Neurospaces::Model;
+
+
+sub get_segments
+{
+    my $self = shift;
+
+    # default result : none
+
+    my $segments = [];
+
+    # if self is a segment
+
+    if (1)
+    {
+	push @$segments, $self;
+    }
+
+    # add other segments
+
+    #t use symboltraversesegments
+
+    return $segments;
+}
+
+
+sub intermediary
+{
+    my $self = shift;
+
+    my $segments = $self->get_segments();
+
+    # convert segments to compartments
+
+    my $compartments = [];
+
+    foreach my $segment (@$segments)
+    {
+	#t enumerate parameters
+
+	my $pCm
+	    = Neurospaces::SymbolParameterResolveScaledValue
+		($segment->{symbol}, "CM", $segment->{context}, );
+	my $pEm
+	    = Neurospaces::SymbolParameterResolveScaledValue
+		($segment->{symbol}, "ELEAK", $segment->{context}, );
+	my $pInitVm
+	    = Neurospaces::SymbolParameterResolveScaledValue
+		($segment->{symbol}, "Vm_init", $segment->{context}, );
+	my $pInject
+	    = Neurospaces::SymbolParameterResolveScaledValue
+		($segment->{symbol}, "INJECT", $segment->{context}, );
+	my $pRa
+	    = Neurospaces::SymbolParameterResolveScaledValue
+		($segment->{symbol}, "RA", $segment->{context}, );
+	my $pRm
+	    = Neurospaces::SymbolParameterResolveScaledValue
+		($segment->{symbol}, "RM", $segment->{context}, );
+	my $pParent
+	    = Neurospaces::SymbolParameterResolveScaledValue
+		($segment->{symbol}, "SOMATOPETAL", $segment->{context}, );
+
+	my $dCm = $pCm;
+	my $dEm = $pEm;
+	my $dInitVm = $pInitVm;
+	my $dInject = $pInject;
+	my $dRa = $pRa;
+	my $dRm = $pRm;
+	my $iParent = $pParent;
+
+# 	my $dCm = 4.57537e-11;
+# 	my $dEm = -0.08;
+# 	my $dInitVm = -0.068;
+# 	my $dInject = 0;
+# 	my $dRa = 360502;
+# 	my $dRm = 3.58441e+08;
+# 	my $iParent = -1;
+
+	my $compartment = Heccer::Compartment->new();
+
+	my $mc = $compartment->swig_mc_get();
+
+	$mc->swig_iType_set(1);
+
+	$compartment->swig_dCm_set($dCm);
+	$compartment->swig_dEm_set($dEm);
+	$compartment->swig_dInitVm_set($dInitVm);
+	$compartment->swig_dInject_set($dInject);
+	$compartment->swig_dRa_set($dRa);
+	$compartment->swig_dRm_set($dRm);
+	$compartment->swig_iParent_set($iParent);
+
+	push @$compartments, $compartment;
+    }
+
+    # put the compartments in an intermediary
+
+    my $intermediary = Heccer::Intermediary->new();
+
+    $intermediary->swig_iCompartments_set($#$compartments + 1);
+
+    $intermediary->swig_pcomp_set($compartments);
+
+    my $pi = $intermediary->swig_piC2m_get();
+
+    my $piC2m = Heccer::int_array(2);
+
+    #t get rid of count by implementing a push, needs current.
+
+    my $comp2mech = [ 0, -1];
+
+    my $count = 0;
+
+    map { Heccer::int_set($piC2m, $count++, $_) } @$comp2mech;
+
+    $intermediary->swig_piC2m_set( $piC2m );
+
+    return $intermediary;
+}
+
+
+sub new
+{
+    my $package = shift;
+
+    my $self = { @_ };
+
+    bless $self, $package;
+
+    return $self;
+}
+
+
+package Neurospaces;
+
+
+sub lookup
+{
+    my $self = shift;
+
+    my $model_name = shift;
+
+#     my $neurospaces = $self->{engine};
+
+    my $context = Neurospaces::PidinStackParse($model_name);
+
+    my $symbol = PidinStackLookupTopSymbol($context, );
+
+    my $model
+	= Neurospaces::Model->new
+	    (
+	     context => $context,
+	     symbol => $symbol,
+	    );
+
+    return $model;
+}
+
+
+sub new
+{
+    my $package = shift;
+
+    my $options = shift;
+
+    my $neurospaces = Neurospaces::NeuroSpacesNew();
+
+    my $self
+	= {
+	   engine => $neurospaces,
+	  };
+
+    bless $self, $package;
+
+    return $self;
+}
+
+
+sub read
+{
+    my $self = shift;
+
+    my $args = shift;
+
+    my $neurospaces = $self->{engine};
+
+    my $success = Neurospaces::NeuroSpacesRead($neurospaces, $#$args + 1, $args);
+
+    return $success;
+}
+
+
+sub setup
+{
+    my $self = shift;
+
+    my $model_name = shift;
+
+    my $solverclass = shift;
+
+    my $solver = $solverclass->new($self);
+
+    $solver->compile($model_name);
+}
+
+
+package Heccer;
+
+
+sub compile
+{
+    my $self = shift;
+
+    my $model_name = shift;
+
+    my $service = $self->{service};
+
+    my $model = $service->lookup($model_name);
+
+    # construct intermediary for this model
+
+    my $intermediary = $model->intermediary();
+
+    my $engine = $self->{engine};
+
+    $engine->swig_inter_set($intermediary);
+
+    # build indices for optimization
+
+    $engine->HeccerCompileP2();
+
+    # compile to byte code
+
+    $engine->HeccerCompileP3();
+
+    # initiate values
+
+    $engine->HeccerInitiate();
+
+    # initial dump
+
+    $engine->HeccerDumpV();
+
+}
+
+
+sub new
+{
+    my $package = shift;
+
+    my $service = shift;
+
+    my $engine = Heccer::HeccerNew($service->{engine});
+
+    my $self
+	= {
+	   engine => $engine,
+	   service => $service,
+	  };
+
+    bless $self, $package;
+
+    return $self;
+}
+
+
+
+# my $soma = Heccer::Compartment->new();
+
+# my $mc = $soma->swig_mc_get();
+
+# $mc->swig_iType_set(1);
+
+# print Dumper($soma);
+
+# $soma->swig_dCm_set(4.57537e-11);
+# $soma->swig_dEm_set(-0.08);
+# $soma->swig_dInitVm_set(-0.068);
+# $soma->swig_dInject_set(0);
+# $soma->swig_dRa_set(360502);
+# $soma->swig_dRm_set(3.58441e+08);
+# $soma->swig_iParent_set(-1);
+
+# my $intermediary = Heccer::Intermediary->new();
+
+# $intermediary->swig_iCompartments_set(1);
+
+# $intermediary->swig_pcomp_set($soma);
+
+# print "Here\n";
+
+# my $pi = $intermediary->swig_piC2m_get();
+
+# print Dumper($pi);
+
+# my $piC2m = Heccer::int_array(2);
+
+# #t get rid of count by implementing a push, needs current.
+
+# my $comp2mech = [ 0, -1];
+
+# my $count = 0;
+
+# map { Heccer::int_set($piC2m, $count++, $_) } @$comp2mech;
+
+# # Heccer::piC2m_set($intermediary, $piC2m, );
+
+# $intermediary->swig_piC2m_set( $piC2m );
+
+# print "There\n";
+
+# # instantiate a heccer with an initialized intermediary
+
+# my $heccer = Heccer::HeccerNewP2($intermediary);
+
+# # build indices for optimization
+
+# $heccer->HeccerCompileP2();
+
+# # compile to byte code
+
+# $heccer->HeccerCompileP3();
+
+# # initiate values
+
+# $heccer->HeccerInitiate();
+
+# # initial dump
+
+# $heccer->HeccerDumpV();
+
+# # a couple of times
+
+# foreach (0 .. 2)
+# {
+#     # step
+
+#     $heccer->HeccerHecc();
+
+#     # dump
+
+#     print "-------\n";
+
+#     print "Iteration $_\n";
+
+#     $heccer->HeccerDumpV();
+# }
+
+# print "Perl script finished\n";
+
+
