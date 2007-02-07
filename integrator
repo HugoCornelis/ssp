@@ -97,22 +97,22 @@ sub intermediary
 	    = Neurospaces::SymbolParameterResolveScaledValue
 		($segment->{symbol}, "CM", $segment->{context}, );
 	my $pEm
-	    = Neurospaces::SymbolParameterResolveScaledValue
+	    = Neurospaces::SymbolParameterResolveValue
 		($segment->{symbol}, "ELEAK", $segment->{context}, );
 	my $pInitVm
-	    = Neurospaces::SymbolParameterResolveScaledValue
+	    = Neurospaces::SymbolParameterResolveValue
 		($segment->{symbol}, "Vm_init", $segment->{context}, );
 	my $pInject
-	    = Neurospaces::SymbolParameterResolveScaledValue
+	    = Neurospaces::SymbolParameterResolveValue
 		($segment->{symbol}, "INJECT", $segment->{context}, );
 	my $pRa
-	    = Neurospaces::SymbolParameterResolveScaledValue
+	    = Neurospaces::SymbolParameterResolveValue
 		($segment->{symbol}, "RA", $segment->{context}, );
 	my $pRm
-	    = Neurospaces::SymbolParameterResolveScaledValue
+	    = Neurospaces::SymbolParameterResolveValue
 		($segment->{symbol}, "RM", $segment->{context}, );
 	my $pParent
-	    = Neurospaces::SymbolParameterResolveScaledValue
+	    = Neurospaces::SymbolParameterResolveValue
 		($segment->{symbol}, "SOMATOPETAL", $segment->{context}, );
 
 	my $dCm = $pCm;
