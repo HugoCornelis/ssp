@@ -1,4 +1,3 @@
-#!/usr/bin/perl -d:ptkdb -w
 #!/usr/bin/perl -w
 #!/usr/bin/perl -d:ptkdb -w
 #
@@ -33,15 +32,57 @@ $ENV{NEUROSPACES_MODELS} = '/local_home/local_home/hugo/neurospaces_project/neur
 
 sub main
 {
-    my $neurospaces = Neurospaces->new();
+    # construct a translation service
 
-    my $args = [ "$0", "-P", "segments/purkinje_maind_passive.ndf" ];
+    my $neurospaces = Neurospaces::NeurospacesNew();
+
+    # read a model
 
     # my $args = [ "$0", "-P", "cells/golgi.ndf" ];
 
-    my $success = $neurospaces->read($args);
+    my $args = [ "$0", "-P", "cells/purk2m9s.ndf" ];
 
-    my $setup = $neurospaces->setup("/Purk_maind", "Heccer");
+    my $success = Neurospaces::NeurospacesRead($neurospaces, $#$args + 1, $args);
+
+    # instantiate a scheduler
+
+    my $scheduler
+	= SSP->new(
+		   {
+# 		    models => [
+# 			       [ "$0", "-P", "segments/purkinje_maind_passive.ndf" ],
+# 			      ],
+		    models => [
+			       {
+				modelname => "/Purkinje",
+				solverclass => "Heccer",
+			       },
+			      ],
+		    service => SSP::Service->new(
+						 {
+						  backend => $neurospaces,
+						 },
+						),
+		    solverclasses => {
+				      Heccer => {
+						 constructor => "SwiggableHeccer::HeccerConstruct",
+						},
+				     },
+		   },
+		  );
+
+    # compile the schedule
+
+    my $setup = $scheduler->setup();
+
+    if (!$setup)
+    {
+	die "Failed to compile a schedule";
+    }
+
+    # advance the time
+
+    $scheduler->advance(0.1);
 }
 
 
@@ -53,162 +94,38 @@ exit 0;
 
 # packages below
 
-package Neurospaces::Model;
+package SSP;
 
 
-sub get_segments
+sub advance
 {
     my $self = shift;
 
-    # default result : none
+    my $time = shift;
 
-    my $segments = [];
+    # set default result : ok
 
-    # if self is a segment
+    my $result = 1;
 
-    if (1)
+    # loop over all schedulees
+
+    my $schedule = $self->{schedule};
+
+    foreach my $schedulee (@$schedule)
     {
-	push @$segments, $self;
+	# advance the engine
+
+	my $error = $schedulee->advance($time);
+
+	if ($error)
+	{
+	    die "Scheduling for $time failed";
+	}
     }
 
-    # add other segments
+    # return result
 
-    #t use symboltraversesegments
-
-    return $segments;
-}
-
-
-sub intermediary
-{
-    my $self = shift;
-
-    my $segments = $self->get_segments();
-
-    # convert segments to compartments
-
-    my $compartments = [];
-
-    foreach my $segment (@$segments)
-    {
-	#t enumerate parameters
-
-	my $pCm
-	    = Neurospaces::SymbolParameterResolveScaledValue
-		($segment->{symbol}, "CM", $segment->{context}, );
-	my $pEm
-	    = Neurospaces::SymbolParameterResolveValue
-		($segment->{symbol}, "ELEAK", $segment->{context}, );
-	my $pInitVm
-	    = Neurospaces::SymbolParameterResolveValue
-		($segment->{symbol}, "Vm_init", $segment->{context}, );
-	my $pInject
-	    = Neurospaces::SymbolParameterResolveValue
-		($segment->{symbol}, "INJECT", $segment->{context}, );
-	my $pRa
-	    = Neurospaces::SymbolParameterResolveValue
-		($segment->{symbol}, "RA", $segment->{context}, );
-	my $pRm
-	    = Neurospaces::SymbolParameterResolveValue
-		($segment->{symbol}, "RM", $segment->{context}, );
-	my $pParent
-	    = Neurospaces::SymbolParameterResolveValue
-		($segment->{symbol}, "SOMATOPETAL", $segment->{context}, );
-
-	my $dCm = $pCm;
-	my $dEm = $pEm;
-	my $dInitVm = $pInitVm;
-	my $dInject = $pInject;
-	my $dRa = $pRa;
-	my $dRm = $pRm;
-	my $iParent = $pParent;
-
-# 	my $dCm = 4.57537e-11;
-# 	my $dEm = -0.08;
-# 	my $dInitVm = -0.068;
-# 	my $dInject = 0;
-# 	my $dRa = 360502;
-# 	my $dRm = 3.58441e+08;
-# 	my $iParent = -1;
-
-	my $compartment = Heccer::Compartment->new();
-
-	my $mc = $compartment->swig_mc_get();
-
-	$mc->swig_iType_set(1);
-
-	$compartment->swig_dCm_set($dCm);
-	$compartment->swig_dEm_set($dEm);
-	$compartment->swig_dInitVm_set($dInitVm);
-	$compartment->swig_dInject_set($dInject);
-	$compartment->swig_dRa_set($dRa);
-	$compartment->swig_dRm_set($dRm);
-	$compartment->swig_iParent_set($iParent);
-
-	push @$compartments, $compartment;
-    }
-
-    # put the compartments in an intermediary
-
-    my $intermediary = Heccer::Intermediary->new();
-
-    $intermediary->swig_iCompartments_set($#$compartments + 1);
-
-    $intermediary->swig_pcomp_set($compartments);
-
-    my $pi = $intermediary->swig_piC2m_get();
-
-    my $piC2m = Heccer::int_array(2);
-
-    #t get rid of count by implementing a push, needs current.
-
-    my $comp2mech = [ 0, -1];
-
-    my $count = 0;
-
-    map { Heccer::int_set($piC2m, $count++, $_) } @$comp2mech;
-
-    $intermediary->swig_piC2m_set( $piC2m );
-
-    return $intermediary;
-}
-
-
-sub new
-{
-    my $package = shift;
-
-    my $self = { @_ };
-
-    bless $self, $package;
-
-    return $self;
-}
-
-
-package Neurospaces;
-
-
-sub lookup
-{
-    my $self = shift;
-
-    my $model_name = shift;
-
-#     my $neurospaces = $self->{engine};
-
-    my $context = Neurospaces::PidinStackParse($model_name);
-
-    my $symbol = PidinStackLookupTopSymbol($context, );
-
-    my $model
-	= Neurospaces::Model->new
-	    (
-	     context => $context,
-	     symbol => $symbol,
-	    );
-
-    return $model;
+    return $result;
 }
 
 
@@ -218,11 +135,9 @@ sub new
 
     my $options = shift;
 
-    my $neurospaces = Neurospaces::NeuroSpacesNew();
-
     my $self
 	= {
-	   engine => $neurospaces,
+	   %$options,
 	  };
 
     bless $self, $package;
@@ -231,54 +146,140 @@ sub new
 }
 
 
-sub read
-{
-    my $self = shift;
-
-    my $args = shift;
-
-    my $neurospaces = $self->{engine};
-
-    my $success = Neurospaces::NeuroSpacesRead($neurospaces, $#$args + 1, $args);
-
-    return $success;
-}
-
-
 sub setup
 {
     my $self = shift;
 
-    my $model_name = shift;
+    # set default result : ok
 
-    my $solverclass = shift;
+    my $result = 1;
 
-    my $solver = $solverclass->new($self);
+    # construct a schedule
 
-    $solver->compile($model_name);
+    my $schedule = $self->{schedule} || [];
+
+    # loop over all models
+
+    my $models = $self->{models};
+
+    foreach my $model (@$models)
+    {
+	# instantiate a schedulee
+
+	my $modelname = $model->{modelname};
+
+	my $solverclass = $model->{solverclass};
+
+	my $service = $self->{service};
+
+	my $engine = SSP::Engine->new($solverclass, $service, $modelname);
+
+	# compile the model
+
+	if (!$engine->compile($self))
+	{
+	    return 0;
+	}
+
+	# register the schedulee in the schedule
+
+	push @$schedule, $engine;
+    }
+
+    # register the schedule
+
+    $self->{schedule} = $schedule;
+
+    # return result
+
+    return $result;
 }
 
 
-package Heccer;
+package SSP::Glue;
+
+
+
+sub backend
+{
+    my $self = shift;
+
+    return $self->{backend};
+}
+
+
+package SSP::Engine;
+
+
+BEGIN { our @ISA = qw(SSP::Glue); }
+
+
+sub advance
+{
+    my $self = shift;
+
+    my $time = shift;
+
+    # set result : ok
+
+    my $result;
+
+    my $backend = $self->backend();
+
+    my $success = $backend->HeccerHeccs($time);
+
+    if (!$success)
+    {
+	$result = "HeccerHeccs() failed";
+    }
+
+    # return result
+
+    return $result;
+}
 
 
 sub compile
 {
     my $self = shift;
 
-    my $model_name = shift;
+    my $scheduler = shift;
+
+    # set default result : ok
+
+    my $result = 1;
+
+    #t do better error checking for this method
+
+    # construct an engine for this model
+
+    my $modelname = $self->{modelname};
+
+    my $solverclass = $self->{solverclass};
+
+    my $constructor = $scheduler->{solverclasses}->{$solverclass}->{constructor};
 
     my $service = $self->{service};
 
-    my $model = $service->lookup($model_name);
+    my $service_backend = $service->backend();
 
-    # construct intermediary for this model
+    my $engine;
 
-    my $intermediary = $model->intermediary();
+    {
+	no strict "refs";
 
-    my $engine = $self->{engine};
+	$engine = &$constructor($service_backend, $modelname);
+    }
 
-    $engine->swig_inter_set($intermediary);
+    # register the engine with the schedulee
+
+    $self->{backend} = $engine;
+
+    # tell the engine to use the service to build the intermediary
+
+    #t use the Heccer.pm methods here.
+
+    $engine->HeccerCompileP1();
 
     # build indices for optimization
 
@@ -292,10 +293,15 @@ sub compile
 
     $engine->HeccerInitiate();
 
-    # initial dump
+#     # initial dump
 
-    $engine->HeccerDumpV();
+#     #! should be diagnostics really
 
+#     $engine->HeccerDumpV();
+
+    # return result
+
+    return $result;
 }
 
 
@@ -303,14 +309,17 @@ sub new
 {
     my $package = shift;
 
+    my $solverclass = shift;
+
     my $service = shift;
 
-    my $engine = Heccer::HeccerNew($service->{engine});
+    my $modelname = shift;
 
     my $self
 	= {
-	   engine => $engine,
+	   modelname => $modelname,
 	   service => $service,
+	   solverclass => $solverclass,
 	  };
 
     bless $self, $package;
@@ -319,88 +328,23 @@ sub new
 }
 
 
+package SSP::Service;
 
-# my $soma = Heccer::Compartment->new();
 
-# my $mc = $soma->swig_mc_get();
+BEGIN { our @ISA = qw(SSP::Glue); }
 
-# $mc->swig_iType_set(1);
 
-# print Dumper($soma);
+sub new
+{
+    my $package = shift;
 
-# $soma->swig_dCm_set(4.57537e-11);
-# $soma->swig_dEm_set(-0.08);
-# $soma->swig_dInitVm_set(-0.068);
-# $soma->swig_dInject_set(0);
-# $soma->swig_dRa_set(360502);
-# $soma->swig_dRm_set(3.58441e+08);
-# $soma->swig_iParent_set(-1);
+    my $options = shift;
 
-# my $intermediary = Heccer::Intermediary->new();
+    my $self = { %$options, };
 
-# $intermediary->swig_iCompartments_set(1);
+    bless $self, $package;
 
-# $intermediary->swig_pcomp_set($soma);
-
-# print "Here\n";
-
-# my $pi = $intermediary->swig_piC2m_get();
-
-# print Dumper($pi);
-
-# my $piC2m = Heccer::int_array(2);
-
-# #t get rid of count by implementing a push, needs current.
-
-# my $comp2mech = [ 0, -1];
-
-# my $count = 0;
-
-# map { Heccer::int_set($piC2m, $count++, $_) } @$comp2mech;
-
-# # Heccer::piC2m_set($intermediary, $piC2m, );
-
-# $intermediary->swig_piC2m_set( $piC2m );
-
-# print "There\n";
-
-# # instantiate a heccer with an initialized intermediary
-
-# my $heccer = Heccer::HeccerNewP2($intermediary);
-
-# # build indices for optimization
-
-# $heccer->HeccerCompileP2();
-
-# # compile to byte code
-
-# $heccer->HeccerCompileP3();
-
-# # initiate values
-
-# $heccer->HeccerInitiate();
-
-# # initial dump
-
-# $heccer->HeccerDumpV();
-
-# # a couple of times
-
-# foreach (0 .. 2)
-# {
-#     # step
-
-#     $heccer->HeccerHecc();
-
-#     # dump
-
-#     print "-------\n";
-
-#     print "Iteration $_\n";
-
-#     $heccer->HeccerDumpV();
-# }
-
-# print "Perl script finished\n";
+    return $self;
+}
 
 
