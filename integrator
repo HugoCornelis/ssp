@@ -40,7 +40,7 @@ sub main
 
     # my $args = [ "$0", "-P", "cells/golgi.ndf" ];
 
-    my $args = [ "$0", "-P", "cells/purk2m9s.ndf" ];
+    my $args = [ "$0", "-P", "tests/cells/tensizesp.ndf" ];
 
     my $success = Neurospaces::NeurospacesRead($neurospaces, $#$args + 1, $args);
 
@@ -54,7 +54,7 @@ sub main
 # 			      ],
 		    models => [
 			       {
-				modelname => "/Purkinje",
+				modelname => "/tensizesp",
 				solverclass => "Heccer",
 			       },
 			      ],
