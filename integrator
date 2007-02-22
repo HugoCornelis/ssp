@@ -5,6 +5,9 @@
 use strict;
 
 
+$| = 1;
+
+
 BEGIN
 {
     push @INC, '.';
@@ -38,8 +41,6 @@ sub main
 
     # read a model
 
-    # my $args = [ "$0", "-P", "cells/golgi.ndf" ];
-
     my $args = [ "$0", "-P", "tests/cells/tensizesp.ndf" ];
 
     my $success = Neurospaces::NeurospacesRead($neurospaces, $#$args + 1, $args);
@@ -49,9 +50,6 @@ sub main
     my $scheduler
 	= SSP->new(
 		   {
-# 		    models => [
-# 			       [ "$0", "-P", "segments/purkinje_maind_passive.ndf" ],
-# 			      ],
 		    models => [
 			       {
 				modelname => "/tensizesp",
@@ -65,7 +63,7 @@ sub main
 						),
 		    solverclasses => {
 				      Heccer => {
-						 constructor => "SwiggableHeccer::HeccerConstruct",
+						 service_name => 'neurospaces',
 						},
 				     },
 		   },
@@ -73,16 +71,27 @@ sub main
 
     # compile the schedule
 
-    my $setup = $scheduler->setup();
+    my $setup = $scheduler->compile();
 
     if (!$setup)
     {
 	die "Failed to compile a schedule";
     }
 
+    my $initiated = $scheduler->initiate();
+
+    if (!$initiated)
+    {
+	die "Failed to initiate the schedule";
+    }
+
     # advance the time
 
-    $scheduler->advance(0.1);
+#     $scheduler->advance(0.1);
+
+    # or do a number of steps
+
+    $scheduler->steps(10, 1);
 }
 
 
@@ -103,6 +112,8 @@ sub advance
 
     my $time = shift;
 
+    my $verbose = shift;
+
     # set default result : ok
 
     my $result = 1;
@@ -115,7 +126,7 @@ sub advance
     {
 	# advance the engine
 
-	my $error = $schedulee->advance($time);
+	my $error = $schedulee->advance($time, $verbose);
 
 	if ($error)
 	{
@@ -129,24 +140,7 @@ sub advance
 }
 
 
-sub new
-{
-    my $package = shift;
-
-    my $options = shift;
-
-    my $self
-	= {
-	   %$options,
-	  };
-
-    bless $self, $package;
-
-    return $self;
-}
-
-
-sub setup
+sub compile
 {
     my $self = shift;
 
@@ -196,6 +190,87 @@ sub setup
 }
 
 
+sub initiate
+{
+    my $self = shift;
+
+    # set default result : ok
+
+    my $result = 1;
+
+    # loop over all schedulees
+
+    my $schedule = $self->{schedule};
+
+    foreach my $schedulee (@$schedule)
+    {
+	# advance the engine
+
+	my $success = $schedulee->initiate();
+
+	if (!$success)
+	{
+	    die "Initiation failed";
+	}
+    }
+
+    # return result
+
+    return $result;
+}
+
+
+sub new
+{
+    my $package = shift;
+
+    my $options = shift;
+
+    my $self
+	= {
+	   %$options,
+	  };
+
+    bless $self, $package;
+
+    return $self;
+}
+
+
+sub steps
+{
+    my $self = shift;
+
+    my $steps = shift;
+
+    my $verbose = shift;
+
+    # set default result : ok
+
+    my $result = 1;
+
+    # loop over all schedulees
+
+    my $schedule = $self->{schedule};
+
+    foreach my $schedulee (@$schedule)
+    {
+	# advance the engine
+
+	my $error = $schedulee->steps($steps, $verbose);
+
+	if ($error)
+	{
+	    die "Scheduling for $steps failed";
+	}
+    }
+
+    # return result
+
+    return $result;
+}
+
+
 package SSP::Glue;
 
 
@@ -226,7 +301,7 @@ sub advance
 
     my $backend = $self->backend();
 
-    my $success = $backend->HeccerHeccs($time);
+    my $success = $backend->advance($time);
 
     if (!$success)
     {
@@ -259,6 +334,8 @@ sub compile
 
     my $constructor = $scheduler->{solverclasses}->{$solverclass}->{constructor};
 
+    my $service_name = $scheduler->{solverclasses}->{$solverclass}->{service_name};
+
     my $service = $self->{service};
 
     my $service_backend = $service->backend();
@@ -268,38 +345,39 @@ sub compile
     {
 	no strict "refs";
 
-	$engine = &$constructor($service_backend, $modelname);
+	$engine
+	    = $solverclass->new
+		(
+		 {
+		  constructor => $constructor,
+		  service_name => $service_name,
+		  service_backend => $service_backend,
+		  modelname => $modelname,
+		 },
+		);
+
+# 	$engine = &$constructor($service_backend, $modelname);
     }
 
     # register the engine with the schedulee
 
     $self->{backend} = $engine;
 
-    # tell the engine to use the service to build the intermediary
-
-    #t use the Heccer.pm methods here.
-
-    $engine->HeccerCompileP1();
-
-    # build indices for optimization
-
-    $engine->HeccerCompileP2();
-
-    # compile to byte code
-
-    $engine->HeccerCompileP3();
-
-    # initiate values
-
-    $engine->HeccerInitiate();
-
-#     # initial dump
-
-#     #! should be diagnostics really
-
-#     $engine->HeccerDumpV();
+    $result = $engine->compile();
 
     # return result
+
+    return $result;
+}
+
+
+sub initiate
+{
+    my $self = shift;
+
+    my $backend = $self->backend();
+
+    my $result = $backend->initiate();
 
     return $result;
 }
@@ -325,6 +403,72 @@ sub new
     bless $self, $package;
 
     return $self;
+}
+
+
+sub steps
+{
+    my $self = shift;
+
+    my $steps = shift;
+
+    my $verbose = shift;
+
+    # set result : ok
+
+    my $result;
+
+    # initial dump
+
+    $verbose && print "Initiated\n";
+
+    my $backend = $self->backend();
+
+    $verbose && $backend->dump($Heccer::config->{tested_things});
+
+    # a couple of times
+
+    my $final_report = 0;
+
+    foreach my $i (0 .. $steps - 1)
+    {
+	# step
+
+	my $success = $backend->step();
+
+	if (!$success)
+	{
+	    $result = "HeccerHecc() failed";
+	}
+
+	if (($i % ($Heccer::config->{reporting_granularity})) == 0)
+	{
+	    # dump
+
+	    $verbose && print "-------\n";
+
+	    $verbose && print "Iteration $i\n";
+
+	    $verbose && $backend->dump(undef, $Heccer::config->{tested_things});
+	}
+	else
+	{
+	    $final_report = 1;
+	}
+    }
+
+    if ($final_report)
+    {
+	$verbose && print "-------\n";
+
+	$verbose && print "Iteration " . ($Heccer::config->{steps}) . "\n";
+
+	$verbose && $backend->dump(undef, $Heccer::config->{tested_things});
+    }
+
+    # return result
+
+    return $result;
 }
 
 
