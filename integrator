@@ -58,9 +58,7 @@ sub main
 			      ],
 		    service => SSP::Service->new(
 						 {
-						  #t this is awkward
-
-						  backend => $neurospaces->{neurospaces},
+						  backend => $neurospaces,
 						 },
 						),
 		    solverclasses => {
