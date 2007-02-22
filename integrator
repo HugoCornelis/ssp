@@ -37,13 +37,13 @@ sub main
 {
     # construct a translation service
 
-    my $neurospaces = Neurospaces::NeurospacesNew();
+    my $neurospaces = Neurospaces->new();
 
     # read a model
 
     my $args = [ "$0", "-P", "tests/cells/tensizesp.ndf" ];
 
-    my $success = Neurospaces::NeurospacesRead($neurospaces, $#$args + 1, $args);
+    my $success = $neurospaces->read($#$args + 1, $args);
 
     # instantiate a scheduler
 
@@ -58,7 +58,9 @@ sub main
 			      ],
 		    service => SSP::Service->new(
 						 {
-						  backend => $neurospaces,
+						  #t this is awkward
+
+						  backend => $neurospaces->{neurospaces},
 						 },
 						),
 		    solverclasses => {
