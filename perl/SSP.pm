@@ -51,11 +51,20 @@ sub compile
 
     my $result = 1;
 
+    # first instantiate the services
+
+    if (!$self->instantiate_services())
+    {
+	return 0;
+    }
+
     # construct a schedule
 
     my $schedule = $self->{schedule} || [];
 
     # loop over all models
+
+    my $solverclasses = $self->{solverclasses};
 
     my $models = $self->{models};
 
@@ -67,7 +76,7 @@ sub compile
 
 	my $solverclass = $model->{solverclass};
 
-	my $service = $self->{service};
+	my $service = $self->{services}->{$solverclasses->{$solverclass}->{service_name}};
 
 	my $engine = SSP::Engine->new($solverclass, $service, $modelname);
 
@@ -123,6 +132,59 @@ sub initiate
 }
 
 
+sub instantiate_services
+{
+    my $self = shift;
+
+    # loop over all services
+
+    my $services = $self->{services};
+
+    foreach my $service_name (keys %$services)
+    {
+	my $service = $services->{$service_name};
+
+	# construct the service backend
+
+	my $service_module = $service->{module_name};
+
+	require "$service_module.pm";
+
+	my $backend = $service_module->new();
+
+	# construct the SSP service for this backend
+
+	my $ssp_service = SSP::Service->new( { backend => $backend, }, );
+
+	# initialize the service backend with the user settings
+
+	my $initializers = $service->{initializers};
+
+	foreach my $initializer (@$initializers)
+	{
+	    my $method = $initializer->{method};
+
+	    my $arguments = $initializer->{arguments};
+
+	    my $success = $backend->$method(@$arguments);
+
+	    if (!$success)
+	    {
+		die "initializer $method for $service_name failed";
+	    }
+	}
+
+	# bind the SSP service in the scheduler
+
+	$service->{ssp_service} = $ssp_service;
+    }
+
+    # return success
+
+    return 1;
+}
+
+
 sub new
 {
     my $package = shift;
@@ -139,6 +201,48 @@ sub new
     return $self;
 }
 
+
+sub run
+{
+    my $self = shift;
+
+    # get initializers and simulation specifications, using defaults
+    # where needed
+
+    my $initializers
+	= $self->{apply}->{initializers}
+	    || [
+		{ method => 'compile', },
+		{ method => 'initiate', },
+	       ],
+		   ;
+
+    my $simulation = $self->{apply}->{simulation} || [];
+
+    # construct the schedule we have to apply
+
+    my $applications = [ @$initializers, @$simulation, ];
+
+    # go through the schedule
+
+    foreach my $application (@$applications)
+    {
+	# get method and arguments
+
+	my $method = $application->{method};
+
+	my $arguments = $application->{arguments};
+
+	# apply the method
+
+	my $success = $self->$method(@$arguments);
+
+	if (!$success)
+	{
+	    die "while running $self->{name}: $method failed";
+	}
+    }
+}
 
 sub steps
 {
@@ -235,32 +339,27 @@ sub compile
 
     my $solverclass = $self->{solverclass};
 
-    my $constructor = $scheduler->{solverclasses}->{$solverclass}->{constructor};
-
     my $service_name = $scheduler->{solverclasses}->{$solverclass}->{service_name};
 
-    my $service = $self->{service};
+    my $solver_module = $scheduler->{solverclasses}->{$solverclass}->{module_name};
+
+    #! the service points into the scheduler, but is not the service object
+
+    my $service = $self->{service}->{ssp_service};
 
     my $service_backend = $service->backend();
 
-    my $engine;
+    require "$solver_module.pm";
 
-    {
-	no strict "refs";
-
-	$engine
-	    = $solverclass->new
-		(
-		 {
-		  constructor => $constructor,
-		  service_name => $service_name,
-		  service_backend => $service_backend,
-		  modelname => $modelname,
-		 },
-		);
-
-# 	$engine = &$constructor($service_backend, $modelname);
-    }
+    my $engine
+	= $solver_module->new
+	    (
+	     {
+	      service_name => $service_name,
+	      service_backend => $service_backend,
+	      modelname => $modelname,
+	     },
+	    );
 
     # register the engine with the schedulee
 

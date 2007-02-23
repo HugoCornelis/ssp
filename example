@@ -18,10 +18,6 @@ BEGIN
 
 use Data::Dumper;
 
-use Heccer;
-
-use Neurospaces;
-
 use SSP;
 
 
@@ -37,63 +33,57 @@ $ENV{NEUROSPACES_MODELS} = '/local_home/local_home/hugo/neurospaces_project/neur
 
 sub main
 {
-    # construct a translation service
-
-    my $neurospaces = Neurospaces->new();
-
-    # read a model
+    # model specification array
 
     my $args = [ "$0", "-P", "tests/cells/tensizesp.ndf" ];
-
-    my $success = $neurospaces->read($#$args + 1, $args);
 
     # instantiate a scheduler
 
     my $scheduler
 	= SSP->new(
 		   {
+		    apply => {
+			      simulation => [
+					     {
+					      arguments => [ 10, 1, ],
+					      method => 'steps',
+					     },
+					     {
+					      arguments => [ 0.1, ],
+					      method => 'advance',
+					     },
+					    ],
+			     },
 		    models => [
 			       {
 				modelname => "/tensizesp",
-				solverclass => "Heccer",
+				solverclass => "heccer",
 			       },
 			      ],
-		    service => SSP::Service->new(
-						 {
-						  backend => $neurospaces,
-						 },
-						),
+		    name => 'tensizesp',
+		    services => {
+				 neurospaces => {
+						 initializers => [
+								  {
+								   arguments => [ $#$args + 1, $args, ],
+								   method => 'read',
+								  },
+								 ],
+						 module_name => 'Neurospaces',
+						},
+				},
 		    solverclasses => {
-				      Heccer => {
+				      heccer => {
+						 module_name => 'Heccer',
 						 service_name => 'neurospaces',
 						},
 				     },
 		   },
 		  );
 
-    # compile the schedule
+    # run the schedule
 
-    my $setup = $scheduler->compile();
-
-    if (!$setup)
-    {
-	die "Failed to compile a schedule";
-    }
-
-    my $initiated = $scheduler->initiate();
-
-    if (!$initiated)
-    {
-	die "Failed to initiate the schedule";
-    }
-
-    # advance the time
-
-#     $scheduler->advance(0.1);
-
-    # or do a number of steps
-
-    $scheduler->steps(10, 1);
+    $scheduler->run();
 }
 
 
