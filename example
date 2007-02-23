@@ -1,0 +1,105 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb -w
+#
+
+use strict;
+
+
+$| = 1;
+
+
+BEGIN
+{
+    push @INC, './perl';
+
+    push @INC, '/usr/local/glue/swig/perl';
+}
+
+
+use Data::Dumper;
+
+use Heccer;
+
+use Neurospaces;
+
+use SSP;
+
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+$ENV{NEUROSPACES_MODELS} = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
+
+
+sub main
+{
+    # construct a translation service
+
+    my $neurospaces = Neurospaces->new();
+
+    # read a model
+
+    my $args = [ "$0", "-P", "tests/cells/tensizesp.ndf" ];
+
+    my $success = $neurospaces->read($#$args + 1, $args);
+
+    # instantiate a scheduler
+
+    my $scheduler
+	= SSP->new(
+		   {
+		    models => [
+			       {
+				modelname => "/tensizesp",
+				solverclass => "Heccer",
+			       },
+			      ],
+		    service => SSP::Service->new(
+						 {
+						  backend => $neurospaces,
+						 },
+						),
+		    solverclasses => {
+				      Heccer => {
+						 service_name => 'neurospaces',
+						},
+				     },
+		   },
+		  );
+
+    # compile the schedule
+
+    my $setup = $scheduler->compile();
+
+    if (!$setup)
+    {
+	die "Failed to compile a schedule";
+    }
+
+    my $initiated = $scheduler->initiate();
+
+    if (!$initiated)
+    {
+	die "Failed to initiate the schedule";
+    }
+
+    # advance the time
+
+#     $scheduler->advance(0.1);
+
+    # or do a number of steps
+
+    $scheduler->steps(10, 1);
+}
+
+
+main();
+
+
+exit 0;
+
+

@@ -1,11 +1,11 @@
 $files = {
-           '_<./integrator' => [
+           '_<./example' => [
                                  {
                                    'expr' => undef,
                                    'value' => '1',
                                    'text' => '    my $setup = $scheduler->compile();
 ',
-                                   'fname' => './integrator',
+                                   'fname' => './example',
                                    'type' => 'user',
                                    'line' => '81'
                                  }
