@@ -16,8 +16,6 @@ BEGIN
 }
 
 
-use Data::Dumper;
-
 use SSP;
 
 
@@ -80,6 +78,16 @@ sub main
 				     },
 		   },
 		  );
+
+    use YAML;
+
+    my $scheduler_yaml;
+
+    {
+	local $/;
+
+	$scheduler_yaml = Load(`cat ./tensizesp.yml`);
+    }
 
     # run the schedule
 

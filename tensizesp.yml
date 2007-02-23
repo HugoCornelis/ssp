@@ -1,0 +1,29 @@
+--- !!perl/hash:SSP
+apply:
+  simulation:
+    - arguments:
+        - 10
+        - 1
+      method: steps
+    - arguments:
+        - 0.1
+      method: advance
+models:
+  - modelname: /tensizesp
+    solverclass: heccer
+name: tensizesp
+services:
+  neurospaces:
+    initializers:
+      - arguments:
+          - 3
+          -
+            - ./example
+            - -P
+            - tests/cells/tensizesp.ndf
+        method: read
+    module_name: Neurospaces
+solverclasses:
+  heccer:
+    module_name: Heccer
+    service_name: neurospaces
