@@ -33,7 +33,11 @@ sub main
 {
     # model specification array
 
-    my $args = [ "$0", "-P", "tests/cells/tensizesp.ndf" ];
+    my $modelname = $0;
+
+    $modelname =~ s/.*\///;
+
+    my $args = [ "$0", "-P", "tests/cells/$modelname.ndf" ];
 
     # instantiate a scheduler
 
@@ -54,11 +58,11 @@ sub main
 			     },
 		    models => [
 			       {
-				modelname => "/tensizesp",
+				modelname => "/$modelname",
 				solverclass => "heccer",
 			       },
 			      ],
-		    name => 'tensizesp',
+		    name => $modelname,
 		    services => {
 				 neurospaces => {
 						 initializers => [
@@ -86,7 +90,10 @@ sub main
     {
 	local $/;
 
-	$scheduler_yaml = Load(`cat ./tensizesp.yml`);
+	if (-e "./$modelname.yml")
+	{
+	    $scheduler_yaml = Load(`cat ./$modelname.yml`);
+	}
     }
 
     # run the schedule
