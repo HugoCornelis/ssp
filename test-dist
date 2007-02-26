@@ -1,0 +1,98 @@
+#!/usr/bin/perl -w
+#
+#
+# build script to be used to unpack and test a dist tarball.
+#
+# builds in /tmp/${package}/<whatever>, and runs the tests.
+#
+
+use strict;
+
+
+{
+    # $Format: "system 'mkdir --parents \"/tmp/${package}/${label}\"'"$
+system 'mkdir --parents "/tmp/ssp/ssp-1"'
+}
+
+if ($?)
+{
+    die "mkdir failed";
+}
+
+
+{
+    # $Format: "system \"cp '${package}-${label}.tar.gz' '/tmp/${package}/${label}'\""$
+system "cp 'ssp-ssp-1.tar.gz' '/tmp/ssp/ssp-1'"
+}
+
+if ($?)
+{
+    die "cp failed";
+}
+
+
+{
+    # $Format: "chdir \"/tmp/${package}/${label}\""$
+chdir "/tmp/ssp/ssp-1"
+}
+
+if ($?)
+{
+    die "chdir failed";
+}
+
+
+{
+    # $Format: "system \"tar xfz '${package}-${label}.tar.gz'\""$
+system "tar xfz 'ssp-ssp-1.tar.gz'"
+}
+
+if ($?)
+{
+    die "cp failed";
+}
+
+
+{
+    # $Format: "chdir \"${package}-${label}\""$
+chdir "ssp-ssp-1"
+}
+
+if ($?)
+{
+    die "chdir failed";
+}
+
+
+{
+    # $Format: "system \"./configure\""$
+system "./configure"
+}
+
+if ($?)
+{
+    die "configure failed";
+}
+
+
+{
+    # $Format: "system \"make\""$
+system "make"
+}
+
+if ($?)
+{
+    die "make failed";
+}
+
+
+{
+    # $Format: "system \"make test\""$
+system "make test"
+}
+
+if ($?)
+{
+    die "test failed";
+}
+
