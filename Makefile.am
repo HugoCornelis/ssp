@@ -25,9 +25,7 @@ html-upload: html-upload-prepare
 
 perldir = $(prefix)/glue/swig/perl
 
-perl_HEADERS = perl/SSP.pm
-
-perl_DATA = ssp_test.pm
+perl_HEADERS = perl/SSP.pm ssp_test.pm
 
 TESTS = ssp_test.pm
 
