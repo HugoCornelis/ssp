@@ -148,7 +148,25 @@ sub instantiate_services
 
 	my $service_module = $service->{module_name};
 
-	require "$service_module.pm";
+	eval
+	{
+	    local $SIG{__DIE__};
+
+	    require "$service_module.pm";
+	};
+
+	if ($@)
+	{
+	    die "Cannot load service module ($service_module.pm) for service $service_name
+
+Possible solutions:
+1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
+2. Install the correct integration module for this service.
+3. The service module is not correct, to find out, type perl -e 'push \@INC, \"/usr/local/glue/swig/perl\" ; require $service_module'
+4. Contact your system administrator.
+
+$@";
+	}
 
 	my $backend = $service_module->new();
 
@@ -349,7 +367,26 @@ sub compile
 
     my $service_backend = $service->backend();
 
-    require "$solver_module.pm";
+    eval
+    {
+	local $SIG{__DIE__};
+
+	require "$solver_module.pm";
+    };
+
+    if ($@)
+    {
+	die "Cannot load solver module ($solver_module.pm) for solverclass $solverclass
+
+Possible solutions:
+1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
+2. Install the correct integration module for this solver.
+   e.g. for Heccer, you need to configure the package with --with-neurospaces
+3. The solverclass module is not correct, to find out, type perl -e 'push \@INC, \"/usr/local/glue/swig/perl\" ; require $solver_module'
+4. Contact your system administrator.
+
+$@";
+    }
 
     my $engine
 	= $solver_module->new
