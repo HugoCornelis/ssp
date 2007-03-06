@@ -37,6 +37,8 @@ sub main
 
     $modelname =~ s/.*\///;
 
+    $modelname =~ s/-/_/g;
+
     my $args = [ "$0", "-P", "tests/cells/$modelname.ndf" ];
 
     # instantiate a scheduler

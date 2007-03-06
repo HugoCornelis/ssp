@@ -16,6 +16,8 @@ BEGIN
 }
 
 
+use SwiggableHeccer;
+
 use SSP;
 
 
@@ -49,7 +51,7 @@ sub main
 		    apply => {
 			      simulation => [
 					     {
-					      arguments => [ 10, 1, ],
+					      arguments => [ 1000, 1, ],
 					      method => 'steps',
 					     },
 					     {
@@ -78,6 +80,22 @@ sub main
 				},
 		    solverclasses => {
 				      heccer => {
+						 constructor_settings => {
+									  dStep => (6e-6),
+									  configuration => {
+											    reporting => {
+													  granularity => 100,
+													  tested_things => (
+															    $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
+															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
+															    | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+															   ),
+													 },
+											   },
+									 },
 						 module_name => 'Heccer',
 						 service_name => 'neurospaces',
 						},

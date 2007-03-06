@@ -78,7 +78,19 @@ sub compile
 
 	my $service = $self->{services}->{$solverclasses->{$solverclass}->{service_name}};
 
-	my $engine = SSP::Engine->new($solverclass, $service, $modelname);
+	my $solverclass_options = $solverclasses->{$solverclass};
+
+	my $options
+	    = {
+	       %$solverclass_options,
+	       modelname => $modelname,
+	       solverclass => $solverclass,
+	       service => $service,
+	      };
+
+# 	my $engine = SSP::Engine->new($solverclass, $service, $modelname);
+
+	my $engine = SSP::Engine->new( { %$options, }, );
 
 	# compile the model
 
@@ -162,7 +174,7 @@ sub instantiate_services
 Possible solutions:
 1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
 2. Install the correct integration module for this service.
-3. The service module is not correct, to find out, type perl -e 'push \@INC, \"/usr/local/glue/swig/perl\" ; require $service_module'
+3. The service module is not correct, to find out, type perl -e 'push \@INC, \"/usr/local/glue/swig/perl\" ; require $service_module', and see if perl can find the solverclass module
 4. Contact your system administrator.
 
 $@";
@@ -357,11 +369,13 @@ sub compile
 
     my $solverclass = $self->{solverclass};
 
-    my $service_name = $scheduler->{solverclasses}->{$solverclass}->{service_name};
+    my $service_name = $self->{service_name};
 
-    my $solver_module = $scheduler->{solverclasses}->{$solverclass}->{module_name};
+    my $solver_module = $self->{module_name};
 
     #! the service points into the scheduler, but is not the service object
+
+    #t use ->backend() method twice ?
 
     my $service = $self->{service}->{ssp_service};
 
@@ -381,20 +395,27 @@ sub compile
 Possible solutions:
 1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
 2. Install the correct integration module for this solver.
-   e.g. for Heccer, you need to configure the package with --with-neurospaces
-3. The solverclass module is not correct, to find out, type perl -e 'push \@INC, \"/usr/local/glue/swig/perl\" ; require $solver_module'
+   e.g. for Heccer, you need to configure Heccer with --with-neurospaces
+3. The solverclass module is not correct, to find out, type perl -e 'push \@INC, \"/usr/local/glue/swig/perl\" ; require $solver_module', and see if perl can find the solverclass module
 4. Contact your system administrator.
 
 $@";
     }
 
+    my $constructor_settings = $self->{constructor_settings} || {};
+
     my $engine
 	= $solver_module->new
 	    (
 	     {
-	      service_name => $service_name,
-	      service_backend => $service_backend,
-	      modelname => $modelname,
+	      #t can create a circular reference but is convenient, not sure
+
+	      %$constructor_settings,
+	      model_source => {
+			       service_name => $service_name,
+			       service_backend => $service_backend,
+			       modelname => $modelname,
+			      },
 	     },
 	    );
 
@@ -426,17 +447,11 @@ sub new
 {
     my $package = shift;
 
-    my $solverclass = shift;
-
-    my $service = shift;
-
-    my $modelname = shift;
+    my $options = shift;
 
     my $self
 	= {
-	   modelname => $modelname,
-	   service => $service,
-	   solverclass => $solverclass,
+	   %$options,
 	  };
 
     bless $self, $package;
@@ -459,11 +474,9 @@ sub steps
 
     # initial dump
 
-    $verbose && print "Initiated\n";
-
     my $backend = $self->backend();
 
-    $verbose && $backend->dump($Heccer::config->{tested_things});
+    $backend->report( { steps => undef, verbose => $verbose, }, );
 
     # a couple of times
 
@@ -480,30 +493,12 @@ sub steps
 	    $result = "HeccerHecc() failed";
 	}
 
-	if (($i % ($Heccer::config->{reporting_granularity})) == 0)
-	{
-	    # dump
+	# dump
 
-	    $verbose && print "-------\n";
-
-	    $verbose && print "Iteration $i\n";
-
-	    $verbose && $backend->dump(undef, $Heccer::config->{tested_things});
-	}
-	else
-	{
-	    $final_report = 1;
-	}
+	$backend->report( { steps => $i, verbose => $verbose, }, );
     }
 
-    if ($final_report)
-    {
-	$verbose && print "-------\n";
-
-	$verbose && print "Iteration " . ($Heccer::config->{steps}) . "\n";
-
-	$verbose && $backend->dump(undef, $Heccer::config->{tested_things});
-    }
+    $backend->report( { steps => -1, verbose => $verbose, }, );
 
     # return result
 
