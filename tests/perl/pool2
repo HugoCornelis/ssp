@@ -81,6 +81,7 @@ sub main
 		    solverclasses => {
 				      heccer => {
 						 constructor_settings => {
+									  dStep => (1e-6),
 									  configuration => {
 											    reporting => {
 													  granularity => 100,
