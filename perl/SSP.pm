@@ -99,6 +99,13 @@ sub compile
 	    return 0;
 	}
 
+	# register the schedulee in the service
+
+	if (!$service->{ssp_service}->register_engine($engine, $modelname))
+	{
+	    return 0;
+	}
+
 	# register the schedulee in the schedule
 
 	push @$schedule, $engine;
@@ -107,6 +114,13 @@ sub compile
     # register the schedule
 
     $self->{schedule} = $schedule;
+
+    # prepare outputs
+
+    if (!$self->instantiate_outputs())
+    {
+	return 0;
+    }
 
     # return result
 
@@ -141,6 +155,75 @@ sub initiate
     # return result
 
     return $result;
+}
+
+
+sub instantiate_outputs
+{
+    my $self = shift;
+
+    # loop over all outputs
+
+    my $outputs = $self->{outputs};
+
+    my $schedule = $self->{schedule};
+
+    foreach my $output (@$outputs)
+    {
+	# determine the service for this output
+
+	my $service_name;
+
+	if (exists $output->{service_name})
+	{
+	    $service_name = $output->{service_name};
+	}
+	else
+	{
+	    #t the service of the first model ...  not really good
+	    #t basically this says that SSP can currently only run one service at a time.
+
+	    my $solverclass = $self->{models}->[0]->{solverclass};
+
+	    $service_name = $self->{solverclasses}->{$solverclass}->{service_name};
+	}
+
+	# ask the service the solverinfo for this output
+
+	my $service = $self->{services}->{$service_name}->{ssp_service};
+
+	my $solverinfo = $service->output_2_solverinfo($output);
+
+	# lookup the solver
+
+	my $solver_engine = $self->lookup_solver_engine($solverinfo->{solver});
+
+	# get the output field from the solver (is a double *)
+
+	my $solverfield = $solver_engine->solverfield($solverinfo);
+
+	# create the engine for the output
+
+	my $output_name = $output->{component_name} . "->" . $output->{field};
+
+	my $output_engine
+	    = SSP::Output->new
+		(
+		 {
+		  class => $output,
+		  field => $solverfield,
+		  name => $output_name,
+		 },
+		);
+
+	# schedule the output_engine
+
+	push @$schedule, $output_engine;
+    }
+
+    # return success
+
+    return 1;
 }
 
 
@@ -215,6 +298,40 @@ $@";
 }
 
 
+sub lookup_solver_engine
+{
+    my $self = shift;
+
+    my $solver_name = shift;
+
+    my $result;
+
+    # loop over all schedulees
+
+    my $schedule = $self->{schedule};
+
+    foreach my $schedulee (@$schedule)
+    {
+	# if name matches
+
+	my $schedulee_name = $schedulee->name();
+
+	if ($schedulee_name eq $solver_name)
+	{
+	    # set result
+
+	    $result = $schedulee;
+
+	    # break searching loop
+
+	    last;
+	}
+    }
+
+    return $result;
+}
+
+
 sub new
 {
     my $package = shift;
@@ -286,20 +403,53 @@ sub steps
 
     my $result = 1;
 
-    # loop over all schedulees
+    # initial dump
 
     my $schedule = $self->{schedule};
 
     foreach my $schedulee (@$schedule)
     {
-	# advance the engine
+	my $backend = $schedulee->backend();
 
-	my $error = $schedulee->steps($steps, $verbose);
+	$backend->report( { steps => undef, verbose => $verbose, }, );
+    }
 
-	if ($error)
+    # a couple of times
+
+    foreach my $step (0 .. $steps - 1)
+    {
+	# loop over all schedulees
+
+	my $schedule = $self->{schedule};
+
+	foreach my $schedulee (@$schedule)
 	{
-	    die "Scheduling for $steps failed";
+	    # advance the engine
+
+	    my $error = $schedulee->step($verbose);
+
+	    if ($error)
+	    {
+		die "Scheduling for $steps failed";
+	    }
+
+	    # dump
+
+	    my $backend = $schedulee->backend();
+
+	    $backend->report( { steps => $step, verbose => $verbose, }, );
 	}
+    }
+
+    # final report
+
+    my $schedule = $self->{schedule};
+
+    foreach my $schedulee (@$schedule)
+    {
+	my $backend = $schedulee->backend();
+
+	$backend->report( { steps => -1, verbose => $verbose, }, );
     }
 
     # return result
@@ -443,6 +593,14 @@ sub initiate
 }
 
 
+sub name
+{
+    my $self = shift;
+
+    return $self->{service_name} . "::" . $self->{modelname};
+}
+
+
 sub new
 {
     my $package = shift;
@@ -459,6 +617,50 @@ sub new
     return $self;
 }
 
+
+sub solverfield
+{
+    my $self = shift;
+
+    my $fieldinfo = shift;
+
+    my $backend = $self->backend();
+
+    my $result = $backend->addressable($fieldinfo);
+
+    return $result;
+}
+
+
+sub step
+{
+    my $self = shift;
+
+    my $verbose = shift;
+
+    # set result : ok
+
+    my $result;
+
+    # step
+
+    my $backend = $self->backend();
+
+    my $success = $backend->step();
+
+    if (!$success)
+    {
+	$result = "HeccerHecc() failed";
+    }
+
+    # return result
+
+    return $result;
+}
+
+
+# steps is supposed to be used for a solver in standalone mode.  The
+# solver is responsible for doing the appropriate output.
 
 sub steps
 {
@@ -479,8 +681,6 @@ sub steps
     $backend->report( { steps => undef, verbose => $verbose, }, );
 
     # a couple of times
-
-    my $final_report = 0;
 
     foreach my $i (0 .. $steps - 1)
     {
@@ -506,6 +706,26 @@ sub steps
 }
 
 
+package SSP::Output;
+
+
+BEGIN { our @ISA = qw(SSP::Glue); }
+
+
+sub new
+{
+    my $package = shift;
+
+    my $options = shift;
+
+    my $self = { %$options, };
+
+    bless $self, $package;
+
+    return $self;
+}
+
+
 package SSP::Service;
 
 
@@ -523,6 +743,36 @@ sub new
     bless $self, $package;
 
     return $self;
+}
+
+
+sub output_2_solverinfo
+{
+    my $self = shift;
+
+    my $service_backend = $self->backend();
+
+    my $result = $service_backend->output_2_solverinfo(@_);
+
+    return $result;
+}
+
+
+sub register_engine
+{
+    my $self = shift;
+
+    my $engine = shift;
+
+    my $modelname = shift;
+
+    # have the service register the solver for this model
+
+    my $backend = $self->backend();
+
+    my $result = $backend->register_engine($engine, $modelname);
+
+    return $result;
 }
 
 

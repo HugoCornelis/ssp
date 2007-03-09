@@ -3,20 +3,20 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '    $result = $engine->compile();
+                                  'text' => '    my $backend = $self->backend();
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '426'
+                                  'line' => '571'
                                 },
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '    my $engine
+                                  'text' => '	if (!$engine->compile($self))
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 407
+                                  'line' => 97
                                 }
                               ]
          };

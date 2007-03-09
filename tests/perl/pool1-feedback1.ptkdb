@@ -3,20 +3,20 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '    $result = $engine->compile();
+                                  'text' => '	my $solverinfo = $service->output_2_solverinfo($output);
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '426'
+                                  'line' => '199'
                                 },
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '    my $engine
+                                  'text' => '    my $self = { %$options, };
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 407
+                                  'line' => 599
                                 }
                               ]
          };
