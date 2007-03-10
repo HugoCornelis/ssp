@@ -33,7 +33,7 @@ sub advance
 
 	if ($error)
 	{
-	    die "Scheduling for $time failed";
+	    die "Advancing time to $time failed";
 	}
     }
 
