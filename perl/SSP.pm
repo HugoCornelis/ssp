@@ -776,6 +776,20 @@ sub add
 }
 
 
+sub advance
+{
+    my $self = shift;
+
+    my $options = shift;
+
+    my $backend = $self->backend();
+
+    my $result = $backend->advance($options);
+
+    return $result;
+}
+
+
 sub initiate
 {
     my $self = shift;
