@@ -3,20 +3,38 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '	my $solverinfo = $service->output_2_solverinfo($output);
+                                  'text' => '    my $result = 1;
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '199'
+                                  'line' => 137
                                 },
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '    my $self = { %$options, };
+                                  'text' => '	my $success = $self->$method(@$arguments);
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 599
+                                  'line' => 437
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '	my $output_backend = $outputclass->{ssp_outputclass};
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '259'
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '	my $outputclass = $outputclasses->{$outputclass_name};
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => 175
                                 }
                               ]
          };

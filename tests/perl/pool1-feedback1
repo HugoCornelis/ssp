@@ -69,26 +69,22 @@ sub main
 			      ],
 		    name => $modelname,
 		    outputclasses => {
-				      heccer => {
-						 calling => [
-							     {
-							      arguments => [ 'field', ],
-							      method => 'HeccerOutputVariable',
-							     },
-							    ],
-						 module_name => 'Heccer',
-						},
+				      double_2_ascii => {
+							 constructor => 'Heccer::Output',
+							 module_name => 'Heccer',
+							},
 				     },
-# 		    outputs => [
-# 				{
-# 				 component_name => '/pool1_feedback1/segments/main[0]',
-# 				 field => 'Vm',
-# 				},
+		    outputs => [
+				{
+				 component_name => '/pool1_feedback1/segments/main[0]',
+				 field => 'Vm',
+				 outputclass => 'double_2_ascii',
+				},
 # 				{
 # 				 component_name => '/pool1_feedback1/segments/main[0]/Ca_pool',
 # 				 field => 'Ca',
 # 				},
-# 			       ],
+			       ],
 		    services => {
 				 neurospaces => {
 						 initializers => [

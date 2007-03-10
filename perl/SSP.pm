@@ -162,11 +162,50 @@ sub instantiate_outputs
 {
     my $self = shift;
 
+    # loop over all output classes
+
+    my $schedule = $self->{schedule};
+
+    my $outputclasses = $self->{outputclasses};
+
+    foreach my $outputclass_name (keys %$outputclasses)
+    {
+	# instantiate the output class
+
+	my $outputclass = $outputclasses->{$outputclass_name};
+
+	# create the engine for the output
+
+	my $output_engine
+	    = SSP::Output->new
+		(
+		 {
+		  name => $outputclass_name,
+		  scheduler => $self,
+		  %$outputclass,
+		 },
+		);
+
+	if (!$output_engine)
+	{
+	    die "Unable to create an output_engine for $outputclass_name";
+	}
+
+	# link the output engine to the output class
+
+	#! such that later on the outputs can find the output engine
+
+	$outputclass->{ssp_outputclass} = $output_engine;
+
+	# schedule the output_engine, such that it outputs something
+	# when variables are added to it
+
+	push @$schedule, $output_engine;
+    }
+
     # loop over all outputs
 
     my $outputs = $self->{outputs};
-
-    my $schedule = $self->{schedule};
 
     foreach my $output (@$outputs)
     {
@@ -202,23 +241,36 @@ sub instantiate_outputs
 
 	my $solverfield = $solver_engine->solverfield($solverinfo);
 
-	# create the engine for the output
+	if (!defined $solverfield)
+	{
+	    die "The output " . $output->{component_name} . "->" . $output->{field} . " cannot be found";
+	}
 
-	my $output_name = $output->{component_name} . "->" . $output->{field};
+	# find the output for the output class
 
-	my $output_engine
-	    = SSP::Output->new
+	my $outputclass_name = $output->{outputclass};
+
+	my $outputclass = $self->{outputclasses}->{$outputclass_name};
+
+	# add the output field to the output engine
+
+	#! note that outputclass is not an object
+
+	my $output_backend = $outputclass->{ssp_outputclass};
+
+	my $connected
+	    = $output_backend->add
 		(
 		 {
-		  class => $output,
-		  field => $solverfield,
-		  name => $output_name,
+		  address => $solverfield,
+		  service_request => $output,
 		 },
 		);
 
-	# schedule the output_engine
-
-	push @$schedule, $output_engine;
+	if (!$connected)
+	{
+	    die "The output " . $output->{component_name} . "->" . $output->{field} . " cannot be connected to its output engine (which is determined by the output class in the schedule).";
+	}
     }
 
     # return success
@@ -426,7 +478,7 @@ sub steps
 	{
 	    # advance the engine
 
-	    my $error = $schedulee->step($verbose);
+	    my $error = $schedulee->step( { steps => $step, verbose => $verbose, }, );
 
 	    if ($error)
 	    {
@@ -442,8 +494,6 @@ sub steps
     }
 
     # final report
-
-    my $schedule = $self->{schedule};
 
     foreach my $schedulee (@$schedule)
     {
@@ -636,7 +686,7 @@ sub step
 {
     my $self = shift;
 
-    my $verbose = shift;
+    my $options = shift;
 
     # set result : ok
 
@@ -646,7 +696,7 @@ sub step
 
     my $backend = $self->backend();
 
-    my $success = $backend->step();
+    my $success = $backend->step($options);
 
     if (!$success)
     {
@@ -712,6 +762,32 @@ package SSP::Output;
 BEGIN { our @ISA = qw(SSP::Glue); }
 
 
+sub add
+{
+    my $self = shift;
+
+    my $options = shift;
+
+    my $backend = $self->backend();
+
+    my $result = $backend->add($options);
+
+    return $result;
+}
+
+
+sub initiate
+{
+    my $self = shift;
+
+    # lookup the method
+
+    my $backend = $self->backend();
+
+    return $backend->initiate();
+}
+
+
 sub new
 {
     my $package = shift;
@@ -722,7 +798,61 @@ sub new
 
     bless $self, $package;
 
+    #t need todo the require on ->{module_name}
+
+    # construct the backend for this output
+
+    {
+	no strict "refs";
+
+	my $method_name = $self->{constructor};
+
+	my $backend
+	    = $method_name->new
+		(
+		 {
+		  name => $self->{name},
+		 },
+		);
+
+	if (!defined $backend)
+	{
+	    return undef;
+	}
+
+	$self->{backend} = $backend;
+    }
+
+    # return result
+
     return $self;
+}
+
+
+sub step
+{
+    my $self = shift;
+
+    my $options = shift;
+
+    # set result : ok
+
+    my $result;
+
+    # step
+
+    my $backend = $self->backend();
+
+    my $success = $backend->step($options);
+
+    if (!$success)
+    {
+	$result = "HeccerHecc() failed";
+    }
+
+    # return result
+
+    return $result;
 }
 
 
