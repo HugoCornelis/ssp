@@ -82,6 +82,7 @@ sub main
 # 				{
 # 				 component_name => '/pool1_feedback1/segments/main[0]/Ca_pool',
 # 				 field => 'Ca',
+# 				 outputclass => 'double_2_ascii',
 # 				},
 			       ],
 		    services => {
@@ -121,6 +122,14 @@ sub main
 		  );
 
     use YAML;
+
+    use IO::File;
+
+    my $configuration = IO::File->new(">./$modelname.yml");
+
+    print $configuration Dump($scheduler);
+
+    $configuration->close();
 
     my $scheduler_yaml;
 
