@@ -93,6 +93,7 @@ sub main
 										      dIntervalEnd => 0.05,
 										      dIntervalStart => -0.1,
 										      iIntervalEntries => 50,
+										      iSmallTableSize => 20,
 										     },
 									 },
 						 module_name => 'Heccer',
