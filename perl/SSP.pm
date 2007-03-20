@@ -623,7 +623,14 @@ $@";
 
     $self->{backend} = $engine;
 
-    $result = $engine->compile();
+    if (ref $engine)
+    {
+	$result = $engine->compile();
+    }
+    else
+    {
+	$result = 0;
+    }
 
     # return result
 
