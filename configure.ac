@@ -35,6 +35,8 @@ AM_INIT_AUTOMAKE(ssp, integration-2)
 
 # Checks for library functions.
 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile
+		 tests/Makefile
+		])
 AC_OUTPUT
 

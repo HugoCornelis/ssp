@@ -8,4 +8,6 @@
 ^install-sh$
 ^installed
 ^missing$
+^tests/Makefile$
+^tests/Makefile.in$
 gz$

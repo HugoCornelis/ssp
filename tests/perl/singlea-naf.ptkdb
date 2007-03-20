@@ -1,24 +1,24 @@
 $files = {
-           '_<perl/SSP.pm' => [
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '    my $engine
+           '_</usr/local/glue/swig/perl/SSP.pm' => [
+                                                     {
+                                                       'expr' => undef,
+                                                       'value' => '1',
+                                                       'text' => '    my $engine
 ',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => '391'
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '    $result = $engine->compile();
+                                                       'fname' => '/usr/local/glue/swig/perl/SSP.pm',
+                                                       'type' => 'user',
+                                                       'line' => '391'
+                                                     },
+                                                     {
+                                                       'expr' => undef,
+                                                       'value' => '1',
+                                                       'text' => '	my $success = $self->$method(@$arguments);
 ',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 405
-                                }
-                              ]
+                                                       'fname' => '/usr/local/glue/swig/perl/SSP.pm',
+                                                       'type' => 'user',
+                                                       'line' => '256'
+                                                     }
+                                                   ]
          };
 $expr_list = [];
 $eval_saved_text = undef;
