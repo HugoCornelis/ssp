@@ -1,0 +1,43 @@
+--- !!perl/hash:SSP
+apply:
+  simulation:
+    - arguments:
+        - 1000
+        - 1
+      method: steps
+    - arguments:
+        - 0.1
+      method: advance
+models:
+  - modelname: /pool1_feedback1
+    solverclass: heccer
+name: pool1_feedback1
+outputclasses:
+  double_2_ascii:
+    constructor: Heccer::Output
+    module_name: Heccer
+outputs:
+  - component_name: '/pool1_feedback1/segments/main[0]'
+    field: Vm
+    outputclass: double_2_ascii
+services:
+  neurospaces:
+    initializers:
+      - arguments:
+          - 3
+          -
+            - ./tests/perl/pool1-feedback1
+            - -P
+            - tests/cells/pool1_feedback1.ndf
+        method: read
+    module_name: Neurospaces
+solverclasses:
+  heccer:
+    constructor_settings:
+      configuration:
+        reporting:
+          granularity: 100
+          tested_things: 6225920
+      dStep: 1e-06
+    module_name: Heccer
+    service_name: neurospaces
