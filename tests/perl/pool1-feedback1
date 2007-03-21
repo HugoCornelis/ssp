@@ -133,7 +133,7 @@ sub main
 
     use IO::File;
 
-    my $configuration = IO::File->new(">./$modelname.yml");
+    my $configuration = IO::File->new(">./yaml/$modelname.yml");
 
     print $configuration Dump($scheduler);
 
