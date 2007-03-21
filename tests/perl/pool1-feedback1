@@ -83,7 +83,7 @@ sub main
 				     },
 		    outputs => [
 				{
-				 component_name => '/pool1_feedback1/segments/main[0]',
+				 component_name => "/$modelname/segments/main[0]",
 				 field => 'Vm',
 				 outputclass => 'double_2_ascii',
 				},

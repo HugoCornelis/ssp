@@ -233,6 +233,11 @@ sub instantiate_outputs
 
 	my $solverinfo = $service->output_2_solverinfo($output);
 
+	if (!ref $solverinfo)
+	{
+	    die "Failed to construct solver info for the output " . $output->{component_name} . "->" . $output->{field} . " ($solverinfo)";
+	}
+
 	# lookup the solver
 
 	my $solver_engine = $self->lookup_solver_engine($solverinfo->{solver});
