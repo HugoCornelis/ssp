@@ -11,7 +11,7 @@ Heccer (dTime) : (0)
 Heccer (dStep) : (1e-06)
 Compartment (mc.iType) : (1)
 Compartment (mc.iType) : (1)
-Tables (iTabulatedGateCount) : (4)
+Tables (iTabulatedGateCount) : (2)
 Compartment operations
 -----
 00000 :: FORWARD_ELIMINATION    0
@@ -33,8 +33,8 @@ Mechanism operations
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 2 1 (nil)							 0.988964
-00037 :: CONCEPTGATE 3 1 (nil)							 0.00265921
+00033 :: CONCEPTGATE 0 1 (nil)							 0.988964
+00037 :: CONCEPTGATE 1 1 (nil)							 0.00265921
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
 00043 :: FLUXPOOL							 0
@@ -65,7 +65,7 @@ Heccer (dTime) : (1e-06)
 Heccer (dStep) : (1e-06)
 Compartment (mc.iType) : (1)
 Compartment (mc.iType) : (1)
-Tables (iTabulatedGateCount) : (4)
+Tables (iTabulatedGateCount) : (2)
 Compartment operations
 -----
 00000 :: FORWARD_ELIMINATION    0
@@ -87,8 +87,8 @@ Mechanism operations
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 2 1 (nil)							 0.988964
-00037 :: CONCEPTGATE 3 1 (nil)							 0.00265921
+00033 :: CONCEPTGATE 0 1 (nil)							 0.988964
+00037 :: CONCEPTGATE 1 1 (nil)							 0.00265921
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
 00043 :: FLUXPOOL							 6.07229e-12
@@ -119,7 +119,7 @@ Heccer (dTime) : (0.000101)
 Heccer (dStep) : (1e-06)
 Compartment (mc.iType) : (1)
 Compartment (mc.iType) : (1)
-Tables (iTabulatedGateCount) : (4)
+Tables (iTabulatedGateCount) : (2)
 Compartment operations
 -----
 00000 :: FORWARD_ELIMINATION    0
@@ -141,8 +141,8 @@ Mechanism operations
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 2 1 (nil)							 0.987195
-00037 :: CONCEPTGATE 3 1 (nil)							 0.00268598
+00033 :: CONCEPTGATE 0 1 (nil)							 0.987195
+00037 :: CONCEPTGATE 1 1 (nil)							 0.00268598
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
 00043 :: FLUXPOOL							 6.29715e-12
@@ -173,7 +173,7 @@ Heccer (dTime) : (0.000201)
 Heccer (dStep) : (1e-06)
 Compartment (mc.iType) : (1)
 Compartment (mc.iType) : (1)
-Tables (iTabulatedGateCount) : (4)
+Tables (iTabulatedGateCount) : (2)
 Compartment operations
 -----
 00000 :: FORWARD_ELIMINATION    0
@@ -195,8 +195,8 @@ Mechanism operations
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 2 1 (nil)							 0.985296
-00037 :: CONCEPTGATE 3 1 (nil)							 0.00271506
+00033 :: CONCEPTGATE 0 1 (nil)							 0.985296
+00037 :: CONCEPTGATE 1 1 (nil)							 0.00271506
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
 00043 :: FLUXPOOL							 6.36237e-12
@@ -227,7 +227,7 @@ Heccer (dTime) : (0.000301)
 Heccer (dStep) : (1e-06)
 Compartment (mc.iType) : (1)
 Compartment (mc.iType) : (1)
-Tables (iTabulatedGateCount) : (4)
+Tables (iTabulatedGateCount) : (2)
 Compartment operations
 -----
 00000 :: FORWARD_ELIMINATION    0
@@ -249,8 +249,8 @@ Mechanism operations
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 2 1 (nil)							 0.983339
-00037 :: CONCEPTGATE 3 1 (nil)							 0.00274542
+00033 :: CONCEPTGATE 0 1 (nil)							 0.983339
+00037 :: CONCEPTGATE 1 1 (nil)							 0.00274542
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
 00043 :: FLUXPOOL							 6.42998e-12
@@ -281,7 +281,7 @@ Heccer (dTime) : (0.000401)
 Heccer (dStep) : (1e-06)
 Compartment (mc.iType) : (1)
 Compartment (mc.iType) : (1)
-Tables (iTabulatedGateCount) : (4)
+Tables (iTabulatedGateCount) : (2)
 Compartment operations
 -----
 00000 :: FORWARD_ELIMINATION    0
@@ -303,8 +303,8 @@ Mechanism operations
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 2 1 (nil)							 0.981318
-00037 :: CONCEPTGATE 3 1 (nil)							 0.00277705
+00033 :: CONCEPTGATE 0 1 (nil)							 0.981318
+00037 :: CONCEPTGATE 1 1 (nil)							 0.00277705
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
 00043 :: FLUXPOOL							 6.49989e-12
@@ -335,7 +335,7 @@ Heccer (dTime) : (0.000501)
 Heccer (dStep) : (1e-06)
 Compartment (mc.iType) : (1)
 Compartment (mc.iType) : (1)
-Tables (iTabulatedGateCount) : (4)
+Tables (iTabulatedGateCount) : (2)
 Compartment operations
 -----
 00000 :: FORWARD_ELIMINATION    0
@@ -357,8 +357,8 @@ Mechanism operations
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 2 1 (nil)							 0.979229
-00037 :: CONCEPTGATE 3 1 (nil)							 0.00280993
+00033 :: CONCEPTGATE 0 1 (nil)							 0.979229
+00037 :: CONCEPTGATE 1 1 (nil)							 0.00280993
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
 00043 :: FLUXPOOL							 6.57201e-12
@@ -389,7 +389,7 @@ Heccer (dTime) : (0.000601)
 Heccer (dStep) : (1e-06)
 Compartment (mc.iType) : (1)
 Compartment (mc.iType) : (1)
-Tables (iTabulatedGateCount) : (4)
+Tables (iTabulatedGateCount) : (2)
 Compartment operations
 -----
 00000 :: FORWARD_ELIMINATION    0
@@ -411,8 +411,8 @@ Mechanism operations
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 2 1 (nil)							 0.977068
-00037 :: CONCEPTGATE 3 1 (nil)							 0.00284405
+00033 :: CONCEPTGATE 0 1 (nil)							 0.977068
+00037 :: CONCEPTGATE 1 1 (nil)							 0.00284405
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
 00043 :: FLUXPOOL							 6.64628e-12
@@ -443,7 +443,7 @@ Heccer (dTime) : (0.000701)
 Heccer (dStep) : (1e-06)
 Compartment (mc.iType) : (1)
 Compartment (mc.iType) : (1)
-Tables (iTabulatedGateCount) : (4)
+Tables (iTabulatedGateCount) : (2)
 Compartment operations
 -----
 00000 :: FORWARD_ELIMINATION    0
@@ -465,8 +465,8 @@ Mechanism operations
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 2 1 (nil)							 0.974831
-00037 :: CONCEPTGATE 3 1 (nil)							 0.00287938
+00033 :: CONCEPTGATE 0 1 (nil)							 0.974831
+00037 :: CONCEPTGATE 1 1 (nil)							 0.00287938
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
 00043 :: FLUXPOOL							 6.72258e-12
@@ -497,7 +497,7 @@ Heccer (dTime) : (0.000801)
 Heccer (dStep) : (1e-06)
 Compartment (mc.iType) : (1)
 Compartment (mc.iType) : (1)
-Tables (iTabulatedGateCount) : (4)
+Tables (iTabulatedGateCount) : (2)
 Compartment operations
 -----
 00000 :: FORWARD_ELIMINATION    0
@@ -519,8 +519,8 @@ Mechanism operations
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 2 1 (nil)							 0.972517
-00037 :: CONCEPTGATE 3 1 (nil)							 0.00291589
+00033 :: CONCEPTGATE 0 1 (nil)							 0.972517
+00037 :: CONCEPTGATE 1 1 (nil)							 0.00291589
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
 00043 :: FLUXPOOL							 6.8008e-12
@@ -551,7 +551,7 @@ Heccer (dTime) : (0.000901)
 Heccer (dStep) : (1e-06)
 Compartment (mc.iType) : (1)
 Compartment (mc.iType) : (1)
-Tables (iTabulatedGateCount) : (4)
+Tables (iTabulatedGateCount) : (2)
 Compartment operations
 -----
 00000 :: FORWARD_ELIMINATION    0
@@ -573,8 +573,8 @@ Mechanism operations
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 2 1 (nil)							 0.970119
-00037 :: CONCEPTGATE 3 1 (nil)							 0.00295361
+00033 :: CONCEPTGATE 0 1 (nil)							 0.970119
+00037 :: CONCEPTGATE 1 1 (nil)							 0.00295361
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
 00043 :: FLUXPOOL							 6.88091e-12
@@ -605,7 +605,7 @@ Heccer (dTime) : (0.001)
 Heccer (dStep) : (1e-06)
 Compartment (mc.iType) : (1)
 Compartment (mc.iType) : (1)
-Tables (iTabulatedGateCount) : (4)
+Tables (iTabulatedGateCount) : (2)
 Compartment operations
 -----
 00000 :: FORWARD_ELIMINATION    0
@@ -627,8 +627,8 @@ Mechanism operations
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 2 1 (nil)							 0.967663
-00037 :: CONCEPTGATE 3 1 (nil)							 0.00299208
+00033 :: CONCEPTGATE 0 1 (nil)							 0.967663
+00037 :: CONCEPTGATE 1 1 (nil)							 0.00299208
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
 00043 :: FLUXPOOL							 6.96192e-12
