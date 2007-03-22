@@ -117,9 +117,9 @@ sub main
     {
 	local $/;
 
-	if (-e "./$modelname.yml")
+	if (-e "./yaml/$modelname.yml")
 	{
-	    $scheduler_yaml = Load(`cat ./$modelname.yml`);
+	    $scheduler_yaml = Load(`cat ./yaml/$modelname.yml`);
 	}
     }
 

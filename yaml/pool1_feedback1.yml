@@ -26,7 +26,7 @@ services:
       - arguments:
           - 3
           -
-            - ./tests/perl/pool1-feedback1
+            - tests/perl/pool1-feedback1
             - -P
             - tests/cells/pool1_feedback1.ndf
         method: read

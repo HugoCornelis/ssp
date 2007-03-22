@@ -135,18 +135,21 @@ sub main
 
     my $configuration = IO::File->new(">./yaml/$modelname.yml");
 
-    print $configuration Dump($scheduler);
+    if (defined $configuration)
+    {
+	print $configuration Dump($scheduler);
 
-    $configuration->close();
+	$configuration->close();
+    }
 
     my $scheduler_yaml;
 
     {
 	local $/;
 
-	if (-e "./$modelname.yml")
+	if (-e "./yaml/$modelname.yml")
 	{
-	    $scheduler_yaml = Load(`cat ./$modelname.yml`);
+	    $scheduler_yaml = Load(`cat ./yaml/$modelname.yml`);
 	}
     }
 

@@ -33,8 +33,8 @@ Mechanism operations
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 0 1 (nil)							 0.988964
-00037 :: CONCEPTGATE 1 1 (nil)							 0.00265921
+00033 :: CONCEPTGATE 0 1 (nil)							 0.0389187
+00037 :: CONCEPTGATE 1 1 (nil)							 0.0826021
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
 00043 :: FLUXPOOL							 0
@@ -87,12 +87,12 @@ Mechanism operations
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 0 1 (nil)							 0.988964
-00037 :: CONCEPTGATE 1 1 (nil)							 0.00265921
+00033 :: CONCEPTGATE 0 1 (nil)							 0.0396533
+00037 :: CONCEPTGATE 1 1 (nil)							 0.0825884
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
-00043 :: FLUXPOOL							 6.07229e-12
-00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (6.07229e-12)							 4.04579e-05
+00043 :: FLUXPOOL							 7.56167e-12
+00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (7.56167e-12)							 4.05702e-05
 00052 :: FINISH
 VM Diagonals (pdDiagonals[0]) : (1.11243)
 VM Diagonals (pdDiagonals[1]) : (1.01417)
@@ -132,33 +132,33 @@ Mechanism operations
 00000 :: COMPARTMENT							 -9.35826e-12 0 86876 1.11243
 00001 :: INITIALIZECHANNEL 0.147021 1.75467e-09
 00006 :: LOADVOLTAGETABLE
-00007 :: CONCEPTGATE 0 1 (nil)							 0.0817519
-00011 :: CONCEPTGATE 1 1 (nil)							 0.0813854
+00007 :: CONCEPTGATE 0 1 (nil)							 0.0817702
+00011 :: CONCEPTGATE 1 1 (nil)							 0.0813853
 00015 :: UPDATECOMPARTMENTCURRENT
 00016 :: REGISTERCHANNELCURRENT
-00017 :: FLUXPOOL							 2.09834e-12
-00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (2.09834e-12)							 4.11807e-05
+00017 :: FLUXPOOL							 2.09868e-12
+00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (2.09868e-12)							 4.11808e-05
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 0 1 (nil)							 0.987195
-00037 :: CONCEPTGATE 1 1 (nil)							 0.00268598
+00033 :: CONCEPTGATE 0 1 (nil)							 0.08647
+00037 :: CONCEPTGATE 1 1 (nil)							 0.0813258
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
-00043 :: FLUXPOOL							 6.29715e-12
-00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (6.29715e-12)							 7.0196e-05
+00043 :: FLUXPOOL							 1.66994e-11
+00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (1.66994e-11)							 0.000103175
 00052 :: FINISH
 VM Diagonals (pdDiagonals[0]) : (1.11243)
 VM Diagonals (pdDiagonals[1]) : (1.01417)
 VM Axial Resistances (pdAxres[0]) : (-0.0141406)
 VM Axial Resistances (pdAxres[1]) : (-0.112415)
 VM Axial Resistances (pdAxres[2]) : (-0.112415)
-VM Axial Resistances (pdResults[0]) : (-0.0327161)
+VM Axial Resistances (pdResults[0]) : (-0.0327051)
 VM Axial Resistances (pdResults[1]) : (1.11243)
-VM Axial Resistances (pdResults[2]) : (-0.0327246)
+VM Axial Resistances (pdResults[2]) : (-0.0327126)
 VM Axial Resistances (pdResults[3]) : (1.01417)
-VM Membrane Potentials (pdVms[0]) : (-0.0327174)
-VM Membrane Potentials (pdVms[1]) : (-0.0327259)
+VM Membrane Potentials (pdVms[0]) : (-0.0327062)
+VM Membrane Potentials (pdVms[1]) : (-0.0327138)
 -------
 Iteration 200
 Heccer (iStatus) : (20)
@@ -186,33 +186,33 @@ Mechanism operations
 00000 :: COMPARTMENT							 -9.35826e-12 0 86876 1.11243
 00001 :: INITIALIZECHANNEL 0.147021 1.75467e-09
 00006 :: LOADVOLTAGETABLE
-00007 :: CONCEPTGATE 0 1 (nil)							 0.124603
-00011 :: CONCEPTGATE 1 1 (nil)							 0.080152
+00007 :: CONCEPTGATE 0 1 (nil)							 0.124718
+00011 :: CONCEPTGATE 1 1 (nil)							 0.0801513
 00015 :: UPDATECOMPARTMENTCURRENT
 00016 :: REGISTERCHANNELCURRENT
-00017 :: FLUXPOOL							 3.15408e-12
-00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (3.15408e-12)							 4.27047e-05
+00017 :: FLUXPOOL							 3.1563e-12
+00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (3.1563e-12)							 4.27056e-05
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 0 1 (nil)							 0.985296
-00037 :: CONCEPTGATE 1 1 (nil)							 0.00271506
+00033 :: CONCEPTGATE 0 1 (nil)							 0.129152
+00037 :: CONCEPTGATE 1 1 (nil)							 0.0800929
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
-00043 :: FLUXPOOL							 6.36237e-12
-00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (6.36237e-12)							 8.14597e-05
+00043 :: FLUXPOOL							 2.45962e-11
+00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (2.45962e-11)							 0.000165776
 00052 :: FINISH
 VM Diagonals (pdDiagonals[0]) : (1.11243)
 VM Diagonals (pdDiagonals[1]) : (1.01417)
 VM Axial Resistances (pdAxres[0]) : (-0.0141406)
 VM Axial Resistances (pdAxres[1]) : (-0.112415)
 VM Axial Resistances (pdAxres[2]) : (-0.112415)
-VM Axial Resistances (pdResults[0]) : (-0.0329642)
+VM Axial Resistances (pdResults[0]) : (-0.0329259)
 VM Axial Resistances (pdResults[1]) : (1.11243)
-VM Axial Resistances (pdResults[2]) : (-0.0329734)
+VM Axial Resistances (pdResults[2]) : (-0.0329335)
 VM Axial Resistances (pdResults[3]) : (1.01417)
-VM Membrane Potentials (pdVms[0]) : (-0.0329655)
-VM Membrane Potentials (pdVms[1]) : (-0.0329746)
+VM Membrane Potentials (pdVms[0]) : (-0.032927)
+VM Membrane Potentials (pdVms[1]) : (-0.0329346)
 -------
 Iteration 300
 Heccer (iStatus) : (20)
@@ -240,33 +240,33 @@ Mechanism operations
 00000 :: COMPARTMENT							 -9.35826e-12 0 86876 1.11243
 00001 :: INITIALIZECHANNEL 0.147021 1.75467e-09
 00006 :: LOADVOLTAGETABLE
-00007 :: CONCEPTGATE 0 1 (nil)							 0.164319
-00011 :: CONCEPTGATE 1 1 (nil)							 0.0789447
+00007 :: CONCEPTGATE 0 1 (nil)							 0.164664
+00011 :: CONCEPTGATE 1 1 (nil)							 0.0789425
 00015 :: UPDATECOMPARTMENTCURRENT
 00016 :: REGISTERCHANNELCURRENT
-00017 :: FLUXPOOL							 4.10233e-12
-00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (4.10233e-12)							 4.43668e-05
+00017 :: FLUXPOOL							 4.10902e-12
+00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (4.10902e-12)							 4.43706e-05
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 0 1 (nil)							 0.983339
-00037 :: CONCEPTGATE 1 1 (nil)							 0.00274542
+00033 :: CONCEPTGATE 0 1 (nil)							 0.168852
+00037 :: CONCEPTGATE 1 1 (nil)							 0.0788852
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
-00043 :: FLUXPOOL							 6.42998e-12
-00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (6.42998e-12)							 8.59226e-05
+00043 :: FLUXPOOL							 3.17096e-11
+00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (3.17096e-11)							 0.000224401
 00052 :: FINISH
 VM Diagonals (pdDiagonals[0]) : (1.11243)
 VM Diagonals (pdDiagonals[1]) : (1.01417)
 VM Axial Resistances (pdAxres[0]) : (-0.0141406)
 VM Axial Resistances (pdAxres[1]) : (-0.112415)
 VM Axial Resistances (pdAxres[2]) : (-0.112415)
-VM Axial Resistances (pdResults[0]) : (-0.0332089)
+VM Axial Resistances (pdResults[0]) : (-0.0331291)
 VM Axial Resistances (pdResults[1]) : (1.11243)
-VM Axial Resistances (pdResults[2]) : (-0.0332187)
+VM Axial Resistances (pdResults[2]) : (-0.0331367)
 VM Axial Resistances (pdResults[3]) : (1.01417)
-VM Membrane Potentials (pdVms[0]) : (-0.0332101)
-VM Membrane Potentials (pdVms[1]) : (-0.0332199)
+VM Membrane Potentials (pdVms[0]) : (-0.0331301)
+VM Membrane Potentials (pdVms[1]) : (-0.0331377)
 -------
 Iteration 400
 Heccer (iStatus) : (20)
@@ -294,33 +294,33 @@ Mechanism operations
 00000 :: COMPARTMENT							 -9.35826e-12 0 86876 1.11243
 00001 :: INITIALIZECHANNEL 0.147021 1.75467e-09
 00006 :: LOADVOLTAGETABLE
-00007 :: CONCEPTGATE 0 1 (nil)							 0.201167
-00011 :: CONCEPTGATE 1 1 (nil)							 0.0777628
+00007 :: CONCEPTGATE 0 1 (nil)							 0.201904
+00011 :: CONCEPTGATE 1 1 (nil)							 0.077758
 00015 :: UPDATECOMPARTMENTCURRENT
 00016 :: REGISTERCHANNELCURRENT
-00017 :: FLUXPOOL							 4.95372e-12
-00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (4.95372e-12)							 4.60374e-05
+00017 :: FLUXPOOL							 4.96789e-12
+00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (4.96789e-12)							 4.60476e-05
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 0 1 (nil)							 0.981318
-00037 :: CONCEPTGATE 1 1 (nil)							 0.00277705
+00033 :: CONCEPTGATE 0 1 (nil)							 0.205861
+00037 :: CONCEPTGATE 1 1 (nil)							 0.0777018
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
-00043 :: FLUXPOOL							 6.49989e-12
-00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (6.49989e-12)							 8.78948e-05
+00043 :: FLUXPOOL							 3.81216e-11
+00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (3.81216e-11)							 0.000278045
 00052 :: FINISH
 VM Diagonals (pdDiagonals[0]) : (1.11243)
 VM Diagonals (pdDiagonals[1]) : (1.01417)
 VM Axial Resistances (pdAxres[0]) : (-0.0141406)
 VM Axial Resistances (pdAxres[1]) : (-0.112415)
 VM Axial Resistances (pdAxres[2]) : (-0.112415)
-VM Axial Resistances (pdResults[0]) : (-0.0334504)
+VM Axial Resistances (pdResults[0]) : (-0.0333163)
 VM Axial Resistances (pdResults[1]) : (1.11243)
-VM Axial Resistances (pdResults[2]) : (-0.0334607)
+VM Axial Resistances (pdResults[2]) : (-0.0333239)
 VM Axial Resistances (pdResults[3]) : (1.01417)
-VM Membrane Potentials (pdVms[0]) : (-0.0334516)
-VM Membrane Potentials (pdVms[1]) : (-0.0334619)
+VM Membrane Potentials (pdVms[0]) : (-0.0333172)
+VM Membrane Potentials (pdVms[1]) : (-0.0333248)
 -------
 Iteration 500
 Heccer (iStatus) : (20)
@@ -348,33 +348,33 @@ Mechanism operations
 00000 :: COMPARTMENT							 -9.35826e-12 0 86876 1.11243
 00001 :: INITIALIZECHANNEL 0.147021 1.75467e-09
 00006 :: LOADVOLTAGETABLE
-00007 :: CONCEPTGATE 0 1 (nil)							 0.235377
-00011 :: CONCEPTGATE 1 1 (nil)							 0.076606
+00007 :: CONCEPTGATE 0 1 (nil)							 0.236693
+00011 :: CONCEPTGATE 1 1 (nil)							 0.076597
 00015 :: UPDATECOMPARTMENTCURRENT
 00016 :: REGISTERCHANNELCURRENT
-00017 :: FLUXPOOL							 5.71747e-12
-00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (5.71747e-12)							 4.76453e-05
+00017 :: FLUXPOOL							 5.7424e-12
+00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (5.7424e-12)							 4.76662e-05
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 0 1 (nil)							 0.979229
-00037 :: CONCEPTGATE 1 1 (nil)							 0.00280993
+00033 :: CONCEPTGATE 0 1 (nil)							 0.240439
+00037 :: CONCEPTGATE 1 1 (nil)							 0.0765419
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
-00043 :: FLUXPOOL							 6.57201e-12
-00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (6.57201e-12)							 8.89616e-05
+00043 :: FLUXPOOL							 4.39045e-11
+00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (4.39045e-11)							 0.000326702
 00052 :: FINISH
 VM Diagonals (pdDiagonals[0]) : (1.11243)
 VM Diagonals (pdDiagonals[1]) : (1.01417)
 VM Axial Resistances (pdAxres[0]) : (-0.0141406)
 VM Axial Resistances (pdAxres[1]) : (-0.112415)
 VM Axial Resistances (pdAxres[2]) : (-0.112415)
-VM Axial Resistances (pdResults[0]) : (-0.0336889)
+VM Axial Resistances (pdResults[0]) : (-0.0334891)
 VM Axial Resistances (pdResults[1]) : (1.11243)
-VM Axial Resistances (pdResults[2]) : (-0.0336996)
+VM Axial Resistances (pdResults[2]) : (-0.0334967)
 VM Axial Resistances (pdResults[3]) : (1.01417)
-VM Membrane Potentials (pdVms[0]) : (-0.03369)
-VM Membrane Potentials (pdVms[1]) : (-0.0337008)
+VM Membrane Potentials (pdVms[0]) : (-0.0334899)
+VM Membrane Potentials (pdVms[1]) : (-0.0334976)
 -------
 Iteration 600
 Heccer (iStatus) : (20)
@@ -402,33 +402,33 @@ Mechanism operations
 00000 :: COMPARTMENT							 -9.35826e-12 0 86876 1.11243
 00001 :: INITIALIZECHANNEL 0.147021 1.75467e-09
 00006 :: LOADVOLTAGETABLE
-00007 :: CONCEPTGATE 0 1 (nil)							 0.267166
-00011 :: CONCEPTGATE 1 1 (nil)							 0.0754737
+00007 :: CONCEPTGATE 0 1 (nil)							 0.269256
+00011 :: CONCEPTGATE 1 1 (nil)							 0.0754586
 00015 :: UPDATECOMPARTMENTCURRENT
 00016 :: REGISTERCHANNELCURRENT
-00017 :: FLUXPOOL							 6.40205e-12
-00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (6.40205e-12)							 4.91538e-05
+00017 :: FLUXPOOL							 6.44103e-12
+00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (6.44103e-12)							 4.91903e-05
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 0 1 (nil)							 0.977068
-00037 :: CONCEPTGATE 1 1 (nil)							 0.00284405
+00033 :: CONCEPTGATE 0 1 (nil)							 0.272794
+00037 :: CONCEPTGATE 1 1 (nil)							 0.0754046
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
-00043 :: FLUXPOOL							 6.64628e-12
-00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (6.64628e-12)							 8.97056e-05
+00043 :: FLUXPOOL							 4.91183e-11
+00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (4.91183e-11)							 0.000370682
 00052 :: FINISH
 VM Diagonals (pdDiagonals[0]) : (1.11243)
 VM Diagonals (pdDiagonals[1]) : (1.01417)
 VM Axial Resistances (pdAxres[0]) : (-0.0141406)
 VM Axial Resistances (pdAxres[1]) : (-0.112415)
 VM Axial Resistances (pdAxres[2]) : (-0.112415)
-VM Axial Resistances (pdResults[0]) : (-0.0339245)
+VM Axial Resistances (pdResults[0]) : (-0.0336489)
 VM Axial Resistances (pdResults[1]) : (1.11243)
-VM Axial Resistances (pdResults[2]) : (-0.0339357)
+VM Axial Resistances (pdResults[2]) : (-0.0336565)
 VM Axial Resistances (pdResults[3]) : (1.01417)
-VM Membrane Potentials (pdVms[0]) : (-0.0339257)
-VM Membrane Potentials (pdVms[1]) : (-0.0339369)
+VM Membrane Potentials (pdVms[0]) : (-0.0336496)
+VM Membrane Potentials (pdVms[1]) : (-0.0336573)
 -------
 Iteration 700
 Heccer (iStatus) : (20)
@@ -456,33 +456,33 @@ Mechanism operations
 00000 :: COMPARTMENT							 -9.35826e-12 0 86876 1.11243
 00001 :: INITIALIZECHANNEL 0.147021 1.75467e-09
 00006 :: LOADVOLTAGETABLE
-00007 :: CONCEPTGATE 0 1 (nil)							 0.296727
-00011 :: CONCEPTGATE 1 1 (nil)							 0.0743652
+00007 :: CONCEPTGATE 0 1 (nil)							 0.299779
+00011 :: CONCEPTGATE 1 1 (nil)							 0.0743422
 00015 :: UPDATECOMPARTMENTCURRENT
 00016 :: REGISTERCHANNELCURRENT
-00017 :: FLUXPOOL							 7.01501e-12
-00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (7.01501e-12)							 5.05463e-05
+00017 :: FLUXPOOL							 7.07089e-12
+00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (7.07089e-12)							 5.0604e-05
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 0 1 (nil)							 0.974831
-00037 :: CONCEPTGATE 1 1 (nil)							 0.00287938
+00033 :: CONCEPTGATE 0 1 (nil)							 0.30313
+00037 :: CONCEPTGATE 1 1 (nil)							 0.0742893
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
-00043 :: FLUXPOOL							 6.72258e-12
-00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (6.72258e-12)							 9.03408e-05
+00043 :: FLUXPOOL							 5.38197e-11
+00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (5.38197e-11)							 0.00041038
 00052 :: FINISH
 VM Diagonals (pdDiagonals[0]) : (1.11243)
 VM Diagonals (pdDiagonals[1]) : (1.01417)
 VM Axial Resistances (pdAxres[0]) : (-0.0141406)
 VM Axial Resistances (pdAxres[1]) : (-0.112415)
 VM Axial Resistances (pdAxres[2]) : (-0.112415)
-VM Axial Resistances (pdResults[0]) : (-0.0341574)
+VM Axial Resistances (pdResults[0]) : (-0.0337968)
 VM Axial Resistances (pdResults[1]) : (1.11243)
-VM Axial Resistances (pdResults[2]) : (-0.034169)
+VM Axial Resistances (pdResults[2]) : (-0.0338045)
 VM Axial Resistances (pdResults[3]) : (1.01417)
-VM Membrane Potentials (pdVms[0]) : (-0.0341586)
-VM Membrane Potentials (pdVms[1]) : (-0.0341702)
+VM Membrane Potentials (pdVms[0]) : (-0.0337976)
+VM Membrane Potentials (pdVms[1]) : (-0.0338052)
 -------
 Iteration 800
 Heccer (iStatus) : (20)
@@ -510,33 +510,33 @@ Mechanism operations
 00000 :: COMPARTMENT							 -9.35826e-12 0 86876 1.11243
 00001 :: INITIALIZECHANNEL 0.147021 1.75467e-09
 00006 :: LOADVOLTAGETABLE
-00007 :: CONCEPTGATE 0 1 (nil)							 0.324225
-00011 :: CONCEPTGATE 1 1 (nil)							 0.0732804
+00007 :: CONCEPTGATE 0 1 (nil)							 0.328433
+00011 :: CONCEPTGATE 1 1 (nil)							 0.0732472
 00015 :: UPDATECOMPARTMENTCURRENT
 00016 :: REGISTERCHANNELCURRENT
-00017 :: FLUXPOOL							 7.56288e-12
-00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (7.56288e-12)							 5.18182e-05
+00017 :: FLUXPOOL							 7.63844e-12
+00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (7.63844e-12)							 5.19024e-05
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 0 1 (nil)							 0.972517
-00037 :: CONCEPTGATE 1 1 (nil)							 0.00291589
+00033 :: CONCEPTGATE 0 1 (nil)							 0.331611
+00037 :: CONCEPTGATE 1 1 (nil)							 0.0731953
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
-00043 :: FLUXPOOL							 6.8008e-12
-00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (6.8008e-12)							 9.09455e-05
+00043 :: FLUXPOOL							 5.80558e-11
+00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (5.80558e-11)							 0.000446181
 00052 :: FINISH
 VM Diagonals (pdDiagonals[0]) : (1.11243)
 VM Diagonals (pdDiagonals[1]) : (1.01417)
 VM Axial Resistances (pdAxres[0]) : (-0.0141406)
 VM Axial Resistances (pdAxres[1]) : (-0.112415)
 VM Axial Resistances (pdAxres[2]) : (-0.112415)
-VM Axial Resistances (pdResults[0]) : (-0.0343879)
+VM Axial Resistances (pdResults[0]) : (-0.0339342)
 VM Axial Resistances (pdResults[1]) : (1.11243)
-VM Axial Resistances (pdResults[2]) : (-0.0343998)
+VM Axial Resistances (pdResults[2]) : (-0.0339418)
 VM Axial Resistances (pdResults[3]) : (1.01417)
-VM Membrane Potentials (pdVms[0]) : (-0.034389)
-VM Membrane Potentials (pdVms[1]) : (-0.0344009)
+VM Membrane Potentials (pdVms[0]) : (-0.0339349)
+VM Membrane Potentials (pdVms[1]) : (-0.0339425)
 -------
 Iteration 900
 Heccer (iStatus) : (20)
@@ -564,33 +564,33 @@ Mechanism operations
 00000 :: COMPARTMENT							 -9.35826e-12 0 86876 1.11243
 00001 :: INITIALIZECHANNEL 0.147021 1.75467e-09
 00006 :: LOADVOLTAGETABLE
-00007 :: CONCEPTGATE 0 1 (nil)							 0.34982
-00011 :: CONCEPTGATE 1 1 (nil)							 0.0722184
+00007 :: CONCEPTGATE 0 1 (nil)							 0.35538
+00011 :: CONCEPTGATE 1 1 (nil)							 0.0721728
 00015 :: UPDATECOMPARTMENTCURRENT
 00016 :: REGISTERCHANNELCURRENT
-00017 :: FLUXPOOL							 8.05177e-12
-00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (8.05177e-12)							 5.29713e-05
+00017 :: FLUXPOOL							 8.14967e-12
+00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (8.14967e-12)							 5.30872e-05
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 0 1 (nil)							 0.970119
-00037 :: CONCEPTGATE 1 1 (nil)							 0.00295361
+00033 :: CONCEPTGATE 0 1 (nil)							 0.358387
+00037 :: CONCEPTGATE 1 1 (nil)							 0.0721219
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
-00043 :: FLUXPOOL							 6.88091e-12
-00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (6.88091e-12)							 9.15481e-05
+00043 :: FLUXPOOL							 6.18696e-11
+00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (6.18696e-11)							 0.000478445
 00052 :: FINISH
 VM Diagonals (pdDiagonals[0]) : (1.11243)
 VM Diagonals (pdDiagonals[1]) : (1.01417)
 VM Axial Resistances (pdAxres[0]) : (-0.0141406)
 VM Axial Resistances (pdAxres[1]) : (-0.112415)
 VM Axial Resistances (pdAxres[2]) : (-0.112415)
-VM Axial Resistances (pdResults[0]) : (-0.0346158)
+VM Axial Resistances (pdResults[0]) : (-0.0340619)
 VM Axial Resistances (pdResults[1]) : (1.11243)
-VM Axial Resistances (pdResults[2]) : (-0.0346281)
-VM Axial Resistances (pdResults[3]) : (1.01417)
-VM Membrane Potentials (pdVms[0]) : (-0.034617)
-VM Membrane Potentials (pdVms[1]) : (-0.0346292)
+VM Axial Resistances (pdResults[2]) : (-0.0340696)
+VM Axial Resistances (pdResults[3]) : (1.01418)
+VM Membrane Potentials (pdVms[0]) : (-0.0340626)
+VM Membrane Potentials (pdVms[1]) : (-0.0340702)
 -------
 Final Iteration
 Heccer (iStatus) : (20)
@@ -618,30 +618,30 @@ Mechanism operations
 00000 :: COMPARTMENT							 -9.35826e-12 0 86876 1.11243
 00001 :: INITIALIZECHANNEL 0.147021 1.75467e-09
 00006 :: LOADVOLTAGETABLE
-00007 :: CONCEPTGATE 0 1 (nil)							 0.373424
-00011 :: CONCEPTGATE 1 1 (nil)							 0.0711893
+00007 :: CONCEPTGATE 0 1 (nil)							 0.380499
+00011 :: CONCEPTGATE 1 1 (nil)							 0.0711289
 00015 :: UPDATECOMPARTMENTCURRENT
 00016 :: REGISTERCHANNELCURRENT
-00017 :: FLUXPOOL							 8.483e-12
-00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (8.483e-12)							 5.40009e-05
+00017 :: FLUXPOOL							 8.6051e-12
+00018 :: EXPONENTIALDECAY 9412.39 4e-05 1.0025 (8.6051e-12)							 5.41531e-05
 00026 :: COMPARTMENT							 -2.23189e-10 0 10928.1 1.01417
 00027 :: INITIALIZECHANNEL 0.137526 1.39493e-08
 00032 :: LOADVOLTAGETABLE
-00033 :: CONCEPTGATE 0 1 (nil)							 0.967663
-00037 :: CONCEPTGATE 1 1 (nil)							 0.00299208
+00033 :: CONCEPTGATE 0 1 (nil)							 0.383356
+00037 :: CONCEPTGATE 1 1 (nil)							 0.0710789
 00041 :: UPDATECOMPARTMENTCURRENT
 00042 :: REGISTERCHANNELCURRENT
-00043 :: FLUXPOOL							 6.96192e-12
-00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (6.96192e-12)							 9.21523e-05
+00043 :: FLUXPOOL							 6.52678e-11
+00044 :: EXPONENTIALDECAY 75790.3 4e-05 1.005 (6.52678e-11)							 0.000507219
 00052 :: FINISH
 VM Diagonals (pdDiagonals[0]) : (1.11243)
 VM Diagonals (pdDiagonals[1]) : (1.01417)
 VM Axial Resistances (pdAxres[0]) : (-0.0141406)
 VM Axial Resistances (pdAxres[1]) : (-0.112415)
 VM Axial Resistances (pdAxres[2]) : (-0.112415)
-VM Axial Resistances (pdResults[0]) : (-0.0348393)
+VM Axial Resistances (pdResults[0]) : (-0.0341799)
 VM Axial Resistances (pdResults[1]) : (1.11243)
-VM Axial Resistances (pdResults[2]) : (-0.0348517)
-VM Axial Resistances (pdResults[3]) : (1.01417)
-VM Membrane Potentials (pdVms[0]) : (-0.0348404)
-VM Membrane Potentials (pdVms[1]) : (-0.0348529)
+VM Axial Resistances (pdResults[2]) : (-0.0341875)
+VM Axial Resistances (pdResults[3]) : (1.01418)
+VM Membrane Potentials (pdVms[0]) : (-0.0341804)
+VM Membrane Potentials (pdVms[1]) : (-0.0341881)
