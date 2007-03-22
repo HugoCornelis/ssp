@@ -1,0 +1,25 @@
+$files = {
+           '_<perl/SSP.pm' => [
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '	my $success = $self->$method(@$arguments);
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '437'
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '    if (ref $engine)
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '626'
+                                }
+                              ]
+         };
+$expr_list = [];
+$eval_saved_text = undef;
+$main_win_geometry = '1592x1114+0+0';

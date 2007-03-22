@@ -1,0 +1,41 @@
+--- !!perl/hash:SSP
+apply:
+  simulation:
+    - arguments:
+        - 25000
+        - 1
+      method: steps
+    - arguments:
+        - 0.1
+      method: advance
+models:
+  - modelname: /purk_test_soma
+    solverclass: heccer
+name: purk_test_soma
+outputclasses:
+  double_2_ascii:
+    constructor: Heccer::Output
+    module_name: Heccer
+outputs:
+  - component_name: /purk_test_soma/segments/soma
+    field: Vm
+    outputclass: double_2_ascii
+services:
+  neurospaces:
+    initializers:
+      - arguments:
+          - 3
+          -
+            - ./tests/perl/purk_test_soma
+            - -P
+            - tests/cells/purk_test_soma.ndf
+        method: read
+    module_name: Neurospaces
+solverclasses:
+  heccer:
+    constructor_settings:
+      configuration:
+        reporting:
+          granularity: 1000
+    module_name: Heccer
+    service_name: neurospaces

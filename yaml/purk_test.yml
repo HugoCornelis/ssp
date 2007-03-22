@@ -1,0 +1,42 @@
+--- !!perl/hash:SSP
+apply:
+  simulation:
+    - arguments:
+        - 25000
+        - 1
+      method: steps
+    - arguments:
+        - 0.1
+      method: advance
+models:
+  - modelname: /purk_test
+    solverclass: heccer
+name: purk_test
+outputclasses:
+  double_2_ascii:
+    constructor: Heccer::Output
+    module_name: Heccer
+outputs:
+  - component_name: '/purk_test/segments/main[0]'
+    field: Vm
+    outputclass: double_2_ascii
+services:
+  neurospaces:
+    initializers:
+      - arguments:
+          - 3
+          -
+            - ./tests/perl/purk_test
+            - -P
+            - tests/cells/purk_test.ndf
+        method: read
+    module_name: Neurospaces
+solverclasses:
+  heccer:
+    constructor_settings:
+      configuration:
+        reporting:
+          granularity: 1000
+          tested_things: 65536
+    module_name: Heccer
+    service_name: neurospaces
