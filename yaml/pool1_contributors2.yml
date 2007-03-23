@@ -9,15 +9,15 @@ apply:
         - 0.1
       method: advance
 models:
-  - modelname: /pool1_feedback1
+  - modelname: /pool1_contributors2
     solverclass: heccer
-name: pool1_feedback1
+name: pool1_contributors2
 outputclasses:
   double_2_ascii:
     constructor: Heccer::Output
     module_name: Heccer
 outputs:
-  - component_name: '/pool1_feedback1/segments/main[0]'
+  - component_name: '/pool1_contributors2/segments/main[0]'
     field: Vm
     outputclass: double_2_ascii
 services:
@@ -26,9 +26,9 @@ services:
       - arguments:
           - 3
           -
-            - ./tests/perl/pool1-feedback1
+            - ./tests/perl/pool1-contributors2
             - -P
-            - tests/cells/pool1_feedback1.ndf
+            - tests/cells/pool1_contributors2.ndf
         method: read
     module_name: Neurospaces
 solverclasses:
