@@ -69,7 +69,7 @@ my $test
 				description => "pool integration, one compartment, one pool with a feedback loop, reversed order",
 			       },
 			      ],
-       description => "pool integration",
+       description => "pool integration & related",
        name => 'pools.t',
       };
 
