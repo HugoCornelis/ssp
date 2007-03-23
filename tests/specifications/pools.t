@@ -82,6 +82,20 @@ my $test
 						 ],
 				description => "pool integration, one pool, two feeding channels",
 			       },
+			       {
+				arguments => [
+					     ],
+				command => 'tests/perl/channel1-nernst1',
+				command_tests => [
+						  {
+						   description => "Is a pool integrated correctly, one pool, two feeding channels ?",
+						   read => [ `cat $::config->{core_directory}/tests/specifications/strings/channel1-nernst1.txt`, ],
+						   timeout => 8,
+						   write => undef,
+						  },
+						 ],
+				description => "pool integration, one pool, two feeding channels",
+			       },
 			      ],
        description => "pool integration & related",
        name => 'pools.t',
