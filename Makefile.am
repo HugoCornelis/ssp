@@ -45,9 +45,13 @@ dist-hook:
 test: check
 
 html-upload-prepare:
+	rm -fr html/htdocs/neurospaces_project/ssp/
+	mkdir --parents html/htdocs/neurospaces_project/ssp
+	mkdir --parents html/htdocs/neurospaces_project/ssp/html_source
+	tar cfh - tests/html | ( cd html/htdocs/neurospaces_project/ssp && tar vxf - )
 
 html-upload: html-upload-prepare
-
+	scp -pr html/htdocs/* hcornelis@shell.sourceforge.net:/home/groups/n/ne/neurospaces/htdocs/
 
 #t use $(swigdir) here
 

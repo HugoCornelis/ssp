@@ -18,13 +18,13 @@ my $test
 				command => 'tests/perl/table-cap',
 				command_tests => [
 						  {
-						   description => "Are gates tabulated correctly, persistent calcium gates ?",
+						   description => "Are gates tabulated correctly, p type calcium gates ?",
 						   read => [ `cat /local_home/local_home/hugo/neurospaces_project/heccer/source/c/snapshots/0/tests/specifications/strings/table-cap.txt`, ],
 						   timeout => 9,
 						   write => undef,
 						  },
 						 ],
-				description => "Persistent Calcium gate tabulation",
+				description => "p type calcium gate tabulation",
 			       },
 			       {
 				arguments => [

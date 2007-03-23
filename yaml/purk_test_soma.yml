@@ -37,5 +37,6 @@ solverclasses:
       configuration:
         reporting:
           granularity: 1000
+          tested_things: 65536
     module_name: Heccer
     service_name: neurospaces
