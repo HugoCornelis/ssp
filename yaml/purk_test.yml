@@ -36,7 +36,8 @@ solverclasses:
     constructor_settings:
       configuration:
         reporting:
-          granularity: 1000
-          tested_things: 65536
+          granularity: 1
+          tested_things: 6225920
+      dStep: 5e-06
     module_name: Heccer
     service_name: neurospaces

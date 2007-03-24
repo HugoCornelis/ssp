@@ -70,13 +70,23 @@ sub compile
 
     foreach my $model (@$models)
     {
-	# instantiate a schedulee
-
 	my $modelname = $model->{modelname};
 
 	my $solverclass = $model->{solverclass};
 
 	my $service = $self->{services}->{$solverclasses->{$solverclass}->{service_name}};
+
+	# apply the parameter settings to the model
+
+	my $parameter_application
+	    = $service->{ssp_service}->apply_model_parameters($model->{parameters});
+
+	if (defined $parameter_application)
+	{
+	    die "Cannot apply parameters: $parameter_application";
+	}
+
+	# instantiate a schedulee
 
 	my $solverclass_options = $solverclasses->{$solverclass};
 
@@ -886,6 +896,20 @@ package SSP::Service;
 
 
 BEGIN { our @ISA = qw(SSP::Glue); }
+
+
+sub apply_model_parameters
+{
+    my $self = shift;
+
+    my $options = shift;
+
+    my $service_backend = $self->backend();
+
+    my $result = $service_backend->apply_model_parameters($options);
+
+    return $result;
+}
 
 
 sub new

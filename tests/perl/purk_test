@@ -1,4 +1,3 @@
-#!/usr/bin/perl -d:ptkdb -w
 #!/usr/bin/perl -w
 #!/usr/bin/perl -d:ptkdb -w
 #
@@ -108,17 +107,17 @@ sub main
 		    solverclasses => {
 				      heccer => {
 						 constructor_settings => {
-# 									  dStep => (1e-6),
+									  dStep => (5e-6),
 									  configuration => {
 											    reporting => {
-													  granularity => 1000,
+													  granularity => 1,
 													  tested_things => (
 															    $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
-# 															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
-# 															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
-# 															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
-# 															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
-# 															    | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
+															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
+															    | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
 															   ),
 													 },
 											   },

@@ -10,6 +10,10 @@ apply:
       method: advance
 models:
   - modelname: /purk_test_soma
+    parameters:
+      - component_name: /purk_test_soma/segments/soma
+        field: INJECT
+        value: 50000000000
     solverclass: heccer
 name: purk_test_soma
 outputclasses:
@@ -26,7 +30,7 @@ services:
       - arguments:
           - 3
           -
-            - ./tests/perl/purk_test_soma
+            - tests/perl/purk_test_soma
             - -P
             - tests/cells/purk_test_soma.ndf
         method: read
