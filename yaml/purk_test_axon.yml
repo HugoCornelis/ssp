@@ -2,8 +2,7 @@
 apply:
   simulation:
     - arguments:
-        - 100
-        - 1
+        - 10000
       method: steps
 models:
   - modelname: /purk_test_axon
@@ -24,7 +23,22 @@ outputs:
   - component_name: /purk_test_axon/segments/axon/cat/cat_gate_activation
     field: state_m
     outputclass: double_2_ascii
-  - component_name: /purk_test_axon/segments/axon/cat/cat_gate_activation
+  - component_name: /purk_test_axon/segments/axon/cat/cat_gate_inactivation
+    field: state_h
+    outputclass: double_2_ascii
+  - component_name: /purk_test_axon/segments/axon/kdr
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: /purk_test_axon/segments/axon/kdr
+    field: state_h
+    outputclass: double_2_ascii
+  - component_name: /purk_test_axon/segments/axon/nap
+    field: state_n
+    outputclass: double_2_ascii
+  - component_name: /purk_test_axon/segments/axon/naf
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: /purk_test_axon/segments/axon/naf
     field: state_h
     outputclass: double_2_ascii
 services:
@@ -33,7 +47,7 @@ services:
       - arguments:
           - 3
           -
-            - tests/perl/purk_test_axon
+            - ./tests/perl/purk_test_axon
             - -P
             - tests/cells/purk_test_axon.ndf
         method: read

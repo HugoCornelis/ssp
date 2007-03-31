@@ -23,7 +23,7 @@ services:
       - arguments:
           - 3
           -
-            - ./tests/perl/channel1-nernst1
+            - tests/perl/channel1-nernst1
             - -P
             - tests/cells/channel1_nernst1.ndf
         method: read

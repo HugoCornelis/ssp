@@ -138,6 +138,36 @@ sub compile
 }
 
 
+sub finish
+{
+    my $self = shift;
+
+    # set default result : ok
+
+    my $result = 1;
+
+    # loop over all schedulees
+
+    my $schedule = $self->{schedule};
+
+    foreach my $schedulee (@$schedule)
+    {
+	# advance the engine
+
+	my $success = $schedulee->finish();
+
+	if (!$success)
+	{
+	    die "Finishing failed";
+	}
+    }
+
+    # return result
+
+    return $result;
+}
+
+
 sub initiate
 {
     my $self = shift;
@@ -431,11 +461,18 @@ sub run
 	       ],
 		   ;
 
+    my $finishers
+	= $self->{apply}->{finishers}
+	    || [
+		{ method => 'finish', },
+	       ],
+		   ;
+
     my $simulation = $self->{apply}->{simulation} || [];
 
     # construct the schedule we have to apply
 
-    my $applications = [ @$initializers, @$simulation, ];
+    my $applications = [ @$initializers, @$simulation, @$finishers, ];
 
     # go through the schedule
 
@@ -653,6 +690,18 @@ $@";
 }
 
 
+sub finish
+{
+    my $self = shift;
+
+    my $backend = $self->backend();
+
+    my $result = $backend->finish();
+
+    return $result;
+}
+
+
 sub initiate
 {
     my $self = shift;
@@ -809,6 +858,18 @@ sub advance
     my $result = $backend->advance($options);
 
     return $result;
+}
+
+
+sub finish
+{
+    my $self = shift;
+
+    # lookup the method
+
+    my $backend = $self->backend();
+
+    return $backend->finish();
 }
 
 
