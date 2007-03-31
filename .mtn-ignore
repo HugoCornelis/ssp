@@ -5,6 +5,7 @@
 ^config.status$
 ^configure$
 ^example.out$
+^html
 ^install-sh$
 ^installed
 ^missing$

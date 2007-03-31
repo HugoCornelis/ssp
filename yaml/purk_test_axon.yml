@@ -2,20 +2,30 @@
 apply:
   simulation:
     - arguments:
-        - 25000
+        - 100
         - 1
       method: steps
 models:
-  - modelname: /purk_test
+  - modelname: /purk_test_axon
+    parameters:
+      - component_name: /purk_test_axon/segments/axon
+        field: INJECT
+        value: 2e-09
     solverclass: heccer
-name: purk_test
+name: purk_test_axon
 outputclasses:
   double_2_ascii:
     constructor: Heccer::Output
     module_name: Heccer
 outputs:
-  - component_name: '/purk_test/segments/main[0]'
+  - component_name: /purk_test_axon/segments/axon
     field: Vm
+    outputclass: double_2_ascii
+  - component_name: /purk_test_axon/segments/axon/cat/cat_gate_activation
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: /purk_test_axon/segments/axon/cat/cat_gate_activation
+    field: state_h
     outputclass: double_2_ascii
 services:
   neurospaces:
@@ -23,9 +33,9 @@ services:
       - arguments:
           - 3
           -
-            - tests/perl/purk_test
+            - tests/perl/purk_test_axon
             - -P
-            - tests/cells/purk_test.ndf
+            - tests/cells/purk_test_axon.ndf
         method: read
     module_name: Neurospaces
 solverclasses:

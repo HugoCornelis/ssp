@@ -1,3 +1,4 @@
+#!/usr/bin/perl -d:ptkdb -w
 #!/usr/bin/perl -w
 #!/usr/bin/perl -d:ptkdb -w
 #
@@ -59,13 +60,13 @@ sub main
 		    apply => {
 			      simulation => [
 					     {
-					      arguments => [ 250000, 1, ],
+					      arguments => [ 100, 1, ],
 					      method => 'steps',
 					     },
-					     {
-					      arguments => [ 0.1, ],
-					      method => 'advance',
-					     },
+# 					     {
+# 					      arguments => [ 0.1, ],
+# 					      method => 'advance',
+# 					     },
 					    ],
 			     },
 		    models => [
@@ -73,9 +74,9 @@ sub main
 				modelname => "/$modelname",
 				parameters => [
 					       {
-						component_name => "/$modelname/segments/soma",
+						component_name => "/$modelname/segments/axon",
 						field => 'INJECT',
-						value => 3e-11,  # 0,
+						value => 2e-9,  # 0,
 					       },
 					      ],
 				solverclass => "heccer",
@@ -90,13 +91,18 @@ sub main
 				     },
 		    outputs => [
 				{
-				 component_name => "/$modelname/segments/soma",
+				 component_name => "/$modelname/segments/axon",
 				 field => 'Vm',
 				 outputclass => 'double_2_ascii',
 				},
 				{
-				 component_name => "/$modelname/segments/soma/ca_pool",
-				 field => 'Ca',
+				 component_name => "/$modelname/segments/axon/cat/cat_gate_activation",
+				 field => 'state_m',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/axon/cat/cat_gate_activation",
+				 field => 'state_h',
 				 outputclass => 'double_2_ascii',
 				},
 			       ],
@@ -114,10 +120,10 @@ sub main
 		    solverclasses => {
 				      heccer => {
 						 constructor_settings => {
-									  dStep => (5e-6),
+									  dStep => (1e-5),
 									  configuration => {
 											    reporting => {
-													  granularity => 1000,
+													  granularity => 1,
 													  tested_things => (
 															    $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
 															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA

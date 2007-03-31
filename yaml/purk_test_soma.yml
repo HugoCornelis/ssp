@@ -2,7 +2,7 @@
 apply:
   simulation:
     - arguments:
-        - 25000
+        - 250000
         - 1
       method: steps
     - arguments:
@@ -13,7 +13,7 @@ models:
     parameters:
       - component_name: /purk_test_soma/segments/soma
         field: INJECT
-        value: 50000000000
+        value: 3e-11
     solverclass: heccer
 name: purk_test_soma
 outputclasses:
@@ -23,6 +23,9 @@ outputclasses:
 outputs:
   - component_name: /purk_test_soma/segments/soma
     field: Vm
+    outputclass: double_2_ascii
+  - component_name: /purk_test_soma/segments/soma/ca_pool
+    field: Ca
     outputclass: double_2_ascii
 services:
   neurospaces:
@@ -41,6 +44,7 @@ solverclasses:
       configuration:
         reporting:
           granularity: 1000
-          tested_things: 65536
+          tested_things: 6225920
+      dStep: 5e-06
     module_name: Heccer
     service_name: neurospaces

@@ -62,10 +62,10 @@ sub main
 					      arguments => [ 25000, 1, ],
 					      method => 'steps',
 					     },
-					     {
-					      arguments => [ 0.1, ],
-					      method => 'advance',
-					     },
+# 					     {
+# 					      arguments => [ 0.1, ],
+# 					      method => 'advance',
+# 					     },
 					    ],
 			     },
 		    models => [
@@ -107,7 +107,7 @@ sub main
 		    solverclasses => {
 				      heccer => {
 						 constructor_settings => {
-									  dStep => (5e-6),
+									  dStep => (1e-5),
 									  configuration => {
 											    reporting => {
 													  granularity => 1,
