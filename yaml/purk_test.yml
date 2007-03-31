@@ -2,7 +2,7 @@
 apply:
   simulation:
     - arguments:
-        - 25000
+        - 400
         - 1
       method: steps
 models:
@@ -14,8 +14,38 @@ outputclasses:
     constructor: Heccer::Output
     module_name: Heccer
 outputs:
+  - component_name: /purk_test/segments/soma
+    field: Vm
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/ca_pool
+    field: Ca
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/cat/cat_gate_activation
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/cat/cat_gate_inactivation
+    field: state_h
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/kdr
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/kdr
+    field: state_h
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/nap
+    field: state_n
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/naf
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/naf
+    field: state_h
+    outputclass: double_2_ascii
   - component_name: '/purk_test/segments/main[0]'
     field: Vm
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]/ca_pool'
+    field: Ca
     outputclass: double_2_ascii
 services:
   neurospaces:
@@ -35,6 +65,6 @@ solverclasses:
         reporting:
           granularity: 1
           tested_things: 6225920
-      dStep: 1e-05
+      dStep: 2e-05
     module_name: Heccer
     service_name: neurospaces

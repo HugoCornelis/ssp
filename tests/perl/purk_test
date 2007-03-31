@@ -59,7 +59,7 @@ sub main
 		    apply => {
 			      simulation => [
 					     {
-					      arguments => [ 25000, 1, ],
+					      arguments => [ 400, 1, ],
 					      method => 'steps',
 					     },
 # 					     {
@@ -83,15 +83,60 @@ sub main
 				     },
 		    outputs => [
 				{
+				 component_name => "/$modelname/segments/soma",
+				 field => 'Vm',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/soma/ca_pool",
+				 field => 'Ca',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/soma/cat/cat_gate_activation",
+				 field => 'state_m',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/soma/cat/cat_gate_inactivation",
+				 field => 'state_h',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/soma/kdr",
+				 field => 'state_m',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/soma/kdr",
+				 field => 'state_h',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/soma/nap",
+				 field => 'state_n',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/soma/naf",
+				 field => 'state_m',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/soma/naf",
+				 field => 'state_h',
+				 outputclass => 'double_2_ascii',
+				},
+				{
 				 component_name => "/$modelname/segments/main[0]",
 				 field => 'Vm',
 				 outputclass => 'double_2_ascii',
 				},
-# 				{
-# 				 component_name => '/pool1_feedback1/segments/main[0]/Ca_pool',
-# 				 field => 'Ca',
-# 				 outputclass => 'double_2_ascii',
-# 				},
+				{
+				 component_name => "/$modelname/segments/main[0]/ca_pool",
+				 field => 'Ca',
+				 outputclass => 'double_2_ascii',
+				},
 			       ],
 		    services => {
 				 neurospaces => {
@@ -107,7 +152,7 @@ sub main
 		    solverclasses => {
 				      heccer => {
 						 constructor_settings => {
-									  dStep => (1e-5),
+									  dStep => (2e-5),
 									  configuration => {
 											    reporting => {
 													  granularity => 1,
