@@ -59,7 +59,7 @@ sub main
 		    apply => {
 			      simulation => [
 					     {
-					      arguments => [ 250000, 1, ],
+					      arguments => [ 5000, 1, ],
 					      method => 'steps',
 					     },
 					     {
@@ -75,7 +75,7 @@ sub main
 					       {
 						component_name => "/$modelname/segments/soma",
 						field => 'INJECT',
-						value => 3e-11,  # 0,
+						value => 2e-9,  # 0,
 					       },
 					      ],
 				solverclass => "heccer",
@@ -97,6 +97,41 @@ sub main
 				{
 				 component_name => "/$modelname/segments/soma/ca_pool",
 				 field => 'Ca',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/soma/cat/cat_gate_activation",
+				 field => 'state_m',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/soma/cat/cat_gate_inactivation",
+				 field => 'state_h',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/soma/kdr",
+				 field => 'state_m',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/soma/kdr",
+				 field => 'state_h',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/soma/nap",
+				 field => 'state_n',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/soma/naf",
+				 field => 'state_m',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/segments/soma/naf",
+				 field => 'state_h',
 				 outputclass => 'double_2_ascii',
 				},
 			       ],

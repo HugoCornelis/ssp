@@ -47,7 +47,7 @@ services:
       - arguments:
           - 3
           -
-            - ./tests/perl/purk_test_axon
+            - tests/perl/purk_test_axon
             - -P
             - tests/cells/purk_test_axon.ndf
         method: read
