@@ -7,7 +7,7 @@ $files = {
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 137
+                                  'line' => 147
                                 },
                                 {
                                   'expr' => undef,
@@ -16,28 +16,15 @@ $files = {
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 437
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	my $output_backend = $outputclass->{ssp_outputclass};
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => '259'
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	my $outputclass = $outputclasses->{$outputclass_name};
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 175
+                                  'line' => '489'
                                 }
                               ]
          };
-$expr_list = [];
+$expr_list = [
+               {
+                 'expr' => '$method',
+                 'depth' => -1
+               }
+             ];
 $eval_saved_text = undef;
 $main_win_geometry = '1592x1114+0+0';

@@ -2,11 +2,15 @@
 apply:
   simulation:
     - arguments:
-        - 50
+        - 2500
         - 1
       method: steps
 models:
   - modelname: /purk_test
+    parameters:
+      - component_name: /purk_test/segments/soma
+        field: INJECT
+        value: 2e-09
     solverclass: heccer
 name: purk_test
 outputclasses:
@@ -71,7 +75,7 @@ solverclasses:
     constructor_settings:
       configuration:
         reporting:
-          granularity: 1
+          granularity: 1000
           tested_things: 6225920
       dStep: 2e-05
     module_name: Heccer

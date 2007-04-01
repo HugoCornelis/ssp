@@ -59,7 +59,7 @@ sub main
 		    apply => {
 			      simulation => [
 					     {
-					      arguments => [ 50, 1, ],
+					      arguments => [ 2500, 1, ],
 					      method => 'steps',
 					     },
 # 					     {
@@ -71,6 +71,13 @@ sub main
 		    models => [
 			       {
 				modelname => "/$modelname",
+				parameters => [
+					       {
+						component_name => "/$modelname/segments/soma",
+						field => 'INJECT',
+						value => 2e-9,  # 0,
+					       },
+					      ],
 				solverclass => "heccer",
 			       },
 			      ],
@@ -252,7 +259,7 @@ sub main
 									  dStep => (2e-5),
 									  configuration => {
 											    reporting => {
-													  granularity => 1,
+													  granularity => 1000,
 													  tested_things => (
 															    $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
 															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
