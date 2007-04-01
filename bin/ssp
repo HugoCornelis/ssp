@@ -38,7 +38,8 @@ $SIG{__DIE__}
 	confess @_;
     };
 
-$ENV{NEUROSPACES_MODELS} = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
+
+my $option_neurospaces_models = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
 
 
 my $option_help;
@@ -46,27 +47,75 @@ my $option_transformator = "";
 my $option_verbose;
 
 
+sub apply_settings
+{
+    my $scheduler = shift;
+
+    my $settings = shift;
+
+    # loop over all services
+
+    my $services = $scheduler->{services};
+
+    foreach my $service_name (keys %$services)
+    {
+	my $service = $services->{$service_name};
+
+	# if this is the neurospaces service
+
+	if ($service->{module_name} eq 'Neurospaces')
+	{
+	    # if the library option is set
+
+	    if (defined $option_neurospaces_models)
+	    {
+		# set the option for the service
+
+		$service->{model_library} = $option_neurospaces_models;
+
+		#t have neurospaces handle the option
+
+		$ENV{NEUROSPACES_MODELS} = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
+	    }
+	}
+    }
+}
+
+
 sub main
 {
     read_cmd_line();
 
+    # loop over all configurations
+
     foreach my $configuration (@ARGV)
     {
+	# if the configuration exists
+
+	if (-e $configuration)
 	{
+	    # construct schedule from the configuration
+
 	    local $/;
 
-	    if (-e $configuration)
-	    {
-		my $scheduler = Load(`cat $configuration`);
+	    my $scheduler = Load(`cat $configuration`);
 
-		# run the schedule
+	    # apply the local settings
 
-		$scheduler->run();
-	    }
-	    else
-	    {
-		print STDERR "$0: configuration $configuration cannot be found\n";
-	    }
+	    my $settings
+		= {
+		   neurospaces_models => $option_neurospaces_models,
+		  };
+
+	    apply_settings($scheduler, $settings);
+
+	    # run the schedule
+
+	    $scheduler->run();
+	}
+	else
+	{
+	    print STDERR "$0: configuration $configuration cannot be found\n";
 	}
     }
 }
