@@ -77,8 +77,8 @@ sub main
 		    name => $modelname,
 		    outputclasses => {
 				      double_2_ascii => {
-							 constructor => 'Heccer::Output',
 							 module_name => 'Heccer',
+							 package => 'Heccer::Output',
 							},
 				     },
 		    outputs => [

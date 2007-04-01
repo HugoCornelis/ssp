@@ -354,7 +354,7 @@ sub instantiate_services
 Possible solutions:
 1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
 2. Install the correct integration module for this service.
-3. The service module is not correct, to find out, type perl -e 'push \@INC, \"/usr/local/glue/swig/perl\" ; require $service_module', and see if perl can find the solverclass module
+3. The service module is not correct, to find out, type perl -e 'push \@INC, \"/usr/local/glue/swig/perl\" ; require $service_module', and see if perl can find and compile the service module
 4. Contact your system administrator.
 
 $@";
@@ -648,7 +648,7 @@ Possible solutions:
 1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
 2. Install the correct integration module for this solver.
    e.g. for Heccer, you need to configure Heccer with --with-neurospaces
-3. The solverclass module is not correct, to find out, type perl -e 'push \@INC, \"/usr/local/glue/swig/perl\" ; require $solver_module', and see if perl can find the solverclass module
+3. The solverclass module is not correct, to find out, type perl -e 'push \@INC, \"/usr/local/glue/swig/perl\" ; require $solver_module', and see if perl can find and compile the solverclass module
 4. Contact your system administrator.
 
 $@";
@@ -897,17 +897,44 @@ sub new
 
     #t need todo the require on ->{module_name}
 
+    my $output_name = $self->{name};
+
+    my $output_module = $self->{module_name};
+
+    eval
+    {
+	local $SIG{__DIE__};
+
+	require "$output_module.pm";
+    };
+
+    if ($@)
+    {
+	die "Cannot load output module ($output_module.pm) for output class $output_name
+
+Possible solutions:
+1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
+2. Install the correct integration module for this output class.
+3. The output module is not correct, to find out, type perl -e 'push \@INC, \"/usr/local/glue/swig/perl\" ; require $output_module', and see if perl can find and compile the output module
+4. Contact your system administrator.
+
+$@";
+    }
+
     # construct the backend for this output
 
     {
 	no strict "refs";
 
-	my $method_name = $self->{constructor};
+	my $options = $self->{options} || {};
+
+	my $output_package = $self->{package};
 
 	my $backend
-	    = $method_name->new
+	    = $output_package->new
 		(
 		 {
+		  %$options,
 		  name => $self->{name},
 		 },
 		);
