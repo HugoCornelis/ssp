@@ -39,10 +39,8 @@ $SIG{__DIE__}
     };
 
 
-my $option_neurospaces_models = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
-
-
 my $option_help;
+my $option_neurospaces_models = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
 my $option_transformator = "";
 my $option_verbose;
 
@@ -72,10 +70,6 @@ sub apply_settings
 		# set the option for the service
 
 		$service->{model_library} = $option_neurospaces_models;
-
-		#t have neurospaces handle the option
-
-		$ENV{NEUROSPACES_MODELS} = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
 	    }
 	}
     }
@@ -127,6 +121,7 @@ sub read_cmd_line
 	= GetOptions
 	    (
 	     "help!" => \$option_help,
+	     "neurospaces-models=s" => \$option_neurospaces_models,
 	     "transformator=s" => \$option_transformator,
 	     "v|verbose+" => \$option_verbose,
 	    );
@@ -141,9 +136,10 @@ $0 <configuration>
 $0: run simulations, given an ssp configuration
 
 options :
-    help            print usage information.
-    transformator   feed the configuration through this transformator before running
-    verbose         set verbosity level.
+    help               print usage information.
+    neurospaces-models directory where to find the neurospaces library
+    transformator      feed the configuration through this transformator before running
+    verbose            set verbosity level.
 ";
 
 	exit 1;

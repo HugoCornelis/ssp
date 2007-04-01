@@ -360,7 +360,7 @@ Possible solutions:
 $@";
 	}
 
-	my $backend = $service_module->new();
+	my $backend = $service_module->new($service);
 
 	# construct the SSP service for this backend
 
