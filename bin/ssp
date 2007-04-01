@@ -1,0 +1,111 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb -w
+#
+
+use strict;
+
+
+$| = 1;
+
+
+BEGIN
+{
+    #! make check
+
+    push @INC, '../perl';
+
+    #! normal run
+
+    push @INC, './perl';
+
+    #! after install
+
+    push @INC, '/usr/local/glue/swig/perl';
+}
+
+
+use Getopt::Long;
+
+use SSP;
+
+use YAML;
+
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+$ENV{NEUROSPACES_MODELS} = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
+
+
+my $option_help;
+my $option_transformator = "";
+my $option_verbose;
+
+
+sub main
+{
+    read_cmd_line();
+
+    foreach my $configuration (@ARGV)
+    {
+	{
+	    local $/;
+
+	    if (-e $configuration)
+	    {
+		my $scheduler = Load(`cat $configuration`);
+
+		# run the schedule
+
+		$scheduler->run();
+	    }
+	    else
+	    {
+		print STDERR "$0: configuration $configuration cannot be found\n";
+	    }
+	}
+    }
+}
+
+
+sub read_cmd_line
+{
+    my $result
+	= GetOptions
+	    (
+	     "help!" => \$option_help,
+	     "transformator=s" => \$option_transformator,
+	     "v|verbose+" => \$option_verbose,
+	    );
+
+    if ($option_help
+	|| !@ARGV)
+    {
+	print
+	    "
+$0 <configuration>
+
+$0: run simulations, given an ssp configuration
+
+options :
+    help            print usage information.
+    transformator   feed the configuration through this transformator before running
+    verbose         set verbosity level.
+";
+
+	exit 1;
+    }
+
+}
+
+
+main();
+
+
+exit 0;
+
+

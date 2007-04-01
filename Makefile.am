@@ -16,6 +16,8 @@
 
 SUBDIRS = tests
 
+bin_SCRIPTS = bin/ssp
+
 # the tests are copied overhere.
 # the perl library is copied overhere.
 #
