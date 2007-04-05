@@ -1,0 +1,51 @@
+--- !!perl/hash:SSP
+apply:
+  simulation:
+    - arguments:
+        - 25000
+      method: steps
+models:
+  - modelname: /Purkinje
+    parameters:
+      - component_name: /Purkinje/segments/soma
+        field: INJECT
+        value: 2e-09
+    solverclass: heccer
+name: purk_test
+outputclasses:
+  double_2_ascii:
+    module_name: Heccer
+    options:
+      filename: /tmp/output
+    package: Heccer::Output
+outputs:
+  - component_name: /Purkinje/segments/soma
+    field: Vm
+    outputclass: double_2_ascii
+  - component_name: /Purkinje/segments/soma/ca_pool
+    field: Ca
+    outputclass: double_2_ascii
+  - component_name: /Purkinje/segments/b0s01[0]
+    field: Vm
+    outputclass: double_2_ascii
+services:
+  neurospaces:
+    initializers:
+      - arguments:
+          - 3
+          -
+            - ssp configuration for edsjb1994 (current injection 2e-9)
+            - -P
+            - tests/cells/purkinje/edsjb1994.ndf
+        method: read
+    module_name: Neurospaces
+solverclasses:
+  heccer:
+    constructor_settings:
+      configuration:
+        reporting:
+          granularity: 1000
+          tested_things: 6225920
+      dStep: 2e-05
+    module_name: Heccer
+    service_name: neurospaces

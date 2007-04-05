@@ -1,0 +1,43 @@
+--- !!perl/hash:SSP
+apply:
+  simulation:
+    - arguments:
+        - 10000
+        - 1
+      method: steps
+models:
+  - modelname: /springmass3
+    parameters: []
+    solverclass: heccer
+name: springmass3
+outputclasses:
+  double_2_ascii:
+    module_name: Heccer
+    options:
+      filename: /tmp/output
+    package: Heccer::Output
+outputs:
+  - component_name: /springmass3/segments/c1
+    field: Vm
+    outputclass: double_2_ascii
+services:
+  neurospaces:
+    initializers:
+      - arguments:
+          - 3
+          -
+            - tests/perl/springmass3
+            - -P
+            - tests/cells/springmass3.ndf
+        method: read
+    module_name: Neurospaces
+solverclasses:
+  heccer:
+    constructor_settings:
+      configuration:
+        reporting:
+          granularity: 100000
+          tested_things: 6225920
+      dStep: 1e-05
+    module_name: Heccer
+    service_name: neurospaces

@@ -1,0 +1,176 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb -w
+#
+
+use strict;
+
+
+$| = 1;
+
+
+BEGIN
+{
+    #! make check
+
+    push @INC, '../perl';
+
+    #! normal run
+
+    push @INC, './perl';
+
+    #! after install
+
+    push @INC, '/usr/local/glue/swig/perl';
+}
+
+
+use SwiggableHeccer;
+
+use SSP;
+
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+$ENV{NEUROSPACES_MODELS} = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
+
+
+sub main
+{
+    # model specification array
+
+    my $modelname = $0;
+
+    $modelname =~ s/.*\///;
+
+    $modelname =~ s/-/_/g;
+
+    my $args = [ "$0", "-P", "tests/cells/$modelname.ndf" ];
+
+    # instantiate a scheduler
+
+    my $scheduler
+	= SSP->new(
+		   {
+		    apply => {
+			      simulation => [
+					     {
+					      arguments => [ 10000, 1, ],
+					      method => 'steps',
+					     },
+# 					     {
+# 					      arguments => [ 0.1, ],
+# 					      method => 'advance',
+# 					     },
+					    ],
+			     },
+		    models => [
+			       {
+				modelname => "/$modelname",
+				parameters => [
+# 					       {
+# 						component_name => "/$modelname/segments/c1",
+# 						field => 'INJECT',
+# 						value => 2e-9,  # 0,
+# 					       },
+					      ],
+				solverclass => "heccer",
+			       },
+			      ],
+		    name => $modelname,
+		    outputclasses => {
+				      double_2_ascii => {
+							 module_name => 'Heccer',
+							 options => {
+								     filename => "/tmp/output",
+								    },
+							 package => 'Heccer::Output',
+							},
+				     },
+		    outputs => [
+				(
+				 {
+				  component_name => "/$modelname/segments/c1",
+				  field => 'Vm',
+				  outputclass => 'double_2_ascii',
+				 },
+				),
+			       ],
+		    services => {
+				 neurospaces => {
+						 initializers => [
+								  {
+								   arguments => [ $#$args + 1, $args, ],
+								   method => 'read',
+								  },
+								 ],
+						 module_name => 'Neurospaces',
+						},
+				},
+		    solverclasses => {
+				      heccer => {
+						 constructor_settings => {
+									  dStep => (1e-5),
+									  configuration => {
+											    reporting => {
+													  granularity => 100000,
+													  tested_things => (
+															    $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
+															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
+															    | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+															   ),
+													 },
+											   },
+									 },
+						 module_name => 'Heccer',
+						 service_name => 'neurospaces',
+						},
+				     },
+		   },
+		  );
+
+    use YAML;
+
+    use IO::File;
+
+    my $configuration = IO::File->new(">./yaml/$modelname.yml");
+
+    if (defined $configuration)
+    {
+	print $configuration Dump($scheduler);
+
+	$configuration->close();
+    }
+
+    my $scheduler_yaml;
+
+    {
+	local $/;
+
+	if (-e "./yaml/$modelname.yml")
+	{
+	    $scheduler_yaml = Load(`cat ./yaml/$modelname.yml`);
+	}
+    }
+
+    # run the schedule
+
+    $scheduler->run();
+
+    system 'cat /tmp/output';
+}
+
+
+main();
+
+
+exit 0;
+
+

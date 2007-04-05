@@ -450,6 +450,8 @@ sub run
 {
     my $self = shift;
 
+    my $verbose = shift;
+
     # get initializers and simulation specifications, using defaults
     # where needed
 
@@ -485,6 +487,11 @@ sub run
 	my $arguments = $application->{arguments};
 
 	# apply the method
+
+	if ($verbose)
+	{
+	    print "$0: applying method '$method' to $self->{name}\n";
+	}
 
 	my $success = $self->$method(@$arguments);
 
