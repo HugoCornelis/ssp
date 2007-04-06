@@ -10,7 +10,7 @@ apply:
       method: advance
 models:
   - modelname: /purk_test_soma
-    parameters:
+    granular_parameters:
       - component_name: /purk_test_soma/segments/soma
         field: INJECT
         value: 2e-09

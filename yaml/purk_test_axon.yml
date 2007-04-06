@@ -6,7 +6,7 @@ apply:
       method: steps
 models:
   - modelname: /purk_test_axon
-    parameters:
+    granular_parameters:
       - component_name: /purk_test_axon/segments/axon
         field: INJECT
         value: 2e-09
@@ -14,8 +14,8 @@ models:
 name: purk_test_axon
 outputclasses:
   double_2_ascii:
-    constructor: Heccer::Output
     module_name: Heccer
+    package: Heccer::Output
 outputs:
   - component_name: /purk_test_axon/segments/axon
     field: Vm
@@ -47,7 +47,7 @@ services:
       - arguments:
           - 3
           -
-            - tests/perl/purk_test_axon
+            - ./tests/perl/purk_test_axon
             - -P
             - tests/cells/purk_test_axon.ndf
         method: read

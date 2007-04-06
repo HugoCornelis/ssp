@@ -71,13 +71,13 @@ sub main
 		    models => [
 			       {
 				modelname => "/$modelname",
-				parameters => [
-					       {
-						component_name => "/$modelname/segments/soma",
-						field => 'INJECT',
-						value => 2e-9,  # 0,
-					       },
-					      ],
+				granular_parameters => [
+							{
+							 component_name => "/$modelname/segments/soma",
+							 field => 'INJECT',
+							 value => 2e-9,  # 0,
+							},
+						       ],
 				solverclass => "heccer",
 			       },
 			      ],

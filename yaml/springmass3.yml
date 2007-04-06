@@ -7,7 +7,7 @@ apply:
       method: steps
 models:
   - modelname: /springmass3
-    parameters: []
+    granular_parameters: []
     solverclass: heccer
 name: springmass3
 outputclasses:
@@ -26,7 +26,7 @@ services:
       - arguments:
           - 3
           -
-            - tests/perl/springmass3
+            - ./tests/perl/springmass3
             - -P
             - tests/cells/springmass3.ndf
         method: read

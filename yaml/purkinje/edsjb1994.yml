@@ -6,10 +6,13 @@ apply:
       method: steps
 models:
   - modelname: /Purkinje
-    parameters:
-      - component_name: /Purkinje/segments/soma
-        field: INJECT
-        value: 2e-09
+    conceptual_parameters:
+      - component_name: thickd::gaba::/Purk_GABA
+        field: FREQUENCY
+        value: 1
+      - component_name: thickd::non_nmda::/Purk_non_NMDA
+        field: FREQUENCY
+        value: 25
     solverclass: heccer
 name: purk_test
 outputclasses:

@@ -76,14 +76,24 @@ sub compile
 
 	my $service = $self->{services}->{$solverclasses->{$solverclass}->{service_name}};
 
-	# apply the parameter settings to the model
+	# apply the conceptual parameter settings to the model
 
-	my $parameter_application
-	    = $service->{ssp_service}->apply_model_parameters($model->{parameters});
+	my $conceptual_parameter_application
+	    = $service->{ssp_service}->apply_conceptual_parameters($model->{conceptual_parameters});
 
-	if (defined $parameter_application)
+	if (defined $conceptual_parameter_application)
 	{
-	    die "Cannot apply parameters: $parameter_application";
+	    die "Cannot apply conceptual_parameters: $conceptual_parameter_application";
+	}
+
+	# apply the granular_parameter settings to the model
+
+	my $granular_parameter_application
+	    = $service->{ssp_service}->apply_granular_parameters($model->{granular_parameters});
+
+	if (defined $granular_parameter_application)
+	{
+	    die "Cannot apply granular_parameters: $granular_parameter_application";
 	}
 
 	# instantiate a schedulee
@@ -993,7 +1003,7 @@ package SSP::Service;
 BEGIN { our @ISA = qw(SSP::Glue); }
 
 
-sub apply_model_parameters
+sub apply_conceptual_parameters
 {
     my $self = shift;
 
@@ -1001,7 +1011,21 @@ sub apply_model_parameters
 
     my $service_backend = $self->backend();
 
-    my $result = $service_backend->apply_model_parameters($options);
+    my $result = $service_backend->apply_conceptual_parameters($options);
+
+    return $result;
+}
+
+
+sub apply_granular_parameters
+{
+    my $self = shift;
+
+    my $options = shift;
+
+    my $service_backend = $self->backend();
+
+    my $result = $service_backend->apply_granular_parameters($options);
 
     return $result;
 }
