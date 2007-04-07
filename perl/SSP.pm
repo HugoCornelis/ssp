@@ -15,7 +15,7 @@ sub advance
 
     my $time = shift;
 
-    my $verbose = shift;
+    my $options = shift;
 
     # set default result : ok
 
@@ -29,7 +29,7 @@ sub advance
     {
 	# advance the engine
 
-	my $error = $schedulee->advance($time, $verbose);
+	my $error = $schedulee->advance($time, $options);
 
 	if ($error)
 	{
@@ -460,7 +460,7 @@ sub run
 {
     my $self = shift;
 
-    my $verbose = shift;
+    my $options = shift;
 
     # get initializers and simulation specifications, using defaults
     # where needed
@@ -498,7 +498,12 @@ sub run
 
 	# apply the method
 
-	if ($verbose)
+	#t note that this verbosity level is not the same as the one
+	#t in the configuration
+	#t
+	#t needs to be sorted out.
+
+	if ($options->{verbosity})
 	{
 	    print "$0: applying method '$method' to $self->{name}\n";
 	}
@@ -518,7 +523,7 @@ sub steps
 
     my $steps = shift;
 
-    my $verbose = shift;
+    my $options = shift || {};
 
     # set default result : ok
 
@@ -532,7 +537,7 @@ sub steps
     {
 	my $backend = $schedulee->backend();
 
-	$backend->report( { steps => undef, verbose => $verbose, }, );
+	$backend->report( { %$options, steps => undef, }, );
     }
 
     # a couple of times
@@ -547,7 +552,7 @@ sub steps
 	{
 	    # advance the engine
 
-	    my $error = $schedulee->step( { steps => $step, verbose => $verbose, }, );
+	    my $error = $schedulee->step( { %$options, steps => $step, }, );
 
 	    if ($error)
 	    {
@@ -558,7 +563,7 @@ sub steps
 
 	    my $backend = $schedulee->backend();
 
-	    $backend->report( { steps => $step, verbose => $verbose, }, );
+	    $backend->report( { %$options, steps => $step, }, );
 	}
     }
 
@@ -568,7 +573,7 @@ sub steps
     {
 	my $backend = $schedulee->backend();
 
-	$backend->report( { steps => -1, verbose => $verbose, }, );
+	$backend->report( { %$options, steps => -1, }, );
     }
 
     # return result
@@ -806,7 +811,7 @@ sub steps
 
     my $steps = shift;
 
-    my $verbose = shift;
+    my $options = shift || {};
 
     # set result : ok
 
@@ -816,7 +821,7 @@ sub steps
 
     my $backend = $self->backend();
 
-    $backend->report( { steps => undef, verbose => $verbose, }, );
+    $backend->report( { %$options, steps => undef, }, );
 
     # a couple of times
 
@@ -833,10 +838,10 @@ sub steps
 
 	# dump
 
-	$backend->report( { steps => $i, verbose => $verbose, }, );
+	$backend->report( { %$options, steps => $i, }, );
     }
 
-    $backend->report( { steps => -1, verbose => $verbose, }, );
+    $backend->report( { %$options, steps => -1, }, );
 
     # return result
 

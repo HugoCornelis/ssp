@@ -8,9 +8,11 @@ models:
   - modelname: /Purkinje
     conceptual_parameters:
       - component_name: thickd::gaba::/Purk_GABA
+        description: endogenous activity
         field: FREQUENCY
         value: 1
       - component_name: thickd::non_nmda::/Purk_non_NMDA
+        description: endogenous activity
         field: FREQUENCY
         value: 25
     solverclass: heccer
@@ -37,7 +39,7 @@ services:
       - arguments:
           - 3
           -
-            - ssp configuration for edsjb1994 (current injection 2e-9)
+            - ssp configuration for edsjb1994
             - -P
             - tests/cells/purkinje/edsjb1994.ndf
         method: read

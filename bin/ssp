@@ -105,7 +105,7 @@ sub main
 
 	    # run the schedule
 
-	    $scheduler->run($option_verbose);
+	    $scheduler->run( { verbosity => $option_verbose, }, );
 	}
 	else
 	{

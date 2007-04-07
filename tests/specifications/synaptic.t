@@ -18,13 +18,13 @@ my $test
 				command => 'tests/perl/springmass3',
 				command_tests => [
 						  {
-						   description => "Is a synaptic (springmass) channel integrated correctly, endogenous firing ?",
+						   description => "Is a synaptic (springmass) channel integrated correctly, endogenous firing (works only for the Linux rng) ?",
 						   read => [ `cat $::config->{core_directory}/tests/specifications/strings/springmass3.txt`, ],
 						   timeout => 8,
 						   write => undef,
 						  },
 						 ],
-				description => "synaptic (springmass) channel integration, endogenous firing",
+				description => "synaptic (springmass) channel integration, endogenous firing (works only for the Linux rng)",
 			       },
 			      ],
        description => "synaptic channels",

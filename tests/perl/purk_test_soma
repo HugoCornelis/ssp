@@ -59,7 +59,7 @@ sub main
 		    apply => {
 			      simulation => [
 					     {
-					      arguments => [ 5000, 1, ],
+					      arguments => [ 5000, { verbose => 2, }, ],
 					      method => 'steps',
 					     },
 					     {
