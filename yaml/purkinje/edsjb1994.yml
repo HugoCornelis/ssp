@@ -11,7 +11,7 @@ models:
         description: endogenous activity
         field: FREQUENCY
         value: 1
-      - component_name: thickd::non_nmda::/Purk_non_NMDA
+      - component_name: spine::/Purk_spine/head/par
         description: endogenous activity
         field: FREQUENCY
         value: 25
