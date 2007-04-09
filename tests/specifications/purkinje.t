@@ -14,7 +14,7 @@ my $test
        command_definitions => [
 			       {
 				arguments => [
-					      'yaml/purkinje/edsjb1994-endogenous.yml',
+					      "$::config->{core_directory}/yaml/purkinje/edsjb1994-endogenous.yml",
 					     ],
 				command => 'bin/ssp',
 				command_tests => [
@@ -29,7 +29,7 @@ my $test
 			       },
 			       {
 				arguments => [
-					      'yaml/purkinje/edsjb1994-current.yml',
+					      "$::config->{core_directory}/yaml/purkinje/edsjb1994-current.yml",
 					     ],
 				command => 'bin/ssp',
 				command_tests => [
