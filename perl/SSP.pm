@@ -473,6 +473,8 @@ sub run
 	       ],
 		   ;
 
+    my $simulation = $self->{apply}->{simulation} || [];
+
     my $finishers
 	= $self->{apply}->{finishers}
 	    || [
@@ -480,11 +482,11 @@ sub run
 	       ],
 		   ;
 
-    my $simulation = $self->{apply}->{simulation} || [];
+    my $results = $self->{apply}->{results} || [];
 
     # construct the schedule we have to apply
 
-    my $applications = [ @$initializers, @$simulation, @$finishers, ];
+    my $applications = [ @$initializers, @$simulation, @$finishers, @$results, ];
 
     # go through the schedule
 
@@ -516,6 +518,33 @@ sub run
 	}
     }
 }
+
+
+sub shell
+{
+    my $self = shift;
+
+    my $options = shift;
+
+    my $result = 1;
+
+    my $commands = $options->{commands};
+
+    foreach my $command (@$commands)
+    {
+	system "$command";
+
+	if ($?)
+	{
+	    print "$0: '$command' failed: $?";
+
+	    $result = 0;
+	}
+    }
+
+    return $result;
+}
+
 
 sub steps
 {

@@ -5,11 +5,11 @@ apply:
         - 10000
       method: steps
 models:
-  - modelname: /purk_test_axon
-    granular_parameters:
+  - granular_parameters:
       - component_name: /purk_test_axon/segments/axon
         field: INJECT
         value: 2e-09
+    modelname: /purk_test_axon
     solverclass: heccer
 name: purk_test_axon
 outputclasses:
