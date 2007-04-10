@@ -39,11 +39,53 @@ $SIG{__DIE__}
     };
 
 
+my $option_configuration_cell;
 my $option_help;
+my $option_model_filename;
+my $option_model_name;
 my $option_neurospaces_models = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
+my $option_solverclass = 'heccer';
+my $option_steps = 2500;
 my $option_transformator = "";
 my $option_verbose;
 
+
+my $args = [ "$0", "-P", "" ];
+
+
+my $configurations
+    = {
+       cell => {
+		apply => {
+			  simulation => [
+					 {
+					  arguments => [ 0, { verbose => 2, }, ],
+					  method => 'steps',
+					 },
+					],
+			 },
+		outputclasses => {
+				  double_2_ascii => {
+						     module_name => 'Heccer',
+						     options => {
+								 filename => "/tmp/output",
+								},
+						     package => 'Heccer::Output',
+						    },
+				 },
+		services => {
+			     neurospaces => {
+					     initializers => [
+							      {
+							       arguments => [ $#$args + 1, $args, ],
+							       method => 'read',
+							      },
+							     ],
+					     module_name => 'Neurospaces',
+					    },
+			    },
+	       },
+      };
 
 sub apply_settings
 {
@@ -94,23 +136,125 @@ sub main
 
 	    my $scheduler = Load(`cat $configuration`);
 
-	    # apply the local settings
+	    # and run it
 
-	    my $settings
-		= {
-		   neurospaces_models => $option_neurospaces_models,
-		  };
-
-	    apply_settings($scheduler, $settings);
-
-	    # run the schedule
-
-	    $scheduler->run( { verbosity => $option_verbose, }, );
+	    schedule($scheduler);
 	}
 	else
 	{
 	    print STDERR "$0: configuration $configuration cannot be found\n";
 	}
+    }
+
+    # if using one of the builtin configurations
+
+    if ($option_configuration_cell)
+    {
+	my $model_root = $option_model_name;
+
+	# construct a schedule from a builtin
+
+	use Clone qw(clone);
+
+	my $scheduler = clone($configurations->{cell});
+
+	# assign name
+
+	$scheduler->{name} = "cell configuration: $model_root";
+
+	# process service options
+
+	my $services
+	    = {
+	       neurospaces => {
+			       initializers => [
+						{
+						 arguments => [ $#$args + 1, $args, ],
+						 method => 'read',
+						},
+					       ],
+			       module_name => 'Neurospaces',
+			      },
+	      };
+
+	$services->{neurospaces}->{initializers}->[0]->{arguments}->[1]->[$#$args] = $option_model_filename;
+
+	$scheduler->{services} = $services;
+
+	# process model options
+
+	my $models
+	    = [
+	       {
+		modelname => "/$option_model_name",
+		solverclass => $option_solverclass,
+	       },
+	      ];
+
+	my $granular_parameters
+	    = [
+	       {
+		component_name => "/$model_root/segments/soma",
+		field => 'INJECT',
+		value => 2e-9,	# 0,
+	       },
+	      ];
+
+	$models->{granular_parameters} = $granular_parameters;
+
+	$scheduler->{models} = $models;
+
+	# process solver class options
+
+	my $solverclasses
+	    = {
+	       heccer => {
+# 			  constructor_settings => {
+# 						   dStep => (2e-5),
+# 						   configuration => {
+# 								     reporting => {
+# 										   granularity => 1000,
+# 										   tested_things => (
+# 												     $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
+# 												     | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
+# 												     | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
+# 												     | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
+# 												     | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
+# 												     | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+# 												    ),
+# 										  },
+# 								    },
+# 						  },
+			  module_name => 'Heccer',
+			  service_name => 'neurospaces',
+			 },
+	      };
+
+	$scheduler->{solverclasses} = $solverclasses;
+
+	# process output options
+
+	my $outputs
+	    = [
+	       {
+		component_name => "/$model_root/segments/soma",
+		field => 'Vm',
+		outputclass => 'double_2_ascii',
+	       },
+	      ];
+
+	$scheduler->{outputs} = $outputs;
+
+	# set number of steps
+
+	if (defined $option_steps)
+	{
+	    $scheduler->{apply}->{simulation}->[0]->{arguments}->[0] = $option_steps;
+	}
+
+	# and run it
+
+	schedule($scheduler);
     }
 }
 
@@ -120,8 +264,13 @@ sub read_cmd_line
     my $result
 	= GetOptions
 	    (
+	     "cell!" => \$option_configuration_cell,
 	     "help!" => \$option_help,
+	     "model-filename=s" => \$option_model_filename,
+	     "model-name=s" => \$option_model_name,
 	     "neurospaces-models=s" => \$option_neurospaces_models,
+	     "solverclass=s" => \$option_solverclass,
+	     "steps=i" => \$option_steps,
 	     "transformator=s" => \$option_transformator,
 	     "v|verbose+" => \$option_verbose,
 	    );
@@ -133,17 +282,47 @@ sub read_cmd_line
 	    "
 $0 <configuration>
 
-$0: run simulations, given an ssp configuration
+$0: run simulations, given an ssp configuration, or using a builtin configuration
 
 options :
+    cell               use the cell builtin configuration
     help               print usage information.
+    model-filename     filename of the model description file (when using a builtin configuration)
+    model-name         name of the model (when using a builtin configuration)
     neurospaces-models directory where to find the neurospaces library
+    solverclass        set the solver class to use (when using a builtin configuration)
+    steps              number of simulation steps
     transformator      feed the configuration through this transformator before running
     verbose            set verbosity level.
 ";
 
 	exit 1;
     }
+
+}
+
+
+sub schedule
+{
+    my $scheduler = shift;
+
+    if (!$scheduler->isa("SSP"))
+    {
+	$scheduler = SSP->new($scheduler);
+    }
+
+    # apply the local settings
+
+    my $settings
+	= {
+	   neurospaces_models => $option_neurospaces_models,
+	  };
+
+    apply_settings($scheduler, $settings);
+
+    # run the schedule
+
+    $scheduler->run( { verbosity => $option_verbose, }, );
 
 }
 

@@ -3,11 +3,11 @@ apply:
   simulation:
     - arguments:
         - 10000
-        - 1
+        - verbose: 2
       method: steps
 models:
-  - modelname: /springmass3
-    granular_parameters: []
+  - granular_parameters: []
+    modelname: /springmass3
     solverclass: heccer
 name: springmass3
 outputclasses:

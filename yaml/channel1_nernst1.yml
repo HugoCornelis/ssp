@@ -3,7 +3,7 @@ apply:
   simulation:
     - arguments:
         - 1000000
-        - 1
+        - verbose: 2
       method: steps
 models:
   - modelname: /channel1_nernst1
@@ -11,8 +11,8 @@ models:
 name: channel1_nernst1
 outputclasses:
   double_2_ascii:
-    constructor: Heccer::Output
     module_name: Heccer
+    package: Heccer::Output
 outputs:
   - component_name: '/channel1_nernst1/segments/main[0]'
     field: Vm
@@ -23,7 +23,7 @@ services:
       - arguments:
           - 3
           -
-            - tests/perl/channel1-nernst1
+            - ./tests/perl/channel1-nernst1
             - -P
             - tests/cells/channel1_nernst1.ndf
         method: read
