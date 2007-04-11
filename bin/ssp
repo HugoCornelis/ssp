@@ -59,7 +59,7 @@ my $configurations
 		apply => {
 			  simulation => [
 					 {
-					  arguments => [ 0, { verbose => 2, }, ],
+					  arguments => [ 0, { verbose => $option_verbose, }, ],
 					  method => 'steps',
 					 },
 					],
@@ -282,12 +282,33 @@ sub main
 
 	$scheduler->{outputs} = $outputs;
 
+	# set the apply options
+
+	# set verbosity level
+
+	my $apply
+	    = {
+	       simulation => [
+			      {
+			       arguments => [ 0, { verbose => 0, }, ],
+			       method => 'steps',
+			      },
+			     ],
+	      };
+
+	if (defined $option_verbose)
+	{
+	    $apply->{simulation}->[0]->{arguments}->[1]->{verbose} = $option_verbose;
+	}
+
 	# set number of steps
 
 	if (defined $option_steps)
 	{
-	    $scheduler->{apply}->{simulation}->[0]->{arguments}->[0] = $option_steps;
+	    $apply->{simulation}->[0]->{arguments}->[0] = $option_steps;
 	}
+
+	$scheduler->{apply} = $apply;
 
 	# and run it
 
