@@ -40,20 +40,17 @@ $SIG{__DIE__}
 
 
 my $option_configuration_cell;
-my $option_help;
 my $option_model_filename;
 my $option_model_name;
 my $option_neurospaces_models = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
 my $option_solverclass = 'heccer';
 my $option_steps = 2500;
+my $option_time_step;
 my $option_transformator = "";
 my $option_verbose;
 
 
-my $args = [ "$0", "-P", "" ];
-
-
-my $configurations
+my $builtin_configurations
     = {
        cell => {
 		apply => {
@@ -64,17 +61,11 @@ my $configurations
 					 },
 					],
 			 },
-		services => {
-			     neurospaces => {
-					     initializers => [
-							      {
-							       arguments => [ $#$args + 1, $args, ],
-							       method => 'read',
-							      },
-							     ],
-					     module_name => 'Neurospaces',
-					    },
-			    },
+		usage => '	Simulate a cell, default is to output the membrane potential of the soma.
+
+	--model-filename set the model filename, and filename of the output file.
+	--steps sets number of steps
+',
 	       },
       };
 
@@ -141,39 +132,13 @@ sub main
 
     if ($option_configuration_cell)
     {
-	if (!defined $option_model_name)
+	if (!defined $option_model_name
+	    && !defined $option_model_filename)
 	{
 	    system "$0 --help";
 
-	    die "option_model_name must be set when using a builtin configuration";
+	    die "option_model_name must be set when using the 'cell' builtin configuration without a filename";
 	}
-
-	my $model_root = $option_model_name;
-
-	# construct a schedule from a builtin
-
-	use Clone qw(clone);
-
-	my $scheduler = clone($configurations->{cell});
-
-	# assign name
-
-	$scheduler->{name} = "cell configuration: $model_root";
-
-	# process service options
-
-	my $services
-	    = {
-	       neurospaces => {
-			       initializers => [
-						{
-						 arguments => [ $#$args + 1, $args, ],
-						 method => 'read',
-						},
-					       ],
-			       module_name => 'Neurospaces',
-			      },
-	      };
 
 	if (!defined $option_model_filename)
 	{
@@ -182,11 +147,74 @@ sub main
 	    die "option_model_filename must be set when using a builtin configuration";
 	}
 
-	$services->{neurospaces}->{initializers}->[0]->{arguments}->[1]->[$#$args] = $option_model_filename;
+	if (!defined $option_model_name)
+	{
+	    $option_model_filename =~ m(.*/([^/]*)\.ndf);
+
+	    $option_model_name = $1;
+
+	    if (!defined $option_model_name)
+	    {
+		system "$0 --help";
+
+		die "option_model_name cannot be determined from the option_model_filename due to a regex mismatch, bailing out";
+	    }
+	}
+
+	# construct a schedule from a builtin
+
+	use Clone qw(clone);
+
+	my $scheduler = clone($builtin_configurations->{cell});
+
+	# assign name
+
+	$scheduler->{name} = "cell configuration: $option_model_name";
+
+	# process service options
+
+	my $services
+	    = {
+	       neurospaces => {
+			       module_name => 'Neurospaces',
+			      },
+	      };
+
+	# if this is a genesis .p file
+
+	if ($option_model_filename =~ m(\.p$))
+	{
+	    my $args = [ "$0", "-P", ];
+
+	    $services->{neurospaces}->{initializers}
+		= [
+		   {
+		    arguments => [ { filename => $option_model_filename, }, $args, ],
+		    method => 'convert',
+		   },
+		  ];
+
+	}
+	else
+	{
+	    my $args = [ "$0", "-P", ];
+
+	    push @$args, $option_model_filename;
+
+	    $services->{neurospaces}->{initializers}
+		= [
+		   {
+		    arguments => [ $args, ],
+		    method => 'read',
+		   },
+		  ];
+	}
 
 	$scheduler->{services} = $services;
 
 	# process model options
+
+	my $model_root = $option_model_name;
 
 	my $models
 	    = [
@@ -236,6 +264,11 @@ sub main
 			  service_name => 'neurospaces',
 			 },
 	      };
+
+	if (defined $option_time_step)
+	{
+	    $solverclasses->{heccer}->{constructor_settings}->{dStep} = $option_time_step;
+	}
 
 	$scheduler->{solverclasses} = $solverclasses;
 
@@ -319,9 +352,13 @@ sub main
 
 sub read_cmd_line
 {
+    my $option_builtins;
+    my $option_help;
+
     my $result
 	= GetOptions
 	    (
+	     "builtins!" => \$option_builtins,
 	     "cell!" => \$option_configuration_cell,
 	     "help!" => \$option_help,
 	     "model-filename=s" => \$option_model_filename,
@@ -329,6 +366,7 @@ sub read_cmd_line
 	     "neurospaces-models=s" => \$option_neurospaces_models,
 	     "solverclass=s" => \$option_solverclass,
 	     "steps=i" => \$option_steps,
+	     "time-step=s" => \$option_time_step,
 	     "transformator=s" => \$option_transformator,
 	     "v|verbose+" => \$option_verbose,
 	    );
@@ -341,7 +379,10 @@ $0 <configuration>
 
 $0: run simulations, given an ssp configuration, or using a builtin configuration
 
+try $0 --builtins for information of how to run a simulation easily
+
 options :
+    builtins           give help about supported builtin configurations
     cell               use the cell builtin configuration
     help               print usage information.
     model-filename     filename of the model description file (when using a builtin configuration)
@@ -349,9 +390,35 @@ options :
     neurospaces-models directory where to find the neurospaces library
     solverclass        set the solver class to use (when using a builtin configuration)
     steps              number of simulation steps
+    time-step          sets the time step
     transformator      feed the configuration through this transformator before running
     verbose            set verbosity level.
 ";
+
+	exit 1;
+    }
+
+    if ($option_builtins)
+    {
+	print
+	    "
+$0 <configuration>
+
+$0: run simulations, given an ssp configuration, or using a builtin configuration
+
+Known builtin configurations:
+
+";
+
+	foreach my $builtin_configuration_name (keys %$builtin_configurations)
+	{
+	    print "\n$builtin_configuration_name:\n\n";
+
+	    print $builtin_configurations->{$builtin_configuration_name}->{usage};
+
+	}
+
+	print "\n";
 
 	exit 1;
     }

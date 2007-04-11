@@ -37,7 +37,6 @@ services:
   neurospaces:
     initializers:
       - arguments:
-          - 3
           -
             - ssp configuration for edsjb1994
             - -P

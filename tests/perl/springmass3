@@ -104,7 +104,7 @@ sub main
 				 neurospaces => {
 						 initializers => [
 								  {
-								   arguments => [ $#$args + 1, $args, ],
+								   arguments => [ $args, ],
 								   method => 'read',
 								  },
 								 ],
