@@ -267,6 +267,8 @@ sub main
 				 },
 	      };
 
+	$scheduler->{outputclasses} = $outputclasses;
+
 	# process output options
 
 	my $outputs

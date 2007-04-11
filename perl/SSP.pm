@@ -307,6 +307,11 @@ sub instantiate_outputs
 
 	my $outputclass = $self->{outputclasses}->{$outputclass_name};
 
+	if (!defined $outputclass)
+	{
+	    die "The output " . $output->{component_name} . "->" . $output->{field} . " has as outputclass $outputclass_name, but this class cannot be found";
+	}
+
 	# add the output field to the output engine
 
 	#! note that outputclass is not an object
