@@ -64,15 +64,6 @@ my $configurations
 					 },
 					],
 			 },
-		outputclasses => {
-				  double_2_ascii => {
-						     module_name => 'Heccer',
-						     options => {
-								 filename => "/tmp/output",
-								},
-						     package => 'Heccer::Output',
-						    },
-				 },
 		services => {
 			     neurospaces => {
 					     initializers => [
@@ -150,6 +141,13 @@ sub main
 
     if ($option_configuration_cell)
     {
+	if (!defined $option_model_name)
+	{
+	    system "$0 --help";
+
+	    die "option_model_name must be set when using a builtin configuration";
+	}
+
 	my $model_root = $option_model_name;
 
 	# construct a schedule from a builtin
@@ -177,6 +175,13 @@ sub main
 			      },
 	      };
 
+	if (!defined $option_model_filename)
+	{
+	    system "$0 --help";
+
+	    die "option_model_filename must be set when using a builtin configuration";
+	}
+
 	$services->{neurospaces}->{initializers}->[0]->{arguments}->[1]->[$#$args] = $option_model_filename;
 
 	$scheduler->{services} = $services;
@@ -200,11 +205,13 @@ sub main
 	       },
 	      ];
 
-	$models->{granular_parameters} = $granular_parameters;
+	$models->[0]->{granular_parameters} = $granular_parameters;
 
 	$scheduler->{models} = $models;
 
 	# process solver class options
+
+	my $option_solverclass_name = 'Heccer';
 
 	my $solverclasses
 	    = {
@@ -225,12 +232,40 @@ sub main
 # 										  },
 # 								    },
 # 						  },
-			  module_name => 'Heccer',
+			  module_name => $option_solverclass_name,
 			  service_name => 'neurospaces',
 			 },
 	      };
 
 	$scheduler->{solverclasses} = $solverclasses;
+
+	# process output class options
+
+	my $option_output_directory = './output';
+
+	my $option_output_filename = $option_output_directory . '/' . $option_model_name;
+
+	$option_output_filename =~ m((.*)/);
+
+	my $directory = $1;
+
+	if ($1)
+	{
+	    `mkdir -p "$1"`;
+	}
+
+	my $option_output_package = $option_solverclass_name . '::' . 'Output';
+
+	my $outputclasses
+	    = {
+	       double_2_ascii => {
+				  module_name => $option_solverclass_name,
+				  options => {
+					      filename => $option_output_filename,
+					     },
+				  package => $option_output_package,
+				 },
+	      };
 
 	# process output options
 
@@ -275,8 +310,7 @@ sub read_cmd_line
 	     "v|verbose+" => \$option_verbose,
 	    );
 
-    if ($option_help
-	|| !@ARGV)
+    if ($option_help)
     {
 	print
 	    "
@@ -306,7 +340,9 @@ sub schedule
 {
     my $scheduler = shift;
 
-    if (!$scheduler->isa("SSP"))
+    use UNIVERSAL qw( isa can );
+
+    if (!isa($scheduler, "SSP"))
     {
 	$scheduler = SSP->new($scheduler);
     }
