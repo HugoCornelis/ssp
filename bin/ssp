@@ -44,6 +44,7 @@ my $option_model_filename;
 my $option_model_name;
 my $option_neurospaces_models = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
 my $option_solverclass = 'heccer';
+my $option_spine_prototype;
 my $option_steps = 2500;
 my $option_time_step;
 my $option_transformator = "";
@@ -149,7 +150,7 @@ sub main
 
 	if (!defined $option_model_name)
 	{
-	    $option_model_filename =~ m(.*/([^/]*)\.ndf);
+	    $option_model_filename =~ m(.*/([^/]*)\.(ndf|p));
 
 	    $option_model_name = $1;
 
@@ -189,8 +190,14 @@ sub main
 	    $services->{neurospaces}->{initializers}
 		= [
 		   {
-		    arguments => [ { filename => $option_model_filename, }, $args, ],
-		    method => 'convert',
+		    arguments => [
+				  {
+				   filename => $option_model_filename,
+				   spine_prototype => $option_spine_prototype,
+				  },
+				  $args,
+				 ],
+		    method => 'load',
 		   },
 		  ];
 
@@ -365,6 +372,7 @@ sub read_cmd_line
 	     "model-name=s" => \$option_model_name,
 	     "neurospaces-models=s" => \$option_neurospaces_models,
 	     "solverclass=s" => \$option_solverclass,
+	     "spine-prototype=s" => \$option_spine_prototype,
 	     "steps=i" => \$option_steps,
 	     "time-step=s" => \$option_time_step,
 	     "transformator=s" => \$option_transformator,
@@ -388,6 +396,7 @@ options :
     model-filename     filename of the model description file (when using a builtin configuration)
     model-name         name of the model (when using a builtin configuration)
     neurospaces-models directory where to find the neurospaces library
+    spine-prototype    add spines with this prototype
     solverclass        set the solver class to use (when using a builtin configuration)
     steps              number of simulation steps
     time-step          sets the time step
