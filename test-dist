@@ -11,7 +11,7 @@ use strict;
 
 {
     # $Format: "system 'mkdir --parents \"/tmp/${package}/${label}\"'"$
-system 'mkdir --parents "/tmp/ssp/purkinje-2"'
+system 'mkdir --parents "/tmp/ssp/nodist"'
 }
 
 if ($?)
@@ -22,7 +22,7 @@ if ($?)
 
 {
     # $Format: "system \"cp '${package}-${label}.tar.gz' '/tmp/${package}/${label}'\""$
-system "cp 'ssp-purkinje-2.tar.gz' '/tmp/ssp/purkinje-2'"
+system "cp 'ssp-nodist.tar.gz' '/tmp/ssp/nodist'"
 }
 
 if ($?)
@@ -33,7 +33,7 @@ if ($?)
 
 {
     # $Format: "chdir \"/tmp/${package}/${label}\""$
-chdir "/tmp/ssp/purkinje-2"
+chdir "/tmp/ssp/nodist"
 }
 
 if ($?)
@@ -44,7 +44,7 @@ if ($?)
 
 {
     # $Format: "system \"tar xfz '${package}-${label}.tar.gz'\""$
-system "tar xfz 'ssp-purkinje-2.tar.gz'"
+system "tar xfz 'ssp-nodist.tar.gz'"
 }
 
 if ($?)
@@ -55,7 +55,7 @@ if ($?)
 
 {
     # $Format: "chdir \"${package}-${label}\""$
-chdir "ssp-purkinje-2"
+chdir "ssp-nodist"
 }
 
 if ($?)
