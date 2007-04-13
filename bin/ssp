@@ -181,7 +181,7 @@ sub main
 	{
 	    # skip non yaml files
 
-	    if ($schedule_name !~ /\.yml/)
+	    if ($schedule_name !~ /\.yml$/)
 	    {
 		next;
 	    }
