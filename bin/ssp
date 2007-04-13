@@ -43,6 +43,7 @@ my $option_configuration_cell;
 my $option_model_filename;
 my $option_model_name;
 my $option_neurospaces_models = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
+my $option_schedules_directory;
 my $option_solverclass = 'heccer';
 my $option_spine_prototype;
 my $option_steps = 2500;
@@ -101,6 +102,60 @@ sub apply_settings
 }
 
 
+sub execute
+{
+    my $filename = shift;
+
+    my $options = shift;
+
+    # if the configuration exists
+
+    if (-e $filename)
+    {
+	# construct schedule from the configuration
+
+	local $/;
+
+	my $scheduler = Load(`cat $filename`);
+
+	# fill in the name of the schedule
+
+	if ($options->{inherit_name})
+	{
+	    $scheduler->{name} = $filename;
+	}
+
+	# fill in the name of the output class
+
+	if ($options->{inherit_outputclass})
+	{
+	    my $outputclasses = $scheduler->{outputclasses};
+
+	    foreach my $outputclass_name (keys %$outputclasses)
+	    {
+		my $outputname = $filename;
+
+		$outputname =~ s(.*/)();
+
+		$outputname =~ s(\.yml$)()i;
+
+		$outputname = "./output/$outputname";
+
+		$outputclasses->{$outputclass_name}->{options}->{filename} = $outputname;
+	    }
+	}
+
+	# and run it
+
+	schedule($scheduler);
+    }
+    else
+    {
+	print STDERR "$0: configuration $filename cannot be found\n";
+    }
+}
+
+
 sub main
 {
     read_cmd_line();
@@ -109,23 +164,38 @@ sub main
 
     foreach my $configuration (@ARGV)
     {
-	# if the configuration exists
+	# execute the configuration
 
-	if (-e $configuration)
+	execute($configuration);
+    }
+
+    # if a directory with schedules was given
+
+    if (defined $option_schedules_directory)
+    {
+	# loop over the directory
+
+	my $schedules = [ glob "$option_schedules_directory/*", ];
+
+	foreach my $schedule_name (@$schedules)
 	{
-	    # construct schedule from the configuration
+	    # skip non yaml files
 
-	    local $/;
+	    if ($schedule_name !~ /\.yml/)
+	    {
+		next;
+	    }
 
-	    my $scheduler = Load(`cat $configuration`);
+	    # execute the schedule
 
-	    # and run it
-
-	    schedule($scheduler);
-	}
-	else
-	{
-	    print STDERR "$0: configuration $configuration cannot be found\n";
+	    execute
+		(
+		 $schedule_name,
+		 {
+		  inherit_name => 1,
+		  inherit_outputclass => 1,
+		 },
+		);
 	}
     }
 
@@ -389,6 +459,7 @@ sub read_cmd_line
 	     "model-filename=s" => \$option_model_filename,
 	     "model-name=s" => \$option_model_name,
 	     "neurospaces-models=s" => \$option_neurospaces_models,
+	     "schedules-directory=s" => \$option_schedules_directory,
 	     "solverclass=s" => \$option_solverclass,
 	     "spine-prototype=s" => \$option_spine_prototype,
 	     "steps=i" => \$option_steps,
@@ -414,8 +485,9 @@ options :
     model-filename     filename of the model description file (when using a builtin configuration)
     model-name         name of the model (when using a builtin configuration)
     neurospaces-models directory where to find the neurospaces library
-    spine-prototype    add spines with this prototype
+    schedule-directory loop of all schedules in this directory, and run the simulations
     solverclass        set the solver class to use (when using a builtin configuration)
+    spine-prototype    add spines with this prototype
     steps              number of simulation steps
     time-step          sets the time step
     transformator      feed the configuration through this transformator before running
@@ -473,7 +545,24 @@ sub schedule
 
     apply_settings($scheduler, $settings);
 
+    # serialize the schedule
+
+    my $serialized_schedule = Dump($scheduler);
+
+    use IO::File;
+
+    my $fh = IO::File->new(">/tmp/current_schedule");
+
+    print $fh $serialized_schedule;
+
+    $fh->close();
+
     # run the schedule
+
+    if ($option_verbose)
+    {
+	print "$0: Running schedule $scheduler->{name}\n";
+    }
 
     $scheduler->run( { verbosity => $option_verbose, }, );
 
