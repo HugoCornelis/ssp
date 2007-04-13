@@ -231,6 +231,24 @@ sub main
 	       },
 	      ];
 
+	my $conceptual_parameters
+	    = [
+	       {
+		component_name => 'thickd::gaba::/Purk_GABA',
+		description => 'endogenous activity',
+		field => 'FREQUENCY',
+		value => '1',
+	       },
+	       {
+		component_name => 'spine::/Purk_spine/head/par',
+		description => 'endogenous activity',
+		field => 'FREQUENCY',
+		value => '25',
+	       },
+	      ];
+
+# 	$models->[0]->{conceptual_parameters} = $conceptual_parameters;
+
 	my $granular_parameters
 	    = [
 	       {
