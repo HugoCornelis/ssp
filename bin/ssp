@@ -43,7 +43,8 @@ my $option_configuration_cell;
 my $option_model_filename;
 my $option_model_name;
 my $option_neurospaces_models = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
-my $option_schedules_directory;
+my $option_set_name;
+my $option_set_outputclass_filename;
 my $option_solverclass = 'heccer';
 my $option_spine_prototype;
 my $option_steps = 2500;
@@ -114,9 +115,21 @@ sub execute
     {
 	# construct schedule from the configuration
 
-	local $/;
+	my $scheduler;
 
-	my $scheduler = Load(`cat $filename`);
+	eval
+	{
+	    local $/;
+
+	    $scheduler = Load(`cat "$filename"`);
+	};
+
+	if ($@)
+	{
+	    print "$0: scheduler cannot be constructed from '$filename': $@, ignoring this schedule\n";
+
+	    return;
+	}
 
 	# fill in the name of the schedule
 
@@ -166,37 +179,14 @@ sub main
     {
 	# execute the configuration
 
-	execute($configuration);
-    }
-
-    # if a directory with schedules was given
-
-    if (defined $option_schedules_directory)
-    {
-	# loop over the directory
-
-	my $schedules = [ glob "$option_schedules_directory/*", ];
-
-	foreach my $schedule_name (@$schedules)
-	{
-	    # skip non yaml files
-
-	    if ($schedule_name !~ /\.yml$/)
-	    {
-		next;
-	    }
-
-	    # execute the schedule
-
-	    execute
-		(
-		 $schedule_name,
-		 {
-		  inherit_name => 1,
-		  inherit_outputclass => 1,
-		 },
-		);
-	}
+	execute
+	    (
+	     $configuration,
+	     {
+	      inherit_name => $option_set_name,
+	      inherit_outputclass => $option_set_outputclass_filename,
+	     },
+	    );
     }
 
     # if using one of the builtin configurations
@@ -459,7 +449,8 @@ sub read_cmd_line
 	     "model-filename=s" => \$option_model_filename,
 	     "model-name=s" => \$option_model_name,
 	     "neurospaces-models=s" => \$option_neurospaces_models,
-	     "schedules-directory=s" => \$option_schedules_directory,
+	     "set-name=s" => \$option_set_name,
+	     "set-outputclass-filename=s" => \$option_set_outputclass_filename,
 	     "solverclass=s" => \$option_solverclass,
 	     "spine-prototype=s" => \$option_spine_prototype,
 	     "steps=i" => \$option_steps,
@@ -485,7 +476,10 @@ options :
     model-filename     filename of the model description file (when using a builtin configuration)
     model-name         name of the model (when using a builtin configuration)
     neurospaces-models directory where to find the neurospaces library
-    schedule-directory loop of all schedules in this directory, and run the simulations
+    set-name           overwrite the schedule name with the name of the file that contains the schedule
+    set-outputclass-filename
+                       overwrite the outputclass filename with something derived from the name of the
+                       file that contains the schedule
     solverclass        set the solver class to use (when using a builtin configuration)
     spine-prototype    add spines with this prototype
     steps              number of simulation steps

@@ -1,0 +1,157 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb -w
+#
+
+use strict;
+
+
+$| = 1;
+
+
+BEGIN
+{
+    #! make check
+
+    push @INC, '../perl';
+
+    #! normal run
+
+    push @INC, './perl';
+
+    #! after install
+
+    push @INC, '/usr/local/glue/swig/perl';
+}
+
+
+use Getopt::Long;
+
+use SSP;
+
+use YAML;
+
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+
+my $option_model_filename;
+my $option_model_name;
+my $option_neurospaces_models = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
+my $option_schedules_directory;
+my $option_solverclass = 'heccer';
+my $option_spine_prototype;
+my $option_steps = 2500;
+my $option_time_step;
+my $option_transformator = "";
+my $option_verbose;
+
+
+sub main
+{
+    read_cmd_line();
+
+    my $command = "ssp";
+
+    my $command_options = "--set-name 1 --set-outputclass-filename 1";
+
+    if ($option_verbose)
+    {
+	$command_options .= ' --verbose' x $option_verbose;
+    }
+
+    # loop over all configurations
+
+    foreach my $configuration (@ARGV)
+    {
+	# execute the configuration
+
+	system "$command $command_options $configuration";
+    }
+
+    # if a directory with schedules was given
+
+    if (defined $option_schedules_directory)
+    {
+	# loop over the directory
+
+	my $schedules = [ glob "$option_schedules_directory/*", ];
+
+	foreach my $schedule_name (@$schedules)
+	{
+	    # skip non yaml files
+
+	    if ($schedule_name !~ /\.yml$/)
+	    {
+		next;
+	    }
+
+	    # execute the schedule
+
+	    system "$command $command_options $schedule_name";
+	}
+    }
+}
+
+
+sub read_cmd_line
+{
+    my $option_builtins;
+    my $option_help;
+
+    my $result
+	= GetOptions
+	    (
+	     "help!" => \$option_help,
+	     "model-filename=s" => \$option_model_filename,
+	     "model-name=s" => \$option_model_name,
+	     "neurospaces-models=s" => \$option_neurospaces_models,
+	     "schedules-directory=s" => \$option_schedules_directory,
+	     "solverclass=s" => \$option_solverclass,
+	     "spine-prototype=s" => \$option_spine_prototype,
+	     "steps=i" => \$option_steps,
+	     "time-step=s" => \$option_time_step,
+	     "transformator=s" => \$option_transformator,
+	     "v|verbose+" => \$option_verbose,
+	    );
+
+    if ($option_help)
+    {
+	print
+	    "
+$0 <configuration>
+
+$0: run the simulation schedules in a directory, setting the name and output class name
+
+try $0 --builtins for information of how to run a simulation easily
+
+options :
+    help               print usage information.
+    model-filename     filename of the model description file (when using a builtin configuration)
+    model-name         name of the model (when using a builtin configuration)
+    neurospaces-models directory where to find the neurospaces library
+    schedule-directory loop of all schedules in this directory, and run the simulations
+    solverclass        set the solver class to use (when using a builtin configuration)
+    spine-prototype    add spines with this prototype
+    steps              number of simulation steps
+    time-step          sets the time step
+    transformator      feed the configuration through this transformator before running
+    verbose            set verbosity level.
+";
+
+	exit 1;
+    }
+
+}
+
+
+main();
+
+
+exit 0;
+
+
