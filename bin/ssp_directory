@@ -39,6 +39,7 @@ $SIG{__DIE__}
     };
 
 
+my $option_model_directory;
 my $option_model_filename;
 my $option_model_name;
 my $option_neurospaces_models = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
@@ -107,6 +108,7 @@ sub read_cmd_line
 	= GetOptions
 	    (
 	     "help!" => \$option_help,
+	     "model-directory=s" => \$option_model_directory,
 	     "model-filename=s" => \$option_model_filename,
 	     "model-name=s" => \$option_model_name,
 	     "neurospaces-models=s" => \$option_neurospaces_models,
@@ -131,6 +133,7 @@ try $0 --builtins for information of how to run a simulation easily
 
 options :
     help               print usage information.
+    model-directory    name of the directory where to look for non-std models
     model-filename     filename of the model description file (when using a builtin configuration)
     model-name         name of the model (when using a builtin configuration)
     neurospaces-models directory where to find the neurospaces library
