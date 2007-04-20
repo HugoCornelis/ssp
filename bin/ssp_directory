@@ -93,6 +93,11 @@ sub main
 
 	    # execute the schedule
 
+	    if ($option_verbose)
+	    {
+		system "date";
+	    }
+
 	    system "$command $command_options $schedule_name";
 	}
     }
