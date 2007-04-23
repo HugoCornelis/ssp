@@ -16,7 +16,7 @@
 
 SUBDIRS = tests
 
-bin_SCRIPTS = bin/ssp bin/ssp_directory
+dist_bin_SCRIPTS = bin/ssp bin/ssp_directory
 
 # the tests are copied overhere.
 # the perl library is copied overhere.
@@ -38,7 +38,6 @@ dist-hook:
 	cp -R $(srcdir)/tests.config $(distdir)
 	cp -R $(srcdir)/tests/perl $(distdir)/tests
 	cp -R $(srcdir)/perl $(distdir)
-	cp -R $(srcdir)/bin $(distdir)
 
 #	cp -R $(srcdir)/hierarchy $(distdir)
 #	cp -R $(srcdir)/library $(distdir)
