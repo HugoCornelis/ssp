@@ -24,6 +24,7 @@ my $test
 						   write => undef,
 						  },
 						 ],
+				disabled => (`cat /usr/local/include/heccer/config.h` =~ m/define RANDOM/),
 				description => "synaptic (springmass) channel integration, endogenous firing (works only for the Linux rng)",
 			       },
 			      ],

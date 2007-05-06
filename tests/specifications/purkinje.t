@@ -20,6 +20,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is the full purkinje cell model behaviour ok, synchans endogenous firing (works only with the ran1() rng) ?",
+						   disabled => (`cat /usr/local/include/heccer/config.h` !~ m/define RANDOM/),
 						   read => [ `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt`, ],
 						   timeout => 300,
 						   write => undef,
@@ -35,6 +36,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is the full purkinje cell model behaviour ok, soma current injection (works only with the ran1() rng) ?",
+						   disabled => (`cat /usr/local/include/heccer/config.h` !~ m/define RANDOM/),
 						   read => [ `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-current.txt`, ],
 						   timeout => 300,
 						   write => undef,
