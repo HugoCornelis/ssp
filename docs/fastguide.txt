@@ -323,12 +323,12 @@ tail -f schedules.out
 
 SSP schedules are specified in yaml format, and easy to understand
 format for naive computer users (see http://www.yaml.org/).
-Additionally yaml has builtin support for all the scripting languages
-I know of.
 
 Yaml is white space sensitive, because users use white space to
 structure the content of information.  Indentation is used to define
-the depth of an entry, while newlines are used to terminate an entry.
-This results in a very easy to understand format.  All the examples
-above are given in YAML syntax.
+the hierarchical depth of an entry, while newlines are used to
+terminate an entry.  This results in a very easy to understand format.
+All the examples above are given in YAML syntax.  Additionally, all
+the scripting languages I know off, have builtin support for yaml data
+structures.
 
