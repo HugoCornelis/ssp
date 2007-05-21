@@ -461,7 +461,8 @@ sub read_cmd_line
 	     "v|verbose+" => \$option_verbose,
 	    );
 
-    if ($option_help)
+    if ($option_help
+	|| !@ARGV)
     {
 	print
 	    "
