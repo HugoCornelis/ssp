@@ -1,0 +1,21 @@
+-*- outline -*-
+
+* installation
+SSP is completely written in perl.  To get a unified installation
+procedure with the other NS tools, it uses autotools for installation.
+To install SSP, run these commands in the SSP source code directory,
+as a normal user:
+
+./configure
+make
+sudo make install
+
+
+Additionally, if you have neurospaces and heccer installed, you can
+also run this command:
+
+make check
+
+to see if all the components work well.
+
+
