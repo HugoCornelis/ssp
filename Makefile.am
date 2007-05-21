@@ -38,6 +38,7 @@ dist-hook:
 	cp -R $(srcdir)/tests.config $(distdir)
 	cp -R $(srcdir)/tests/perl $(distdir)/tests
 	cp -R $(srcdir)/perl $(distdir)
+	cp -R $(srcdir)/yaml $(distdir)
 
 #	cp -R $(srcdir)/hierarchy $(distdir)
 #	cp -R $(srcdir)/library $(distdir)
