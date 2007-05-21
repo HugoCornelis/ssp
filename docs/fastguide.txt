@@ -1,13 +1,13 @@
-=============================
-SSP: a small & fast userguide
-=============================
+========================================
+SSP: a small & fast incomplete userguide
+========================================
 
 
 - - - - - - - - - - - - - - - -
 Introduction: SSP functionality
 - - - - - - - - - - - - - - - -
 
-In a quick list:
+In a quick list, what SSP offers:
 
 - SSP glues other software components together.
 - SSP synchronizes the activities of other components during a simulation.
@@ -27,6 +27,9 @@ to Neurospaces and Heccer. Other configurations will connect SSP to
 other modeling services or solvers. SSP achieves this by loading on
 the fly, the integration modules that are referenced in its
 configuration. Other modules are not loaded.
+
+Two examples
+============
 
 Below is a typical configuration file for SSP. It first configures SSP
 to use Neurospaces as the modeling service. Then, it instructs SSP to
