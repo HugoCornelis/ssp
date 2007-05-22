@@ -2,7 +2,6 @@
 SSP: a small & fast incomplete userguide
 ========================================
 
-
 - - - - - - - - - - - - - - - -
 Introduction: SSP functionality
 - - - - - - - - - - - - - - - -
@@ -31,13 +30,17 @@ configuration. Other modules are not loaded.
 Two examples
 ============
 
+This section should only give one small example, this is meant to be
+an introduction only.
+
 Below is a typical configuration file for SSP. It first configures SSP
 to use Neurospaces as the modeling service. Then, it instructs SSP to
 load a model called 'cells/tensizesp.ndf', and to instantiate a solver
 called 'Heccer' for a part of the model (namely '/tensizesp'). The
 simulation of the model is run using the 'apply' entry in the
-configuration file (note that the order in the configuration file is
-alphabetical, not chronological).
+configuration file (note that the order in the configuration file
+below is alphabetical, not chronological.  A user may specify the
+entries in any order that he chooses.).
 
 ::
 
@@ -197,6 +200,9 @@ if a discrete event scheduler must be specified as a service or as an
 engine, from semantics it is the former, from software architecture it
 is the latter).
 
+Following is a non-exhaustive list of keys (about 70% of the currently
+defined keys are covered here).
+
 apply
   The *apply* key contains a set of subkeys that define how to run a schedule.
   Each subkey contains an array of 'methods' that have to be executed.  The
@@ -214,7 +220,7 @@ apply
         method: steps
       - arguments:
           - 0.1
-        description: advance the simulation for 0.1s.
+        description: advance the simulation by 0.1s.
         method: advance
 
 services
@@ -222,10 +228,10 @@ services
   instantiate these services.  For the neurospaces service, the most
   important methods are 'read', to read a model specified in a
   neurospaces description file, and 'load', to load a model specified
-  in an external format (only Genesis .p files are supported at the
-  moment of writing).  Additional options like e.g. a shrinkage
-  correction factor, or a spines distribution definition, can be
-  specified overhere.
+  in an external format (only Genesis .p files are supported at
+  present).  Additional options like e.g. a shrinkage correction
+  factor, or a spines distribution definition, can be specified
+  overhere.
 
 solverclasses
   The solver classes, and their relationship to the services.
