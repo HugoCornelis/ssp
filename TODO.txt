@@ -1,5 +1,7 @@
 -*- outline -*-
 
+* the ssp tests have hardcoded paths to the neurospaces models in the scripts in tests/perl.
+
 * add the mtn revision to the dist, somehow.
 
 * Add a prefix like '*** Error' to each error report.

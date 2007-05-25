@@ -31,7 +31,9 @@ Two examples
 ============
 
 This section should only give one small example, this is meant to be
-an introduction only.
+an introduction only.  Then have a more extended example section at
+the end, or, alternatively, start with a light-readable example
+section, then, give a more 'specification'-like manual.
 
 Below is a typical configuration file for SSP. It first configures SSP
 to use Neurospaces as the modeling service. Then, it instructs SSP to
