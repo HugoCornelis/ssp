@@ -20,7 +20,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is the full purkinje cell model behaviour ok, synchans endogenous firing (works only with the ran1() rng) ?",
-						   disabled => (`cat /usr/local/include/heccer/config.h` =~ m/define RANDOM.*ran1/ ? 0 : 1),
+						   disabled => (`cat /usr/local/include/heccer/config.h` =~ m/define RANDOM.*ran1/ ? 0 : "ran1 not defined as rng in heccer config"),
 						   read => [ `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt`, ],
 						   timeout => 300,
 						   write => undef,
