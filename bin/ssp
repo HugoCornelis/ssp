@@ -43,7 +43,7 @@ my $option_configuration_cell;
 my $option_model_directory;
 my $option_model_filename;
 my $option_model_name;
-my $option_neurospaces_models = '/local_home/local_home/hugo/neurospaces_project/neurospaces/source/c/snapshots/0/library';
+my $option_neurospaces_models = '/usr/local/neurospaces/models/library';
 my $option_set_name;
 my $option_set_outputclass_filename;
 my $option_solverclass = 'heccer';

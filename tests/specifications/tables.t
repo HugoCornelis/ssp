@@ -19,7 +19,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, p type calcium gates ?",
-						   read => [ `cat /local_home/local_home/hugo/neurospaces_project/heccer/source/c/snapshots/0/tests/specifications/strings/table-cap.txt`, ],
+						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-cap.txt`, ],
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -33,7 +33,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, calcium t-type gates ?",
-						   read => [ `cat /local_home/local_home/hugo/neurospaces_project/heccer/source/c/snapshots/0/tests/specifications/strings/table-cat.txt`, ],
+						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-cat.txt`, ],
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -47,7 +47,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, K2 potassium gates ?",
-						   read => [ `cat /local_home/local_home/hugo/neurospaces_project/heccer/source/c/snapshots/0/tests/specifications/strings/table-k2.txt`, ],
+						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-k2.txt`, ],
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -61,7 +61,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, simple potassium gates ?",
-						   read => [ `cat /local_home/local_home/hugo/neurospaces_project/heccer/source/c/snapshots/0/tests/specifications/strings/table-ka.txt`, ],
+						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-ka.txt`, ],
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -75,7 +75,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, simple potassium gates ?",
-						   read => [ `cat /local_home/local_home/hugo/neurospaces_project/heccer/source/c/snapshots/0/tests/specifications/strings/table-kc.txt`, ],
+						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-kc.txt`, ],
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -89,7 +89,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, delayed rectifier potassium gates ?",
-						   read => [ `cat /local_home/local_home/hugo/neurospaces_project/heccer/source/c/snapshots/0/tests/specifications/strings/table-kdr.txt`, ],
+						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-kdr.txt`, ],
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -103,7 +103,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, anomalous rectifier potassium gates ?",
-						   read => [ `cat /local_home/local_home/hugo/neurospaces_project/heccer/source/c/snapshots/0/tests/specifications/strings/table-kh.txt`, ],
+						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-kh.txt`, ],
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -117,7 +117,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, muscarinic potassium gates ?",
-						   read => [ `cat /local_home/local_home/hugo/neurospaces_project/heccer/source/c/snapshots/0/tests/specifications/strings/table-km.txt`, ],
+						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-km.txt`, ],
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -131,7 +131,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, simple sodium gates ?",
-						   read => [ `cat /local_home/local_home/hugo/neurospaces_project/heccer/source/c/snapshots/0/tests/specifications/strings/table-naf.txt`, ],
+						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-naf.txt`, ],
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -145,7 +145,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, persistent sodium gates ?",
-						   read => [ `cat /local_home/local_home/hugo/neurospaces_project/heccer/source/c/snapshots/0/tests/specifications/strings/table-nap.txt`, ],
+						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-nap.txt`, ],
 						   timeout => 9,
 						   write => undef,
 						  },

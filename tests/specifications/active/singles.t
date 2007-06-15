@@ -19,7 +19,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a single compartment with a naf conductance solved correctly ?",
-						   read => [ `cat /local_home/local_home/hugo/neurospaces_project/heccer/source/c/snapshots/0/tests/specifications/strings/active/singlea-naf.txt`, ],
+						   read => [ `cat /usr/local/heccer/tests/specifications/strings/active/singlea-naf.txt`, ],
 						   timeout => 5,
 						   write => undef,
 						  },
