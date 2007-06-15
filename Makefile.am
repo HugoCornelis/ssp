@@ -18,7 +18,9 @@ SUBDIRS = tests
 
 dist_bin_SCRIPTS = bin/ssp bin/ssp_directory
 
-# the tests are copied overhere.
+ssptestdir=$(prefix)/ssp
+nobase_dist_ssptest_DATA=@TEST_SPECIFICATION_FILES@
+
 # the perl library is copied overhere.
 #
 # The variable EXTRA_DIST could also be used here.
@@ -28,23 +30,20 @@ dist-hook:
 	$(RM) -fr `find $(distdir) -name _Inline`
 	cp $(srcdir)/license.txt $(distdir)
 	cp -R $(srcdir)/docs $(distdir)
-	test -d $(distdir)/tests || mkdir $(distdir)/tests
-	test -d $(distdir)/tests/specifications || mkdir $(distdir)/tests/specifications
-	cp -R $(srcdir)/tests/run $(distdir)/tests/run
-	cp -R $(srcdir)/tests/tests_2_html $(distdir)/tests/tests_2_html
-	cp -R $(srcdir)/tests/specifications $(distdir)/tests
-#	cp -R $(srcdir)/tests/code/tests.config $(distdir)/tests/code/tests.config
-	cp -R $(srcdir)/tests/tests.config $(distdir)/tests/tests.config
-	cp -R $(srcdir)/tests.config $(distdir)
-	cp -R $(srcdir)/tests/perl $(distdir)/tests
-	cp -R $(srcdir)/perl $(distdir)
-	cp -R $(srcdir)/yaml $(distdir)
-
-#	cp -R $(srcdir)/hierarchy $(distdir)
-#	cp -R $(srcdir)/library $(distdir)
-
-#! this one breaks the distcheck, because automake makes dist dirs read-only
-#	cd $(distdir)/tests && ./tests_2_html
+	$(srcdir)/install-sh -d $(distdir)/tests
+	$(srcdir)/install-sh -d $(distdir)/tests/html
+	$(srcdir)/install-sh -d $(distdir)/tests/html/algorithms
+	$(srcdir)/install-sh -d $(distdir)/tests/html/code
+	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications
+	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications/algorithms
+	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications/code
+	cp -dp $(srcdir)/tests/{run,run.ptkdb,command_extractor,command_extractor.ptkdb,tests_2_html,tests_2_html.ptkdb,tests.config} $(distdir)/tests
+	cp -a $(srcdir)/tests.config $(distdir)
+#	cp -a $(srcdir)/tests/code/tests.config $(distdir)/tests/code/tests.config
+	cp -a $(srcdir)/tests/perl $(distdir)/tests
+	cp -a $(srcdir)/perl $(distdir)
+	cp -a $(srcdir)/yaml $(distdir)
+	( cd $(distdir)/tests && chmod -R u+w . && ./tests_2_html )
 
 test: check
 
