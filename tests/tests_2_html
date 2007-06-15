@@ -16,6 +16,14 @@ our $perl_modules_directory;
 our $config;
 
 
+my $tests_disabled = 0;
+
+
+my $option_header;
+my $option_help;
+my $option_verbose;
+
+
 BEGIN
 {
     # default : running stand-alone
@@ -90,6 +98,8 @@ BEGIN
     }
 }
 
+
+$ENV{NEUROSPACES_MODELS} = ${core_directory} . '/library';
 
 my $tests_dir = $config->{tests_directory};
 
@@ -214,10 +224,6 @@ sub html_table_code
 
 sub main
 {
-    my $option_header;
-    my $option_help;
-    my $option_verbose;
-
     my $total_tests = 0;
 
     my $result
@@ -379,44 +385,105 @@ options :
 
 		$html .= $cgi->h2($command_definition_count . ". " . ucfirst $command_definition->{description});
 
-		my $model = [ $command_definition->{command}, @{$command_definition->{arguments} || []}, ];
-
-		if (@$model)
+		if ($command_definition->{disabled})
 		{
-		    # output source code
+		    $html .= $cgi->h2("This command definition is currently disabled (disabled is '$command_definition->{disabled}')");
+		}
 
-		    my $source_information = output_source($file, $model);
+		if ($command_definition->{command} =~ /CODE/)
+		{
+		    # embedded perl code
 
-		    my $source_anchor = $source_information->{result_anchor};
+		    use Data::Dumper;
 
-		    my $command .= "<a href=\"$source_anchor\">" . (join ' ', @$model) . "</a>";
+		    $Data::Dumper::Deparse = 1;
 
-		    $html .= $cgi->h4("Startup command : " . $command);
-
-		    if (! scalar grep { /^[^-]/ } @$model [ 1 .. $#$model ] )
 		    {
-			$html .= "(No model has been loaded for the following set of commands.)";
+			my $perl_code = Dumper($command_definition->{command});
+
+			if (0)
+			{
+			    require PPI;
+			    require PPI::HTML;
+
+# 			    print $perl_code;
+
+			    # Load your Perl file
+			    my $Document = PPI::Document->new(\$perl_code);
+
+			    # Create a reusable syntax highlighter
+			    my $Highlight = PPI::HTML->new( line_numbers => 1 );
+
+			    # Spit out the HTML
+			    $html .= "\n<verbatim>\n" . $Highlight->html( $Document ) . "\n</verbatim>\n";
+			}
+			elsif (0)
+			{
+			    require IPC::Open3;
+
+			    my ($wtr, $rdr, $err);
+			    my $pid = open3($wtr, $rdr, $err, "source-highlight 2>&1 --line-number-ref --src-lang perl --out-format html");
+
+			    #! this might block for long code fragments ?
+
+			    print $wtr $perl_code;
+
+			    my $source_html;
+
+			    read $rdr, $source_html, 100000;
+
+			    $html .= "\n<verbatim>\n" . $source_html . "\n</verbatim>\n";
+			}
+			elsif (1)
+			{
+			    use File::Temp qw/ tempfile tempdir /;
+
+			    my ($fh, $filename) = tempfile();
+
+			    print $fh $perl_code;
+
+			    $fh->close();
+
+			    use IO::File;
+
+			    my $reader;
+
+			    open($reader, "source-highlight 2>&1 --line-number-ref --src-lang perl --out-format html --input \"$filename\" |");
+
+			    local $/;
+
+			    my $source_html = <$reader>;
+
+			    close($reader);
+
+			    $html .= "\n<verbatim>\n" . $source_html . "\n</verbatim>\n";
+			}
+
 		    }
 		}
 		else
 		{
-		    #t embedded perl code
+		    my $model = [ $command_definition->{command}, @{$command_definition->{arguments} || []}, ];
 
-# 		{
-# 		    use PPI;
-# 		    use PPI::HTML;
+		    if (@$model)
+		    {
+			# output source code
 
-# 		    # Load your Perl file
-# 		    my $Document = PPI::Document->load( 'script.pl' );
+			#! guessing turned on to turn executables into highligted source code.
 
-# 		    # Create a reusable syntax highlighter
-# 		    my $Highlight = PPI::HTML->new( line_numbers => 1 );
+			my $source_information = output_source($file, $model, { guessing => 0, }, );
 
-# 		    # Spit out the HTML
-# 		    print $Highlight->html( $Document );
+			my $source_anchor = defined $source_information->{result_anchor} ? " href=\"$source_information->{result_anchor}\"" . $source_information->{result_anchor} : "" ;
 
-# 		}
+			my $command .= "<a$source_anchor>" . (join ' ', @$model) . "</a>";
 
+			$html .= $cgi->h4("Startup command : " . $command);
+
+			if (! scalar grep { /^[^-]/ } @$model [ 1 .. $#$model ] )
+			{
+			    $html .= "(No model has been loaded for the following set of commands.)";
+			}
+		    }
 		}
 
 		$html .= $cgi->hr();
@@ -484,6 +551,31 @@ options :
 			     )
 			  );
 
+		    $entries++;
+
+		    if (defined $command_test->{comment})
+		    {
+			$source->{"$entries. Comment"} = $command_test->{comment};
+
+			$entries++;
+		    }
+
+		    if ($command_test->{disabled}
+			|| $command_definition->{disabled})
+		    {
+			#! loose some info here, don't really care
+
+			my $disabled
+			    = $command_test->{disabled}
+				|| $command_definition->{disabled};
+
+			$source->{"$entries. This test is currently not executed"} = "(disabled is '$disabled')";
+
+			$entries++;
+
+			$tests_disabled++;
+		    }
+
 		    # render
 
 		    $html
@@ -543,7 +635,7 @@ options :
 	(
 	 {
 	  cgi => $cgi,
-	  content => html_index($cgi, $sections, ) . "<hr> Total of $total_tests tests",
+	  content => html_index($cgi, $sections, ) . "<hr> Total of $total_tests tests ($tests_disabled test(s) disabled)",
 	  filename => "index.html",
 	  header => $option_header,
 	  title => "Main Index",
@@ -638,6 +730,11 @@ sub output_content
 
     # write output
 
+    if ($option_verbose)
+    {
+	print "Generating $output_file\n";
+    }
+
     my $file = IO::File->new(">$output_file");
 
     print $file $result;
@@ -668,19 +765,40 @@ sub output_source
 
     my $source = shift;
 
+    my $options = shift;
+
     my $result = {};
 
-    # profile the tester source
+    # guess the tester source
 
     my $source_text_file = $config->{core_directory} . $source->[0];
 
-    my $source_profile = `file $source_text_file`;
+    #t guessing is ok, but the implementation not so (duplicate code, use a hash instead)
 
-    if ($source_profile =~ /ELF.*executable/
-	|| $source_profile =~ /ERROR/)
+    if ($options->{guessing})
     {
-	$source_text_file .= ".c";
+	my $source_profile = `file '$source_text_file'`;
 
+	if ($source_profile =~ /ELF.*executable/
+	    || $source_profile =~ /ERROR/)
+	{
+	    $source_text_file .= ".c";
+	}
+	elsif ($source_profile =~ /perl/)
+	{
+	}
+	else
+	{
+	    die "source_type for $source_text_file cannot be determined";
+	}
+    }
+
+    # profile the tester source
+
+    my $source_profile = `file '$source_text_file'`;
+
+    if ($source_profile =~ /ASCII C\+\+ program text/i)
+    {
 	$result->{source_type} = "cpp";
     }
     elsif ($source_profile =~ /perl/)
@@ -689,42 +807,57 @@ sub output_source
     }
     else
     {
-	die "source_type for $source_text_file cannot be determined";
+# 	die "source_type for $source_text_file cannot be determined";
     }
 
-    # set result: where to find the source text
+    # if this is a known source type
 
-    $result->{source_text_file} = $source_text_file;
+    if (defined $result->{source_type}
+	&& $result->{source_type} =~ m(cpp|perl))
+    {
+	# set result: where to find the source text
 
-    # slurp source text
+	$result->{source_text_file} = $source_text_file;
 
-    $result->{source_text} = `cat "$source_text_file"`;
+	# slurp source text
 
-    # define an output text location
+	$result->{source_text} = `cat "$source_text_file"`;
 
-    $result->{result_text_file} = "$outputs_dir/$source_text_file.source.html";
+	# define an output text location
 
-    #! this does not look good to me, it is a reversed parent
-    #! directory removal, there must be something wrong with the data
-    #! flow design here.
+	$result->{result_text_file} = "$outputs_dir/$source_text_file.source.html";
 
-    #! I guess it is somehow related to the global configuration in $config ...
+	#! this does not look good to me, it is a reversed parent
+	#! directory removal, there must be something wrong with the data
+	#! flow design here.
 
-    $result->{result_text_file} =~ s(/\.\./tests)();
+	#! I guess it is somehow related to the global configuration in $config ...
 
-    output_prepare($result->{result_text_file});
+	#! code line coming from the heccer source
 
-    system "source-highlight 2>&1 --line-number-ref --src-lang $result->{source_type} --out-format html --input \"$source_text_file\" --output $result->{result_text_file} ";
+	#     $result->{result_text_file} =~ s(/\.\./tests)();
 
-    #! oh boy ...
+	$result->{result_text_file} =~ s(html/\.\./tests)(html);
 
-    $result->{result_anchor} = $result->{result_text_file};
+	output_prepare($result->{result_text_file});
 
-    my $parents = ( $test_definition_file =~ tr(/)(/));
+	if ($option_verbose)
+	{
+	    print "Generating $result->{result_text_file}\n";
+	}
 
-    $parents = "../" x ($parents);
+	system "source-highlight 2>&1 --line-number-ref --src-lang $result->{source_type} --out-format html --input \"$source_text_file\" --output $result->{result_text_file} ";
 
-    $result->{result_anchor} =~ s(html/)(html/$parents);
+	#! oh boy ...
+
+	$result->{result_anchor} = $result->{result_text_file};
+
+	my $parents = ( $test_definition_file =~ tr(/)(/));
+
+	$parents = "../" x ($parents);
+
+	$result->{result_anchor} =~ s(html/)(html/$parents);
+    }
 
     # return result: source information
 
