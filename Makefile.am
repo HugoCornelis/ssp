@@ -32,11 +32,11 @@ dist-hook:
 	cp -R $(srcdir)/docs $(distdir)
 	$(srcdir)/install-sh -d $(distdir)/tests
 	$(srcdir)/install-sh -d $(distdir)/tests/html
-	$(srcdir)/install-sh -d $(distdir)/tests/html/algorithms
-	$(srcdir)/install-sh -d $(distdir)/tests/html/code
-	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications
-	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications/algorithms
-	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications/code
+#	$(srcdir)/install-sh -d $(distdir)/tests/html/algorithms
+#	$(srcdir)/install-sh -d $(distdir)/tests/html/code
+#	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications
+#	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications/algorithms
+#	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications/code
 	cp -dp $(srcdir)/tests/{run,run.ptkdb,command_extractor,command_extractor.ptkdb,tests_2_html,tests_2_html.ptkdb,tests.config} $(distdir)/tests
 	cp -a $(srcdir)/tests.config $(distdir)
 #	cp -a $(srcdir)/tests/code/tests.config $(distdir)/tests/code/tests.config
