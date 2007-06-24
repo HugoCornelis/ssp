@@ -21,7 +21,6 @@ services:
   neurospaces:
     initializers:
       - arguments:
-          - 3
           -
             - ./tests/perl/channel1-nernst1
             - -P

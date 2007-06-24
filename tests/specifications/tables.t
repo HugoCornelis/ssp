@@ -89,6 +89,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, delayed rectifier potassium gates ?",
+						   disabled => (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf" ? "purkinje cell potassium channels not found" : ""),
 						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-kdr.txt`, ],
 						   timeout => 9,
 						   write => undef,
@@ -103,6 +104,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, anomalous rectifier potassium gates ?",
+						   disabled => (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf" ? "purkinje cell potassium channels not found" : ""),
 						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-kh.txt`, ],
 						   timeout => 9,
 						   write => undef,
@@ -117,6 +119,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, muscarinic potassium gates ?",
+						   disabled => (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf" ? "purkinje cell potassium channels not found" : ""),
 						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-km.txt`, ],
 						   timeout => 9,
 						   write => undef,
