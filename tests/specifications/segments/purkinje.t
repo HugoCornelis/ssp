@@ -25,6 +25,7 @@ my $test
 						  },
 						 ],
 				description => "purkinje undocumented axon segment",
+				disabled => (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf" ? "purkinje cell potassium channels not found" : ""),
 			       },
 			      ],
        description => "purkinje segments",
