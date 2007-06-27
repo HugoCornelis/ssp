@@ -71,7 +71,7 @@ sub main
     {
 	# execute the configuration
 
-	system "$command $command_options $configuration";
+	system "$command $command_options \"$configuration\"";
     }
 
     # if a directory with schedules was given
@@ -98,7 +98,7 @@ sub main
 		system "date";
 	    }
 
-	    system "$command $command_options $schedule_name";
+	    system "$command $command_options \"$schedule_name\"";
 	}
     }
 }
