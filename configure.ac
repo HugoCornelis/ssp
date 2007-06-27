@@ -40,6 +40,12 @@ AM_INIT_AUTOMAKE(ssp, i64-6)
 TEST_SPECIFICATION_FILES=`find tests/specifications -name "*.t" -printf "%p " && find tests/specifications/strings -name "*.txt" -printf "%p "`
 AC_SUBST(TEST_SPECIFICATION_FILES)
 
+dnl YAML_FILES=`find yaml -name "*.yml" -printf "%p "`
+dnl AC_SUBST(YAML_FILES)
+
+dnl PERL_FILES=`find perl -type f -printf "%p "`
+dnl AC_SUBST(PERL_FILES)
+
 
 AC_CONFIG_FILES([Makefile
 		 tests/Makefile
