@@ -34,7 +34,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a synaptic (springmass) channel with an event table integrated correctly ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/springmass2.txt`, ],
+						   read => [ `cat $::config->{core_directory}/tests/specifications/strings/springmass4.txt`, ],
 						   timeout => 8,
 						   write => undef,
 						  },
