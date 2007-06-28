@@ -27,6 +27,20 @@ my $test
 				disabled => (`cat /usr/local/include/heccer/config.h` =~ m/define RANDOM.*ran1/ ? "ran1 defined as rng in heccer config" : 0),
 				description => "synaptic (springmass) channel integration, endogenous firing (works only for the Linux rng)",
 			       },
+			       {
+				arguments => [
+					     ],
+				command => 'tests/perl/springmass4',
+				command_tests => [
+						  {
+						   description => "Is a synaptic (springmass) channel with an event table integrated correctly ?",
+						   read => [ `cat /usr/local/heccer/tests/specifications/strings/springmass2.txt`, ],
+						   timeout => 8,
+						   write => undef,
+						  },
+						 ],
+				description => "synaptic (springmass) channel integration, with an event table",
+			       },
 			      ],
        description => "synaptic channels",
        name => 'synaptic.t',
