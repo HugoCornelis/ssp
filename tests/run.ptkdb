@@ -1,0 +1,47 @@
+$files = {
+           '_<tests/run' => [
+                              {
+                                'expr' => undef,
+                                'value' => '1',
+                                'text' => '	my $tests = $transformator->transform() || [];
+',
+                                'fname' => 'tests/run',
+                                'type' => 'user',
+                                'line' => '877'
+                              },
+                              {
+                                'expr' => undef,
+                                'value' => '1',
+                                'text' => '    if ($option_flattenout)
+',
+                                'fname' => 'tests/run',
+                                'type' => 'user',
+                                'line' => '816'
+                              },
+                              {
+                                'expr' => undef,
+                                'value' => '1',
+                                'text' => '		my $preparer = $preparation->{preparer};
+',
+                                'fname' => 'tests/run',
+                                'type' => 'user',
+                                'line' => 236
+                              }
+                            ]
+         };
+$expr_list = [
+               {
+                 'expr' => '$path',
+                 'depth' => -1
+               },
+               {
+                 'expr' => '$context->{path}',
+                 'depth' => -1
+               },
+               {
+                 'expr' => '$context->{array}->[1]->{content}->{name}',
+                 'depth' => -1
+               }
+             ];
+$eval_saved_text = undef;
+$main_win_geometry = '1272x941+51+12';
