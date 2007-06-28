@@ -122,6 +122,10 @@ my $package_label = "i64-6";
 # $Format: "my $package_version = \"${major}-${minor}-${micro}\";"$
 my $package_version = "i64-6-0";
 
+my $monotone_id = `mtn automate get_current_revision_id`;
+chomp $monotone_id;
+
+
 my $error_count = 0;
 
 my $test_report
@@ -130,9 +134,10 @@ my $test_report
 		       command => $0,
 		       name => "Test report",
 		       package => {
-				   name => $package_name,
 				   label => $package_label,
+				   name => $package_name,
 				   version => $package_version,
+				   version_control_id => $monotone_id,
 				  },
 		      },
        global => {
