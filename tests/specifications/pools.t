@@ -90,7 +90,7 @@ my $test
 						  {
 						   description => "Is the solved nernst potential applied for channel reversal potentials ?",
 						   read => [ `cat $::config->{core_directory}/tests/specifications/strings/channel1-nernst1.txt`, ],
-						   timeout => 60,
+						   timeout => 160,
 						   write => undef,
 						  },
 						 ],
