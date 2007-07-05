@@ -18,12 +18,12 @@ dnl ##########################################################################
 AC_PREREQ(2.59)
 
 # $Format: "AC_INIT(${package}, ${label}, ${email})"$
-AC_INIT(ssp, i64-6, hugo.cornelis@gmail.com)
+AC_INIT(ssp, i64-7, hugo.cornelis@gmail.com)
 
 AC_CONFIG_SRCDIR([ssp_test.pm])
 
 # $Format: "AM_INIT_AUTOMAKE(${package}, ${label})"$
-AM_INIT_AUTOMAKE(ssp, i64-6)
+AM_INIT_AUTOMAKE(ssp, i64-7)
 
 # Checks for programs.
 
