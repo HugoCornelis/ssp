@@ -43,7 +43,7 @@ dist-hook:
 	cp -a $(srcdir)/tests/perl $(distdir)/tests
 	cp -a $(srcdir)/perl $(distdir)
 	cp -a $(srcdir)/yaml $(distdir)
-	( cd $(distdir)/tests && chmod -R u+w . && ./tests_2_html )
+	( cd $(distdir)/tests && chmod -R u+w . && ./tests_2_html --introduction introduction.html )
 
 test: check
 
