@@ -25,6 +25,12 @@ AC_CONFIG_SRCDIR([ssp_test.pm])
 # $Format: "AM_INIT_AUTOMAKE(${package}, ${label})"$
 AM_INIT_AUTOMAKE(ssp, i64-7)
 
+PERL_MODULES=`(cd perl && find . -name "*.pm" -printf "%p ")`
+AC_SUBST(PERL_MODULES)
+
+PERL_DATA=`(cd perl && find . -name "numbers-7x11.txt" -printf "%p ")`
+AC_SUBST(PERL_DATA)
+
 # Checks for programs.
 
 # Checks for libraries.
@@ -43,11 +49,9 @@ AC_SUBST(TEST_SPECIFICATION_FILES)
 dnl YAML_FILES=`find yaml -name "*.yml" -printf "%p "`
 dnl AC_SUBST(YAML_FILES)
 
-dnl PERL_FILES=`find perl -type f -printf "%p "`
-dnl AC_SUBST(PERL_FILES)
-
 
 AC_CONFIG_FILES([Makefile
+		 perl/Makefile
 		 tests/Makefile
 		])
 AC_OUTPUT

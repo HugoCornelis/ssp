@@ -14,7 +14,7 @@
 ##############################################################################
 
 
-SUBDIRS = tests
+SUBDIRS = perl tests
 
 dist_bin_SCRIPTS = bin/ssp bin/ssp_directory
 
@@ -29,6 +29,7 @@ dist-hook:
 	find $(distdir) -name _Inline -exec chmod u+w -R \{\} \;
 	$(RM) -fr `find $(distdir) -name _Inline`
 	cp $(srcdir)/license.txt $(distdir)
+	cp $(srcdir)/ssp_test.pm $(distdir)
 	cp -R $(srcdir)/docs $(distdir)
 	$(srcdir)/install-sh -d $(distdir)/tests
 	$(srcdir)/install-sh -d $(distdir)/tests/html
@@ -41,7 +42,7 @@ dist-hook:
 	cp -a $(srcdir)/tests.config $(distdir)
 #	cp -a $(srcdir)/tests/code/tests.config $(distdir)/tests/code/tests.config
 	cp -a $(srcdir)/tests/perl $(distdir)/tests
-	cp -a $(srcdir)/perl $(distdir)
+#	cp -a $(srcdir)/perl $(distdir)
 	cp -a $(srcdir)/yaml $(distdir)
 	( cd $(distdir)/tests && chmod -R u+w . && ./tests_2_html --introduction introduction.html )
 
@@ -56,11 +57,11 @@ html-upload-prepare:
 html-upload: html-upload-prepare
 	scp -pr html/htdocs/* hcornelis@shell.sourceforge.net:/home/groups/n/ne/neurospaces/htdocs/
 
-#t use $(swigdir) here
+##t use $(swigdir) here
 
-perldir = $(prefix)/glue/swig/perl
+#perldir = $(prefix)/glue/swig/perl
 
-perl_HEADERS = perl/SSP.pm ssp_test.pm
+#perl_HEADERS = perl/SSP.pm ssp_test.pm
 
 TESTS = ssp_test.pm
 
