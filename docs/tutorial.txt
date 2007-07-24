@@ -1,0 +1,45 @@
+==============================
+SSP & Studio: a small tutorial
+==============================
+
+- - - - - - - - - - - - - - - - - - - - 
+Example 1: running a simple neuron model
+- - - - - - - - - - - - - - - - - - - - 
+
+First choose a neuron model.  Neurospaces comes with a library of
+simple neuron models.  One of them is in the model library file
+
+'tests/cells/tensizesp.ndf'
+
+Normally, the model library is located in
+'/usr/local/neurospaces/models/library'.
+
+This is a simple passive 10 compartmental model (ie. without ionic
+conductances).  To explore the model, use the command:
+
+'neurospaces -g tests/cells/tensizesp.ndf'
+
+Then, click the 'Explorer' button.  The neurospaces studio explorer
+can be used to check the structure and parameter values of the model.
+Specific as well as scaled values are displayed.
+
+The neurospaces studio only allows to extract certain information from
+a model, but right now, it does not allow to run the model.  To run a
+model, use ssp.  To run the model 'tests/cells/tensizesp.ndf', use the
+following command line:
+
+'ssp --cell --model-filename tests/cells/tensizesp.ndf'
+
+
+This tells ssp to use the buitin configuration with name 'cell' to run
+single neuron models (doesn't matter how complex these models are).
+
+The builtin configuration for a cell currently stimulates the neuron
+model with a current injection of 2e-09 into the soma.  The calculated
+membrane potential of the soma goes to a file with name
+'output/tensizesp'.  This file is in ASCII format, with one column for
+each calculated output.  The first column is the time step.
+
+
+
+
