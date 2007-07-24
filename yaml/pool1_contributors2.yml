@@ -24,7 +24,6 @@ services:
   neurospaces:
     initializers:
       - arguments:
-          - 3
           -
             - ./tests/perl/pool1-contributors2
             - -P
