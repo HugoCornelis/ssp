@@ -433,6 +433,10 @@ sub main
 
 	$scheduler->{apply} = $apply;
 
+	# dump the schedule
+
+	print Dump("Running schedule") . Dump($scheduler);
+
 	# and run it
 
 	schedule($scheduler);
@@ -466,7 +470,9 @@ sub read_cmd_line
 	    );
 
     if ($option_help
-	|| !@ARGV)
+	|| !@ARGV
+	&& !$option_builtins
+	&& !$option_configuration_cell)
     {
 	print
 	    "
