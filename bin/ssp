@@ -69,7 +69,10 @@ my $builtin_configurations
 					 },
 					],
 			 },
-		usage => '	Simulate a cell, default is to output the membrane potential of the soma.
+		usage => '
+	Simulate a cell, default is to output the membrane potential of the soma.
+	A current injection of 2e-9 is given (unless overwritten using the options).
+	The soma segment must reside in a SEGMENT_GROUP with name "segments".
 
 	--model-filename set the model filename, and filename of the output file.
 	--steps sets number of steps
