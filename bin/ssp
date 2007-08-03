@@ -44,6 +44,7 @@ $SIG{__DIE__}
 
 
 my $option_configuration_cell;
+my $option_emit_schedules;
 my $option_model_directory;
 my $option_model_filename;
 my $option_model_name;
@@ -457,6 +458,7 @@ sub read_cmd_line
 	    (
 	     "builtins!" => \$option_builtins,
 	     "cell!" => \$option_configuration_cell,
+	     "emit-schedules!" => \$option_emit_schedules,
 	     "help!" => \$option_help,
 	     "model-directory=s" => \$option_model_directory,
 	     "model-filename=s" => \$option_model_filename,
@@ -488,6 +490,7 @@ try $0 --builtins for information of how to run a simulation easily
 options :
     builtins           give help about supported builtin configurations
     cell               use the cell builtin configuration
+    emit-schedules     print schedules to stdout instead of running them.
     help               print usage information.
     model-directory    name of the directory where to look for non-std models
     model-filename     filename of the model description file (when using a builtin configuration)
@@ -568,14 +571,28 @@ sub schedule
 
     $fh->close();
 
-    # run the schedule
+    # if options say to emit the schedule
 
-    if ($option_verbose)
+    if ($option_emit_schedules)
     {
-	print "$0: Running schedule $scheduler->{name}\n";
+	# emit the schedule
+
+	print Dump($scheduler);
     }
 
-    $scheduler->run( { verbosity => $option_verbose, }, );
+    # else
+
+    else
+    {
+	# run the schedule
+
+	if ($option_verbose)
+	{
+	    print "$0: Running schedule $scheduler->{name}\n";
+	}
+
+	$scheduler->run( { verbosity => $option_verbose, }, );
+    }
 
 }
 
