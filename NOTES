@@ -1,3 +1,11 @@
-- Improved test framework.
-- Synchronized package management somewhat with neurospaces.
-- Added synchannel test for event files.
+1. Added option to inject current into the soma for the cell builtin
+   configuration.
+2. Bugfix: initial './' are not required anymore for model files in the
+   current directory.
+3. Added option to emit schedules.
+4. Improved user feedback for the cell builtin configuration.
+5. Improvements to the test framework.
+6. Added docs/tutorial.txt, incomplete.
+7. Added again support for running from template configuration files.
+8. Website update.
+9. Bugfix: added package information to tests/tests.config.
