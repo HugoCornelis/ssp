@@ -86,7 +86,7 @@ cell:
 						   write => undef,
 						  },
 						 ],
-				description => "help message",
+				description => "builtin configuration message",
 			       },
 			      ],
        description => "command line switches",
