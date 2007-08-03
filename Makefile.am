@@ -49,6 +49,7 @@ dist-hook:
 test: check
 
 html-upload-prepare:
+	( cd tests && ./tests_2_html --introduction introduction.html )
 	rm -fr html/htdocs/neurospaces_project/ssp/
 	mkdir --parents html/htdocs/neurospaces_project/ssp
 	mkdir --parents html/htdocs/neurospaces_project/ssp/html_source
