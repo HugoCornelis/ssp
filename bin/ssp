@@ -45,6 +45,7 @@ $SIG{__DIE__}
 
 my $option_configuration_cell;
 my $option_emit_schedules;
+my $option_inject_soma;
 my $option_model_directory;
 my $option_model_filename;
 my $option_model_name;
@@ -318,14 +319,30 @@ sub main
 
 # 	$models->[0]->{conceptual_parameters} = $conceptual_parameters;
 
-	my $granular_parameters
-	    = [
-	       {
-		component_name => "/$model_root/segments/soma",
-		field => 'INJECT',
-		value => 2e-9,	# 0,
-	       },
-	      ];
+	my $granular_parameters;
+
+	if ($option_inject_soma)
+	{
+	    $granular_parameters
+		= [
+		   {
+		    component_name => "/$model_root/segments/soma",
+		    field => 'INJECT',
+		    value => $option_inject_soma,
+		   },
+		  ];
+	}
+	else
+	{
+	    $granular_parameters
+		= [
+		   {
+		    component_name => "/$model_root/segments/soma",
+		    field => 'INJECT',
+		    value => 2e-9, # 0,
+		   },
+		  ];
+	}
 
 	$models->[0]->{granular_parameters} = $granular_parameters;
 
@@ -460,6 +477,7 @@ sub read_cmd_line
 	     "cell!" => \$option_configuration_cell,
 	     "emit-schedules!" => \$option_emit_schedules,
 	     "help!" => \$option_help,
+	     "inject-soma=s" => \$option_inject_soma,
 	     "model-directory=s" => \$option_model_directory,
 	     "model-filename=s" => \$option_model_filename,
 	     "model-name=s" => \$option_model_name,
@@ -492,6 +510,7 @@ options :
     cell               use the cell builtin configuration
     emit-schedules     print schedules to stdout instead of running them.
     help               print usage information.
+    inject-soma        amount of current injected into the soma.
     model-directory    name of the directory where to look for non-std models
     model-filename     filename of the model description file (when using a builtin configuration)
     model-name         name of the model (when using a builtin configuration)
