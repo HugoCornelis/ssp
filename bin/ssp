@@ -220,7 +220,7 @@ sub main
 
 	if (!defined $option_model_name)
 	{
-	    $option_model_filename =~ m(.*/?([^/]*)\.(ndf|p));
+	    $option_model_filename =~ m(.*/?([^/]*)\.(ndf|p|swc))i;
 
 	    $option_model_name = $1;
 
