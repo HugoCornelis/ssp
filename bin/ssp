@@ -251,9 +251,26 @@ sub main
 			      },
 	      };
 
-	# if this is a genesis .p file
+	# if this is a neurospaces .ndf file
 
-	if ($option_model_filename =~ m(\.p$))
+	if  ($option_model_filename =~ m(\.ndf$))
+	{
+	    my $args = [ "$0", "-P", ];
+
+	    push @$args, $option_model_filename;
+
+	    $services->{neurospaces}->{initializers}
+		= [
+		   {
+		    arguments => [ $args, ],
+		    method => 'read',
+		   },
+		  ];
+	}
+
+	# else a true morphology file
+
+	else
 	{
 	    my $args = [ "$0", "-P", ];
 
@@ -271,20 +288,6 @@ sub main
 		   },
 		  ];
 
-	}
-	else
-	{
-	    my $args = [ "$0", "-P", ];
-
-	    push @$args, $option_model_filename;
-
-	    $services->{neurospaces}->{initializers}
-		= [
-		   {
-		    arguments => [ $args, ],
-		    method => 'read',
-		   },
-		  ];
 	}
 
 	$scheduler->{services} = $services;
@@ -456,7 +459,10 @@ sub main
 
 	# dump the schedule
 
-	print Dump("Running schedule") . Dump($scheduler);
+	if ($option_verbose)
+	{
+	    print Dump("Running schedule") . Dump($scheduler);
+	}
 
 	# and run it
 
