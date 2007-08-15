@@ -375,7 +375,9 @@ Possible solutions:
 $@";
 	}
 
-	my $backend = $service_module->new($service);
+	my $package = $service->{package} || $service_module;
+
+	my $backend = $package->new($service);
 
 	# construct the SSP service for this backend
 
