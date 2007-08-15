@@ -1,2 +1,2 @@
-1. Improved support for SWC conversion.
-2. Split into integration tests and stand-alone tests.
+- Added possibility to have the service name different from the
+  package name, to accomodate Heccer::DES as a service.
