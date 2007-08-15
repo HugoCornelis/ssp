@@ -1,0 +1,41 @@
+$files = {
+           '_<perl/SSP.pm' => [
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '	if (!$success)
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '522'
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '	my $success = $self->$method(@$arguments);
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '520'
+                                }
+                              ],
+           '_<tests/perl/spiker3' => [
+                                       {
+                                         'expr' => undef,
+                                         'value' => '1',
+                                         'text' => '    $scheduler->run();
+',
+                                         'fname' => 'tests/perl/spiker3',
+                                         'type' => 'user',
+                                         'line' => 142
+                                       }
+                                     ]
+         };
+$expr_list = [
+               {
+                 'expr' => '$method',
+                 'depth' => -1
+               }
+             ];
+$eval_saved_text = undef;
+$main_win_geometry = '1397x921+143+78';
