@@ -1,5 +1,7 @@
 -*- outline -*-
 
+* the tests/tests directory is part of the distribution, somehow.
+
 * have ssp_directory write a hash of the input
 after termination of the command, add an option to overwrite, default
 is not to simulate if the hash matches.
