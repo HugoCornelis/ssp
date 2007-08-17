@@ -3,11 +3,29 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
+                                  'text' => '	if ($@)
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '365'
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
                                   'text' => '	if (!$success)
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '522'
+                                  'line' => 522
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '	if (!$engine->compile($self))
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '117'
                                 },
                                 {
                                   'expr' => undef,
@@ -16,7 +34,7 @@ $files = {
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '520'
+                                  'line' => 520
                                 }
                               ],
            '_<tests/perl/spiker3' => [
