@@ -3,11 +3,29 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
+                                  'text' => '	if (!$engine->compile($self))
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '117'
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
                                   'text' => '    my $result = 1;
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 147
+                                  'line' => 157
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '	    my $success = $backend->$method(@$arguments);
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '396'
                                 },
                                 {
                                   'expr' => undef,
@@ -16,7 +34,7 @@ $files = {
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '489'
+                                  'line' => '520'
                                 }
                               ]
          };
