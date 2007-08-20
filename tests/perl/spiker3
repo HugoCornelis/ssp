@@ -84,6 +84,14 @@ sub main
 				modelname => "/$modelname/source",
 				solverclass => "heccer",
 			       },
+			       {
+				modelname => "/$modelname/target1",
+				solverclass => "heccer",
+			       },
+			       {
+				modelname => "/$modelname/target2",
+				solverclass => "heccer",
+			       },
 			      ],
 		    name => $modelname,
 		    outputclasses => {
