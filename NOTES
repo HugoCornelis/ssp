@@ -1,2 +1,1 @@
-- Added possibility to have the service name different from the
-  package name, to accomodate Heccer::DES as a service.
+- Adapted expected test feedback for extended error reports by heccer.
