@@ -472,6 +472,8 @@ sub run
     # get initializers and simulation specifications, using defaults
     # where needed
 
+    my $modifiers = $self->{apply}->{modifiers} || [];
+
     my $initializers
 	= $self->{apply}->{initializers}
 	    || [
@@ -493,13 +495,15 @@ sub run
 
     # construct the schedule we have to apply
 
-    my $applications = [ @$initializers, @$simulation, @$finishers, @$results, ];
+    my $applications = [ @$modifiers, @$initializers, @$simulation, @$finishers, @$results, ];
 
     # go through the schedule
 
     foreach my $application (@$applications)
     {
-	# get method and arguments
+	# get object, method and arguments
+
+	my $object = $application->{object} || $self;
 
 	my $method = $application->{method};
 
@@ -517,7 +521,7 @@ sub run
 	    print "$0: applying method '$method' to $self->{name}\n";
 	}
 
-	my $success = $self->$method(@$arguments);
+	my $success = $object->$method(@$arguments);
 
 	if (!$success)
 	{
