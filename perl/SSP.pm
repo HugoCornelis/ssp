@@ -51,13 +51,6 @@ sub compile
 
     my $result = 1;
 
-    # first instantiate the services
-
-    if (!$self->instantiate_services())
-    {
-	return 0;
-    }
-
     # construct a schedule
 
     my $schedule = $self->{schedule} || [];
@@ -412,6 +405,40 @@ $@";
 }
 
 
+sub lookup_object
+{
+    my $self = shift;
+
+    my $object_name = shift;
+
+    # default: not found
+
+    my $result;
+
+    # search in the services
+
+    my $services = $self->{services};
+
+    foreach my $service_name (keys %$services)
+    {
+	my $service = $services->{$service_name};
+
+	# if name matches
+
+	if ($service_name =~ /$object_name/)
+	{
+	    # set result: matching object
+
+	    $result = $service->{ssp_service};
+
+	    last;
+	}
+    }
+
+    # return result
+}
+
+
 sub lookup_solver_engine
 {
     my $self = shift;
@@ -472,6 +499,12 @@ sub run
     # get initializers and simulation specifications, using defaults
     # where needed
 
+    my $services = $self->{apply}->{services}
+	||
+	    [
+	     { method => 'instantiate_services', },
+	    ];
+
     my $modifiers = $self->{apply}->{modifiers} || [];
 
     my $initializers
@@ -495,15 +528,31 @@ sub run
 
     # construct the schedule we have to apply
 
-    my $applications = [ @$modifiers, @$initializers, @$simulation, @$finishers, @$results, ];
+    my $applications = [ @$services, @$modifiers, @$initializers, @$simulation, @$finishers, @$results, ];
 
     # go through the schedule
 
     foreach my $application (@$applications)
     {
-	# get object, method and arguments
+	# get object
 
 	my $object = $application->{object} || $self;
+
+	if (!ref($object))
+	{
+	    $object = $self->lookup_object($object);
+
+	    if (!defined $object)
+	    {
+		die "$0: schedule references service or object $object, but it cannot be found";
+	    }
+
+	    # get object backend
+
+	    $object = $object->backend();
+	}
+
+	# get method and arguments
 
 	my $method = $application->{method};
 
