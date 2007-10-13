@@ -436,6 +436,8 @@ sub lookup_object
     }
 
     # return result
+
+    return $result;
 }
 
 
@@ -536,20 +538,30 @@ sub run
     {
 	# get object
 
-	my $object = $application->{object} || $self;
+	my $object_name = $application->{object} || $self;
 
-	if (!ref($object))
+	my $object;
+
+	# translate a name to a real object
+
+	if (!ref($object_name))
 	{
-	    $object = $self->lookup_object($object);
-
-	    if (!defined $object)
-	    {
-		die "$0: schedule references service or object $object, but it cannot be found";
-	    }
+	    $object = $self->lookup_object($object_name);
 
 	    # get object backend
 
-	    $object = $object->backend();
+	    #! not sure, should be out of the if() ?
+
+	    $object = (defined $object) and $object->backend();
+	}
+	else
+	{
+	    $object = $object_name;
+	}
+
+	if (!defined $object)
+	{
+	    die "$0: schedule references service or object $object, but it cannot be found";
 	}
 
 	# get method and arguments
