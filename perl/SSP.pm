@@ -552,7 +552,7 @@ sub run
 
 	    #! not sure, should be out of the if() ?
 
-	    $object = (defined $object) and $object->backend();
+	    $object = ((defined $object) and ($object->backend()));
 	}
 	else
 	{
