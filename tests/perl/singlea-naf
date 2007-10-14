@@ -63,7 +63,7 @@ sub main
 		    apply => {
 			      simulation => [
 					     {
-					      arguments => [ 1000, { verbose => 2, }, ],
+					      arguments => [ $ARGV[0] ? 10 : 1000, { verbose => 2, }, ],
 					      method => 'steps',
 					     },
 					     {
@@ -93,20 +93,33 @@ sub main
 		    solverclasses => {
 				      heccer => {
 						 constructor_settings => {
-									  dStep => (6e-6),
-									  configuration => {
-											    reporting => {
-													  granularity => 100,
-													  tested_things => (
-															    $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
-															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
-															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
-															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
-															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
-															    | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
-															   ),
-													 },
-											   },
+									  !$ARGV[0]
+									  ? (
+									     dStep => (6e-6),
+									     configuration => {
+											       reporting => {
+													     granularity => 100,
+													     tested_things => (
+															       $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
+															       | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
+															       | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
+															       | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
+															       | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
+															       | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+															      ),
+													    },
+											      },
+									    )
+									  : (),
+									  $ARGV[0]
+									  ? (
+									     options => {
+											 iOptions => (
+												      $SwiggableHeccer::HECCER_OPTION_PASSIVE_SYNCHANS
+												     ),
+											},
+									    )
+									  : (),
 									 },
 						 module_name => 'Heccer',
 						 service_name => 'neurospaces',

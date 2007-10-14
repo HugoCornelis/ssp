@@ -161,7 +161,7 @@ my $test
 				description => "ten passive compartments with different properties and injected current",
 			       },
 			      ],
-       description => "passive model testing",
+       description => "simple passive model testing",
        name => 'passive.t',
       };
 
