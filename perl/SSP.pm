@@ -128,13 +128,6 @@ sub compile
 
     $self->{schedule} = $schedule;
 
-    # prepare outputs
-
-    if (!$self->instantiate_outputs())
-    {
-	return 0;
-    }
-
     # return result
 
     return $result;
@@ -513,6 +506,7 @@ sub run
 	= $self->{apply}->{initializers}
 	    || [
 		{ method => 'compile', },
+		{ method => 'instantiate_outputs', },
 		{ method => 'initiate', },
 	       ],
 		   ;
