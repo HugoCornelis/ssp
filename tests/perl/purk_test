@@ -102,71 +102,75 @@ sub main
 				  field => 'Vm',
 				  outputclass => 'double_2_ascii',
 				 },
-				 {
-				  component_name => "/$modelname/segments/soma/ca_pool",
-				  field => 'Ca',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/soma/km",
-				  field => 'state_n',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/soma/kdr",
-				  field => 'state_m',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/soma/kdr",
-				  field => 'state_h',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/soma/ka",
-				  field => 'state_m',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/soma/ka",
-				  field => 'state_h',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/soma/kh",
-				  field => 'state_m',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/soma/kh",
-				  field => 'state_h',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/soma/nap",
-				  field => 'state_n',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/soma/naf",
-				  field => 'state_m',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/soma/naf",
-				  field => 'state_h',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/soma/cat/cat_gate_activation",
-				  field => 'state_m',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/soma/cat/cat_gate_inactivation",
-				  field => 'state_h',
-				  outputclass => 'double_2_ascii',
-				 },
+				 !$ARGV[0]
+				 ? (
+				    {
+				     component_name => "/$modelname/segments/soma/ca_pool",
+				     field => 'Ca',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/soma/km",
+				     field => 'state_n',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/soma/kdr",
+				     field => 'state_m',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/soma/kdr",
+				     field => 'state_h',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/soma/ka",
+				     field => 'state_m',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/soma/ka",
+				     field => 'state_h',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/soma/kh",
+				     field => 'state_m',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/soma/kh",
+				     field => 'state_h',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/soma/nap",
+				     field => 'state_n',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/soma/naf",
+				     field => 'state_m',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/soma/naf",
+				     field => 'state_h',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/soma/cat/cat_gate_activation",
+				     field => 'state_m',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/soma/cat/cat_gate_inactivation",
+				     field => 'state_h',
+				     outputclass => 'double_2_ascii',
+				    },
+				   )
+				 : (),
 				),
 				(
 				 {
@@ -174,76 +178,80 @@ sub main
 				  field => 'Vm',
 				  outputclass => 'double_2_ascii',
 				 },
-				 {
-				  component_name => "/$modelname/segments/main[0]/ca_pool",
-				  field => 'Ca',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/main[0]/cat/cat_gate_activation",
-				  field => 'state_m',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/main[0]/cat/cat_gate_inactivation",
-				  field => 'state_h',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/main[0]/cap/cap_gate_activation",
-				  field => 'state_m',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/main[0]/cap/cap_gate_inactivation",
-				  field => 'state_h',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/main[0]/km",
-				  field => 'state_n',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/main[0]/kdr",
-				  field => 'state_m',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/main[0]/kdr",
-				  field => 'state_h',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/main[0]/ka",
-				  field => 'state_m',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/main[0]/ka",
-				  field => 'state_h',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/main[0]/kc",
-				  field => 'state_m',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/main[0]/kc",
-				  field => 'state_h',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/main[0]/k2",
-				  field => 'state_m',
-				  outputclass => 'double_2_ascii',
-				 },
-				 {
-				  component_name => "/$modelname/segments/main[0]/k2",
-				  field => 'state_h',
-				  outputclass => 'double_2_ascii',
-				 },
+				 !$ARGV[0]
+				 ? (
+				    {
+				     component_name => "/$modelname/segments/main[0]/ca_pool",
+				     field => 'Ca',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/main[0]/cat/cat_gate_activation",
+				     field => 'state_m',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/main[0]/cat/cat_gate_inactivation",
+				     field => 'state_h',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/main[0]/cap/cap_gate_activation",
+				     field => 'state_m',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/main[0]/cap/cap_gate_inactivation",
+				     field => 'state_h',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/main[0]/km",
+				     field => 'state_n',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/main[0]/kdr",
+				     field => 'state_m',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/main[0]/kdr",
+				     field => 'state_h',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/main[0]/ka",
+				     field => 'state_m',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/main[0]/ka",
+				     field => 'state_h',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/main[0]/kc",
+				     field => 'state_m',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/main[0]/kc",
+				     field => 'state_h',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/main[0]/k2",
+				     field => 'state_m',
+				     outputclass => 'double_2_ascii',
+				    },
+				    {
+				     component_name => "/$modelname/segments/main[0]/k2",
+				     field => 'state_h',
+				     outputclass => 'double_2_ascii',
+				    },
+				   )
+				 : (),
 				),
 			       ],
 		    services => {
@@ -274,6 +282,15 @@ sub main
 															   ),
 													 },
 											   },
+									  $ARGV[0]
+									  ? (
+									     options => {
+											 iOptions => (
+												      $SwiggableHeccer::HECCER_OPTION_PASSIVE_SYNCHANS
+												     ),
+											},
+									    )
+									  : (),
 									 },
 						 module_name => 'Heccer',
 						 service_name => 'neurospaces',

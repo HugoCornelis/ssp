@@ -1,0 +1,1153 @@
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (4)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dBasalActivatorStart) : (4e-05)
+Heccer Options (dBasalActivatorEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (0)
+Heccer (dStep) : (2e-05)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Compartment operations
+-----
+00000 :: FORWARD_ELIMINATION    0
+00001 :: SET_DIAGONAL
+00002 :: FORWARD_ELIMINATION    2
+00003 :: SET_DIAGONAL
+00004 :: FORWARD_ELIMINATION    4
+00005 :: SET_DIAGONAL
+00006 :: FORWARD_ELIMINATION    6
+00007 :: SET_DIAGONAL
+00008 :: FORWARD_ELIMINATION    8
+00009 :: SET_DIAGONAL
+00010 :: FORWARD_ELIMINATION   10
+00011 :: SET_DIAGONAL
+00012 :: FORWARD_ELIMINATION   12
+00013 :: SET_DIAGONAL
+00014 :: FORWARD_ELIMINATION   14
+00015 :: SET_DIAGONAL
+00016 :: FORWARD_ELIMINATION   16
+00017 :: SET_DIAGONAL
+00018 :: FORWARD_ELIMINATION   18
+00019 :: SET_DIAGONAL
+00020 :: FORWARD_ELIMINATION   20
+00021 :: SET_DIAGONAL
+00022 :: FORWARD_ELIMINATION   22
+00023 :: SET_DIAGONAL
+00024 :: FORWARD_ELIMINATION   24
+00025 :: FINISH
+00026 :: BACKWARD_SUBSTITUTION   26
+00027 :: FINISH_ROW
+00028 :: BACKWARD_SUBSTITUTION   24
+00029 :: FINISH_ROW
+00030 :: BACKWARD_SUBSTITUTION   22
+00031 :: FINISH_ROW
+00032 :: BACKWARD_SUBSTITUTION   20
+00033 :: FINISH_ROW
+00034 :: BACKWARD_SUBSTITUTION   18
+00035 :: FINISH_ROW
+00036 :: BACKWARD_SUBSTITUTION   16
+00037 :: FINISH_ROW
+00038 :: BACKWARD_SUBSTITUTION   14
+00039 :: FINISH_ROW
+00040 :: BACKWARD_SUBSTITUTION   12
+00041 :: FINISH_ROW
+00042 :: BACKWARD_SUBSTITUTION   10
+00043 :: FINISH_ROW
+00044 :: BACKWARD_SUBSTITUTION    8
+00045 :: FINISH_ROW
+00046 :: BACKWARD_SUBSTITUTION    6
+00047 :: FINISH_ROW
+00048 :: BACKWARD_SUBSTITUTION    4
+00049 :: FINISH_ROW
+00050 :: BACKWARD_SUBSTITUTION    2
+00051 :: FINISH_ROW
+00052 :: FINISH
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -1.76829e-12 0 9.19539e+06 16.4217
+00001 :: INITIALIZECHANNEL -0.08 1.12757e-06
+00002 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00003 :: UPDATECOMPARTMENTCURRENT
+00004 :: INITIALIZECHANNEL -0.08 1.12757e-06
+00005 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00006 :: UPDATECOMPARTMENTCURRENT
+00007 :: INITIALIZECHANNEL 0 3.7178e-05
+00008 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00009 :: UPDATECOMPARTMENTCURRENT
+00010 :: COMPARTMENT							 -5.67194e-12 0 2.86677e+06 7.5314
+00011 :: INITIALIZECHANNEL -0.08 3.61675e-06
+00012 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00013 :: UPDATECOMPARTMENTCURRENT
+00014 :: INITIALIZECHANNEL -0.08 3.61675e-06
+00015 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00016 :: UPDATECOMPARTMENTCURRENT
+00017 :: INITIALIZECHANNEL 0 0.000119252
+00018 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00019 :: UPDATECOMPARTMENTCURRENT
+00020 :: COMPARTMENT							 -2.08173e-12 0 7.81088e+06 21.1593
+00021 :: INITIALIZECHANNEL -0.08 1.32743e-06
+00022 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00023 :: UPDATECOMPARTMENTCURRENT
+00024 :: INITIALIZECHANNEL -0.08 1.32743e-06
+00025 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00026 :: UPDATECOMPARTMENTCURRENT
+00027 :: INITIALIZECHANNEL 0 4.3768e-05
+00028 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00029 :: UPDATECOMPARTMENTCURRENT
+00030 :: COMPARTMENT							 -3.04639e-12 0 5.33752e+06 34.6497
+00031 :: INITIALIZECHANNEL -0.08 1.94255e-06
+00032 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00033 :: UPDATECOMPARTMENTCURRENT
+00034 :: INITIALIZECHANNEL -0.08 1.94255e-06
+00035 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00036 :: UPDATECOMPARTMENTCURRENT
+00037 :: INITIALIZECHANNEL 0 6.40498e-05
+00038 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00039 :: UPDATECOMPARTMENTCURRENT
+00040 :: COMPARTMENT							 -8.20896e-12 0 1.98078e+06 13.3843
+00041 :: COMPARTMENT							 -5.48124e-12 0 2.96651e+06 13.426
+00042 :: COMPARTMENT							 -2.85213e-12 0 5.70106e+06 47.4699
+00043 :: COMPARTMENT							 -3.64139e-12 0 4.46537e+06 46.7046
+00044 :: COMPARTMENT							 -6.20396e-12 0 2.62093e+06 20.2012
+00045 :: COMPARTMENT							 -3.03544e-12 0 5.35677e+06 53.3701
+00046 :: COMPARTMENT							 -4.95637e-12 0 3.28066e+06 33.9933
+00047 :: COMPARTMENT							 -1.61832e-11 0 1.00476e+06 5.18436
+00048 :: COMPARTMENT							 -9.35826e-12 0 1.73752e+06 4.81797
+00049 :: COMPARTMENT							 -2.23189e-10 2e-09 218562 1.28342
+00050 :: FINISH
+VM Diagonals (pdDiagonals[0]) : (16.4217)
+VM Diagonals (pdDiagonals[1]) : (7.5314)
+VM Diagonals (pdDiagonals[2]) : (21.1593)
+VM Diagonals (pdDiagonals[3]) : (34.6497)
+VM Diagonals (pdDiagonals[4]) : (13.3843)
+VM Diagonals (pdDiagonals[5]) : (13.426)
+VM Diagonals (pdDiagonals[6]) : (47.4699)
+VM Diagonals (pdDiagonals[7]) : (46.7046)
+VM Diagonals (pdDiagonals[8]) : (20.2012)
+VM Diagonals (pdDiagonals[9]) : (53.3701)
+VM Diagonals (pdDiagonals[10]) : (33.9933)
+VM Diagonals (pdDiagonals[11]) : (5.18436)
+VM Diagonals (pdDiagonals[12]) : (4.81797)
+VM Diagonals (pdDiagonals[13]) : (1.28342)
+VM Axial Resistances (pdAxres[0]) : (-4.80782)
+VM Axial Resistances (pdAxres[1]) : (-15.4215)
+VM Axial Resistances (pdAxres[2]) : (-4.69557)
+VM Axial Resistances (pdAxres[3]) : (-1.72338)
+VM Axial Resistances (pdAxres[4]) : (-10.5669)
+VM Axial Resistances (pdAxres[5]) : (-15.4636)
+VM Axial Resistances (pdAxres[6]) : (-8.56606)
+VM Axial Resistances (pdAxres[7]) : (-23.0825)
+VM Axial Resistances (pdAxres[8]) : (-5.71812)
+VM Axial Resistances (pdAxres[9]) : (-3.81807)
+VM Axial Resistances (pdAxres[10]) : (-12.8909)
+VM Axial Resistances (pdAxres[11]) : (-6.7077)
+VM Axial Resistances (pdAxres[12]) : (-26.3007)
+VM Axial Resistances (pdAxres[13]) : (-33.5787)
+VM Axial Resistances (pdAxres[14]) : (-11.389)
+VM Axial Resistances (pdAxres[15]) : (-19.4038)
+VM Axial Resistances (pdAxres[16]) : (-15.9664)
+VM Axial Resistances (pdAxres[17]) : (-7.81198)
+VM Axial Resistances (pdAxres[18]) : (-22.2946)
+VM Axial Resistances (pdAxres[19]) : (-36.4034)
+VM Axial Resistances (pdAxres[20]) : (-3.27659)
+VM Axial Resistances (pdAxres[21]) : (-10.6985)
+VM Axial Resistances (pdAxres[22]) : (-1.56946)
+VM Axial Resistances (pdAxres[23]) : (-0.90757)
+VM Axial Resistances (pdAxres[24]) : (-0.282813)
+VM Axial Resistances (pdAxres[25]) : (-2.2483)
+VM Axial Resistances (pdAxres[26]) : (-2.2483)
+VM Axial Resistances (pdAxres[27]) : (-0.90757)
+VM Axial Resistances (pdAxres[28]) : (-10.6985)
+VM Axial Resistances (pdAxres[29]) : (-36.4034)
+VM Axial Resistances (pdAxres[30]) : (-7.81198)
+VM Axial Resistances (pdAxres[31]) : (-19.4038)
+VM Axial Resistances (pdAxres[32]) : (-33.5787)
+VM Axial Resistances (pdAxres[33]) : (-6.7077)
+VM Axial Resistances (pdAxres[34]) : (-3.81807)
+VM Axial Resistances (pdAxres[35]) : (-23.0825)
+VM Axial Resistances (pdAxres[36]) : (-15.4636)
+VM Axial Resistances (pdAxres[37]) : (-1.72338)
+VM Axial Resistances (pdAxres[38]) : (-15.4215)
+VM Axial Resistances (pdResults[0]) : (0)
+VM Axial Resistances (pdResults[1]) : (0)
+VM Axial Resistances (pdResults[2]) : (0)
+VM Axial Resistances (pdResults[3]) : (0)
+VM Axial Resistances (pdResults[4]) : (0)
+VM Axial Resistances (pdResults[5]) : (0)
+VM Axial Resistances (pdResults[6]) : (0)
+VM Axial Resistances (pdResults[7]) : (0)
+VM Axial Resistances (pdResults[8]) : (0)
+VM Axial Resistances (pdResults[9]) : (0)
+VM Axial Resistances (pdResults[10]) : (0)
+VM Axial Resistances (pdResults[11]) : (0)
+VM Axial Resistances (pdResults[12]) : (0)
+VM Axial Resistances (pdResults[13]) : (0)
+VM Axial Resistances (pdResults[14]) : (0)
+VM Axial Resistances (pdResults[15]) : (0)
+VM Axial Resistances (pdResults[16]) : (0)
+VM Axial Resistances (pdResults[17]) : (0)
+VM Axial Resistances (pdResults[18]) : (0)
+VM Axial Resistances (pdResults[19]) : (0)
+VM Axial Resistances (pdResults[20]) : (0)
+VM Axial Resistances (pdResults[21]) : (0)
+VM Axial Resistances (pdResults[22]) : (0)
+VM Axial Resistances (pdResults[23]) : (0)
+VM Axial Resistances (pdResults[24]) : (0)
+VM Axial Resistances (pdResults[25]) : (0)
+VM Axial Resistances (pdResults[26]) : (0)
+VM Axial Resistances (pdResults[27]) : (0)
+VM Membrane Potentials (pdVms[0]) : (-0.068)
+VM Membrane Potentials (pdVms[1]) : (-0.068)
+VM Membrane Potentials (pdVms[2]) : (-0.068)
+VM Membrane Potentials (pdVms[3]) : (-0.068)
+VM Membrane Potentials (pdVms[4]) : (-0.068)
+VM Membrane Potentials (pdVms[5]) : (-0.068)
+VM Membrane Potentials (pdVms[6]) : (-0.068)
+VM Membrane Potentials (pdVms[7]) : (-0.068)
+VM Membrane Potentials (pdVms[8]) : (-0.068)
+VM Membrane Potentials (pdVms[9]) : (-0.068)
+VM Membrane Potentials (pdVms[10]) : (-0.068)
+VM Membrane Potentials (pdVms[11]) : (-0.068)
+VM Membrane Potentials (pdVms[12]) : (-0.068)
+VM Membrane Potentials (pdVms[13]) : (-0.068)
+-------
+Iteration 0
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (4)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dBasalActivatorStart) : (4e-05)
+Heccer Options (dBasalActivatorEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (2e-05)
+Heccer (dStep) : (2e-05)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Compartment operations
+-----
+00000 :: FORWARD_ELIMINATION    0
+00001 :: SET_DIAGONAL
+00002 :: FORWARD_ELIMINATION    2
+00003 :: SET_DIAGONAL
+00004 :: FORWARD_ELIMINATION    4
+00005 :: SET_DIAGONAL
+00006 :: FORWARD_ELIMINATION    6
+00007 :: SET_DIAGONAL
+00008 :: FORWARD_ELIMINATION    8
+00009 :: SET_DIAGONAL
+00010 :: FORWARD_ELIMINATION   10
+00011 :: SET_DIAGONAL
+00012 :: FORWARD_ELIMINATION   12
+00013 :: SET_DIAGONAL
+00014 :: FORWARD_ELIMINATION   14
+00015 :: SET_DIAGONAL
+00016 :: FORWARD_ELIMINATION   16
+00017 :: SET_DIAGONAL
+00018 :: FORWARD_ELIMINATION   18
+00019 :: SET_DIAGONAL
+00020 :: FORWARD_ELIMINATION   20
+00021 :: SET_DIAGONAL
+00022 :: FORWARD_ELIMINATION   22
+00023 :: SET_DIAGONAL
+00024 :: FORWARD_ELIMINATION   24
+00025 :: FINISH
+00026 :: BACKWARD_SUBSTITUTION   26
+00027 :: FINISH_ROW
+00028 :: BACKWARD_SUBSTITUTION   24
+00029 :: FINISH_ROW
+00030 :: BACKWARD_SUBSTITUTION   22
+00031 :: FINISH_ROW
+00032 :: BACKWARD_SUBSTITUTION   20
+00033 :: FINISH_ROW
+00034 :: BACKWARD_SUBSTITUTION   18
+00035 :: FINISH_ROW
+00036 :: BACKWARD_SUBSTITUTION   16
+00037 :: FINISH_ROW
+00038 :: BACKWARD_SUBSTITUTION   14
+00039 :: FINISH_ROW
+00040 :: BACKWARD_SUBSTITUTION   12
+00041 :: FINISH_ROW
+00042 :: BACKWARD_SUBSTITUTION   10
+00043 :: FINISH_ROW
+00044 :: BACKWARD_SUBSTITUTION    8
+00045 :: FINISH_ROW
+00046 :: BACKWARD_SUBSTITUTION    6
+00047 :: FINISH_ROW
+00048 :: BACKWARD_SUBSTITUTION    4
+00049 :: FINISH_ROW
+00050 :: BACKWARD_SUBSTITUTION    2
+00051 :: FINISH_ROW
+00052 :: FINISH
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -1.76829e-12 0 9.19539e+06 16.4217
+00001 :: INITIALIZECHANNEL -0.08 1.12757e-06
+00002 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00003 :: UPDATECOMPARTMENTCURRENT
+00004 :: INITIALIZECHANNEL -0.08 1.12757e-06
+00005 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00006 :: UPDATECOMPARTMENTCURRENT
+00007 :: INITIALIZECHANNEL 0 3.7178e-05
+00008 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00009 :: UPDATECOMPARTMENTCURRENT
+00010 :: COMPARTMENT							 -5.67194e-12 0 2.86677e+06 7.5314
+00011 :: INITIALIZECHANNEL -0.08 3.61675e-06
+00012 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00013 :: UPDATECOMPARTMENTCURRENT
+00014 :: INITIALIZECHANNEL -0.08 3.61675e-06
+00015 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00016 :: UPDATECOMPARTMENTCURRENT
+00017 :: INITIALIZECHANNEL 0 0.000119252
+00018 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00019 :: UPDATECOMPARTMENTCURRENT
+00020 :: COMPARTMENT							 -2.08173e-12 0 7.81088e+06 21.1593
+00021 :: INITIALIZECHANNEL -0.08 1.32743e-06
+00022 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00023 :: UPDATECOMPARTMENTCURRENT
+00024 :: INITIALIZECHANNEL -0.08 1.32743e-06
+00025 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00026 :: UPDATECOMPARTMENTCURRENT
+00027 :: INITIALIZECHANNEL 0 4.3768e-05
+00028 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00029 :: UPDATECOMPARTMENTCURRENT
+00030 :: COMPARTMENT							 -3.04639e-12 0 5.33752e+06 34.6497
+00031 :: INITIALIZECHANNEL -0.08 1.94255e-06
+00032 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00033 :: UPDATECOMPARTMENTCURRENT
+00034 :: INITIALIZECHANNEL -0.08 1.94255e-06
+00035 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00036 :: UPDATECOMPARTMENTCURRENT
+00037 :: INITIALIZECHANNEL 0 6.40498e-05
+00038 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00039 :: UPDATECOMPARTMENTCURRENT
+00040 :: COMPARTMENT							 -8.20896e-12 0 1.98078e+06 13.3843
+00041 :: COMPARTMENT							 -5.48124e-12 0 2.96651e+06 13.426
+00042 :: COMPARTMENT							 -2.85213e-12 0 5.70106e+06 47.4699
+00043 :: COMPARTMENT							 -3.64139e-12 0 4.46537e+06 46.7046
+00044 :: COMPARTMENT							 -6.20396e-12 0 2.62093e+06 20.2012
+00045 :: COMPARTMENT							 -3.03544e-12 0 5.35677e+06 53.3701
+00046 :: COMPARTMENT							 -4.95637e-12 0 3.28066e+06 33.9933
+00047 :: COMPARTMENT							 -1.61832e-11 0 1.00476e+06 5.18436
+00048 :: COMPARTMENT							 -9.35826e-12 0 1.73752e+06 4.81797
+00049 :: COMPARTMENT							 -2.23189e-10 2e-09 218562 1.28342
+00050 :: FINISH
+VM Diagonals (pdDiagonals[0]) : (16.4217)
+VM Diagonals (pdDiagonals[1]) : (7.5314)
+VM Diagonals (pdDiagonals[2]) : (21.1593)
+VM Diagonals (pdDiagonals[3]) : (34.6497)
+VM Diagonals (pdDiagonals[4]) : (13.3843)
+VM Diagonals (pdDiagonals[5]) : (13.426)
+VM Diagonals (pdDiagonals[6]) : (47.4699)
+VM Diagonals (pdDiagonals[7]) : (46.7046)
+VM Diagonals (pdDiagonals[8]) : (20.2012)
+VM Diagonals (pdDiagonals[9]) : (53.3701)
+VM Diagonals (pdDiagonals[10]) : (33.9933)
+VM Diagonals (pdDiagonals[11]) : (5.18436)
+VM Diagonals (pdDiagonals[12]) : (4.81797)
+VM Diagonals (pdDiagonals[13]) : (1.28342)
+VM Axial Resistances (pdAxres[0]) : (-4.80782)
+VM Axial Resistances (pdAxres[1]) : (-15.4215)
+VM Axial Resistances (pdAxres[2]) : (-4.69557)
+VM Axial Resistances (pdAxres[3]) : (-1.72338)
+VM Axial Resistances (pdAxres[4]) : (-10.5669)
+VM Axial Resistances (pdAxres[5]) : (-15.4636)
+VM Axial Resistances (pdAxres[6]) : (-8.56606)
+VM Axial Resistances (pdAxres[7]) : (-23.0825)
+VM Axial Resistances (pdAxres[8]) : (-5.71812)
+VM Axial Resistances (pdAxres[9]) : (-3.81807)
+VM Axial Resistances (pdAxres[10]) : (-12.8909)
+VM Axial Resistances (pdAxres[11]) : (-6.7077)
+VM Axial Resistances (pdAxres[12]) : (-26.3007)
+VM Axial Resistances (pdAxres[13]) : (-33.5787)
+VM Axial Resistances (pdAxres[14]) : (-11.389)
+VM Axial Resistances (pdAxres[15]) : (-19.4038)
+VM Axial Resistances (pdAxres[16]) : (-15.9664)
+VM Axial Resistances (pdAxres[17]) : (-7.81198)
+VM Axial Resistances (pdAxres[18]) : (-22.2946)
+VM Axial Resistances (pdAxres[19]) : (-36.4034)
+VM Axial Resistances (pdAxres[20]) : (-3.27659)
+VM Axial Resistances (pdAxres[21]) : (-10.6985)
+VM Axial Resistances (pdAxres[22]) : (-1.56946)
+VM Axial Resistances (pdAxres[23]) : (-0.90757)
+VM Axial Resistances (pdAxres[24]) : (-0.282813)
+VM Axial Resistances (pdAxres[25]) : (-2.2483)
+VM Axial Resistances (pdAxres[26]) : (-2.2483)
+VM Axial Resistances (pdAxres[27]) : (-0.90757)
+VM Axial Resistances (pdAxres[28]) : (-10.6985)
+VM Axial Resistances (pdAxres[29]) : (-36.4034)
+VM Axial Resistances (pdAxres[30]) : (-7.81198)
+VM Axial Resistances (pdAxres[31]) : (-19.4038)
+VM Axial Resistances (pdAxres[32]) : (-33.5787)
+VM Axial Resistances (pdAxres[33]) : (-6.7077)
+VM Axial Resistances (pdAxres[34]) : (-3.81807)
+VM Axial Resistances (pdAxres[35]) : (-23.0825)
+VM Axial Resistances (pdAxres[36]) : (-15.4636)
+VM Axial Resistances (pdAxres[37]) : (-1.72338)
+VM Axial Resistances (pdAxres[38]) : (-15.4215)
+VM Axial Resistances (pdResults[0]) : (-0.0679985)
+VM Axial Resistances (pdResults[1]) : (16.4217)
+VM Axial Resistances (pdResults[2]) : (-0.0679983)
+VM Axial Resistances (pdResults[3]) : (3.01642)
+VM Axial Resistances (pdResults[4]) : (-0.0679951)
+VM Axial Resistances (pdResults[5]) : (18.4766)
+VM Axial Resistances (pdResults[6]) : (-0.0679937)
+VM Axial Resistances (pdResults[7]) : (25.8059)
+VM Axial Resistances (pdResults[8]) : (-0.0679927)
+VM Axial Resistances (pdResults[9]) : (5.72228)
+VM Axial Resistances (pdResults[10]) : (-0.0679878)
+VM Axial Resistances (pdResults[11]) : (9.61073)
+VM Axial Resistances (pdResults[12]) : (-0.0679815)
+VM Axial Resistances (pdResults[13]) : (38.4728)
+VM Axial Resistances (pdResults[14]) : (-0.0679784)
+VM Axial Resistances (pdResults[15]) : (23.7496)
+VM Axial Resistances (pdResults[16]) : (-0.067973)
+VM Axial Resistances (pdResults[17]) : (10.8962)
+VM Axial Resistances (pdResults[18]) : (-0.0679614)
+VM Axial Resistances (pdResults[19]) : (41.923)
+VM Axial Resistances (pdResults[20]) : (-0.0679552)
+VM Axial Resistances (pdResults[21]) : (14.634)
+VM Axial Resistances (pdResults[22]) : (-0.0679378)
+VM Axial Resistances (pdResults[23]) : (2.78895)
+VM Axial Resistances (pdResults[24]) : (-0.0678038)
+VM Axial Resistances (pdResults[25]) : (4.30724)
+VM Axial Resistances (pdResults[26]) : (-0.0676219)
+VM Axial Resistances (pdResults[27]) : (1.28342)
+VM Membrane Potentials (pdVms[0]) : (-0.067997)
+VM Membrane Potentials (pdVms[1]) : (-0.0679965)
+VM Membrane Potentials (pdVms[2]) : (-0.0679902)
+VM Membrane Potentials (pdVms[3]) : (-0.0679874)
+VM Membrane Potentials (pdVms[4]) : (-0.0679853)
+VM Membrane Potentials (pdVms[5]) : (-0.0679756)
+VM Membrane Potentials (pdVms[6]) : (-0.0679629)
+VM Membrane Potentials (pdVms[7]) : (-0.0679568)
+VM Membrane Potentials (pdVms[8]) : (-0.067946)
+VM Membrane Potentials (pdVms[9]) : (-0.0679228)
+VM Membrane Potentials (pdVms[10]) : (-0.0679104)
+VM Membrane Potentials (pdVms[11]) : (-0.0678756)
+VM Membrane Potentials (pdVms[12]) : (-0.0676076)
+VM Membrane Potentials (pdVms[13]) : (-0.0672437)
+-------
+Iteration 1000
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (4)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dBasalActivatorStart) : (4e-05)
+Heccer Options (dBasalActivatorEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (0.02002)
+Heccer (dStep) : (2e-05)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Compartment operations
+-----
+00000 :: FORWARD_ELIMINATION    0
+00001 :: SET_DIAGONAL
+00002 :: FORWARD_ELIMINATION    2
+00003 :: SET_DIAGONAL
+00004 :: FORWARD_ELIMINATION    4
+00005 :: SET_DIAGONAL
+00006 :: FORWARD_ELIMINATION    6
+00007 :: SET_DIAGONAL
+00008 :: FORWARD_ELIMINATION    8
+00009 :: SET_DIAGONAL
+00010 :: FORWARD_ELIMINATION   10
+00011 :: SET_DIAGONAL
+00012 :: FORWARD_ELIMINATION   12
+00013 :: SET_DIAGONAL
+00014 :: FORWARD_ELIMINATION   14
+00015 :: SET_DIAGONAL
+00016 :: FORWARD_ELIMINATION   16
+00017 :: SET_DIAGONAL
+00018 :: FORWARD_ELIMINATION   18
+00019 :: SET_DIAGONAL
+00020 :: FORWARD_ELIMINATION   20
+00021 :: SET_DIAGONAL
+00022 :: FORWARD_ELIMINATION   22
+00023 :: SET_DIAGONAL
+00024 :: FORWARD_ELIMINATION   24
+00025 :: FINISH
+00026 :: BACKWARD_SUBSTITUTION   26
+00027 :: FINISH_ROW
+00028 :: BACKWARD_SUBSTITUTION   24
+00029 :: FINISH_ROW
+00030 :: BACKWARD_SUBSTITUTION   22
+00031 :: FINISH_ROW
+00032 :: BACKWARD_SUBSTITUTION   20
+00033 :: FINISH_ROW
+00034 :: BACKWARD_SUBSTITUTION   18
+00035 :: FINISH_ROW
+00036 :: BACKWARD_SUBSTITUTION   16
+00037 :: FINISH_ROW
+00038 :: BACKWARD_SUBSTITUTION   14
+00039 :: FINISH_ROW
+00040 :: BACKWARD_SUBSTITUTION   12
+00041 :: FINISH_ROW
+00042 :: BACKWARD_SUBSTITUTION   10
+00043 :: FINISH_ROW
+00044 :: BACKWARD_SUBSTITUTION    8
+00045 :: FINISH_ROW
+00046 :: BACKWARD_SUBSTITUTION    6
+00047 :: FINISH_ROW
+00048 :: BACKWARD_SUBSTITUTION    4
+00049 :: FINISH_ROW
+00050 :: BACKWARD_SUBSTITUTION    2
+00051 :: FINISH_ROW
+00052 :: FINISH
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -1.76829e-12 0 9.19539e+06 16.4217
+00001 :: INITIALIZECHANNEL -0.08 1.12757e-06
+00002 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00003 :: UPDATECOMPARTMENTCURRENT
+00004 :: INITIALIZECHANNEL -0.08 1.12757e-06
+00005 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00006 :: UPDATECOMPARTMENTCURRENT
+00007 :: INITIALIZECHANNEL 0 3.7178e-05
+00008 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00009 :: UPDATECOMPARTMENTCURRENT
+00010 :: COMPARTMENT							 -5.67194e-12 0 2.86677e+06 7.5314
+00011 :: INITIALIZECHANNEL -0.08 3.61675e-06
+00012 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00013 :: UPDATECOMPARTMENTCURRENT
+00014 :: INITIALIZECHANNEL -0.08 3.61675e-06
+00015 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00016 :: UPDATECOMPARTMENTCURRENT
+00017 :: INITIALIZECHANNEL 0 0.000119252
+00018 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00019 :: UPDATECOMPARTMENTCURRENT
+00020 :: COMPARTMENT							 -2.08173e-12 0 7.81088e+06 21.1593
+00021 :: INITIALIZECHANNEL -0.08 1.32743e-06
+00022 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00023 :: UPDATECOMPARTMENTCURRENT
+00024 :: INITIALIZECHANNEL -0.08 1.32743e-06
+00025 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00026 :: UPDATECOMPARTMENTCURRENT
+00027 :: INITIALIZECHANNEL 0 4.3768e-05
+00028 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00029 :: UPDATECOMPARTMENTCURRENT
+00030 :: COMPARTMENT							 -3.04639e-12 0 5.33752e+06 34.6497
+00031 :: INITIALIZECHANNEL -0.08 1.94255e-06
+00032 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00033 :: UPDATECOMPARTMENTCURRENT
+00034 :: INITIALIZECHANNEL -0.08 1.94255e-06
+00035 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00036 :: UPDATECOMPARTMENTCURRENT
+00037 :: INITIALIZECHANNEL 0 6.40498e-05
+00038 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00039 :: UPDATECOMPARTMENTCURRENT
+00040 :: COMPARTMENT							 -8.20896e-12 0 1.98078e+06 13.3843
+00041 :: COMPARTMENT							 -5.48124e-12 0 2.96651e+06 13.426
+00042 :: COMPARTMENT							 -2.85213e-12 0 5.70106e+06 47.4699
+00043 :: COMPARTMENT							 -3.64139e-12 0 4.46537e+06 46.7046
+00044 :: COMPARTMENT							 -6.20396e-12 0 2.62093e+06 20.2012
+00045 :: COMPARTMENT							 -3.03544e-12 0 5.35677e+06 53.3701
+00046 :: COMPARTMENT							 -4.95637e-12 0 3.28066e+06 33.9933
+00047 :: COMPARTMENT							 -1.61832e-11 0 1.00476e+06 5.18436
+00048 :: COMPARTMENT							 -9.35826e-12 0 1.73752e+06 4.81797
+00049 :: COMPARTMENT							 -2.23189e-10 2e-09 218562 1.28342
+00050 :: FINISH
+VM Diagonals (pdDiagonals[0]) : (16.4217)
+VM Diagonals (pdDiagonals[1]) : (7.5314)
+VM Diagonals (pdDiagonals[2]) : (21.1593)
+VM Diagonals (pdDiagonals[3]) : (34.6497)
+VM Diagonals (pdDiagonals[4]) : (13.3843)
+VM Diagonals (pdDiagonals[5]) : (13.426)
+VM Diagonals (pdDiagonals[6]) : (47.4699)
+VM Diagonals (pdDiagonals[7]) : (46.7046)
+VM Diagonals (pdDiagonals[8]) : (20.2012)
+VM Diagonals (pdDiagonals[9]) : (53.3701)
+VM Diagonals (pdDiagonals[10]) : (33.9933)
+VM Diagonals (pdDiagonals[11]) : (5.18436)
+VM Diagonals (pdDiagonals[12]) : (4.81797)
+VM Diagonals (pdDiagonals[13]) : (1.28342)
+VM Axial Resistances (pdAxres[0]) : (-4.80782)
+VM Axial Resistances (pdAxres[1]) : (-15.4215)
+VM Axial Resistances (pdAxres[2]) : (-4.69557)
+VM Axial Resistances (pdAxres[3]) : (-1.72338)
+VM Axial Resistances (pdAxres[4]) : (-10.5669)
+VM Axial Resistances (pdAxres[5]) : (-15.4636)
+VM Axial Resistances (pdAxres[6]) : (-8.56606)
+VM Axial Resistances (pdAxres[7]) : (-23.0825)
+VM Axial Resistances (pdAxres[8]) : (-5.71812)
+VM Axial Resistances (pdAxres[9]) : (-3.81807)
+VM Axial Resistances (pdAxres[10]) : (-12.8909)
+VM Axial Resistances (pdAxres[11]) : (-6.7077)
+VM Axial Resistances (pdAxres[12]) : (-26.3007)
+VM Axial Resistances (pdAxres[13]) : (-33.5787)
+VM Axial Resistances (pdAxres[14]) : (-11.389)
+VM Axial Resistances (pdAxres[15]) : (-19.4038)
+VM Axial Resistances (pdAxres[16]) : (-15.9664)
+VM Axial Resistances (pdAxres[17]) : (-7.81198)
+VM Axial Resistances (pdAxres[18]) : (-22.2946)
+VM Axial Resistances (pdAxres[19]) : (-36.4034)
+VM Axial Resistances (pdAxres[20]) : (-3.27659)
+VM Axial Resistances (pdAxres[21]) : (-10.6985)
+VM Axial Resistances (pdAxres[22]) : (-1.56946)
+VM Axial Resistances (pdAxres[23]) : (-0.90757)
+VM Axial Resistances (pdAxres[24]) : (-0.282813)
+VM Axial Resistances (pdAxres[25]) : (-2.2483)
+VM Axial Resistances (pdAxres[26]) : (-2.2483)
+VM Axial Resistances (pdAxres[27]) : (-0.90757)
+VM Axial Resistances (pdAxres[28]) : (-10.6985)
+VM Axial Resistances (pdAxres[29]) : (-36.4034)
+VM Axial Resistances (pdAxres[30]) : (-7.81198)
+VM Axial Resistances (pdAxres[31]) : (-19.4038)
+VM Axial Resistances (pdAxres[32]) : (-33.5787)
+VM Axial Resistances (pdAxres[33]) : (-6.7077)
+VM Axial Resistances (pdAxres[34]) : (-3.81807)
+VM Axial Resistances (pdAxres[35]) : (-23.0825)
+VM Axial Resistances (pdAxres[36]) : (-15.4636)
+VM Axial Resistances (pdAxres[37]) : (-1.72338)
+VM Axial Resistances (pdAxres[38]) : (-15.4215)
+VM Axial Resistances (pdResults[0]) : (0.226181)
+VM Axial Resistances (pdResults[1]) : (16.4217)
+VM Axial Resistances (pdResults[2]) : (0.226192)
+VM Axial Resistances (pdResults[3]) : (3.01642)
+VM Axial Resistances (pdResults[4]) : (0.226312)
+VM Axial Resistances (pdResults[5]) : (18.4766)
+VM Axial Resistances (pdResults[6]) : (0.226358)
+VM Axial Resistances (pdResults[7]) : (25.8059)
+VM Axial Resistances (pdResults[8]) : (0.226387)
+VM Axial Resistances (pdResults[9]) : (5.72228)
+VM Axial Resistances (pdResults[10]) : (0.226491)
+VM Axial Resistances (pdResults[11]) : (9.61073)
+VM Axial Resistances (pdResults[12]) : (0.226604)
+VM Axial Resistances (pdResults[13]) : (38.4728)
+VM Axial Resistances (pdResults[14]) : (0.226652)
+VM Axial Resistances (pdResults[15]) : (23.7496)
+VM Axial Resistances (pdResults[16]) : (0.226725)
+VM Axial Resistances (pdResults[17]) : (10.8962)
+VM Axial Resistances (pdResults[18]) : (0.226852)
+VM Axial Resistances (pdResults[19]) : (41.923)
+VM Axial Resistances (pdResults[20]) : (0.226912)
+VM Axial Resistances (pdResults[21]) : (14.634)
+VM Axial Resistances (pdResults[22]) : (0.227052)
+VM Axial Resistances (pdResults[23]) : (2.78895)
+VM Axial Resistances (pdResults[24]) : (0.22773)
+VM Axial Resistances (pdResults[25]) : (4.30724)
+VM Axial Resistances (pdResults[26]) : (0.228274)
+VM Axial Resistances (pdResults[27]) : (1.28342)
+VM Membrane Potentials (pdVms[0]) : (0.226277)
+VM Membrane Potentials (pdVms[1]) : (0.226287)
+VM Membrane Potentials (pdVms[2]) : (0.226407)
+VM Membrane Potentials (pdVms[3]) : (0.226454)
+VM Membrane Potentials (pdVms[4]) : (0.226482)
+VM Membrane Potentials (pdVms[5]) : (0.226587)
+VM Membrane Potentials (pdVms[6]) : (0.2267)
+VM Membrane Potentials (pdVms[7]) : (0.226748)
+VM Membrane Potentials (pdVms[8]) : (0.226821)
+VM Membrane Potentials (pdVms[9]) : (0.226948)
+VM Membrane Potentials (pdVms[10]) : (0.227008)
+VM Membrane Potentials (pdVms[11]) : (0.227147)
+VM Membrane Potentials (pdVms[12]) : (0.227826)
+VM Membrane Potentials (pdVms[13]) : (0.22837)
+-------
+Iteration 2000
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (4)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dBasalActivatorStart) : (4e-05)
+Heccer Options (dBasalActivatorEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (0.04002)
+Heccer (dStep) : (2e-05)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Compartment operations
+-----
+00000 :: FORWARD_ELIMINATION    0
+00001 :: SET_DIAGONAL
+00002 :: FORWARD_ELIMINATION    2
+00003 :: SET_DIAGONAL
+00004 :: FORWARD_ELIMINATION    4
+00005 :: SET_DIAGONAL
+00006 :: FORWARD_ELIMINATION    6
+00007 :: SET_DIAGONAL
+00008 :: FORWARD_ELIMINATION    8
+00009 :: SET_DIAGONAL
+00010 :: FORWARD_ELIMINATION   10
+00011 :: SET_DIAGONAL
+00012 :: FORWARD_ELIMINATION   12
+00013 :: SET_DIAGONAL
+00014 :: FORWARD_ELIMINATION   14
+00015 :: SET_DIAGONAL
+00016 :: FORWARD_ELIMINATION   16
+00017 :: SET_DIAGONAL
+00018 :: FORWARD_ELIMINATION   18
+00019 :: SET_DIAGONAL
+00020 :: FORWARD_ELIMINATION   20
+00021 :: SET_DIAGONAL
+00022 :: FORWARD_ELIMINATION   22
+00023 :: SET_DIAGONAL
+00024 :: FORWARD_ELIMINATION   24
+00025 :: FINISH
+00026 :: BACKWARD_SUBSTITUTION   26
+00027 :: FINISH_ROW
+00028 :: BACKWARD_SUBSTITUTION   24
+00029 :: FINISH_ROW
+00030 :: BACKWARD_SUBSTITUTION   22
+00031 :: FINISH_ROW
+00032 :: BACKWARD_SUBSTITUTION   20
+00033 :: FINISH_ROW
+00034 :: BACKWARD_SUBSTITUTION   18
+00035 :: FINISH_ROW
+00036 :: BACKWARD_SUBSTITUTION   16
+00037 :: FINISH_ROW
+00038 :: BACKWARD_SUBSTITUTION   14
+00039 :: FINISH_ROW
+00040 :: BACKWARD_SUBSTITUTION   12
+00041 :: FINISH_ROW
+00042 :: BACKWARD_SUBSTITUTION   10
+00043 :: FINISH_ROW
+00044 :: BACKWARD_SUBSTITUTION    8
+00045 :: FINISH_ROW
+00046 :: BACKWARD_SUBSTITUTION    6
+00047 :: FINISH_ROW
+00048 :: BACKWARD_SUBSTITUTION    4
+00049 :: FINISH_ROW
+00050 :: BACKWARD_SUBSTITUTION    2
+00051 :: FINISH_ROW
+00052 :: FINISH
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -1.76829e-12 0 9.19539e+06 16.4217
+00001 :: INITIALIZECHANNEL -0.08 1.12757e-06
+00002 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00003 :: UPDATECOMPARTMENTCURRENT
+00004 :: INITIALIZECHANNEL -0.08 1.12757e-06
+00005 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00006 :: UPDATECOMPARTMENTCURRENT
+00007 :: INITIALIZECHANNEL 0 3.7178e-05
+00008 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00009 :: UPDATECOMPARTMENTCURRENT
+00010 :: COMPARTMENT							 -5.67194e-12 0 2.86677e+06 7.5314
+00011 :: INITIALIZECHANNEL -0.08 3.61675e-06
+00012 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00013 :: UPDATECOMPARTMENTCURRENT
+00014 :: INITIALIZECHANNEL -0.08 3.61675e-06
+00015 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00016 :: UPDATECOMPARTMENTCURRENT
+00017 :: INITIALIZECHANNEL 0 0.000119252
+00018 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00019 :: UPDATECOMPARTMENTCURRENT
+00020 :: COMPARTMENT							 -2.08173e-12 0 7.81088e+06 21.1593
+00021 :: INITIALIZECHANNEL -0.08 1.32743e-06
+00022 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00023 :: UPDATECOMPARTMENTCURRENT
+00024 :: INITIALIZECHANNEL -0.08 1.32743e-06
+00025 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00026 :: UPDATECOMPARTMENTCURRENT
+00027 :: INITIALIZECHANNEL 0 4.3768e-05
+00028 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00029 :: UPDATECOMPARTMENTCURRENT
+00030 :: COMPARTMENT							 -3.04639e-12 0 5.33752e+06 34.6497
+00031 :: INITIALIZECHANNEL -0.08 1.94255e-06
+00032 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00033 :: UPDATECOMPARTMENTCURRENT
+00034 :: INITIALIZECHANNEL -0.08 1.94255e-06
+00035 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00036 :: UPDATECOMPARTMENTCURRENT
+00037 :: INITIALIZECHANNEL 0 6.40498e-05
+00038 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00039 :: UPDATECOMPARTMENTCURRENT
+00040 :: COMPARTMENT							 -8.20896e-12 0 1.98078e+06 13.3843
+00041 :: COMPARTMENT							 -5.48124e-12 0 2.96651e+06 13.426
+00042 :: COMPARTMENT							 -2.85213e-12 0 5.70106e+06 47.4699
+00043 :: COMPARTMENT							 -3.64139e-12 0 4.46537e+06 46.7046
+00044 :: COMPARTMENT							 -6.20396e-12 0 2.62093e+06 20.2012
+00045 :: COMPARTMENT							 -3.03544e-12 0 5.35677e+06 53.3701
+00046 :: COMPARTMENT							 -4.95637e-12 0 3.28066e+06 33.9933
+00047 :: COMPARTMENT							 -1.61832e-11 0 1.00476e+06 5.18436
+00048 :: COMPARTMENT							 -9.35826e-12 0 1.73752e+06 4.81797
+00049 :: COMPARTMENT							 -2.23189e-10 2e-09 218562 1.28342
+00050 :: FINISH
+VM Diagonals (pdDiagonals[0]) : (16.4217)
+VM Diagonals (pdDiagonals[1]) : (7.5314)
+VM Diagonals (pdDiagonals[2]) : (21.1593)
+VM Diagonals (pdDiagonals[3]) : (34.6497)
+VM Diagonals (pdDiagonals[4]) : (13.3843)
+VM Diagonals (pdDiagonals[5]) : (13.426)
+VM Diagonals (pdDiagonals[6]) : (47.4699)
+VM Diagonals (pdDiagonals[7]) : (46.7046)
+VM Diagonals (pdDiagonals[8]) : (20.2012)
+VM Diagonals (pdDiagonals[9]) : (53.3701)
+VM Diagonals (pdDiagonals[10]) : (33.9933)
+VM Diagonals (pdDiagonals[11]) : (5.18436)
+VM Diagonals (pdDiagonals[12]) : (4.81797)
+VM Diagonals (pdDiagonals[13]) : (1.28342)
+VM Axial Resistances (pdAxres[0]) : (-4.80782)
+VM Axial Resistances (pdAxres[1]) : (-15.4215)
+VM Axial Resistances (pdAxres[2]) : (-4.69557)
+VM Axial Resistances (pdAxres[3]) : (-1.72338)
+VM Axial Resistances (pdAxres[4]) : (-10.5669)
+VM Axial Resistances (pdAxres[5]) : (-15.4636)
+VM Axial Resistances (pdAxres[6]) : (-8.56606)
+VM Axial Resistances (pdAxres[7]) : (-23.0825)
+VM Axial Resistances (pdAxres[8]) : (-5.71812)
+VM Axial Resistances (pdAxres[9]) : (-3.81807)
+VM Axial Resistances (pdAxres[10]) : (-12.8909)
+VM Axial Resistances (pdAxres[11]) : (-6.7077)
+VM Axial Resistances (pdAxres[12]) : (-26.3007)
+VM Axial Resistances (pdAxres[13]) : (-33.5787)
+VM Axial Resistances (pdAxres[14]) : (-11.389)
+VM Axial Resistances (pdAxres[15]) : (-19.4038)
+VM Axial Resistances (pdAxres[16]) : (-15.9664)
+VM Axial Resistances (pdAxres[17]) : (-7.81198)
+VM Axial Resistances (pdAxres[18]) : (-22.2946)
+VM Axial Resistances (pdAxres[19]) : (-36.4034)
+VM Axial Resistances (pdAxres[20]) : (-3.27659)
+VM Axial Resistances (pdAxres[21]) : (-10.6985)
+VM Axial Resistances (pdAxres[22]) : (-1.56946)
+VM Axial Resistances (pdAxres[23]) : (-0.90757)
+VM Axial Resistances (pdAxres[24]) : (-0.282813)
+VM Axial Resistances (pdAxres[25]) : (-2.2483)
+VM Axial Resistances (pdAxres[26]) : (-2.2483)
+VM Axial Resistances (pdAxres[27]) : (-0.90757)
+VM Axial Resistances (pdAxres[28]) : (-10.6985)
+VM Axial Resistances (pdAxres[29]) : (-36.4034)
+VM Axial Resistances (pdAxres[30]) : (-7.81198)
+VM Axial Resistances (pdAxres[31]) : (-19.4038)
+VM Axial Resistances (pdAxres[32]) : (-33.5787)
+VM Axial Resistances (pdAxres[33]) : (-6.7077)
+VM Axial Resistances (pdAxres[34]) : (-3.81807)
+VM Axial Resistances (pdAxres[35]) : (-23.0825)
+VM Axial Resistances (pdAxres[36]) : (-15.4636)
+VM Axial Resistances (pdAxres[37]) : (-1.72338)
+VM Axial Resistances (pdAxres[38]) : (-15.4215)
+VM Axial Resistances (pdResults[0]) : (0.35676)
+VM Axial Resistances (pdResults[1]) : (16.4217)
+VM Axial Resistances (pdResults[2]) : (0.356768)
+VM Axial Resistances (pdResults[3]) : (3.01642)
+VM Axial Resistances (pdResults[4]) : (0.356868)
+VM Axial Resistances (pdResults[5]) : (18.4766)
+VM Axial Resistances (pdResults[6]) : (0.356907)
+VM Axial Resistances (pdResults[7]) : (25.8059)
+VM Axial Resistances (pdResults[8]) : (0.35693)
+VM Axial Resistances (pdResults[9]) : (5.72228)
+VM Axial Resistances (pdResults[10]) : (0.357017)
+VM Axial Resistances (pdResults[11]) : (9.61073)
+VM Axial Resistances (pdResults[12]) : (0.357111)
+VM Axial Resistances (pdResults[13]) : (38.4728)
+VM Axial Resistances (pdResults[14]) : (0.35715)
+VM Axial Resistances (pdResults[15]) : (23.7496)
+VM Axial Resistances (pdResults[16]) : (0.357211)
+VM Axial Resistances (pdResults[17]) : (10.8962)
+VM Axial Resistances (pdResults[18]) : (0.357316)
+VM Axial Resistances (pdResults[19]) : (41.923)
+VM Axial Resistances (pdResults[20]) : (0.357366)
+VM Axial Resistances (pdResults[21]) : (14.634)
+VM Axial Resistances (pdResults[22]) : (0.357482)
+VM Axial Resistances (pdResults[23]) : (2.78895)
+VM Axial Resistances (pdResults[24]) : (0.358045)
+VM Axial Resistances (pdResults[25]) : (4.30724)
+VM Axial Resistances (pdResults[26]) : (0.358497)
+VM Axial Resistances (pdResults[27]) : (1.28342)
+VM Membrane Potentials (pdVms[0]) : (0.356802)
+VM Membrane Potentials (pdVms[1]) : (0.356811)
+VM Membrane Potentials (pdVms[2]) : (0.35691)
+VM Membrane Potentials (pdVms[3]) : (0.356949)
+VM Membrane Potentials (pdVms[4]) : (0.356972)
+VM Membrane Potentials (pdVms[5]) : (0.357059)
+VM Membrane Potentials (pdVms[6]) : (0.357153)
+VM Membrane Potentials (pdVms[7]) : (0.357193)
+VM Membrane Potentials (pdVms[8]) : (0.357253)
+VM Membrane Potentials (pdVms[9]) : (0.357359)
+VM Membrane Potentials (pdVms[10]) : (0.357408)
+VM Membrane Potentials (pdVms[11]) : (0.357524)
+VM Membrane Potentials (pdVms[12]) : (0.358087)
+VM Membrane Potentials (pdVms[13]) : (0.358539)
+-------
+Final Iteration
+Heccer (iStatus) : (20)
+Heccer (iErrorCount) : (0)
+Heccer Options (iOptions) : (4)
+Heccer Options (dIntervalStart) : (-0.1)
+Heccer Options (dIntervalEnd) : (0.05)
+Heccer Options (dBasalActivatorStart) : (4e-05)
+Heccer Options (dBasalActivatorEnd) : (0.3)
+Heccer Options (iIntervalEntries) : (3000)
+Heccer Options (iSmallTableSize) : (149)
+Heccer (dTime) : (0.05)
+Heccer (dStep) : (2e-05)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Compartment (mc.iType) : (1)
+Tables (iTabulatedGateCount) : (0)
+Compartment operations
+-----
+00000 :: FORWARD_ELIMINATION    0
+00001 :: SET_DIAGONAL
+00002 :: FORWARD_ELIMINATION    2
+00003 :: SET_DIAGONAL
+00004 :: FORWARD_ELIMINATION    4
+00005 :: SET_DIAGONAL
+00006 :: FORWARD_ELIMINATION    6
+00007 :: SET_DIAGONAL
+00008 :: FORWARD_ELIMINATION    8
+00009 :: SET_DIAGONAL
+00010 :: FORWARD_ELIMINATION   10
+00011 :: SET_DIAGONAL
+00012 :: FORWARD_ELIMINATION   12
+00013 :: SET_DIAGONAL
+00014 :: FORWARD_ELIMINATION   14
+00015 :: SET_DIAGONAL
+00016 :: FORWARD_ELIMINATION   16
+00017 :: SET_DIAGONAL
+00018 :: FORWARD_ELIMINATION   18
+00019 :: SET_DIAGONAL
+00020 :: FORWARD_ELIMINATION   20
+00021 :: SET_DIAGONAL
+00022 :: FORWARD_ELIMINATION   22
+00023 :: SET_DIAGONAL
+00024 :: FORWARD_ELIMINATION   24
+00025 :: FINISH
+00026 :: BACKWARD_SUBSTITUTION   26
+00027 :: FINISH_ROW
+00028 :: BACKWARD_SUBSTITUTION   24
+00029 :: FINISH_ROW
+00030 :: BACKWARD_SUBSTITUTION   22
+00031 :: FINISH_ROW
+00032 :: BACKWARD_SUBSTITUTION   20
+00033 :: FINISH_ROW
+00034 :: BACKWARD_SUBSTITUTION   18
+00035 :: FINISH_ROW
+00036 :: BACKWARD_SUBSTITUTION   16
+00037 :: FINISH_ROW
+00038 :: BACKWARD_SUBSTITUTION   14
+00039 :: FINISH_ROW
+00040 :: BACKWARD_SUBSTITUTION   12
+00041 :: FINISH_ROW
+00042 :: BACKWARD_SUBSTITUTION   10
+00043 :: FINISH_ROW
+00044 :: BACKWARD_SUBSTITUTION    8
+00045 :: FINISH_ROW
+00046 :: BACKWARD_SUBSTITUTION    6
+00047 :: FINISH_ROW
+00048 :: BACKWARD_SUBSTITUTION    4
+00049 :: FINISH_ROW
+00050 :: BACKWARD_SUBSTITUTION    2
+00051 :: FINISH_ROW
+00052 :: FINISH
+Mechanism operations
+-----
+00000 :: COMPARTMENT							 -1.76829e-12 0 9.19539e+06 16.4217
+00001 :: INITIALIZECHANNEL -0.08 1.12757e-06
+00002 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00003 :: UPDATECOMPARTMENTCURRENT
+00004 :: INITIALIZECHANNEL -0.08 1.12757e-06
+00005 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00006 :: UPDATECOMPARTMENTCURRENT
+00007 :: INITIALIZECHANNEL 0 3.7178e-05
+00008 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00009 :: UPDATECOMPARTMENTCURRENT
+00010 :: COMPARTMENT							 -5.67194e-12 0 2.86677e+06 7.5314
+00011 :: INITIALIZECHANNEL -0.08 3.61675e-06
+00012 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00013 :: UPDATECOMPARTMENTCURRENT
+00014 :: INITIALIZECHANNEL -0.08 3.61675e-06
+00015 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00016 :: UPDATECOMPARTMENTCURRENT
+00017 :: INITIALIZECHANNEL 0 0.000119252
+00018 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00019 :: UPDATECOMPARTMENTCURRENT
+00020 :: COMPARTMENT							 -2.08173e-12 0 7.81088e+06 21.1593
+00021 :: INITIALIZECHANNEL -0.08 1.32743e-06
+00022 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00023 :: UPDATECOMPARTMENTCURRENT
+00024 :: INITIALIZECHANNEL -0.08 1.32743e-06
+00025 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00026 :: UPDATECOMPARTMENTCURRENT
+00027 :: INITIALIZECHANNEL 0 4.3768e-05
+00028 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00029 :: UPDATECOMPARTMENTCURRENT
+00030 :: COMPARTMENT							 -3.04639e-12 0 5.33752e+06 34.6497
+00031 :: INITIALIZECHANNEL -0.08 1.94255e-06
+00032 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00033 :: UPDATECOMPARTMENTCURRENT
+00034 :: INITIALIZECHANNEL -0.08 1.94255e-06
+00035 :: SPRINGMASS -1 (nil) -1 0 0							 -1 0 0
+00036 :: UPDATECOMPARTMENTCURRENT
+00037 :: INITIALIZECHANNEL 0 6.40498e-05
+00038 :: SPRINGMASS -1 (nil) -1 1 0							 -1 0 0
+00039 :: UPDATECOMPARTMENTCURRENT
+00040 :: COMPARTMENT							 -8.20896e-12 0 1.98078e+06 13.3843
+00041 :: COMPARTMENT							 -5.48124e-12 0 2.96651e+06 13.426
+00042 :: COMPARTMENT							 -2.85213e-12 0 5.70106e+06 47.4699
+00043 :: COMPARTMENT							 -3.64139e-12 0 4.46537e+06 46.7046
+00044 :: COMPARTMENT							 -6.20396e-12 0 2.62093e+06 20.2012
+00045 :: COMPARTMENT							 -3.03544e-12 0 5.35677e+06 53.3701
+00046 :: COMPARTMENT							 -4.95637e-12 0 3.28066e+06 33.9933
+00047 :: COMPARTMENT							 -1.61832e-11 0 1.00476e+06 5.18436
+00048 :: COMPARTMENT							 -9.35826e-12 0 1.73752e+06 4.81797
+00049 :: COMPARTMENT							 -2.23189e-10 2e-09 218562 1.28342
+00050 :: FINISH
+VM Diagonals (pdDiagonals[0]) : (16.4217)
+VM Diagonals (pdDiagonals[1]) : (7.5314)
+VM Diagonals (pdDiagonals[2]) : (21.1593)
+VM Diagonals (pdDiagonals[3]) : (34.6497)
+VM Diagonals (pdDiagonals[4]) : (13.3843)
+VM Diagonals (pdDiagonals[5]) : (13.426)
+VM Diagonals (pdDiagonals[6]) : (47.4699)
+VM Diagonals (pdDiagonals[7]) : (46.7046)
+VM Diagonals (pdDiagonals[8]) : (20.2012)
+VM Diagonals (pdDiagonals[9]) : (53.3701)
+VM Diagonals (pdDiagonals[10]) : (33.9933)
+VM Diagonals (pdDiagonals[11]) : (5.18436)
+VM Diagonals (pdDiagonals[12]) : (4.81797)
+VM Diagonals (pdDiagonals[13]) : (1.28342)
+VM Axial Resistances (pdAxres[0]) : (-4.80782)
+VM Axial Resistances (pdAxres[1]) : (-15.4215)
+VM Axial Resistances (pdAxres[2]) : (-4.69557)
+VM Axial Resistances (pdAxres[3]) : (-1.72338)
+VM Axial Resistances (pdAxres[4]) : (-10.5669)
+VM Axial Resistances (pdAxres[5]) : (-15.4636)
+VM Axial Resistances (pdAxres[6]) : (-8.56606)
+VM Axial Resistances (pdAxres[7]) : (-23.0825)
+VM Axial Resistances (pdAxres[8]) : (-5.71812)
+VM Axial Resistances (pdAxres[9]) : (-3.81807)
+VM Axial Resistances (pdAxres[10]) : (-12.8909)
+VM Axial Resistances (pdAxres[11]) : (-6.7077)
+VM Axial Resistances (pdAxres[12]) : (-26.3007)
+VM Axial Resistances (pdAxres[13]) : (-33.5787)
+VM Axial Resistances (pdAxres[14]) : (-11.389)
+VM Axial Resistances (pdAxres[15]) : (-19.4038)
+VM Axial Resistances (pdAxres[16]) : (-15.9664)
+VM Axial Resistances (pdAxres[17]) : (-7.81198)
+VM Axial Resistances (pdAxres[18]) : (-22.2946)
+VM Axial Resistances (pdAxres[19]) : (-36.4034)
+VM Axial Resistances (pdAxres[20]) : (-3.27659)
+VM Axial Resistances (pdAxres[21]) : (-10.6985)
+VM Axial Resistances (pdAxres[22]) : (-1.56946)
+VM Axial Resistances (pdAxres[23]) : (-0.90757)
+VM Axial Resistances (pdAxres[24]) : (-0.282813)
+VM Axial Resistances (pdAxres[25]) : (-2.2483)
+VM Axial Resistances (pdAxres[26]) : (-2.2483)
+VM Axial Resistances (pdAxres[27]) : (-0.90757)
+VM Axial Resistances (pdAxres[28]) : (-10.6985)
+VM Axial Resistances (pdAxres[29]) : (-36.4034)
+VM Axial Resistances (pdAxres[30]) : (-7.81198)
+VM Axial Resistances (pdAxres[31]) : (-19.4038)
+VM Axial Resistances (pdAxres[32]) : (-33.5787)
+VM Axial Resistances (pdAxres[33]) : (-6.7077)
+VM Axial Resistances (pdAxres[34]) : (-3.81807)
+VM Axial Resistances (pdAxres[35]) : (-23.0825)
+VM Axial Resistances (pdAxres[36]) : (-15.4636)
+VM Axial Resistances (pdAxres[37]) : (-1.72338)
+VM Axial Resistances (pdAxres[38]) : (-15.4215)
+VM Axial Resistances (pdResults[0]) : (0.391331)
+VM Axial Resistances (pdResults[1]) : (16.4217)
+VM Axial Resistances (pdResults[2]) : (0.391339)
+VM Axial Resistances (pdResults[3]) : (3.01642)
+VM Axial Resistances (pdResults[4]) : (0.391434)
+VM Axial Resistances (pdResults[5]) : (18.4766)
+VM Axial Resistances (pdResults[6]) : (0.39147)
+VM Axial Resistances (pdResults[7]) : (25.8059)
+VM Axial Resistances (pdResults[8]) : (0.391492)
+VM Axial Resistances (pdResults[9]) : (5.72228)
+VM Axial Resistances (pdResults[10]) : (0.391574)
+VM Axial Resistances (pdResults[11]) : (9.61073)
+VM Axial Resistances (pdResults[12]) : (0.391663)
+VM Axial Resistances (pdResults[13]) : (38.4728)
+VM Axial Resistances (pdResults[14]) : (0.391701)
+VM Axial Resistances (pdResults[15]) : (23.7496)
+VM Axial Resistances (pdResults[16]) : (0.391758)
+VM Axial Resistances (pdResults[17]) : (10.8962)
+VM Axial Resistances (pdResults[18]) : (0.391858)
+VM Axial Resistances (pdResults[19]) : (41.923)
+VM Axial Resistances (pdResults[20]) : (0.391905)
+VM Axial Resistances (pdResults[21]) : (14.634)
+VM Axial Resistances (pdResults[22]) : (0.392014)
+VM Axial Resistances (pdResults[23]) : (2.78895)
+VM Axial Resistances (pdResults[24]) : (0.392547)
+VM Axial Resistances (pdResults[25]) : (4.30724)
+VM Axial Resistances (pdResults[26]) : (0.392974)
+VM Axial Resistances (pdResults[27]) : (1.28342)
+VM Membrane Potentials (pdVms[0]) : (0.391359)
+VM Membrane Potentials (pdVms[1]) : (0.391367)
+VM Membrane Potentials (pdVms[2]) : (0.391462)
+VM Membrane Potentials (pdVms[3]) : (0.391498)
+VM Membrane Potentials (pdVms[4]) : (0.39152)
+VM Membrane Potentials (pdVms[5]) : (0.391602)
+VM Membrane Potentials (pdVms[6]) : (0.391691)
+VM Membrane Potentials (pdVms[7]) : (0.391729)
+VM Membrane Potentials (pdVms[8]) : (0.391786)
+VM Membrane Potentials (pdVms[9]) : (0.391886)
+VM Membrane Potentials (pdVms[10]) : (0.391933)
+VM Membrane Potentials (pdVms[11]) : (0.392042)
+VM Membrane Potentials (pdVms[12]) : (0.392575)
+VM Membrane Potentials (pdVms[13]) : (0.393002)
