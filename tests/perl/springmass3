@@ -132,6 +132,15 @@ sub main
 															   ),
 													 },
 											   },
+									  $ARGV[0]
+									  ? (
+									     options => {
+											 iOptions => (
+												      $SwiggableHeccer::HECCER_OPTION_PASSIVE_SYNCHANS
+												     ),
+											},
+									    )
+									  : (),
 									 },
 						 module_name => 'Heccer',
 						 service_name => 'neurospaces',
