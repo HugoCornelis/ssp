@@ -19,7 +19,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a small subset of the purkinje cell model solved correctly ?",
-						   read => [ `cat $::config->{tests_directory}/strings/purk_test.txt`, ],
+						   read => (join '', `cat $::config->{tests_directory}/strings/purk_test.txt`),
 						   timeout => 15,
 						   write => undef,
 						  },
@@ -34,7 +34,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a small subset of the purkinje cell model solved correctly, passive-only mode ?",
-						   read => [ `cat $::config->{tests_directory}/strings/purk_test_passive.txt`, ],
+						   read => (join '', `cat $::config->{tests_directory}/strings/purk_test_passive.txt`),
 						   timeout => 15,
 						   write => undef,
 						  },

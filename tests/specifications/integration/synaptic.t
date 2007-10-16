@@ -19,7 +19,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a synaptic (springmass) channel integrated correctly, endogenous firing (works only for the Linux rng) ?",
-						   read => [ `cat $::config->{core_directory}/tests/specifications/strings/springmass3.txt`, ],
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/springmass3.txt`),
 						   timeout => 8,
 						   write => undef,
 						  },
@@ -34,7 +34,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a synaptic (springmass) channel with an event table integrated correctly ?",
-						   read => [ `cat $::config->{core_directory}/tests/specifications/strings/springmass4.txt`, ],
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/springmass4.txt`),
 						   timeout => 8,
 						   write => undef,
 						  },
@@ -49,7 +49,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a synaptic (springmass) channel integrated correctly, endogenous firing, passive-only mode (works only for the Linux rng) ?",
-						   read => [ `cat $::config->{core_directory}/tests/specifications/strings/springmass3p.txt`, ],
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/springmass3p.txt`),
 						   timeout => 8,
 						   write => undef,
 						  },
@@ -65,7 +65,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a synaptic (springmass) channel with an event table integrated correctly, passive-only mode ?",
-						   read => [ `cat $::config->{core_directory}/tests/specifications/strings/springmass4p.txt`, ],
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/springmass4p.txt`),
 						   timeout => 8,
 						   write => undef,
 						  },

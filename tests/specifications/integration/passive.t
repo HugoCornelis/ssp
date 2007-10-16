@@ -27,7 +27,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a single passive compartment solved correctly ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/singlep.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/singlep.txt`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -41,7 +41,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are two passive compartments solved correctly ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/doublep.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/doublep.txt`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -55,7 +55,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are three passive compartments solved correctly ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/triplep.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/triplep.txt`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -69,7 +69,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a fork of three passive compartments solved correctly ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/fork3p.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork3p.txt`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -83,7 +83,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a fork of four passive compartments solved correctly, first alternative ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/fork4p1.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork4p1.txt`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -97,7 +97,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a fork of four passive compartments solved correctly, second alternative ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/fork4p2.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork4p2.txt`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -111,7 +111,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a fork of four passive compartments solved correctly, third alternative ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/fork4p3.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork4p3.txt`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -125,7 +125,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are two passive compartments with injected current solved correctly ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/c1c2p1.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/c1c2p1.txt`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -139,7 +139,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are two passive compartments with asymetric properties and injected current solved correctly ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/c1c2p2.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/c1c2p2.txt`),
 						   timeout => 5,
 						   write => undef,
 						  },
@@ -153,7 +153,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are ten passive compartments with different properties and injected current solved correctly ?",
-						   read => [ `cat $::config->{tests_directory}/strings/tensizesp.txt`, ],
+						   read => (join '', `cat $::config->{tests_directory}/strings/tensizesp.txt`),
 						   timeout => 18,
 						   write => undef,
 						  },

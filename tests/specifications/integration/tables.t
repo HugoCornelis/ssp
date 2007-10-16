@@ -19,7 +19,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, p type calcium gates ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-cap.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-cap.txt`),
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -33,7 +33,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, calcium t-type gates ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-cat.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-cat.txt`),
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -47,7 +47,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, K2 potassium gates ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-k2.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-k2.txt`),
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -61,7 +61,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, simple potassium gates ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-ka.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-ka.txt`),
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -75,7 +75,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, simple potassium gates ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-kc.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-kc.txt`),
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -90,7 +90,7 @@ my $test
 						  {
 						   description => "Are gates tabulated correctly, delayed rectifier potassium gates ?",
 						   disabled => (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf" ? "purkinje cell potassium channels not found" : ""),
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-kdr.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-kdr.txt`),
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -105,7 +105,7 @@ my $test
 						  {
 						   description => "Are gates tabulated correctly, anomalous rectifier potassium gates ?",
 						   disabled => (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf" ? "purkinje cell potassium channels not found" : ""),
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-kh.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-kh.txt`),
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -120,7 +120,7 @@ my $test
 						  {
 						   description => "Are gates tabulated correctly, muscarinic potassium gates ?",
 						   disabled => (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf" ? "purkinje cell potassium channels not found" : ""),
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-km.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-km.txt`),
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -134,7 +134,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, simple sodium gates ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-naf.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-naf.txt`),
 						   timeout => 9,
 						   write => undef,
 						  },
@@ -148,7 +148,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, persistent sodium gates ?",
-						   read => [ `cat /usr/local/heccer/tests/specifications/strings/table-nap.txt`, ],
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-nap.txt`),
 						   timeout => 9,
 						   write => undef,
 						  },
