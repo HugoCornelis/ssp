@@ -14,7 +14,6 @@ inputclasses:
     module_name: Heccer
     options:
       command: -0.06
-      filename: event_data/soma_vm_trace.txt
       name: purkinje cell perfect clamp
     package: Heccer::PerfectClamp
 inputs:
