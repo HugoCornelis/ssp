@@ -23,7 +23,7 @@ my $test
 						   disabled => (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf"
 								? "purkinje cell potassium channels not found"
 								: ""),
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt`),
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-perfectclamp.txt`),
 						   timeout => 300,
 						   write => undef,
 						  },
