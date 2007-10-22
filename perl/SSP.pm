@@ -194,6 +194,137 @@ sub initiate
 }
 
 
+sub instantiate_inputs
+{
+    my $self = shift;
+
+    # loop over all input classes
+
+    my $schedule = $self->{schedule};
+
+    my $inputclasses = $self->{inputclasses};
+
+    foreach my $inputclass_name (keys %$inputclasses)
+    {
+	# instantiate the input class
+
+	my $inputclass = $inputclasses->{$inputclass_name};
+
+	# create the engine for the input
+
+	my $input_engine
+	    = SSP::Input->new
+		(
+		 {
+		  name => $inputclass_name,
+		  scheduler => $self,
+		  %$inputclass,
+		 },
+		);
+
+	if (!$input_engine)
+	{
+	    die "Unable to create an input_engine for $inputclass_name";
+	}
+
+	# link the input engine to the input class
+
+	#! such that later on the inputs can find the input engine
+
+	$inputclass->{ssp_inputclass} = $input_engine;
+
+	# schedule the input_engine, such that it inputs something
+	# when variables are added to it
+
+	push @$schedule, $input_engine;
+    }
+
+    # loop over all inputs
+
+    my $inputs = $self->{inputs};
+
+    foreach my $input (@$inputs)
+    {
+	# determine the service for this input
+
+	my $service_name;
+
+	if (exists $input->{service_name})
+	{
+	    $service_name = $input->{service_name};
+	}
+	else
+	{
+	    #t the service of the first model ...  not really good
+	    #t basically this says that SSP can currently only run one service at a time.
+
+	    my $solverclass = $self->{models}->[0]->{solverclass};
+
+	    $service_name = $self->{solverclasses}->{$solverclass}->{service_name};
+	}
+
+	# ask the service the solverinfo for this input
+
+	my $service = $self->{services}->{$service_name}->{ssp_service};
+
+	my $solverinfo = $service->input_2_solverinfo($input);
+
+	if (!ref $solverinfo)
+	{
+	    die "Failed to construct solver info for the input " . $input->{component_name} . "->" . $input->{field} . " ($solverinfo)";
+	}
+
+	# lookup the solver
+
+	my $solver_engine = $self->lookup_solver_engine($solverinfo->{solver});
+
+	# get the input field from the solver (is a double *)
+
+	my $solverfield = $solver_engine->solverfield($solverinfo);
+
+	if (!defined $solverfield)
+	{
+	    die "The input " . $input->{component_name} . "->" . $input->{field} . " cannot be found";
+	}
+
+	# find the input for the input class
+
+	my $inputclass_name = $input->{inputclass};
+
+	my $inputclass = $self->{inputclasses}->{$inputclass_name};
+
+	if (!defined $inputclass)
+	{
+	    die "The input " . $input->{component_name} . "->" . $input->{field} . " has as inputclass $inputclass_name, but this class cannot be found";
+	}
+
+	# add the input field to the input engine
+
+	#! note that inputclass is not an object
+
+	my $input_backend = $inputclass->{ssp_inputclass};
+
+	my $connected
+	    = $input_backend->add
+		(
+		 {
+		  address => $solverfield,
+		  service_request => $input,
+		 },
+		);
+
+	if (!$connected)
+	{
+	    die "The input " . $input->{component_name} . "->" . $input->{field} . " cannot be connected to its input engine (which is determined by the input class in the schedule).";
+	}
+    }
+
+    # return success
+
+    return 1;
+}
+
+
 sub instantiate_outputs
 {
     my $self = shift;
@@ -506,6 +637,7 @@ sub run
 	= $self->{apply}->{initializers}
 	    || [
 		{ method => 'compile', },
+		{ method => 'instantiate_inputs', },
 		{ method => 'instantiate_outputs', },
 		{ method => 'initiate', },
 	       ],
@@ -944,6 +1076,159 @@ sub steps
 }
 
 
+package SSP::Input;
+
+
+BEGIN { our @ISA = qw(SSP::Glue); }
+
+
+sub add
+{
+    my $self = shift;
+
+    my $options = shift;
+
+    my $backend = $self->backend();
+
+    my $result = $backend->add($options);
+
+    return $result;
+}
+
+
+sub advance
+{
+    my $self = shift;
+
+    my $options = shift;
+
+    my $backend = $self->backend();
+
+    my $result = $backend->advance($options);
+
+    return $result;
+}
+
+
+sub finish
+{
+    my $self = shift;
+
+    # lookup the method
+
+    my $backend = $self->backend();
+
+    return $backend->finish();
+}
+
+
+sub initiate
+{
+    my $self = shift;
+
+    # lookup the method
+
+    my $backend = $self->backend();
+
+    return $backend->initiate();
+}
+
+
+sub new
+{
+    my $package = shift;
+
+    my $options = shift;
+
+    my $self = { %$options, };
+
+    bless $self, $package;
+
+    #t need todo the require on ->{module_name}
+
+    my $input_name = $self->{name};
+
+    my $input_module = $self->{module_name};
+
+    eval
+    {
+	local $SIG{__DIE__};
+
+	require "$input_module.pm";
+    };
+
+    if ($@)
+    {
+	die "Cannot load input module ($input_module.pm) for input class $input_name
+
+Possible solutions:
+1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
+2. Install the correct integration module for this input class.
+3. The input module is not correct, to find out, type perl -e 'push \@INC, \"/usr/local/glue/swig/perl\" ; require $input_module', and see if perl can find and compile the input module
+4. Contact your system administrator.
+
+$@";
+    }
+
+    # construct the backend for this input
+
+    {
+	no strict "refs";
+
+	my $options = $self->{options} || {};
+
+	my $input_package = $self->{package};
+
+	my $backend
+	    = $input_package->new
+		(
+		 {
+		  %$options,
+		  name => $self->{name},
+		 },
+		);
+
+	if (!defined $backend)
+	{
+	    return undef;
+	}
+
+	$self->{backend} = $backend;
+    }
+
+    # return result
+
+    return $self;
+}
+
+
+sub step
+{
+    my $self = shift;
+
+    my $options = shift;
+
+    # set result : ok
+
+    my $result;
+
+    # step
+
+    my $backend = $self->backend();
+
+    my $success = $backend->step($options);
+
+    if (!$success)
+    {
+	$result = "HeccerHecc() failed";
+    }
+
+    # return result
+
+    return $result;
+}
+
+
 package SSP::Output;
 
 
@@ -1126,6 +1411,18 @@ sub apply_granular_parameters
     my $service_backend = $self->backend();
 
     my $result = $service_backend->apply_granular_parameters($options);
+
+    return $result;
+}
+
+
+sub input_2_solverinfo
+{
+    my $self = shift;
+
+    my $service_backend = $self->backend();
+
+    my $result = $service_backend->input_2_solverinfo(@_);
 
     return $result;
 }
