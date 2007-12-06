@@ -11,7 +11,7 @@ use strict;
 
 {
     # $Format: "system 'mkdir --parents \"/tmp/${package}/${label}\"'"$
-system 'mkdir --parents "/tmp/ssp/des-5"'
+system 'mkdir --parents "/tmp/ssp/des-6"'
 }
 
 if ($?)
@@ -22,7 +22,7 @@ if ($?)
 
 {
     # $Format: "system \"cp '${package}-${label}.tar.gz' '/tmp/${package}/${label}'\""$
-system "cp 'ssp-des-5.tar.gz' '/tmp/ssp/des-5'"
+system "cp 'ssp-des-6.tar.gz' '/tmp/ssp/des-6'"
 }
 
 if ($?)
@@ -33,7 +33,7 @@ if ($?)
 
 {
     # $Format: "chdir \"/tmp/${package}/${label}\""$
-chdir "/tmp/ssp/des-5"
+chdir "/tmp/ssp/des-6"
 }
 
 if ($?)
@@ -44,7 +44,7 @@ if ($?)
 
 {
     # $Format: "system \"tar xfz '${package}-${label}.tar.gz'\""$
-system "tar xfz 'ssp-des-5.tar.gz'"
+system "tar xfz 'ssp-des-6.tar.gz'"
 }
 
 if ($?)
@@ -55,7 +55,7 @@ if ($?)
 
 {
     # $Format: "chdir \"${package}-${label}\""$
-chdir "ssp-des-5"
+chdir "ssp-des-6"
 }
 
 if ($?)
