@@ -1,1 +1,7 @@
-- Adapted expected test feedback for extended error reports by heccer.
+- Added ->{modifiers} entry to the schedule.
+- Added possibility for dynamic objects when running a schedule.
+- Initialization of outputs is now also done
+  using a regular scheduler entry.
+- Added integration tests for the heccer passive-only option.
+- Added test case for perfect clamp.
+- Updated test framework.
