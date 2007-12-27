@@ -9,7 +9,7 @@ use strict;
 
 our $neurospaces_core_directory;
 
-our $neurospaces_perl_modules;
+# our $neurospaces_perl_modules;
 
 our $neurospaces_tests;
 
@@ -46,15 +46,15 @@ BEGIN
 
     $neurospaces_core_directory =~ s((.*)/tests/library$)($1);
 
-    $neurospaces_perl_modules = $neurospaces_core_directory;
+#     $neurospaces_perl_modules = $neurospaces_core_directory;
 
-    # find the Neurospaces perl modules directory
+#     # find the Neurospaces perl modules directory
 
-    $neurospaces_perl_modules .= "/perl";
+#     $neurospaces_perl_modules .= "/perl";
 
-    # add to include path
+#     # add to include path
 
-    unshift @INC, $neurospaces_perl_modules;
+#     unshift @INC, $neurospaces_perl_modules;
 }
 
 
