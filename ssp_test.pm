@@ -8,9 +8,9 @@ use strict;
 
 BEGIN
 {
-#     push @INC, './perl';
+    push @INC, './perl';
 
-#     push @INC, '../perl';
+    push @INC, '../perl';
 
     push @INC, '/usr/local/glue/swig/perl';
 }
