@@ -10,13 +10,17 @@ $| = 1;
 
 BEGIN
 {
-#     #! make check
+    #! make check
 
-#     push @INC, '../perl';
+    push @INC, '../perl';
 
-#     #! normal run
+    #! make distcheck
 
-#     push @INC, './perl';
+    push @INC, '../../perl';
+
+    #! normal run
+
+    push @INC, './perl';
 
     #! after install
 

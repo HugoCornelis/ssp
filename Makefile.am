@@ -21,8 +21,6 @@ dist_bin_SCRIPTS = bin/ssp bin/ssp_directory
 ssptestdir=$(prefix)/ssp
 nobase_dist_ssptest_DATA=@TEST_SPECIFICATION_FILES@
 
-# the perl library is copied overhere.
-#
 # The variable EXTRA_DIST could also be used here.
 
 dist-hook:
@@ -42,7 +40,6 @@ dist-hook:
 	cp -a $(srcdir)/tests.config $(distdir)
 #	cp -a $(srcdir)/tests/code/tests.config $(distdir)/tests/code/tests.config
 	cp -a $(srcdir)/tests/perl $(distdir)/tests
-#	cp -a $(srcdir)/perl $(distdir)
 	cp -a $(srcdir)/yaml $(distdir)
 	( cd $(distdir)/tests && chmod -R u+w . && ./tests_2_html --introduction introduction.html )
 
