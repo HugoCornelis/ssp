@@ -1,5 +1,8 @@
 -*- outline -*-
 
+* check in how far numerical_compare() can be used
+to match the expected test output of heccer.
+
 * the tests/tests directory is part of the distribution, somehow.
 
 * have ssp_directory write a hash of the input
