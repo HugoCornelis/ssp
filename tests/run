@@ -109,7 +109,7 @@ use YAML;
 
 my $option_flattenout;
 my $option_help;
-my $option_numerical_compare = 0;
+my $option_numerical_compare = 1;
 my $option_random_order;
 my $option_regex_selector = ".*";
 my $option_timeout_multiplier = 1;

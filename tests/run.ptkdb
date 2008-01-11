@@ -3,29 +3,56 @@ $files = {
                               {
                                 'expr' => undef,
                                 'value' => '1',
-                                'text' => '	my $tests = $transformator->transform() || [];
+                                'text' => '    while (scalar @$numbers1 > scalar @$numbers2)
 ',
                                 'fname' => 'tests/run',
                                 'type' => 'user',
-                                'line' => '877'
+                                'line' => '888'
                               },
                               {
                                 'expr' => undef,
                                 'value' => '1',
-                                'text' => '    if ($option_flattenout)
+                                'text' => '				$error = numerical_compare($command_test, $before_match, $read, $error);
 ',
                                 'fname' => 'tests/run',
                                 'type' => 'user',
-                                'line' => '816'
+                                'line' => 510
                               },
                               {
                                 'expr' => undef,
                                 'value' => '1',
-                                'text' => '		my $preparer = $preparation->{preparer};
+                                'text' => '	    return \'numerical_compare(): texts differ ($texts1->[$index] ne $texts2->[$index]), aborting with error\';
 ',
                                 'fname' => 'tests/run',
                                 'type' => 'user',
-                                'line' => 236
+                                'line' => '924'
+                              },
+                              {
+                                'expr' => undef,
+                                'value' => '1',
+                                'text' => '		return \'numerical_compare(): numbers differ above accuracy ($numbers1->[$index] != $numbers2->[$index]), aborting with error\';
+',
+                                'fname' => 'tests/run',
+                                'type' => 'user',
+                                'line' => '940'
+                              },
+                              {
+                                'expr' => undef,
+                                'value' => '1',
+                                'text' => '    foreach my $text (@$texts1)
+',
+                                'fname' => 'tests/run',
+                                'type' => 'user',
+                                'line' => 856
+                              },
+                              {
+                                'expr' => undef,
+                                'value' => '1',
+                                'text' => '    return $result;
+',
+                                'fname' => 'tests/run',
+                                'type' => 'user',
+                                'line' => '945'
                               }
                             ]
          };
@@ -41,7 +68,47 @@ $expr_list = [
                {
                  'expr' => '$context->{array}->[1]->{content}->{name}',
                  'depth' => -1
+               },
+               {
+                 'expr' => '$text',
+                 'depth' => -1
+               },
+               {
+                 'expr' => '$number',
+                 'depth' => -1
+               },
+               {
+                 'expr' => 'scalar @$numbers1',
+                 'depth' => -1
+               },
+               {
+                 'expr' => 'scalar @$numbers2',
+                 'depth' => -1
+               },
+               {
+                 'expr' => 'scalar @$texts1',
+                 'depth' => -1
+               },
+               {
+                 'expr' => 'scalar @$texts2',
+                 'depth' => -1
+               },
+               {
+                 'expr' => '$index',
+                 'depth' => -1
+               },
+               {
+                 'expr' => '$diff',
+                 'depth' => -1
+               },
+               {
+                 'expr' => '$numbers1->[$index]',
+                 'depth' => -1
+               },
+               {
+                 'expr' => '$numbers2->[$index]',
+                 'depth' => -1
                }
              ];
 $eval_saved_text = undef;
-$main_win_geometry = '1272x941+51+12';
+$main_win_geometry = '1495x941+51+12';

@@ -19,7 +19,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a pool integrated correctly, one compartment, single pool case ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/pool1.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/pool1.txt`),
 						   timeout => 8,
 						   write => undef,
 						  },
@@ -33,7 +33,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a pool integrated correctly, two compartments, two pools case ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/pool2.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/pool2.txt`),
 						   timeout => 8,
 						   write => undef,
 						  },
@@ -47,7 +47,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a pool integrated correctly, one compartment, one pool with a feedback loop ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/pool1-feedback1.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/pool1-feedback1.txt`),
 						   timeout => 8,
 						   write => undef,
 						  },
@@ -61,7 +61,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a pool integrated correctly, one compartment, one pool with a feedback loop, reversed order ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/pool1-feedback2.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/pool1-feedback2.txt`),
 						   timeout => 8,
 						   write => undef,
 						  },
@@ -75,7 +75,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a pool integrated correctly, one pool, two feeding channels ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/pool1-contributors2.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/pool1-contributors2.txt`),
 						   timeout => 8,
 						   write => undef,
 						  },
@@ -89,7 +89,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is the solved nernst potential applied for channel reversal potentials ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/channel1-nernst1.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/channel1-nernst1.txt`),
 						   timeout => 160,
 						   write => undef,
 						  },

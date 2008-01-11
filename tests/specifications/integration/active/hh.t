@@ -19,7 +19,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a single compartment with regular HH channels solved correctly ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/active/hh1.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/active/hh1.txt`),
 						   timeout => 15,
 						   write => undef,
 						  },
