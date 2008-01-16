@@ -50,6 +50,7 @@ my $option_model_directory;
 my $option_model_filename;
 my $option_model_name;
 my $option_neurospaces_models = '/usr/local/neurospaces/models/library';
+my $option_neurospaces_studio;
 my $option_set_name;
 my $option_set_outputclass_filename;
 my $option_solverclass = 'heccer';
@@ -81,6 +82,7 @@ my $builtin_configurations
 ',
 	       },
       };
+
 
 sub apply_settings
 {
@@ -166,6 +168,34 @@ sub execute
 
 		$outputclasses->{$outputclass_name}->{options}->{filename} = $outputname;
 	    }
+	}
+
+	# if option to replace the simulation routine with calls to the neurospaces studio
+
+	if ($option_neurospaces_studio)
+	{
+	    # load things related to the neurospaces studio
+
+	    #! for proper error reporting of loading modules (Renderer etc),
+	    #! 'require' must be used, not 'use'.
+
+	    require Neurospaces;
+	    require Neurospaces::Traversal;
+	    require Neurospaces::Studio;
+
+	    #! this comes later in the neurospaces script, no clue why
+
+	    require Neurospaces::GUI;
+
+	    # replace the simulation routine
+
+	    $scheduler->{apply}->{simulation}
+		= [
+		   {
+		    arguments => [ $0, ],
+		    method => 'Neurospaces::GUI::gui',
+		   },
+		  ];
 	}
 
 	# and run it
@@ -488,6 +518,7 @@ sub read_cmd_line
 	     "model-filename=s" => \$option_model_filename,
 	     "model-name=s" => \$option_model_name,
 	     "neurospaces-models=s" => \$option_neurospaces_models,
+	     "neurospaces-studio=s" => \$option_neurospaces_studio,
 	     "set-name=s" => \$option_set_name,
 	     "set-outputclass-filename=s" => \$option_set_outputclass_filename,
 	     "solverclass=s" => \$option_solverclass,
@@ -521,6 +552,8 @@ options :
     model-filename     filename of the model description file (when using a builtin configuration)
     model-name         name of the model (when using a builtin configuration)
     neurospaces-models directory where to find the neurospaces library
+    neurospaces-studio replace the simulation routine with calls to the neurospaces studio,
+                       this allows to explore the model after all modifiers have completed.
     set-name           overwrite the schedule name with the name of the file that contains the schedule
     set-outputclass-filename
                        overwrite the outputclass filename with something derived from the name of the
