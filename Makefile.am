@@ -26,7 +26,7 @@ dist-keywords:
 
 # The variable EXTRA_DIST could also be used here.
 
-dist-hook:
+dist-hook: dist-keywords
 	cd $(srcdir) && if test -n "`mtn ls changed `" ; then false ; else true ; fi
 	find $(distdir) -name _Inline -exec chmod u+w -R \{\} \;
 	$(RM) -fr `find $(distdir) -name _Inline`
