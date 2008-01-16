@@ -196,6 +196,11 @@ sub execute
 		    method => 'Neurospaces::GUI::gui',
 		   },
 		  ];
+
+	    # remove the compilation and initiation parts, to prevent
+	    # that output files get overwritten
+
+	    $scheduler->{apply}->{initializers} = [ undef, ];
 	}
 
 	# and run it

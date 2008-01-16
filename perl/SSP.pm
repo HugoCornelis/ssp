@@ -662,6 +662,14 @@ sub run
 
     foreach my $application (@$applications)
     {
+	# skip applications that we meant to switch off the defaults
+
+	if (!ref $application
+	    && !defined $application)
+	{
+	    next;
+	}
+
 	# get object
 
 	my $object_name = $application->{object} || $self;
