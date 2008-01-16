@@ -60,6 +60,8 @@ my $option_time_step;
 my $option_transformator = "";
 my $option_verbose;
 
+my $exit_code = 0;
+
 
 my $builtin_configurations
     = {
@@ -210,6 +212,8 @@ sub execute
     else
     {
 	print STDERR "$0: configuration $filename cannot be found\n";
+
+	$exit_code = 1;
     }
 }
 
@@ -663,6 +667,6 @@ sub schedule
 main();
 
 
-exit 0;
+exit $exit_code;
 
 
