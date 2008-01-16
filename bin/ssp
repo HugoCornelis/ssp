@@ -560,7 +560,7 @@ options :
                        file that contains the schedule
     solverclass        set the solver class to use (when using a builtin configuration)
     spine-prototype    add spines with this prototype
-    steps              number of simulation steps
+    steps              number of simulation steps, when using one of the builtin configurations.
     time-step          sets the time step
     transformator      feed the configuration through this transformator before running
     verbose            set verbosity level.
