@@ -21,9 +21,13 @@ dist_bin_SCRIPTS = bin/ssp bin/ssp_directory
 ssptestdir=$(prefix)/ssp
 nobase_dist_ssptest_DATA=@TEST_SPECIFICATION_FILES@
 
+dist-keywords:
+	release-expand ssp des 7 0 des-7 hugo.cornelis@gmail.com --verbose
+
 # The variable EXTRA_DIST could also be used here.
 
 dist-hook:
+	cd $(srcdir) && if test -n "`mtn ls changed `" ; then false ; else true ; fi
 	find $(distdir) -name _Inline -exec chmod u+w -R \{\} \;
 	$(RM) -fr `find $(distdir) -name _Inline`
 	cp $(srcdir)/license.txt $(distdir)
