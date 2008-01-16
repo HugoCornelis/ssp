@@ -518,7 +518,7 @@ sub read_cmd_line
 	     "model-filename=s" => \$option_model_filename,
 	     "model-name=s" => \$option_model_name,
 	     "neurospaces-models=s" => \$option_neurospaces_models,
-	     "neurospaces-studio=s" => \$option_neurospaces_studio,
+	     "neurospaces-studio" => \$option_neurospaces_studio,
 	     "set-name=s" => \$option_set_name,
 	     "set-outputclass-filename=s" => \$option_set_outputclass_filename,
 	     "solverclass=s" => \$option_solverclass,
