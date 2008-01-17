@@ -37,13 +37,15 @@ options :
     model-filename     filename of the model description file \(when using a builtin configuration\)
     model-name         name of the model \(when using a builtin configuration\)
     neurospaces-models directory where to find the neurospaces library
+    neurospaces-studio replace the simulation routine with calls to the neurospaces studio,
+                       this allows to explore the model after all modifiers have completed.
     set-name           overwrite the schedule name with the name of the file that contains the schedule
     set-outputclass-filename
                        overwrite the outputclass filename with something derived from the name of the
                        file that contains the schedule
     solverclass        set the solver class to use \(when using a builtin configuration\)
     spine-prototype    add spines with this prototype
-    steps              number of simulation steps
+    steps              number of simulation steps, when using one of the builtin configurations.
     time-step          sets the time step
     transformator      feed the configuration through this transformator before running
     verbose            set verbosity level.
