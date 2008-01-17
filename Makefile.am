@@ -22,7 +22,7 @@ ssptestdir=$(prefix)/ssp
 nobase_dist_ssptest_DATA=@TEST_SPECIFICATION_FILES@
 
 dist-keywords:
-	release-expand ssp des 7 0 des-7 hugo.cornelis@gmail.com --verbose
+	release-expand ssp des 8 0 des-8 hugo.cornelis@gmail.com --verbose
 
 # The variable EXTRA_DIST could also be used here.
 
