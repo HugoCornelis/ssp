@@ -3,26 +3,49 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '    my $result = 1;
+                                  'text' => '	$self->{apply}->{$application_class_name}
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 147
+                                  'line' => '814'
                                 },
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '	my $success = $self->$method(@$arguments);
+                                  'text' => '    my $application_classes = $self->{application_classes};
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '489'
+                                  'line' => 800
                                 }
-                              ]
+                              ],
+           '_<tests/perl/purk_test' => [
+                                         {
+                                           'expr' => undef,
+                                           'value' => '1',
+                                           'text' => 'main();
+',
+                                           'fname' => 'tests/perl/purk_test',
+                                           'type' => 'user',
+                                           'line' => 332
+                                         }
+                                       ]
          };
 $expr_list = [
                {
                  'expr' => '$method',
+                 'depth' => -1
+               },
+               {
+                 'expr' => '$application_class_name',
+                 'depth' => -1
+               },
+               {
+                 'expr' => '$application_class',
+                 'depth' => -1
+               },
+               {
+                 'expr' => '$self->{apply}',
                  'depth' => -1
                }
              ];

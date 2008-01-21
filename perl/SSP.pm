@@ -134,6 +134,107 @@ sub compile
 }
 
 
+#
+# daemonize()
+#
+# Daemonize the running process by setting a session id, optionally close
+# shared resources between child and parent (files), and print a diagnostic
+# message on STDOUT.  '$pid' is replaced with the child process id in the
+# diagnostic message.
+#
+# returns the created process id if $options->{return} is set, otherwise
+# exits.
+#
+
+sub daemonize
+{
+    my $self = shift;
+
+    my $close_files = shift;
+
+    my $options = shift;
+
+    my $message = $options->{message} || '';
+
+    my $pid;
+
+#     mlog("daemonize ($$)", "forking");
+
+    if ($pid = fork())
+    {
+# 	mlog("daemonize ($$)", "forked");
+
+        # parent : print optional message and exit or return
+
+	if ($message)
+	{
+	    $message =~ s/\$pid/$pid/g;
+
+	    print($message);
+	}
+
+	if ($options->{return})
+	{
+# 	    mlog("daemonize ($$)", "forked : return");
+
+	    return $pid;
+	}
+	else
+	{
+# 	    mlog("daemonize ($$)", "forked : exit");
+
+	    exit(0);
+	}
+    }
+
+    # child : create session, optionally close shared resources.
+
+#     mlog("daemonize ($$)", "forked : cd");
+
+    use POSIX;
+
+    POSIX::setsid();
+    chdir('/');
+
+    if ($close_files)
+    {
+# 	mlog("daemonize ($$)", "closing files");
+
+	# unlock shared resources : close all file descriptors.
+
+	my $closed = new FileHandle ">/tmp/closed.txt";
+
+	my $files = POSIX::sysconf(POSIX::_SC_OPEN_MAX);
+
+	if ($closed)
+	{
+	    print $closed "Closing $files file handles.\n";
+	}
+
+	while ($files > -1)
+	{
+	    my $result = "not done";
+
+	    if (!defined $closed || $closed->fileno() != $files)
+	    {
+		$result = POSIX::close($files) || -1;
+	    }
+
+	    if (defined $closed)
+	    {
+		print $closed "Closed file handle $files : $result\n";
+	    }
+
+	    $files--;
+	}
+
+	$closed->close();
+    }
+
+#     mlog("daemonize ($$)", "done");
+}
+
+
 sub finish
 {
     my $self = shift;
@@ -610,6 +711,45 @@ sub new
 	   %$options,
 	  };
 
+    # set defaults for application classes
+
+    $self->{application_classes}
+	= {
+	   services => {
+			default => [
+				    { method => 'instantiate_services', },
+				   ],
+			priority => 20,
+		       },
+	   modifiers => {
+			 default => [],
+			 priority => 50,
+			},
+	   initializers => {
+			    default => [
+					{ method => 'compile', },
+					{ method => 'instantiate_inputs', },
+					{ method => 'instantiate_outputs', },
+					{ method => 'initiate', },
+				       ],
+			    priority => 80,
+			   },
+	   simulation => {
+			  default => [],
+			  priority => 110,
+			 },
+	   finishers => {
+			 default => [
+				     { method => 'finish', },
+				    ],
+			 priority => 140,
+			},
+	   results => {
+		       default => [],
+		       priority => 170,
+		      },
+	  };
+
     bless $self, $package;
 
     return $self;
@@ -622,47 +762,108 @@ sub run
 
     my $options = shift;
 
-    # get initializers and simulation specifications, using defaults
-    # where needed
+#     # get initializers and simulation specifications, using defaults
+#     # where needed
 
-    my $services = $self->{apply}->{services}
-	||
-	    [
-	     { method => 'instantiate_services', },
-	    ];
+#     my $services
+# 	= $self->{apply}->{services}
+# 	    ||
+# 		[
+# 		 { method => 'instantiate_services', },
+# 		];
 
-    my $modifiers = $self->{apply}->{modifiers} || [];
+#     my $modifiers = $self->{apply}->{modifiers} || [];
 
-    my $initializers
-	= $self->{apply}->{initializers}
-	    || [
-		{ method => 'compile', },
-		{ method => 'instantiate_inputs', },
-		{ method => 'instantiate_outputs', },
-		{ method => 'initiate', },
-	       ],
-		   ;
+#     my $initializers
+# 	= $self->{apply}->{initializers}
+# 	    || [
+# 		{ method => 'compile', },
+# 		{ method => 'instantiate_inputs', },
+# 		{ method => 'instantiate_outputs', },
+# 		{ method => 'initiate', },
+# 	       ],
+# 		   ;
 
-    my $simulation = $self->{apply}->{simulation} || [];
+#     my $simulation = $self->{apply}->{simulation} || [];
 
-    my $finishers
-	= $self->{apply}->{finishers}
-	    || [
-		{ method => 'finish', },
-	       ],
-		   ;
+#     my $finishers
+# 	= $self->{apply}->{finishers}
+# 	    || [
+# 		{ method => 'finish', },
+# 	       ],
+# 		   ;
 
-    my $results = $self->{apply}->{results} || [];
+#     my $results = $self->{apply}->{results} || [];
+
+    # loop through the application_classes
+
+    my $application_classes = $self->{application_classes};
+
+    foreach my $application_class_name (
+					sort
+					{
+					    $application_classes->{$a}->{priority} <=> $application_classes->{$b}->{priority}
+					}
+					keys %$application_classes
+				       )
+    {
+	my $application_class = $application_classes->{$application_class_name};
+
+	# apply the default when needed
+
+	$self->{apply}->{$application_class_name}
+	    = $self->{apply}->{$application_class_name}
+		|| $application_class->{default};
+
+	# translate command hashes to schedule arrays
+
+	if ($self->{apply}->{$application_class_name} =~ /HASH/)
+	{
+	    my $type = $self->{apply}->{$application_class_name}->{type};
+
+	    # when pushing
+
+	    #t I guess I have to redo this, overly complicated for what it does.
+
+	    #t only used for daemonizing
+
+	    if ($type eq 'push')
+	    {
+		my $applications
+		    = [
+		       @{$self->{apply}->{$application_class_name}->{have}},
+		       @{$self->{apply}->{$application_class_name}->{push}},
+		      ];
+
+		$self->{apply}->{$application_class_name} = $applications;
+	    }
+	    else
+	    {
+		die "$0: schedule applies a type of $type to the $application_class application_class, but this type is not defined.";
+	    }
+	}
+    }
 
     # construct the schedule we have to apply
 
-    my $applications = [ @$services, @$modifiers, @$initializers, @$simulation, @$finishers, @$results, ];
+    my $applications = [];
+
+    foreach my $application_class_name (
+					sort
+					{
+					    $application_classes->{$a}->{priority} <=> $application_classes->{$b}->{priority}
+					}
+					keys %$application_classes
+				       )
+    {
+	push @$applications, @{$self->{apply}->{$application_class_name}};
+    }
 
     # go through the schedule
 
     foreach my $application (@$applications)
     {
-	# skip applications that we meant to switch off the defaults
+	# skip applications that were meant to switch off the defaults
 
 	if (!ref $application
 	    && !defined $application)
