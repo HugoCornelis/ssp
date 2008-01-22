@@ -206,13 +206,20 @@ sub daemonize
 
 	# unlock shared resources : close all file descriptors.
 
-	my $closed = new FileHandle ">/tmp/closed.txt";
+	use FileHandle;
+
+	my $closed = FileHandle->new(">/tmp/closed.txt");
 
 	my $files = POSIX::sysconf(POSIX::_SC_OPEN_MAX);
 
 	if ($closed)
 	{
 	    print $closed "Closing $files file handles.\n";
+	}
+
+	if ($close_files > 0)
+	{
+	    $files = $close_files;
 	}
 
 	while ($files > -1)

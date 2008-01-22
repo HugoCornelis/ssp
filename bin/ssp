@@ -216,7 +216,14 @@ sub execute
 		= {
 		   push => [
 			    {
-			     arguments => [],
+			     #! arguments: close_files, options hash
+
+			     #! only STDIN, STDOUT, STDERR, because I think some of the GUI
+			     #! things have potentially already opened filehandles, or so.
+			     #! simply closing all filehandles inhibits the GUI when used
+			     #! invocated from the webserver.
+
+			     arguments => [ 2, ],
 			     method => 'daemonize',
 			    },
 			   ],
