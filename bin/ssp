@@ -214,10 +214,12 @@ sub execute
 
 	    $scheduler->{apply}->{initializers}
 		= {
-		   push => {
-			    arguments => [],
-			    method => 'daemonize',
-			   },
+		   push => [
+			    {
+			     arguments => [],
+			     method => 'daemonize',
+			    },
+			   ],
 		   have => $scheduler->{apply}->{initializers},
 		   type => 'push',
 		  };

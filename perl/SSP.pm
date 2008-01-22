@@ -189,6 +189,10 @@ sub daemonize
 
     # child : create session, optionally close shared resources.
 
+    # set default result
+
+    my $result = 1;
+
 #     mlog("daemonize ($$)", "forked : cd");
 
     use POSIX;
@@ -232,6 +236,8 @@ sub daemonize
     }
 
 #     mlog("daemonize ($$)", "done");
+
+    return $result;
 }
 
 
@@ -711,46 +717,11 @@ sub new
 	   %$options,
 	  };
 
-    # set defaults for application classes
-
-    $self->{application_classes}
-	= {
-	   services => {
-			default => [
-				    { method => 'instantiate_services', },
-				   ],
-			priority => 20,
-		       },
-	   modifiers => {
-			 default => [],
-			 priority => 50,
-			},
-	   initializers => {
-			    default => [
-					{ method => 'compile', },
-					{ method => 'instantiate_inputs', },
-					{ method => 'instantiate_outputs', },
-					{ method => 'initiate', },
-				       ],
-			    priority => 80,
-			   },
-	   simulation => {
-			  default => [],
-			  priority => 110,
-			 },
-	   finishers => {
-			 default => [
-				     { method => 'finish', },
-				    ],
-			 priority => 140,
-			},
-	   results => {
-		       default => [],
-		       priority => 170,
-		      },
-	  };
-
     bless $self, $package;
+
+    # we always need application_classes etc.
+
+    $self->salvage();
 
     return $self;
 }
@@ -761,6 +732,10 @@ sub run
     my $self = shift;
 
     my $options = shift;
+
+    # we always need application_classes etc.
+
+    $self->salvage();
 
 #     # get initializers and simulation specifications, using defaults
 #     # where needed
@@ -923,6 +898,55 @@ sub run
 	{
 	    die "while running $self->{name}: $method failed";
 	}
+    }
+}
+
+
+sub salvage
+{
+    my $self = shift;
+
+    # set defaults for application classes
+
+    if (!exists $self->{application_classes})
+    {
+	$self->{application_classes}
+	    = {
+	       services => {
+			    default => [
+					{ method => 'instantiate_services', },
+				       ],
+			    priority => 20,
+			   },
+	       modifiers => {
+			     default => [],
+			     priority => 50,
+			    },
+	       initializers => {
+				default => [
+					    { method => 'compile', },
+					    { method => 'instantiate_inputs', },
+					    { method => 'instantiate_outputs', },
+					    { method => 'initiate', },
+					   ],
+				priority => 80,
+			       },
+	       simulation => {
+			      default => [],
+			      priority => 110,
+			     },
+	       finishers => {
+			     default => [
+					 { method => 'finish', },
+					],
+			     priority => 140,
+			    },
+	       results => {
+			   default => [],
+			   priority => 170,
+			  },
+	      };
+
     }
 }
 
