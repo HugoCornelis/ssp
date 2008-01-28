@@ -1,4 +1,29 @@
 --- !!perl/hash:SSP
+application_classes:
+  finishers:
+    default:
+      - method: finish
+    priority: 140
+  initializers:
+    default:
+      - method: compile
+      - method: instantiate_inputs
+      - method: instantiate_outputs
+      - method: initiate
+    priority: 80
+  modifiers:
+    default: []
+    priority: 50
+  results:
+    default: []
+    priority: 170
+  services:
+    default:
+      - method: instantiate_services
+    priority: 20
+  simulation:
+    default: []
+    priority: 110
 apply:
   simulation:
     - arguments:
@@ -25,7 +50,7 @@ services:
     initializers:
       - arguments:
           -
-            - ./tests/perl/pool1-feedback1
+            - tests/perl/pool1-feedback1
             - -P
             - tests/cells/pool1_feedback1.ndf
         method: read

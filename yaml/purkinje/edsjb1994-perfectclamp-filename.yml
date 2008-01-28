@@ -56,7 +56,7 @@ services:
   neurospaces:
     initializers:
       - arguments:
-          - filename: tests/cells/purkinje/edsjb1994.ndf
+          - filename: cells/purkinje/edsjb1994.ndf
             no-use-library: 1
           -
             - ssp configuration for edsjb1994

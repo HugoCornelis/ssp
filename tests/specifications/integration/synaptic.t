@@ -19,7 +19,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a synaptic (springmass) channel integrated correctly, endogenous firing (works only for the Linux rng) ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/springmass3.txt`),
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/springmass3-2.txt`),
 						   timeout => 8,
 						   write => undef,
 						  },
@@ -49,7 +49,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a synaptic (springmass) channel integrated correctly, endogenous firing, passive-only mode (works only for the Linux rng) ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/springmass3p.txt`),
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/springmass3-2p.txt`),
 						   timeout => 8,
 						   write => undef,
 						  },

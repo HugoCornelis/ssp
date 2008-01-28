@@ -1,4 +1,29 @@
 --- !!perl/hash:SSP
+application_classes:
+  finishers:
+    default:
+      - method: finish
+    priority: 140
+  initializers:
+    default:
+      - method: compile
+      - method: instantiate_inputs
+      - method: instantiate_outputs
+      - method: initiate
+    priority: 80
+  modifiers:
+    default: []
+    priority: 50
+  results:
+    default: []
+    priority: 170
+  services:
+    default:
+      - method: instantiate_services
+    priority: 20
+  simulation:
+    default: []
+    priority: 110
 apply:
   simulation:
     - arguments:
@@ -25,7 +50,7 @@ services:
     initializers:
       - arguments:
           -
-            - ./tests/perl/springmass4
+            - tests/perl/springmass4
             - -P
             - tests/cells/springmass4.ndf
         method: read
@@ -37,5 +62,7 @@ solverclasses:
         reporting:
           granularity: 1000
       dStep: 2e-05
+      options:
+        iOptions: 4
     module_name: Heccer
     service_name: neurospaces

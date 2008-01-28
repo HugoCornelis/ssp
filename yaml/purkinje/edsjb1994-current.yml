@@ -40,7 +40,7 @@ services:
           -
             - ssp configuration for edsjb1994
             - -P
-            - tests/cells/purkinje/edsjb1994.ndf
+            - cells/purkinje/edsjb1994.ndf
         method: read
     module_name: Neurospaces
 solverclasses:
