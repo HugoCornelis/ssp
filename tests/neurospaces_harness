@@ -130,6 +130,7 @@ my $test_report
 		       package => $config->{package},
 		      },
        global => {
+		  config => $config,
 		  error_count => $error_count,
 		  status => 'initializing',
 		  test_count => 0,
