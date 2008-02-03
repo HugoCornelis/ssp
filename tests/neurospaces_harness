@@ -933,7 +933,7 @@ sub numerical_compare
 	{
 	    my $diff = $numbers1->[$index] - $numbers2->[$index];
 
-	    #t the 1000 is a bit arbitrary, quite large
+	    #t the 1000 is a bit arbitrary, quite large differences allowed ...
 
 	    if (abs($diff) > abs($numbers1->[$index] / 1000))
 	    {
