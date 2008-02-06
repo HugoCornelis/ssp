@@ -1,5 +1,8 @@
 -*- outline -*-
 
+* rename
+in SSP.pm: service_name to model_container.
+
 * check in how far numerical_compare() can be used
 to match the expected test output of heccer.
 
