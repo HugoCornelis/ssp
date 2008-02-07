@@ -13,6 +13,8 @@ sub advance
 {
     my $self = shift;
 
+    my $scheduler = shift;
+
     my $time = shift;
 
     my $options = shift;
@@ -29,7 +31,7 @@ sub advance
     {
 	# advance the engine
 
-	my $error = $schedulee->advance($time, $options);
+	my $error = $schedulee->advance($self, $time, $options);
 
 	if ($error)
 	{
@@ -40,6 +42,80 @@ sub advance
     # return result
 
     return $result;
+}
+
+
+sub analyze
+{
+    my $self = shift;
+
+    # loop over all analyzers
+
+    my $analyzers = $self->{analyzers};
+
+    foreach my $analyzer_name (keys %$analyzers)
+    {
+	my $analyzer = $analyzers->{$analyzer_name};
+
+	# construct the analyzer backend
+
+	my $analyzer_module = $analyzer->{module_name};
+
+	eval
+	{
+	    local $SIG{__DIE__};
+
+	    require "$analyzer_module.pm";
+	};
+
+	if ($@)
+	{
+	    die "Cannot load analyzer module ($analyzer_module.pm) for analyzer $analyzer_name
+
+Possible solutions:
+1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
+2. Install the correct integration module for this analyzer.
+3. The analyzer module is not correct, to find out, type perl -e 'push \@INC, \"/usr/local/glue/swig/perl\" ; require $analyzer_module', and see if perl can find and compile the analyzer module
+4. Contact your system administrator.
+
+$@";
+	}
+
+	my $package = $analyzer->{package} || $analyzer_module;
+
+	my $backend = $package->new($analyzer);
+
+	# construct the SSP analyzer for this backend
+
+	my $ssp_analyzer = SSP::Analyzer->new( { backend => $backend, }, );
+
+	# initialize the analyzer backend with the user settings
+
+	my $initializers = $analyzer->{initializers};
+
+	foreach my $initializer (@$initializers)
+	{
+	    my $method = $initializer->{method};
+
+	    my $arguments = $initializer->{arguments};
+
+	    my $success = $backend->$method($self, @$arguments);
+
+	    if (!$success)
+	    {
+		die "initializer $method for $analyzer_name failed";
+	    }
+	}
+
+	# bind the SSP analyzer in the scheduler
+
+	$analyzer->{ssp_analyzer} = $ssp_analyzer;
+    }
+
+    # return success
+
+    return 1;
+
 }
 
 
@@ -149,6 +225,8 @@ sub compile
 sub daemonize
 {
     my $self = shift;
+
+    my $scheduler = shift;
 
     my $close_files = shift;
 
@@ -624,7 +702,7 @@ $@";
 
 	    my $arguments = $initializer->{arguments};
 
-	    my $success = $backend->$method(@$arguments);
+	    my $success = $backend->$method($self, @$arguments);
 
 	    if (!$success)
 	    {
@@ -899,7 +977,7 @@ sub run
 	    print "$0: applying method '$method' to $self->{name}\n";
 	}
 
-	my $success = $object->$method(@$arguments);
+	my $success = $object->$method($self, @$arguments);
 
 	if (!$success)
 	{
@@ -938,6 +1016,12 @@ sub salvage
 					   ],
 				priority => 80,
 			       },
+	       analyzers => {
+			     default => [
+					 { method => 'analyze', },
+					],
+			     priority => 95,
+			    },
 	       simulation => {
 			      default => [],
 			      priority => 110,
@@ -961,6 +1045,8 @@ sub salvage
 sub shell
 {
     my $self = shift;
+
+    my $scheduler = shift;
 
     my $options = shift;
 
@@ -988,6 +1074,8 @@ sub steps
 {
     my $self = shift;
 
+    my $scheduler = shift;
+
     my $steps = shift;
 
     my $options = shift || {};
@@ -1004,7 +1092,7 @@ sub steps
     {
 	my $backend = $schedulee->backend();
 
-	$backend->report( { %$options, steps => undef, }, );
+	$backend->report( $self, { %$options, steps => undef, }, );
     }
 
     # a couple of times
@@ -1019,7 +1107,7 @@ sub steps
 	{
 	    # advance the engine
 
-	    my $error = $schedulee->step( { %$options, steps => $step, }, );
+	    my $error = $schedulee->step( $self, { %$options, steps => $step, }, );
 
 	    if ($error)
 	    {
@@ -1030,7 +1118,7 @@ sub steps
 
 	    my $backend = $schedulee->backend();
 
-	    $backend->report( { %$options, steps => $step, }, );
+	    $backend->report( $self, { %$options, steps => $step, }, );
 	}
     }
 
@@ -1040,7 +1128,7 @@ sub steps
     {
 	my $backend = $schedulee->backend();
 
-	$backend->report( { %$options, steps => -1, }, );
+	$backend->report( $self, { %$options, steps => -1, }, );
     }
 
     # return result
@@ -1061,6 +1149,44 @@ sub backend
 }
 
 
+package SSP::Analyzer;
+
+
+
+BEGIN { our @ISA = qw(SSP::Glue); }
+
+
+sub analyze
+{
+    my $self = shift;
+}
+
+
+sub backend
+{
+    my $self = shift;
+
+    return $self->{backend};
+}
+
+
+sub new
+{
+    my $package = shift;
+
+    my $options = shift;
+
+    my $self
+	= {
+	   %$options,
+	  };
+
+    bless $self, $package;
+
+    return $self;
+}
+
+
 package SSP::Engine;
 
 
@@ -1071,6 +1197,8 @@ sub advance
 {
     my $self = shift;
 
+    my $scheduler = shift;
+
     my $time = shift;
 
     # set result : ok
@@ -1079,7 +1207,7 @@ sub advance
 
     my $backend = $self->backend();
 
-    my $success = $backend->advance($time);
+    my $success = $backend->advance($self, $time);
 
     if (!$success)
     {
@@ -1256,7 +1384,7 @@ sub step
 
     my $backend = $self->backend();
 
-    my $success = $backend->step($options);
+    my $success = $backend->step($self, $options);
 
     if (!$success)
     {
@@ -1288,7 +1416,7 @@ sub steps
 
     my $backend = $self->backend();
 
-    $backend->report( { %$options, steps => undef, }, );
+    $backend->report( $self, { %$options, steps => undef, }, );
 
     # a couple of times
 
@@ -1296,7 +1424,7 @@ sub steps
     {
 	# step
 
-	my $success = $backend->step();
+	my $success = $backend->step( $self, );
 
 	if (!$success)
 	{
@@ -1305,10 +1433,10 @@ sub steps
 
 	# dump
 
-	$backend->report( { %$options, steps => $i, }, );
+	$backend->report( $self, { %$options, steps => $i, }, );
     }
 
-    $backend->report( { %$options, steps => -1, }, );
+    $backend->report( $self, { %$options, steps => -1, }, );
 
     # return result
 
@@ -1340,11 +1468,13 @@ sub advance
 {
     my $self = shift;
 
+    my $scheduler = shift;
+
     my $options = shift;
 
     my $backend = $self->backend();
 
-    my $result = $backend->advance($options);
+    my $result = $backend->advance($self, $options);
 
     return $result;
 }
@@ -1446,6 +1576,8 @@ sub step
 {
     my $self = shift;
 
+    my $scheduler = shift;
+
     my $options = shift;
 
     # set result : ok
@@ -1456,7 +1588,7 @@ sub step
 
     my $backend = $self->backend();
 
-    my $success = $backend->step($options);
+    my $success = $backend->step($self, $options);
 
     if (!$success)
     {
@@ -1493,11 +1625,13 @@ sub advance
 {
     my $self = shift;
 
+    my $scheduler = shift;
+
     my $options = shift;
 
     my $backend = $self->backend();
 
-    my $result = $backend->advance($options);
+    my $result = $backend->advance($self, $options);
 
     return $result;
 }
@@ -1599,6 +1733,8 @@ sub step
 {
     my $self = shift;
 
+    my $scheduler = shift;
+
     my $options = shift;
 
     # set result : ok
@@ -1609,7 +1745,7 @@ sub step
 
     my $backend = $self->backend();
 
-    my $success = $backend->step($options);
+    my $success = $backend->step($self, $options);
 
     if (!$success)
     {
@@ -1636,7 +1772,7 @@ sub apply_conceptual_parameters
 
     my $service_backend = $self->backend();
 
-    my $result = $service_backend->apply_conceptual_parameters($options);
+    my $result = $service_backend->apply_conceptual_parameters($self, $options);
 
     return $result;
 }
@@ -1650,7 +1786,7 @@ sub apply_granular_parameters
 
     my $service_backend = $self->backend();
 
-    my $result = $service_backend->apply_granular_parameters($options);
+    my $result = $service_backend->apply_granular_parameters($self, $options);
 
     return $result;
 }

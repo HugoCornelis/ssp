@@ -3,22 +3,33 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '	$self->{apply}->{$application_class_name}
+                                  'text' => '	if (!$engine->compile($self))
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '814'
+                                  'line' => '186'
                                 },
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '    my $application_classes = $self->{application_classes};
+                                  'text' => '    if (ref $engine)
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 800
+                                  'line' => '1293'
                                 }
                               ],
+           '_</usr/local/glue/swig/perl/Heccer.pm' => [
+                                                        {
+                                                          'expr' => undef,
+                                                          'value' => '1',
+                                                          'text' => '    my $result = $backend->OutputGeneratorAnnotatedStep("$options->{steps}");
+',
+                                                          'fname' => '/usr/local/glue/swig/perl/Heccer.pm',
+                                                          'type' => 'user',
+                                                          'line' => '1097'
+                                                        }
+                                                      ],
            '_<tests/perl/purk_test' => [
                                          {
                                            'expr' => undef,

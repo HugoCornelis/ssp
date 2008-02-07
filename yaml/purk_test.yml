@@ -1,5 +1,9 @@
 --- !!perl/hash:SSP
 application_classes:
+  analyzers:
+    default:
+      - method: analyze
+    priority: 95
   finishers:
     default:
       - method: finish
