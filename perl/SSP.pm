@@ -87,7 +87,7 @@ $@";
 
 	# construct the SSP analyzer for this backend
 
-	my $ssp_analyzer = SSP::Analyzer->new( { backend => $backend, }, );
+	my $ssp_analyzer = SSP::Analyzer->new( { backend => $backend, scheduler => $self, }, );
 
 	# initialize the analyzer backend with the user settings
 
@@ -175,6 +175,7 @@ sub compile
 	       modelname => $modelname,
 	       solverclass => $solverclass,
 	       service => $service,
+	       scheduler => $self,
 	      };
 
 # 	my $engine = SSP::Engine->new($solverclass, $service, $modelname);
@@ -690,7 +691,7 @@ $@";
 
 	# construct the SSP service for this backend
 
-	my $ssp_service = SSP::Service->new( { backend => $backend, }, );
+	my $ssp_service = SSP::Service->new( { backend => $backend, scheduler => $self, }, );
 
 	# initialize the service backend with the user settings
 
@@ -731,23 +732,51 @@ sub lookup_object
 
     my $result;
 
-    # search in the services
-
-    my $services = $self->{services};
-
-    foreach my $service_name (keys %$services)
+    if (!defined $result)
     {
-	my $service = $services->{$service_name};
+	# search in the services
 
-	# if name matches
+	my $services = $self->{services};
 
-	if ($service_name =~ /$object_name/)
+	foreach my $service_name (keys %$services)
 	{
-	    # set result: matching object
+	    my $service = $services->{$service_name};
 
-	    $result = $service->{ssp_service};
+	    # if name matches
 
-	    last;
+	    if ($service_name =~ /$object_name/)
+	    {
+		# set result: matching object
+
+		$result = $service->{ssp_service};
+
+		last;
+	    }
+	}
+    }
+
+    if (!defined $result)
+    {
+	# search in the solvers
+
+	my $solverclasses = $self->{solverclasses};
+
+	foreach my $solverclass_name (keys %$solverclasses)
+	{
+	    my $solverclass = $solverclasses->{$solverclass_name};
+
+	    # if name matches
+
+	    if ($solverclass_name =~ /$object_name/)
+	    {
+		# set result: matching object
+
+		#t should be returning the SSP::Engine perhaps ?
+
+		$result = $solverclass;
+
+		last;
+	    }
 	}
     }
 
@@ -803,6 +832,24 @@ sub new
 	  };
 
     bless $self, $package;
+
+    # do a sanity check: no solverclasses and services with the same name
+
+    my $named_objects_array
+	= [
+	   keys %{$self->{services}},
+	   keys %{$self->{solverclasses}},
+	  ];
+
+    my $named_objects_hash
+	= {
+	   map { $_ => 1; } @$named_objects_array,
+	  };
+
+    if (scalar @$named_objects_array ne scalar keys %$named_objects_hash)
+    {
+	die "$0: schedule contains duplicate object names (check service names and solver names).";
+    }
 
     # we always need application_classes etc.
 
