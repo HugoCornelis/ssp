@@ -99,7 +99,7 @@ $@";
 
 	    my $arguments = $initializer->{arguments};
 
-	    my $success = $backend->$method($self, @$arguments);
+	    my $success = $backend->$method($ssp_analyzer, @$arguments);
 
 	    if (!$success)
 	    {
@@ -702,7 +702,7 @@ $@";
 
 	    my $arguments = $initializer->{arguments};
 
-	    my $success = $backend->$method($self, @$arguments);
+	    my $success = $backend->$method($ssp_service, @$arguments);
 
 	    if (!$success)
 	    {
@@ -1092,7 +1092,7 @@ sub steps
     {
 	my $backend = $schedulee->backend();
 
-	$backend->report( $self, { %$options, steps => undef, }, );
+	$backend->report( $schedulee, { %$options, steps => undef, }, );
     }
 
     # a couple of times
@@ -1118,7 +1118,7 @@ sub steps
 
 	    my $backend = $schedulee->backend();
 
-	    $backend->report( $self, { %$options, steps => $step, }, );
+	    $backend->report( $schedulee, { %$options, steps => $step, }, );
 	}
     }
 
@@ -1128,7 +1128,7 @@ sub steps
     {
 	my $backend = $schedulee->backend();
 
-	$backend->report( $self, { %$options, steps => -1, }, );
+	$backend->report( $schedulee, { %$options, steps => -1, }, );
     }
 
     # return result
@@ -1313,7 +1313,7 @@ sub finish
 
     my $backend = $self->backend();
 
-    my $result = $backend->finish();
+    my $result = $backend->finish($self);
 
     return $result;
 }
@@ -1325,7 +1325,7 @@ sub initiate
 
     my $backend = $self->backend();
 
-    my $result = $backend->initiate();
+    my $result = $backend->initiate($self);
 
     return $result;
 }
@@ -1363,6 +1363,8 @@ sub solverfield
     my $fieldinfo = shift;
 
     my $backend = $self->backend();
+
+    #t should give $self as first argument
 
     my $result = $backend->addressable($fieldinfo);
 
@@ -1458,6 +1460,8 @@ sub add
 
     my $backend = $self->backend();
 
+    #t should give $self as first argument
+
     my $result = $backend->add($options);
 
     return $result;
@@ -1488,7 +1492,7 @@ sub finish
 
     my $backend = $self->backend();
 
-    return $backend->finish();
+    return $backend->finish($self);
 }
 
 
@@ -1500,7 +1504,7 @@ sub initiate
 
     my $backend = $self->backend();
 
-    return $backend->initiate();
+    return $backend->initiate($self);
 }
 
 
@@ -1615,6 +1619,8 @@ sub add
 
     my $backend = $self->backend();
 
+    #t should give $self as first argument
+
     my $result = $backend->add($options);
 
     return $result;
@@ -1645,7 +1651,7 @@ sub finish
 
     my $backend = $self->backend();
 
-    return $backend->finish();
+    return $backend->finish($self);
 }
 
 
@@ -1657,7 +1663,7 @@ sub initiate
 
     my $backend = $self->backend();
 
-    return $backend->initiate();
+    return $backend->initiate($self);
 }
 
 
@@ -1798,6 +1804,8 @@ sub input_2_solverinfo
 
     my $service_backend = $self->backend();
 
+    #t should give $self as first argument
+
     my $result = $service_backend->input_2_solverinfo(@_);
 
     return $result;
@@ -1824,6 +1832,8 @@ sub output_2_solverinfo
 
     my $service_backend = $self->backend();
 
+    #t should give $self as first argument
+
     my $result = $service_backend->output_2_solverinfo(@_);
 
     return $result;
@@ -1841,6 +1851,8 @@ sub register_engine
     # have the service register the solver for this model
 
     my $backend = $self->backend();
+
+    #t should give $self as first argument
 
     my $result = $backend->register_engine($engine, $modelname);
 
