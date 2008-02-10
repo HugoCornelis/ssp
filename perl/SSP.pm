@@ -1714,6 +1714,17 @@ sub initiate
 }
 
 
+sub name
+{
+    my $self = shift;
+
+    #t this is broken: does not include a count (same field can be
+    #t output many times).
+
+    return $self->{output_module} . "::" . $self->{name};
+}
+
+
 sub new
 {
     my $package = shift;
