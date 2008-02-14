@@ -66,12 +66,13 @@ sub main
 	= SSP->new(
 		   {
 		    apply => {
-# 			      simulation => [
-# 					     {
-# 					      arguments => [ 40000, { verbose => 2, }, ],
-# 					      method => 'steps',
-# 					     },
-# 					    ],
+			      simulation => [
+					     {
+					      arguments => [ 40000, { verbose => 2, }, ],
+					      method => 'dump',
+					      object => 'tabulator',
+					     },
+					    ],
 			     },
 		    analyzers => {
 				  tabulator => {

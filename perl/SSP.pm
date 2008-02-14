@@ -746,7 +746,7 @@ sub lookup_object
 
 	    if ($service_name =~ /$object_name/)
 	    {
-		# set result: matching object
+		# set result: matching object, isa SSP::Service
 
 		$result = $service->{ssp_service};
 
@@ -774,6 +774,31 @@ sub lookup_object
 		#t should be returning the SSP::Engine perhaps ?
 
 		$result = $solverclass;
+
+		last;
+	    }
+	}
+    }
+
+    if (!defined $result)
+    {
+	# search in the analyzers
+
+	my $analyzers = $self->{analyzers};
+
+	foreach my $analyzer_name (keys %$analyzers)
+	{
+	    my $analyzer = $analyzers->{$analyzer_name};
+
+	    # if name matches
+
+	    if ($analyzer_name =~ /$object_name/)
+	    {
+		# set result: matching object
+
+		#t should be returning the SSP::Analyzer perhaps ?
+
+		$result = $analyzer;
 
 		last;
 	    }
@@ -837,6 +862,7 @@ sub new
 
     my $named_objects_array
 	= [
+	   keys %{$self->{analyzers}},
 	   keys %{$self->{services}},
 	   keys %{$self->{solverclasses}},
 	  ];
