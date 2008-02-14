@@ -3,20 +3,20 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '	my $success = $object->$method($self, @$arguments);
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 1027
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
                                   'text' => '	    my $success = $backend->$method($ssp_analyzer, @$arguments);
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '102'
+                                  'line' => 102
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '	my $success = $object->$method($peer, @$arguments);
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '1061'
                                 }
                               ]
          };

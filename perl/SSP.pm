@@ -794,11 +794,9 @@ sub lookup_object
 
 	    if ($analyzer_name =~ /$object_name/)
 	    {
-		# set result: matching object
+		# set result: matching object, isa SSP::Analyzer
 
-		#t should be returning the SSP::Analyzer perhaps ?
-
-		$result = $analyzer;
+		$result = $analyzer->{ssp_analyzer};
 
 		last;
 	    }
@@ -1004,6 +1002,12 @@ sub run
 	    next;
 	}
 
+	# start determining the ssp frontend peer for aliens
+
+	#t so default is ssp itself, which seem far from logical ...
+
+	my $peer = $self;
+
 	# get object
 
 	my $object_name = $application->{object} || $self;
@@ -1015,6 +1019,10 @@ sub run
 	if (!ref($object_name))
 	{
 	    $object = $self->lookup_object($object_name);
+
+	    # we set the ssp frontend as peer
+
+	    $peer = $object;
 
 	    # get object backend
 
@@ -1050,7 +1058,7 @@ sub run
 	    print "$0: applying method '$method' to $self->{name}\n";
 	}
 
-	my $success = $object->$method($self, @$arguments);
+	my $success = $object->$method($peer, @$arguments);
 
 	if (!$success)
 	{
