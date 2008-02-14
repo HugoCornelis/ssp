@@ -156,7 +156,7 @@ my $test
 				description => "Persistent sodium gate tabulation",
 			       },
 			      ],
-       description => "Gate tabulation",
+       description => "Raw gate tabulation calculations",
        name => 'tables.t',
       };
 
