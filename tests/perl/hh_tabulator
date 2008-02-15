@@ -68,12 +68,12 @@ sub main
 		    apply => {
 			      simulation => [
 					     {
-					      arguments => [ { source => "neurospaces::/$modelname/segments/soma/na/na_gate_activation/forward", }, ],
+					      arguments => [ { source => "/$modelname/segments/soma/na/na_gate_activation/forward", }, ],
 					      method => 'dump',
 					      object => 'tabulator',
 					     },
 					     {
-					      arguments => [ { source => "neurospaces::/$modelname/segments/soma/na/na_gate_activation/backward", }, ],
+					      arguments => [ { source => "/$modelname/segments/soma/na/na_gate_activation/backward", }, ],
 					      method => 'dump',
 					      object => 'tabulator',
 					     },
