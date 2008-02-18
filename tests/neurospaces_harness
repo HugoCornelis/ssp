@@ -464,6 +464,8 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 
 		    # write
 
+		    my $time_start = [ gettimeofday(), ];
+
 		    if (defined $write)
 		    {
 			print "*** Write : $write\n";
@@ -481,8 +483,6 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 
 			if (!ref $read)
 			{
-			    my $time_start = [ gettimeofday(), ];
-
 			    ($matched_pattern_position,
 			     $error,
 			     $successfully_matching_string,
@@ -497,8 +497,6 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 
 			else
 			{
-			    my $time_start = [ gettimeofday(), ];
-
 			    ($matched_pattern_position,
 			     $error,
 			     $successfully_matching_string,
