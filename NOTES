@@ -1,7 +1,16 @@
-- Added ->{modifiers} entry to the schedule.
-- Added possibility for dynamic objects when running a schedule.
-- Initialization of outputs is now also done
-  using a regular scheduler entry.
-- Added integration tests for the heccer passive-only option.
-- Added test case for perfect clamp.
 - Updated test framework.
+- Start using Data::Utilities from CPAN.
+- Some updates to the integration test specification, related to
+  backend updates.
+- Updates to the test framework.
+- Added more robust interfaces to backends, using front-end proxy
+  objects.
+- Added integration with the browser, most notably server and
+  daemonize options.
+- Added integration with the neurospaces studio.
+- Added error handling to bin/ssp.
+- Build and release management changes, synchronizations with other
+  packages.
+- Added run-time environment analysis hooks.  This can be used to
+  interface with intermediary data, most notably tables at the moment.
+- Added timing report to the test framework.
