@@ -19,7 +19,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
-						   read => 'tgt is SwiggableHeccer::TabulatedGateTable=HASH',
+						   read => [ '-re', 'table index is 0(.|\n)*table index is 1', ],
 						   write => undef,
 						  },
 						 ],
