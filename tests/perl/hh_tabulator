@@ -68,7 +68,16 @@ sub main
 		    apply => {
 			      simulation => [
 					     {
-					      arguments => [ { source => "/$modelname/segments/soma/na/na_gate_activation/forward", }, ],
+					      arguments => [
+							    {
+# 							     format => 'alpha-beta',
+# 							     format => 'steadystate-tau',
+# 							     format => 'A-B',
+# 							     format => 'internal*dt',
+							     format => 'internal',
+							     source => "/$modelname/segments/soma/na/na_gate_activation/forward",
+							    },
+							   ],
 					      method => 'dump',
 					      object => 'tabulator',
 					     },
