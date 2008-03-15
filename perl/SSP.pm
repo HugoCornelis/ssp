@@ -147,22 +147,28 @@ sub compile
 
 	# apply the conceptual parameter settings to the model
 
-	my $conceptual_parameter_application
-	    = $service->{ssp_service}->apply_conceptual_parameters($model->{conceptual_parameters});
-
-	if (defined $conceptual_parameter_application)
+	if ($model->{conceptual_parameters})
 	{
-	    die "Cannot apply conceptual_parameters: $conceptual_parameter_application";
+	    my $conceptual_parameter_application
+		= $service->{ssp_service}->apply_conceptual_parameters($model->{conceptual_parameters});
+
+	    if (defined $conceptual_parameter_application)
+	    {
+		die "Cannot apply conceptual_parameters: $conceptual_parameter_application";
+	    }
 	}
 
 	# apply the granular_parameter settings to the model
 
-	my $granular_parameter_application
-	    = $service->{ssp_service}->apply_granular_parameters($model->{granular_parameters});
-
-	if (defined $granular_parameter_application)
+	if ($model->{granular_parameters})
 	{
-	    die "Cannot apply granular_parameters: $granular_parameter_application";
+	    my $granular_parameter_application
+		= $service->{ssp_service}->apply_granular_parameters($model->{granular_parameters});
+
+	    if (defined $granular_parameter_application)
+	    {
+		die "Cannot apply granular_parameters: $granular_parameter_application";
+	    }
 	}
 
 	# instantiate a schedulee
