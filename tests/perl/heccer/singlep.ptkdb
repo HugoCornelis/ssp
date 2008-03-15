@@ -1,0 +1,39 @@
+$files = {
+           '_<perl/SSP.pm' => [
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '    my $engine
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '1365'
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '	    my $success = $backend->$method($ssp_service, @$arguments);
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => 712
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '	my $success = $object->$method($peer, @$arguments);
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => 1067
+                                }
+                              ]
+         };
+$expr_list = [
+               {
+                 'expr' => '$method',
+                 'depth' => -1
+               }
+             ];
+$eval_saved_text = undef;
+$main_win_geometry = '1592x1114+0+0';
