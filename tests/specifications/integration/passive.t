@@ -84,7 +84,7 @@ my $test
 						  {
 						   description => "Is a fork of four passive compartments solved correctly, first alternative ?",
 						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/fork4p1.txt`),
-						   timeout => 5,
+						   timeout => 15,
 						   write => undef,
 						  },
 						 ],
