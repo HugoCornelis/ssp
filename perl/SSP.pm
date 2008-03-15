@@ -1354,6 +1354,8 @@ $@";
 
     my $constructor_settings = $self->{constructor_settings} || {};
 
+    my $package = $self->{package} || $solver_module;
+
     my $engine
 	= $solver_module->new
 	    (

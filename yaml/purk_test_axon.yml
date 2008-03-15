@@ -1,4 +1,34 @@
 --- !!perl/hash:SSP
+analyzers: {}
+application_classes:
+  analyzers:
+    default:
+      - method: analyze
+    priority: 95
+  finishers:
+    default:
+      - method: finish
+    priority: 140
+  initializers:
+    default:
+      - method: compile
+      - method: instantiate_inputs
+      - method: instantiate_outputs
+      - method: initiate
+    priority: 80
+  modifiers:
+    default: []
+    priority: 50
+  results:
+    default: []
+    priority: 170
+  services:
+    default:
+      - method: instantiate_services
+    priority: 20
+  simulation:
+    default: []
+    priority: 110
 apply:
   simulation:
     - arguments:
@@ -46,7 +76,7 @@ services:
     initializers:
       - arguments:
           -
-            - ./tests/perl/purk_test_axon
+            - tests/perl/purk_test_axon
             - -P
             - tests/cells/purk_test_axon.ndf
         method: read
