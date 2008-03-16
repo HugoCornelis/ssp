@@ -1,0 +1,225 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb -w
+#
+
+use strict;
+
+
+$| = 1;
+
+
+BEGIN
+{
+    #! make check
+
+    push @INC, '../perl';
+
+    #! make distcheck
+
+    push @INC, '../../perl';
+
+    #! normal run
+
+    push @INC, './perl';
+
+    #! after install
+
+    push @INC, '/usr/local/glue/swig/perl';
+}
+
+
+use Heccer;
+
+use SSP;
+
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+sub main
+{
+    # model specification array
+
+    my $modelname = $0;
+
+    $modelname =~ s/.*\///;
+
+    $modelname =~ s/-/_/g;
+
+    # instantiate a scheduler
+
+    my $scheduler
+	= SSP->new(
+		   {
+		    apply => {
+			      simulation => [
+					     {
+					      arguments => [ 1000, { verbose => 2, }, ],
+					      method => 'steps',
+					     },
+					     {
+					      arguments => [ 0.1, ],
+					      method => 'advance',
+					     },
+					    ],
+			     },
+		    models => [
+			       {
+# 				modelname => 'a single compartment',
+				solverclass => "heccer",
+			       },
+			      ],
+		    name => $modelname,
+		    services => {
+				 heccer_intermediary => {
+							 initializers => [
+									  {
+									   method => 'load',
+									   arguments => [
+											 {
+											  comp2mech => [ 2, -1],
+											  compartments => [
+													   {
+													    dCm => 4.57537e-11,
+													    dEm => -0.08,
+													    dInitVm => -0.028,
+													    dInject => 0,
+													    dRa => 360502,
+													    dRm => 3.58441e+08,
+													   },
+													  ],
+											  iCompartments => 1,
+											  math_components => [
+													      Heccer::ChannelActivationInactivation->new
+													      (
+													       {
+														dReversalPotential => 0.1375262439,
+														dMaximalConductance => 1.394928884e-08,
+														iPool => 1,
+														activation => {
+															       iPower => 1,
+															       gate_concept => {
+																		dInitActivation => 0.038918706451336625,
+																		parameters => {
+																			       forward => {
+																					   dHHScale => 2.6e3,
+																					   dHHMult => 0.0,
+																					   iHHFactorFlag => -1.0,
+																					   dHHAdd => 1.0,
+																					   dHHOffset2 => 0.021,
+																					   dHHTau => -8e-3,
+																					  },
+																			       backward => {
+																					    dHHScale => 0.18e3,
+																					    dHHMult => 0.0,
+																					    iHHFactorFlag => -1.0,
+																					    dHHAdd => 1.0,
+																					    dHHOffset2 => 0.04,
+																					    dHHTau => 4e-3,
+																					   },
+																			      },
+																	       },
+															      },
+														inactivation => {
+																 iPower => 1,
+																 gate_concept => {
+																		  dInitActivation => 0.082602128127539254,
+																		  parameters => {
+																				 forward => {
+																					     dHHScale => 0.0025e3,
+																					     dHHMult => 0.0,
+																					     iHHFactorFlag => -1.0,
+																					     dHHAdd => 1.0,
+																					     dHHOffset2 => 0.04,
+																					     dHHTau => 8e-3,
+																					    },
+																				 backward => {
+																					      dHHScale => 0.19e3,
+																					      dHHMult => 0.0,
+																					      iHHFactorFlag => -1.0,
+																					      dHHAdd => 1.0,
+																					      dHHOffset2 => 0.05,
+																					      dHHTau => -10.0e-3,
+																					     },
+																				},
+																		 },
+																},
+													       },
+													      ),
+													      Heccer::ExponentialDecay->new
+													      (
+													       {
+														dInitValue => 4e-5,
+														dBeta => 9412391936.0,
+														dSteadyState => 4e-05,
+														dTau => 0.00010,
+														piExternal => [
+															       0,
+															      ],
+													       },
+													      ),
+													     ],
+# 											  pcName => 'a single compartment',
+											 },
+											],
+									  },
+									 ],
+							 module_name => 'Heccer',
+							 package => 'Heccer::Intermediary::Compiler',
+							},
+				},
+		    solverclasses => {
+				      heccer => {
+						 constructor_settings => {
+									  configuration => {
+											    reporting => {
+													  granularity => 100,
+													  tested_things => (
+															    $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
+															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
+															    | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+															   ),
+													 },
+											   },
+									  dStep => (2e-5),
+									 },
+						 module_name => 'Heccer',
+						 package => 'Heccer::Intermediary::Compiler',
+						 service_name => 'heccer_intermediary',
+						},
+				     },
+		   },
+		  );
+
+    use YAML;
+
+    my $scheduler_yaml;
+
+    {
+	local $/;
+
+	if (-e "./yaml/$modelname.yml")
+	{
+	    $scheduler_yaml = Load(`cat ./yaml/$modelname.yml`);
+	}
+    }
+
+    # run the schedule
+
+    $scheduler->run();
+}
+
+
+main();
+
+
+exit 0;
+
+
