@@ -1,0 +1,231 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb -w
+#
+
+use strict;
+
+
+$| = 1;
+
+
+BEGIN
+{
+    #! make check
+
+    push @INC, '../perl';
+
+    #! make distcheck
+
+    push @INC, '../../perl';
+
+    #! normal run
+
+    push @INC, './perl';
+
+    #! after install
+
+    push @INC, '/usr/local/glue/swig/perl';
+}
+
+
+use SSP;
+
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+sub main
+{
+    # model specification array
+
+    my $modelname = $0;
+
+    $modelname =~ s/.*\///;
+
+    $modelname =~ s/-/_/g;
+
+    # instantiate a scheduler
+
+    my $scheduler
+	= SSP->new(
+		   {
+		    apply => {
+			      simulation => [
+					     {
+					      arguments => [ 10, { verbose => 2, }, ],
+					      method => 'steps',
+					     },
+					     {
+					      arguments => [ 0.1, ],
+					      method => 'advance',
+					     },
+					    ],
+			     },
+		    models => [
+			       {
+# 				modelname => 'a single compartment',
+				solverclass => "heccer",
+			       },
+			      ],
+		    name => $modelname,
+		    services => {
+				 heccer_intermediary => {
+							 initializers => [
+									  {
+									   method => 'load',
+									   arguments => [
+											 {
+											  comp2mech => [
+													0,
+													0,
+													0,
+													0,
+													0,
+													0,
+													0,
+													0,
+													0,
+													0,
+													-1,
+												       ],
+											  compartments => [
+													   {
+													    dCm => 4.575370291e-11,
+													    dEm => -0.08,
+													    dInitVm => -0.068,
+													    dInject => 1e-8,
+													    dRa => 360501.9688,
+													    dRm => 358440928,
+													    iParent => -1,
+													   },
+													   {
+													    dCm => 5.755329373e-12,
+													    dEm => -0.08,
+													    dInitVm => -0.068,
+													    dInject => 0,
+													    dRa => 772813.4375,
+													    dRm => 8.548598272e9,
+													    iParent => 0,
+													   },
+													   {
+													    dCm => 9.952665428e-12,
+													    dEm => -0.08,
+													    dInitVm => -0.068,
+													    dInject => 0,
+													    dRa => 1107083.25,
+													    dRm => 4943399424.0,
+													    iParent => 1,
+													   },
+													   {
+													    dCm => 3.048169139e-12,
+													    dEm => -0.08,
+													    dInitVm => -0.068,
+													    dInject => 0,
+													    dRa => 306646.9688,
+													    dRm => 1.614083584e+10,
+													    iParent => 2,
+													   },
+													   {
+													    dCm => 1.866796431e-12,
+													    dEm => -0.08,
+													    dInitVm => -0.068,
+													    dInject => 0,
+													    dRa => 147150.0781,
+													    dRm => 2.635531059e+10,
+													    iParent => 3,
+													   },
+													   {
+													    dCm => 3.81543408e-12,
+													    dEm => -0.08,
+													    dInitVm => -0.068,
+													    dInject => 0,
+													    dRa => 335501.9375,
+													    dRm => 1.289499341e+10,
+													    iParent => 4,
+													   },
+													   {
+													    dCm => 2.239454065e-12,
+													    dEm => -0.08,
+													    dInitVm => -0.068,
+													    dInject => 0,
+													    dRa => 230128.9531,
+													    dRm => 2.196964147e+10,
+													    iParent => 5,
+													   },
+													   {
+													    dCm => 1.754059463e-12,
+													    dEm => -0.08,
+													    dInitVm => -0.068,
+													    dInject => 0,
+													    dRa => 169781.8594,
+													    dRm => 2.804921958e+10,
+													    iParent => 6,
+													   },
+													   {
+													    dCm => 3.37096605e-12,
+													    dEm => -0.08,
+													    dInitVm => -0.068,
+													    dInject => 0,
+													    dRa => 442254.125,
+													    dRm => 1.459522355e+10,
+													    iParent => 7,
+													   },
+													   {
+													    dCm => 5.048512389e-12,
+													    dEm => -0.08,
+													    dInitVm => -0.068,
+													    dInject => 0,
+													    dRa => 518791.0938,
+													    dRm => 9745444864.0,
+													    iParent => 8,
+													   },
+													  ],
+											  iCompartments => 10,
+# 											  pcName => 'a single compartment',
+											 },
+											],
+									  },
+									 ],
+							 module_name => 'Heccer',
+							 package => 'Heccer::Intermediary::Compiler',
+							},
+				},
+		    solverclasses => {
+				      heccer => {
+						 module_name => 'Heccer',
+						 package => 'Heccer::Intermediary::Compiler',
+						 service_name => 'heccer_intermediary',
+						},
+				     },
+		   },
+		  );
+
+    use YAML;
+
+    my $scheduler_yaml;
+
+    {
+	local $/;
+
+	if (-e "./yaml/$modelname.yml")
+	{
+	    $scheduler_yaml = Load(`cat ./yaml/$modelname.yml`);
+	}
+    }
+
+    # run the schedule
+
+    $scheduler->run();
+}
+
+
+main();
+
+
+exit 0;
+
+

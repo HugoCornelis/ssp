@@ -1,0 +1,147 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb -w
+#
+
+use strict;
+
+
+$| = 1;
+
+
+BEGIN
+{
+    #! make check
+
+    push @INC, '../perl';
+
+    #! make distcheck
+
+    push @INC, '../../perl';
+
+    #! normal run
+
+    push @INC, './perl';
+
+    #! after install
+
+    push @INC, '/usr/local/glue/swig/perl';
+}
+
+
+use SSP;
+
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+sub main
+{
+    # model specification array
+
+    my $modelname = $0;
+
+    $modelname =~ s/.*\///;
+
+    $modelname =~ s/-/_/g;
+
+    # instantiate a scheduler
+
+    my $scheduler
+	= SSP->new(
+		   {
+		    apply => {
+			      simulation => [
+					     {
+					      arguments => [ 10, { verbose => 2, }, ],
+					      method => 'steps',
+					     },
+					     {
+					      arguments => [ 0.1, ],
+					      method => 'advance',
+					     },
+					    ],
+			     },
+		    models => [
+			       {
+# 				modelname => 'a single compartment',
+				solverclass => "heccer",
+			       },
+			      ],
+		    name => $modelname,
+		    services => {
+				 heccer_intermediary => {
+							 initializers => [
+									  {
+									   method => 'load',
+									   arguments => [
+											 {
+											  comp2mech => [ 0, 0, -1],
+											  compartments => [
+													   {
+													    dCm => 4.57537e-11,
+													    dEm => -0.08,
+													    dInitVm => -0.068,
+													    dInject => 1e-8,
+													    dRa => 360502,
+													    dRm => 3.58441e+08,
+													    iParent => -1,
+													   },
+													   {
+													    dCm => 5.755329373e-12,
+													    dEm => -0.08,
+													    dInitVm => -0.068,
+													    dInject => 0,
+													    dRa => 772813.4375,
+													    dRm => 8.548598272e9,
+													    iParent => 0,
+													   },
+													  ],
+											  iCompartments => 2,
+# 											  pcName => 'a single compartment',
+											 },
+											],
+									  },
+									 ],
+							 module_name => 'Heccer',
+							 package => 'Heccer::Intermediary::Compiler',
+							},
+				},
+		    solverclasses => {
+				      heccer => {
+						 module_name => 'Heccer',
+						 package => 'Heccer::Intermediary::Compiler',
+						 service_name => 'heccer_intermediary',
+						},
+				     },
+		   },
+		  );
+
+    use YAML;
+
+    my $scheduler_yaml;
+
+    {
+	local $/;
+
+	if (-e "./yaml/$modelname.yml")
+	{
+	    $scheduler_yaml = Load(`cat ./yaml/$modelname.yml`);
+	}
+    }
+
+    # run the schedule
+
+    $scheduler->run();
+}
+
+
+main();
+
+
+exit 0;
+
+
