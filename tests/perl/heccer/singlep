@@ -112,6 +112,17 @@ sub main
 
     use YAML;
 
+    use IO::File;
+
+    my $configuration = IO::File->new(">./yaml/heccer/$modelname.yml");
+
+    if (defined $configuration)
+    {
+	print $configuration Dump($scheduler);
+
+	$configuration->close();
+    }
+
     my $scheduler_yaml;
 
     {
