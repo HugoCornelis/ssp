@@ -3,31 +3,42 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '	my $arguments = $application->{arguments};
+                                  'text' => '	my $success = $object->$method($peer, @$arguments);
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 697
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	my $connected
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => '307'
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	if (!$engine->compile($self))
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 110
+                                  'line' => '1067'
                                 }
-                              ]
+                              ],
+           '_<bin/ssp' => [
+                            {
+                              'expr' => undef,
+                              'value' => '1',
+                              'text' => '	my $model_root = $option_model_name;
+',
+                              'fname' => 'bin/ssp',
+                              'type' => 'user',
+                              'line' => 363
+                            },
+                            {
+                              'expr' => undef,
+                              'value' => '1',
+                              'text' => '	$scheduler->run( { verbosity => $option_verbose, }, );
+',
+                              'fname' => 'bin/ssp',
+                              'type' => 'user',
+                              'line' => '700'
+                            },
+                            {
+                              'expr' => undef,
+                              'value' => '1',
+                              'text' => '	schedule($scheduler);
+',
+                              'fname' => 'bin/ssp',
+                              'type' => 'user',
+                              'line' => '543'
+                            }
+                          ]
          };
 $expr_list = [
                {

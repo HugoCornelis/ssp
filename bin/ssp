@@ -269,8 +269,7 @@ sub main
 
     if ($option_configuration_cell)
     {
-	if (!defined $option_model_name
-	    && !defined $option_model_filename)
+	if (!defined $option_model_filename)
 	{
 	    system "$0 --help";
 
@@ -362,10 +361,18 @@ sub main
 
 	my $model_root = $option_model_name;
 
+	if (!$model_root)
+	{
+	    $model_root = $option_model_filename;
+
+	    $model_root =~ s/^.*\///;
+	    $model_root =~ s/\..*$//;
+	}
+
 	my $models
 	    = [
 	       {
-		modelname => "/$option_model_name",
+		modelname => "/$model_root",
 		solverclass => $option_solverclass,
 	       },
 	      ];
@@ -456,7 +463,7 @@ sub main
 
 	my $option_output_directory = './output';
 
-	my $option_output_filename = $option_output_directory . '/' . $option_model_name;
+	my $option_output_filename = $option_output_directory . '/' . $model_root;
 
 	$option_output_filename =~ m((.*)/);
 
