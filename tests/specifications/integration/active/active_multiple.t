@@ -21,7 +21,7 @@ my $test
 						   description => "Is a small subset of the purkinje cell model solved correctly ?",
 						   disabled => (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf" ? "purkinje cell potassium channels not found" : ""),
 						   read => (join '', `cat $::config->{tests_directory}/strings/purk_test.txt`),
-						   timeout => 15,
+						   timeout => 50,
 						   write => undef,
 						  },
 						 ],
