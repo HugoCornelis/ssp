@@ -1,0 +1,199 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb -w
+#
+
+use strict;
+
+
+$| = 1;
+
+
+BEGIN
+{
+    #! make check
+
+    push @INC, '../perl';
+
+    #! make distcheck
+
+    push @INC, '../../perl';
+
+    #! normal run
+
+    push @INC, './perl';
+
+    #! after install
+
+    push @INC, '/usr/local/glue/swig/perl';
+}
+
+
+use SwiggableHeccer;
+
+use SSP;
+
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+$ENV{NEUROSPACES_MODELS} = '/usr/local/neurospaces/models/library';
+
+
+sub main
+{
+    # model specification array
+
+    my $modelname = $0;
+
+    $modelname =~ s/.*\///;
+
+    $modelname =~ s/-/_/g;
+
+    my $args = [ "$0", "-P", "tests/networks/$modelname.ndf" ];
+
+    # instantiate a scheduler
+
+    my $scheduler
+	= SSP->new(
+		   {
+		    apply => {
+			      simulation => [
+					     {
+					      arguments => [ 10000, { verbose => 2, }, ],
+					      method => 'steps',
+					     },
+# 					     {
+# 					      arguments => [ 0.1, ],
+# 					      method => 'advance',
+# 					     },
+					    ],
+			     },
+		    models => [
+			       {
+				granular_parameters => [
+							{
+							 component_name => "/$modelname/source/soma",
+							 field => 'INJECT',
+							 value => 2e-9,
+							},
+						       ],
+				modelname => "/$modelname/source",
+				solverclass => "heccer",
+			       },
+# 			       {
+# 				modelname => "/$modelname/target1",
+# 				solverclass => "heccer",
+# 			       },
+# 			       {
+# 				modelname => "/$modelname/target2",
+# 				solverclass => "heccer",
+# 			       },
+			      ],
+		    name => $modelname,
+		    outputclasses => {
+				      double_2_ascii => {
+							 module_name => 'Heccer',
+							 package => 'Heccer::Output',
+							},
+				      event_2_ascii => {
+							module_name => 'Heccer',
+							package => 'Heccer::Output',
+						       },
+				     },
+		    outputs => [
+				{
+				 component_name => "/$modelname/source/soma",
+				 field => 'Vm',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/source/soma/spikegen",
+				 field => 'spike',
+				 outputclass => 'event_2_ascii',
+				},
+			       ],
+		    services => {
+				 neurospaces => {
+						 initializers => [
+								  {
+								   arguments => [ $args, ],
+								   method => 'read',
+								  },
+								 ],
+						 module_name => 'Neurospaces',
+						},
+				},
+		    solverclasses => {
+				      heccer => {
+						 constructor_settings => {
+									  dStep => (1e-6),
+									  configuration => {
+											    reporting => {
+													  granularity => 10000,
+													  tested_things => (
+															    $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
+															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
+															    | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+															   ),
+													 },
+											   },
+									 },
+						 module_name => 'Heccer',
+						 service_name => 'neurospaces',
+						},
+				      event_distributor => {
+							    initializers => [
+									     {
+									      arguments => [],
+									      method => 'add_distributor',
+									     },
+									    ],
+							    module_name => 'Heccer',
+							    package => 'Heccer::DES',
+						      },
+				      event_queuer => {
+						       initializers => [
+									{
+									 arguments => [],
+									 method => 'add_queuer',
+									},
+								       ],
+						       module_name => 'Heccer',
+						       package => 'Heccer::DES',
+						      },
+				     },
+		   },
+		  );
+
+    use YAML;
+
+    my $scheduler_yaml;
+
+    {
+	local $/;
+
+	if (-e "./yaml/$modelname.yml")
+	{
+	    $scheduler_yaml = Load(`cat ./yaml/$modelname.yml`);
+	}
+    }
+
+    # run the schedule
+
+    $scheduler->run();
+}
+
+
+main();
+
+
+exit 0;
+
+
