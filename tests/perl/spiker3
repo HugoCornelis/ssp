@@ -78,7 +78,7 @@ sub main
 							{
 							 component_name => "/$modelname/source/soma",
 							 field => 'INJECT',
-							 value => 2e-9,  # 0,
+							 value => 2e-9,
 							},
 						       ],
 				modelname => "/$modelname/source",
@@ -117,25 +117,11 @@ sub main
 								 ],
 						 module_name => 'Neurospaces',
 						},
-				 event_system => {
-						  initializers => [
-								   {
-								    arguments => [],
-								    method => 'add_distributor',
-								   },
-								   {
-								    arguments => [],
-								    method => 'add_queuer',
-								   },
-								  ],
-						  module_name => 'Heccer',
-						  package => 'Heccer::DES',
-						 },
 				},
 		    solverclasses => {
 				      heccer => {
 						 constructor_settings => {
-# 									  dStep => (1e-11),
+									  dStep => (1e-6),
 									  configuration => {
 											    reporting => {
 													  granularity => 10000,
@@ -153,6 +139,26 @@ sub main
 						 module_name => 'Heccer',
 						 service_name => 'neurospaces',
 						},
+				      event_distributor => {
+							    initializers => [
+									     {
+									      arguments => [],
+									      method => 'add_distributor',
+									     },
+									    ],
+							    module_name => 'Heccer',
+							    package => 'Heccer::DES',
+							   },
+				      event_queuer => {
+						       initializers => [
+									{
+									 arguments => [],
+									 method => 'add_queuer',
+									},
+								       ],
+						       module_name => 'Heccer',
+						       package => 'Heccer::DES',
+						      },
 				     },
 		   },
 		  );

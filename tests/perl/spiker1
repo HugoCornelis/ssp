@@ -158,16 +158,16 @@ sub main
 							    module_name => 'Heccer',
 							    package => 'Heccer::DES',
 						      },
-				      event_queuer => {
-						       initializers => [
-									{
-									 arguments => [],
-									 method => 'add_queuer',
-									},
-								       ],
-						       module_name => 'Heccer',
-						       package => 'Heccer::DES',
-						      },
+# 				      event_queuer => {
+# 						       initializers => [
+# 									{
+# 									 arguments => [],
+# 									 method => 'add_queuer',
+# 									},
+# 								       ],
+# 						       module_name => 'Heccer',
+# 						       package => 'Heccer::DES',
+# 						      },
 				     },
 		   },
 		  );
