@@ -101,7 +101,7 @@ sub main
 							},
 				      event_2_ascii => {
 							module_name => 'Heccer',
-							package => 'Heccer::Output',
+							package => 'Heccer::Event::Output',
 						       },
 				     },
 		    outputs => [
@@ -126,6 +126,26 @@ sub main
 								 ],
 						 module_name => 'Neurospaces',
 						},
+				 event_distributor => {
+						       initializers => [
+									{
+									 arguments => [ { solverclass => 'heccer', }, ],
+									 method => 'add_distributor',
+									},
+								       ],
+						       module_name => 'Heccer',
+						       package => 'Heccer::DES',
+						      },
+# 				 event_queuer => {
+# 						  initializers => [
+# 								   {
+# 								    arguments => [],
+# 								    method => 'add_queuer',
+# 								   },
+# 								  ],
+# 						  module_name => 'Heccer',
+# 						  package => 'Heccer::DES',
+# 						 },
 				},
 		    solverclasses => {
 				      heccer => {
@@ -148,26 +168,6 @@ sub main
 						 module_name => 'Heccer',
 						 service_name => 'neurospaces',
 						},
-				      event_distributor => {
-							    initializers => [
-									     {
-									      arguments => [],
-									      method => 'add_distributor',
-									     },
-									    ],
-							    module_name => 'Heccer',
-							    package => 'Heccer::DES',
-						      },
-# 				      event_queuer => {
-# 						       initializers => [
-# 									{
-# 									 arguments => [],
-# 									 method => 'add_queuer',
-# 									},
-# 								       ],
-# 						       module_name => 'Heccer',
-# 						       package => 'Heccer::DES',
-# 						      },
 				     },
 		   },
 		  );
