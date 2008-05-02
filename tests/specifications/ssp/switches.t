@@ -80,11 +80,15 @@ Known builtin configurations:
 cell:
 
 
-	Simulate a cell, default is to output the membrane potential of the soma.
-	A current injection of 2e-9 is given \(unless overwritten using the options\).
-	The soma segment must reside in a SEGMENT_GROUP with name "segments".
+	Simulate a single model neuron, default is to output the membrane potential of the soma.
+	Use the options to inject current in the soma \(--inject\).
+	The model\'s soma segment must reside in a SEGMENT_GROUP with name "segments".
 
-	--model-filename set the model filename, and filename of the output file.
+        The name of the model neuron is inferred from the name of the model description file.
+        \(e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+        called "hh_neuron"\).
+
+	--model-name overwrite the default model name.
 	--steps sets number of steps
 ', ],
 						   timeout => 3,

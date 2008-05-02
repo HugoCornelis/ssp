@@ -52,6 +52,7 @@ my $option_model_filename;
 my $option_model_name;
 my $option_neurospaces_models = '/usr/local/neurospaces/models/library';
 my $option_neurospaces_studio;
+my $option_output_fields = [];
 my $option_set_name;
 my $option_set_outputclass_filename;
 my $option_solverclass = 'heccer';
@@ -76,11 +77,15 @@ my $builtin_configurations
 					],
 			 },
 		usage => '
-	Simulate a cell, default is to output the membrane potential of the soma.
-	A current injection of 2e-9 is given (unless overwritten using the options).
-	The soma segment must reside in a SEGMENT_GROUP with name "segments".
+	Simulate a single model neuron, default is to output the membrane potential of the soma.
+	Use the options to inject current in the soma (--inject).
+	The model\'s soma segment must reside in a SEGMENT_GROUP with name "segments".
 
-	--model-filename set the model filename, and filename of the output file.
+        The name of the model neuron is inferred from the name of the model description file.
+        (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+        called "hh_neuron").
+
+	--model-name overwrite the default model name.
 	--steps sets number of steps
 ',
 	       },
@@ -157,17 +162,29 @@ sub execute
 
 	if ($options->{inherit_outputclass})
 	{
+	    # loop over all output classes
+
 	    my $outputclasses = $scheduler->{outputclasses};
 
 	    foreach my $outputclass_name (keys %$outputclasses)
 	    {
+		# start with schedule filename
+
 		my $outputname = $filename;
+
+		# remove all directory names
 
 		$outputname =~ s(.*/)();
 
+		# remove possible .yml extension, gives output filename
+
 		$outputname =~ s(\.yml$)()i;
 
+		# we assume all output is directed to an output directory
+
 		$outputname = "./output/$outputname";
+
+		# fill in output class
 
 		$outputclasses->{$outputclass_name}->{options}->{filename} = $outputname;
 	    }
@@ -269,25 +286,32 @@ sub main
 
     if ($option_configuration_cell)
     {
+# 	if (!defined $option_model_filename)
+# 	{
+# 	    system "$0 --help";
+
+# 	    die "option_model_name must be set when using the 'cell' builtin configuration without a filename";
+# 	}
+
+# 	if (!defined $option_model_filename)
+# 	{
+# 	    system "$0 --help";
+
+# 	    die "option_model_filename must be set when using a builtin configuration";
+# 	}
+
 	if (!defined $option_model_filename)
 	{
-	    system "$0 --help";
-
-	    die "option_model_name must be set when using the 'cell' builtin configuration without a filename";
-	}
-
-	if (!defined $option_model_filename)
-	{
-	    system "$0 --help";
-
-	    die "option_model_filename must be set when using a builtin configuration";
+	    $option_model_filename = $option_configuration_cell;
 	}
 
 	if (!defined $option_model_name)
 	{
-	    $option_model_filename =~ m(.*/?([^/]*)\.(ndf|p|swc))i;
+	    $option_model_filename =~ m((.*)\.(ndf|p|swc))i;
 
 	    $option_model_name = $1;
+
+	    $option_model_name =~ s(.*/)();
 
 	    if (!defined $option_model_name)
 	    {
@@ -295,6 +319,8 @@ sub main
 
 		die "option_model_name cannot be determined from the option_model_filename due to a regex mismatch, bailing out";
 	    }
+
+	    print "Inferring model name from $option_model_filename, model name set to $option_model_name\nUse the --model-name option to overwrite\n";
 	}
 
 	# construct a schedule from a builtin
@@ -305,7 +331,7 @@ sub main
 
 	# assign name
 
-	$scheduler->{name} = "cell configuration: $option_model_name";
+	$scheduler->{name} = "builtin cell configuration: $option_model_name";
 
 	# process service options
 
@@ -320,6 +346,8 @@ sub main
 
 	if  ($option_model_filename =~ m(\.ndf$))
 	{
+	    # use the 'read' method to initialize the model container
+
 	    my $args = [ "$0", "-P", ];
 
 	    push @$args, $option_model_filename;
@@ -337,6 +365,11 @@ sub main
 
 	else
 	{
+	    # use the 'load' method to initializer the model container
+
+	    #! this will also convert .p and .swc files respecting the
+	    #! conversion library.
+
 	    my $args = [ "$0", "-P", ];
 
 	    $services->{neurospaces}->{initializers}
@@ -357,17 +390,19 @@ sub main
 
 	$scheduler->{services} = $services;
 
-	# process model options
+	# infer the model name
 
 	my $model_root = $option_model_name;
 
-	if (!$model_root)
-	{
-	    $model_root = $option_model_filename;
+# 	if (!$model_root)
+# 	{
+# 	    $model_root = $option_model_filename;
 
-	    $model_root =~ s/^.*\///;
-	    $model_root =~ s/\..*$//;
-	}
+# 	    $model_root =~ s/^.*\///;
+# 	    $model_root =~ s/\..*$//;
+# 	}
+
+	# link model name with solver class
 
 	my $models
 	    = [
@@ -377,23 +412,27 @@ sub main
 	       },
 	      ];
 
-	my $conceptual_parameters
-	    = [
-	       {
-		component_name => 'thickd::gaba::/Purk_GABA',
-		description => 'endogenous activity',
-		field => 'FREQUENCY',
-		value => '1',
-	       },
-	       {
-		component_name => 'spine::/Purk_spine/head/par',
-		description => 'endogenous activity',
-		field => 'FREQUENCY',
-		value => '25',
-	       },
-	      ];
+	# no conceptual parameters, has been obsoleted
+
+# 	my $conceptual_parameters
+# 	    = [
+# 	       {
+# 		component_name => 'thickd::gaba::/Purk_GABA',
+# 		description => 'endogenous activity',
+# 		field => 'FREQUENCY',
+# 		value => '1',
+# 	       },
+# 	       {
+# 		component_name => 'spine::/Purk_spine/head/par',
+# 		description => 'endogenous activity',
+# 		field => 'FREQUENCY',
+# 		value => '25',
+# 	       },
+# 	      ];
 
 # 	$models->[0]->{conceptual_parameters} = $conceptual_parameters;
+
+	# fill in granular parameters for this model
 
 	my $granular_parameters;
 
@@ -412,19 +451,21 @@ sub main
 	{
 	    $granular_parameters
 		= [
-		   {
-		    component_name => "/$model_root/segments/soma",
-		    field => 'INJECT',
-		    value => 2e-9, # 0,
-		   },
+# 		   {
+# 		    component_name => "/$model_root/segments/soma",
+# 		    field => 'INJECT',
+# 		    value => 2e-9, # 0,
+# 		   },
 		  ];
 	}
 
 	$models->[0]->{granular_parameters} = $granular_parameters;
 
+	# fill in the model section of the schedule
+
 	$scheduler->{models} = $models;
 
-	# process solver class options
+	# define the solver class
 
 	my $option_solverclass_name = 'Heccer';
 
@@ -457,15 +498,19 @@ sub main
 	    $solverclasses->{heccer}->{constructor_settings}->{dStep} = $option_time_step;
 	}
 
+	# fill in solver class in the schedule
+
 	$scheduler->{solverclasses} = $solverclasses;
 
-	# process output class options
+	# define an output filename
 
 	my $option_output_directory = './output';
 
 	my $option_output_filename = $option_output_directory . '/' . $model_root;
 
 	$option_output_filename =~ m((.*)/);
+
+	# create the directory for the output file
 
 	my $directory = $1;
 
@@ -474,7 +519,13 @@ sub main
 	    `mkdir -p "$1"`;
 	}
 
+	# we assume the solver exports a suitable output class
+
+	#! not sure if this is a good idea
+
 	my $option_output_package = $option_solverclass_name . '::' . 'Output';
+
+	# assemble output class definition
 
 	my $outputclasses
 	    = {
@@ -487,17 +538,39 @@ sub main
 				 },
 	      };
 
+	# fill in the output class in the schedule
+
 	$scheduler->{outputclasses} = $outputclasses;
 
-	# process output options
+	# link the model outputs with the output class
+
+	if (!@$option_output_fields)
+	{
+	    $option_output_fields = [ "/$model_root/segments/soma->Vm", ];
+	}
 
 	my $outputs
 	    = [
+	       map
 	       {
-		component_name => "/$model_root/segments/soma",
-		field => 'Vm',
-		outputclass => 'double_2_ascii',
-	       },
+		   my $address = $_;
+
+		   $address =~ m/(.*)->(.*)/;
+
+		   my $component_name = $1;
+
+		   my $field = $2;
+
+		   my $result
+		       = {
+			  component_name => $component_name,
+			  field => $field,
+			  outputclass => 'double_2_ascii',
+			 };
+
+		   $result;
+	       }
+	       @$option_output_fields,
 	      ];
 
 	$scheduler->{outputs} = $outputs;
@@ -553,7 +626,7 @@ sub read_cmd_line
 	= GetOptions
 	    (
 	     "builtins!" => \$option_builtins,
-	     "cell!" => \$option_configuration_cell,
+	     "cell=s" => \$option_configuration_cell,
 	     "daemonize!" => \$option_daemonize,
 	     "emit-schedules!" => \$option_emit_schedules,
 	     "help!" => \$option_help,
@@ -563,6 +636,7 @@ sub read_cmd_line
 	     "model-name=s" => \$option_model_name,
 	     "neurospaces-models=s" => \$option_neurospaces_models,
 	     "neurospaces-studio" => \$option_neurospaces_studio,
+	     "output-fields=s" => $option_output_fields,
 	     "set-name=s" => \$option_set_name,
 	     "set-outputclass-filename=s" => \$option_set_outputclass_filename,
 	     "solverclass=s" => \$option_solverclass,
@@ -672,9 +746,12 @@ sub schedule
 
     my $fh = IO::File->new(">/tmp/current_schedule");
 
-    print $fh $serialized_schedule;
+    if ($fh)
+    {
+	print $fh $serialized_schedule;
 
-    $fh->close();
+	$fh->close();
+    }
 
     # if options say to emit the schedule
 
