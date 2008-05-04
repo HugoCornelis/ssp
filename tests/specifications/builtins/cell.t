@@ -58,7 +58,7 @@ models:
   - granular_parameters: []
     modelname: /stand_alone
     solverclass: heccer
-name: \'builtin cell configuration: stand_alone\'
+name: \'builtin cell configuration, applied to: stand_alone\'
 outputclasses:
   double_2_ascii:
     module_name: Heccer
@@ -149,7 +149,7 @@ models:
         value: 2e-8
     modelname: /stand_alone
     solverclass: heccer
-name: \'builtin cell configuration: stand_alone\'
+name: \'builtin cell configuration, applied to: stand_alone\'
 outputclasses:
   double_2_ascii:
     module_name: Heccer

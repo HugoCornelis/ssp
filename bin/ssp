@@ -331,7 +331,7 @@ sub main
 
 	# assign name
 
-	$scheduler->{name} = "builtin cell configuration: $option_model_name";
+	$scheduler->{name} = "builtin cell configuration, applied to: $option_model_name";
 
 	# process service options
 
