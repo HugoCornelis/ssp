@@ -815,6 +815,18 @@ sub lookup_object
 }
 
 
+# sub lookup_output
+# {
+#     my $self = shift;
+
+#     my $options = shift;
+
+#     my $index = $options->{index};
+
+#     return $self->{outputs}->[$index];
+# }
+
+
 sub lookup_solver_engine
 {
     my $self = shift;
@@ -1249,12 +1261,12 @@ sub analyze
 }
 
 
-sub backend
-{
-    my $self = shift;
+# sub backend
+# {
+#     my $self = shift;
 
-    return $self->{backend};
-}
+#     return $self->{backend};
+# }
 
 
 sub new
@@ -1434,10 +1446,7 @@ sub new
 
     my $options = shift;
 
-    my $self
-	= {
-	   %$options,
-	  };
+    my $self = { %$options, };
 
     bless $self, $package;
 
@@ -1638,7 +1647,7 @@ $@";
     {
 	no strict "refs";
 
-	my $options = $self->{options} || {};
+	my $input_options = $self->{options} || {};
 
 	my $input_package = $self->{package};
 
@@ -1647,6 +1656,7 @@ $@";
 		(
 		 {
 		  %$options,
+		  %$input_options,
 		  name => $self->{name},
 		 },
 		);
@@ -1808,7 +1818,7 @@ $@";
     {
 	no strict "refs";
 
-	my $options = $self->{options} || {};
+	my $output_options = $self->{options} || {};
 
 	my $output_package = $self->{package};
 
@@ -1817,6 +1827,7 @@ $@";
 		(
 		 {
 		  %$options,
+		  %$output_options,
 		  name => $self->{name},
 		 },
 		);

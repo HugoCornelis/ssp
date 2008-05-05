@@ -105,6 +105,7 @@ sub main
 				      event_2_ascii => {
 							module_name => 'Heccer',
 							options => {
+								    distributor_name => 'event_distributor',
 								    filename => "/tmp/output_spike",
 								   },
 							package => 'Heccer::Event::Output',
@@ -132,31 +133,34 @@ sub main
 								 ],
 						 module_name => 'Neurospaces',
 						},
-    #t fill in output objects in the matrix
-
-    #t link event_distributor instance to heccer instances
-
-    #t see comments and code spiker1.c
-
 				 event_distributor => {
 						       initializers => [
 									{
-									 arguments => [ { solverclass => 'heccer', }, ],
-									 method => 'add_distributor',
+									 arguments => [ { connections => 1, }, ],
+									 method => 'compile',
 									},
+# 									{
+# 									 arguments => [
+# 										       {
+# 											index => 1,
+# 											type => 'output',
+# 										       },
+# 										      ],
+# 									 method => 'add_output',
+# 									},
 								       ],
 						       module_name => 'Heccer',
-						       package => 'Heccer::DES',
+						       package => 'Heccer::DES::Distributor',
 						      },
 # 				 event_queuer => {
 # 						  initializers => [
 # 								   {
 # 								    arguments => [],
-# 								    method => 'add_queuer',
+# 								    method => 'compile',
 # 								   },
 # 								  ],
 # 						  module_name => 'Heccer',
-# 						  package => 'Heccer::DES',
+# 						  package => 'Heccer::DES::Queuer',
 # 						 },
 				},
 		    solverclasses => {
