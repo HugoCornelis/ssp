@@ -17,8 +17,10 @@ my $test
 				command_tests => [
 						  {
 						   description => "Can we run a single neuron model from the cell builtin schedule ?",
-						   read => '
-analyzers: {}
+						   read => [
+							    '-re',
+							    '
+analyzers: \{\}
 application_classes:
   analyzers:
     default:
@@ -36,17 +38,17 @@ application_classes:
       - method: initiate
     priority: 80
   modifiers:
-    default: []
+    default: \[\]
     priority: 50
   results:
-    default: []
+    default: \[\]
     priority: 170
   services:
     default:
       - method: instantiate_services
     priority: 20
   simulation:
-    default: []
+    default: \[\]
     priority: 110
 apply:
   simulation:
@@ -55,7 +57,7 @@ apply:
         - verbose: 0
       method: steps
 models:
-  - granular_parameters: []
+  - granular_parameters: \[\]
     modelname: /stand_alone
     solverclass: heccer
 name: \'builtin cell configuration, applied to: stand_alone\'
@@ -74,7 +76,7 @@ services:
     initializers:
       - arguments:
           -
-            - ./bin/ssp
+            - (.*?)/bin/ssp
             - -P
             - cells/stand_alone.ndf
         method: read
@@ -85,6 +87,7 @@ solverclasses:
     module_name: Heccer
     service_name: neurospaces
 ',
+							   ],
 						   timeout => 3,
 						   write => undef,
 						  },
@@ -105,8 +108,10 @@ solverclasses:
 				command_tests => [
 						  {
 						   description => "Can we run a single neuron model from the cell builtin schedule, soma Vm output, soma current injection ?",
-						   read => '
-analyzers: {}
+						   read => [
+							    '-re',
+							    '
+analyzers: \{\}
 application_classes:
   analyzers:
     default:
@@ -124,17 +129,17 @@ application_classes:
       - method: initiate
     priority: 80
   modifiers:
-    default: []
+    default: \[\]
     priority: 50
   results:
-    default: []
+    default: \[\]
     priority: 170
   services:
     default:
       - method: instantiate_services
     priority: 20
   simulation:
-    default: []
+    default: \[\]
     priority: 110
 apply:
   simulation:
@@ -165,7 +170,7 @@ services:
     initializers:
       - arguments:
           -
-            - ./bin/ssp
+            - (.*?)/bin/ssp
             - -P
             - cells/stand_alone.ndf
         method: read
@@ -176,6 +181,7 @@ solverclasses:
     module_name: Heccer
     service_name: neurospaces
 ',
+							   ],
 						   timeout => 3,
 						   write => undef,
 						  },
