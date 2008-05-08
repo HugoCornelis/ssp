@@ -105,6 +105,8 @@ sub main
 				      event_2_ascii => {
 							module_name => 'Heccer',
 							options => {
+								    # the source of events is the event_distributor service
+
 								    distributor_name => 'event_distributor',
 								    filename => "/tmp/output_spike",
 								   },
@@ -117,8 +119,17 @@ sub main
 				 field => 'Vm',
 				 outputclass => 'double_2_ascii',
 				},
+
+				# this one defines the connection between the heccer spikegen and event output object
+
 				{
 				 component_name => "/$modelname/source/soma/spikegen",
+
+				 # but the connection is relayed over the event_distributor
+
+				 #! note that distributor_services should be possible for continuous valued variables
+
+				 distributor_service => 'event_distributor',
 				 field => 'spike',
 				 outputclass => 'event_2_ascii',
 				},
@@ -136,7 +147,21 @@ sub main
 				 event_distributor => {
 						       initializers => [
 									{
-									 arguments => [ { connections => 1, }, ],
+									 arguments => [
+										       {
+											#t so this needs to be calculated automatically from the outputs above
+
+											connections => 1,
+
+# 											# this is a reference into the output table
+
+# 											outputs => [ 1, ],
+
+# 											# the source of events is heccer spikegens
+
+# 											solverclasses => [ 'heccer', ],
+										       },
+										      ],
 									 method => 'compile',
 									},
 # 									{

@@ -608,44 +608,65 @@ sub instantiate_outputs
 
 	my $solver_engine = $self->lookup_solver_engine($solverinfo->{solver});
 
-	# get the output field from the solver (is a double *)
+	# if there is a relay service
 
-	my $solverfield = $solver_engine->solverfield($solverinfo);
-
-	if (!defined $solverfield)
+	if ($output->{distributor_service})
 	{
-	    die "The output " . $output->{component_name} . "->" . $output->{field} . " cannot be found";
+	    #1
+
+	    #t connect the solver with the service
+
+	    #t fills in the iTable member for the spikegen intermediary
+
+	    #t fills in the event send function
+
+	    #2
+
+	    #t connect the service with the output engine
+
+	    #t fills in the output object and OutputGeneratorAnnotatedStep() in the distributor_service
 	}
-
-	# find the output for the output class
-
-	my $outputclass_name = $output->{outputclass};
-
-	my $outputclass = $self->{outputclasses}->{$outputclass_name};
-
-	if (!defined $outputclass)
+	else
 	{
-	    die "The output " . $output->{component_name} . "->" . $output->{field} . " has as outputclass $outputclass_name, but this class cannot be found";
-	}
+	    # get the output field from the solver (is a double *)
 
-	# add the output field to the output engine
+	    my $solverfield = $solver_engine->solverfield($solverinfo);
 
-	#! note that outputclass is not an object
+	    if (!defined $solverfield)
+	    {
+		die "The output " . $output->{component_name} . "->" . $output->{field} . " cannot be found";
+	    }
 
-	my $output_backend = $outputclass->{ssp_outputclass};
+	    # find the output for the output class
 
-	my $connected
-	    = $output_backend->add
-		(
-		 {
-		  address => $solverfield,
-		  service_request => $output,
-		 },
-		);
+	    my $outputclass_name = $output->{outputclass};
 
-	if (!$connected)
-	{
-	    die "The output " . $output->{component_name} . "->" . $output->{field} . " cannot be connected to its output engine (which is determined by the output class in the schedule).";
+	    my $outputclass = $self->{outputclasses}->{$outputclass_name};
+
+	    if (!defined $outputclass)
+	    {
+		die "The output " . $output->{component_name} . "->" . $output->{field} . " has as outputclass $outputclass_name, but this class cannot be found";
+	    }
+
+	    # add the output field to the output engine
+
+	    #! note that outputclass is not an object
+
+	    my $output_backend = $outputclass->{ssp_outputclass};
+
+	    my $connected
+		= $output_backend->add
+		    (
+		     {
+		      address => $solverfield,
+		      service_request => $output,
+		     },
+		    );
+
+	    if (!$connected)
+	    {
+		die "The output " . $output->{component_name} . "->" . $output->{field} . " cannot be connected to its output engine (which is determined by the output class in the schedule).";
+	    }
 	}
     }
 
