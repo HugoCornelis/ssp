@@ -53,6 +53,7 @@ my $option_model_name;
 my $option_neurospaces_models = '/usr/local/neurospaces/models/library';
 my $option_neurospaces_studio;
 my $option_output_fields = [];
+my $option_parameters = [];
 my $option_set_name;
 my $option_set_outputclass_filename;
 my $option_solverclass = 'heccer';
@@ -451,13 +452,35 @@ sub main
 	{
 	    $granular_parameters
 		= [
-# 		   {
-# 		    component_name => "/$model_root/segments/soma",
-# 		    field => 'INJECT',
-# 		    value => 2e-9, # 0,
-# 		   },
 		  ];
 	}
+
+	$granular_parameters
+	    = [
+	       @$granular_parameters,
+	       map
+	       {
+		   my $setting = $_;
+
+		   $setting =~ m/^(.*)->(.*)=(.*)$/;
+
+		   my $component_name = $1;
+
+		   my $field = $2;
+
+		   my $value = $3;
+
+		   my $result
+		       = {
+			  component_name => $component_name,
+			  field => $field,
+			  value => $value,
+			 };
+
+		   $result;
+	       }
+	       @$option_parameters,
+	      ];
 
 	$models->[0]->{granular_parameters} = $granular_parameters;
 
@@ -555,7 +578,7 @@ sub main
 	       {
 		   my $address = $_;
 
-		   $address =~ m/(.*)->(.*)/;
+		   $address =~ m/^(.*)->(.*)$/;
 
 		   my $component_name = $1;
 
@@ -637,6 +660,7 @@ sub read_cmd_line
 	     "neurospaces-models=s" => \$option_neurospaces_models,
 	     "neurospaces-studio" => \$option_neurospaces_studio,
 	     "output-fields=s" => $option_output_fields,
+	     "parameters=s" => $option_parameters,
 	     "set-name=s" => \$option_set_name,
 	     "set-outputclass-filename=s" => \$option_set_outputclass_filename,
 	     "solverclass=s" => \$option_solverclass,
@@ -675,6 +699,8 @@ options :
     neurospaces-models directory where to find the neurospaces library.
     neurospaces-studio replace the simulation routine with calls to the neurospaces studio,
                        this allows to explore the model after all modifiers have completed.
+    outputs            define an output, can be given multiple times.
+    parameters         set a specific parameter value, can be given multiple times.
     set-name           overwrite the schedule name with the name of the file that contains the schedule.
     set-outputclass-filename
                        overwrite the outputclass filename with something derived from the name of the
