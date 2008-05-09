@@ -107,7 +107,7 @@ sub main
 							options => {
 								    # the source of events is the event_distributor service
 
-								    distributor_name => 'event_distributor',
+								    event_source => 'event_distributor',
 								    filename => "/tmp/output_spike",
 								   },
 							package => 'Heccer::Event::Output',
@@ -149,17 +149,9 @@ sub main
 									{
 									 arguments => [
 										       {
-											#t so this needs to be calculated automatically from the outputs above
+											# output goes to this output object
 
-											connections => 1,
-
-# 											# this is a reference into the output table
-
-# 											outputs => [ 1, ],
-
-# 											# the source of events is heccer spikegens
-
-# 											solverclasses => [ 'heccer', ],
+											output => 'event_2_ascii',
 										       },
 										      ],
 									 method => 'compile',
