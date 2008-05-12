@@ -152,6 +152,10 @@ sub main
 											# output goes to this output object
 
 											output => 'event_2_ascii',
+
+											# solver info translation service
+
+											service => 'neurospaces',
 										       },
 										      ],
 									 method => 'compile',

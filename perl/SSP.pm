@@ -393,6 +393,79 @@ sub initiate
 }
 
 
+# sub instantiate_communicators
+# {
+#     my $self = shift;
+
+#     # loop over all services
+
+#     my $communicators = $self->{communicators};
+
+#     foreach my $communicator_name (keys %$communicators)
+#     {
+# 	my $communicator = $communicators->{$communicator_name};
+
+# 	# construct the communicator backend
+
+# 	my $communicator_module = $communicator->{module_name};
+
+# 	eval
+# 	{
+# 	    local $SIG{__DIE__};
+
+# 	    require "$communicator_module.pm";
+# 	};
+
+# 	if ($@)
+# 	{
+# 	    die "Cannot load communicator module ($communicator_module.pm) for communicator $communicator_name
+
+# Possible solutions:
+# 1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
+# 2. Install the correct integration module for this communicator.
+# 3. The communicator module is not correct, to find out, type perl -e 'push \@INC, \"/usr/local/glue/swig/perl\" ; require $communicator_module', and see if perl can find and compile the communicator module
+# 4. Contact your system administrator.
+
+# $@";
+# 	}
+
+# 	my $package = $communicator->{package} || $communicator_module;
+
+# 	my $backend = $package->new($communicator);
+
+# 	# construct the SSP communicator for this backend
+
+# 	my $ssp_communicator = SSP::Engine->new( { backend => $backend, scheduler => $self, }, );
+
+# 	# initialize the communicator backend with the user settings
+
+# 	my $initializers = $communicator->{initializers};
+
+# 	foreach my $initializer (@$initializers)
+# 	{
+# 	    my $method = $initializer->{method};
+
+# 	    my $arguments = $initializer->{arguments};
+
+# 	    my $success = $backend->$method($ssp_communicator, @$arguments);
+
+# 	    if (!$success)
+# 	    {
+# 		die "initializer $method for $communicator_name failed";
+# 	    }
+# 	}
+
+# 	# bind the SSP communicator in the scheduler
+
+# 	$communicator->{ssp_communicator} = $ssp_communicator;
+#     }
+
+#     # return success
+
+#     return 1;
+# }
+
+
 sub instantiate_inputs
 {
     my $self = shift;
