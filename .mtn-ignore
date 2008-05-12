@@ -8,7 +8,6 @@ synaptic-test.patch
 ^html
 ^installed
 ^output
-^perl/Makefile$
-^tests/Makefile$
 ^tests/html
+^tests/output
 gz$
