@@ -19,25 +19,24 @@ sub advance
 
     my $options = shift;
 
-    # set default result : ok
+    # determine the time step
 
-    my $result = 1;
+    my $time_step_min = $self->get_time_step();
 
-    # loop over all schedulees
+    # if we were not able to define a time step
 
-    my $schedule = $self->{schedule};
-
-    foreach my $schedulee (@$schedule)
+    if (!defined $time_step_min)
     {
-	# advance the engine
-
-	my $error = $schedulee->advance($self, $time, $options);
-
-	if ($error)
-	{
-	    die "Advancing time to $time failed";
-	}
+	die "$0: Cannot determine a minimal time step";
     }
+
+    # calculate number of steps
+
+    my $steps = $time / $time_step_min;
+
+    # do a number of steps based on this time step
+
+    my $result = $self->steps($scheduler, $steps);
 
     # return result
 
@@ -70,7 +69,7 @@ sub analyze
 
 	if ($@)
 	{
-	    die "Cannot load analyzer module ($analyzer_module.pm) for analyzer $analyzer_name
+	    die "$0: Cannot load analyzer module ($analyzer_module.pm) for analyzer $analyzer_name
 
 Possible solutions:
 1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
@@ -103,7 +102,7 @@ $@";
 
 	    if (!$success)
 	    {
-		die "initializer $method for $analyzer_name failed";
+		die "$0: Initializer $method for $analyzer_name failed";
 	    }
 	}
 
@@ -119,11 +118,25 @@ $@";
 }
 
 
+sub apply_granular_parameters
+{
+    my $self = shift;
+
+    # set default result: ok
+
+    my $result = 1;
+
+    # return result
+
+    return $result;
+}
+
+
 sub compile
 {
     my $self = shift;
 
-    # set default result : ok
+    # set default result: ok
 
     my $result = 1;
 
@@ -154,7 +167,7 @@ sub compile
 
 	    if (defined $conceptual_parameter_application)
 	    {
-		die "Cannot apply conceptual_parameters: $conceptual_parameter_application";
+		die "$0: Cannot apply conceptual_parameters: $conceptual_parameter_application";
 	    }
 	}
 
@@ -167,7 +180,7 @@ sub compile
 
 	    if (defined $granular_parameter_application)
 	    {
-		die "Cannot apply granular_parameters: $granular_parameter_application";
+		die "$0: Cannot apply granular_parameters: $granular_parameter_application";
 	    }
 	}
 
@@ -337,7 +350,7 @@ sub finish
 {
     my $self = shift;
 
-    # set default result : ok
+    # set default result: ok
 
     my $result = 1;
 
@@ -363,11 +376,40 @@ sub finish
 }
 
 
+sub get_time_step
+{
+    my $self = shift;
+
+    my $result;
+
+    # loop over all schedulees
+
+    my $schedule = $self->{schedule};
+
+    foreach my $schedulee (@$schedule)
+    {
+	# get the time step
+
+	my $time_step = $schedulee->get_time_step();
+
+	if (!defined $result
+	    or $time_step < $result)
+	{
+	    $result = $time_step;
+	}
+    }
+
+    # return result
+
+    return $result;
+}
+
+
 sub initiate
 {
     my $self = shift;
 
-    # set default result : ok
+    # set default result: ok
 
     my $result = 1;
 
@@ -383,7 +425,7 @@ sub initiate
 
 	if (!$success)
 	{
-	    die "Initiation failed";
+	    die "$0: Initiation failed";
 	}
     }
 
@@ -418,7 +460,7 @@ sub initiate
 
 # 	if ($@)
 # 	{
-# 	    die "Cannot load communicator module ($communicator_module.pm) for communicator $communicator_name
+# 	    die "$0: Cannot load communicator module ($communicator_module.pm) for communicator $communicator_name
 
 # Possible solutions:
 # 1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
@@ -451,7 +493,7 @@ sub initiate
 
 # 	    if (!$success)
 # 	    {
-# 		die "initializer $method for $communicator_name failed";
+# 		die "$0: initializer $method for $communicator_name failed";
 # 	    }
 # 	}
 
@@ -774,7 +816,7 @@ sub instantiate_services
 
 	if ($@)
 	{
-	    die "Cannot load service module ($service_module.pm) for service $service_name
+	    die "$0: Cannot load service module ($service_module.pm) for service $service_name
 
 Possible solutions:
 1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
@@ -807,7 +849,7 @@ $@";
 
 	    if (!$success)
 	    {
-		die "initializer $method for $service_name failed";
+		die "$0: Initializer $method for $service_name failed";
 	    }
 	}
 
@@ -1176,6 +1218,10 @@ sub run
 	{
 	    die "while running $self->{name}: $method failed";
 	}
+
+	# register the method that done the work
+
+	$self->{status}->{$method}++;
     }
 }
 
@@ -1273,7 +1319,7 @@ sub steps
 
     my $options = shift || {};
 
-    # set default result : ok
+    # set default result: ok
 
     my $result = 1;
 
@@ -1419,7 +1465,7 @@ sub compile
 
     my $scheduler = shift;
 
-    # set default result : ok
+    # set default result: ok
 
     my $result = 1;
 
@@ -1452,7 +1498,7 @@ sub compile
 
     if ($@)
     {
-	die "Cannot load solver module ($solver_module.pm) for solverclass $solverclass
+	die "$0: Cannot load solver module ($solver_module.pm) for solverclass $solverclass
 
 Possible solutions:
 1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
@@ -1509,6 +1555,18 @@ sub finish
     my $backend = $self->backend();
 
     my $result = $backend->finish($self);
+
+    return $result;
+}
+
+
+sub get_time_step
+{
+    my $self = shift;
+
+    my $backend = $self->backend();
+
+    my $result = $backend->get_time_step($self);
 
     return $result;
 }
@@ -1688,6 +1746,18 @@ sub finish
 }
 
 
+sub get_time_step
+{
+    my $self = shift;
+
+    my $backend = $self->backend();
+
+    my $result = $backend->get_time_step($self);
+
+    return $result;
+}
+
+
 sub initiate
 {
     my $self = shift;
@@ -1725,7 +1795,7 @@ sub new
 
     if ($@)
     {
-	die "Cannot load input module ($input_module.pm) for input class $input_name
+	die "$0: Cannot load input module ($input_module.pm) for input class $input_name
 
 Possible solutions:
 1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
@@ -1848,6 +1918,18 @@ sub finish
 }
 
 
+sub get_time_step
+{
+    my $self = shift;
+
+    my $backend = $self->backend();
+
+    my $result = $backend->get_time_step($self);
+
+    return $result;
+}
+
+
 sub initiate
 {
     my $self = shift;
@@ -1896,7 +1978,7 @@ sub new
 
     if ($@)
     {
-	die "Cannot load output module ($output_module.pm) for output class $output_name
+	die "$0: Cannot load output module ($output_module.pm) for output class $output_name
 
 Possible solutions:
 1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.

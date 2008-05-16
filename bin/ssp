@@ -46,6 +46,8 @@ $SIG{__DIE__}
 my $option_configuration_cell;
 my $option_daemonize;
 my $option_emit_schedules;
+my $option_inject_delay;
+my $option_inject_duration;
 my $option_inject_soma;
 my $option_model_directory;
 my $option_model_filename;
@@ -58,7 +60,8 @@ my $option_set_name;
 my $option_set_outputclass_filename;
 my $option_solverclass = 'heccer';
 my $option_spine_prototype;
-my $option_steps = 2500;
+my $option_steps;
+my $option_time = 0.050;
 my $option_time_step;
 my $option_transformator = "";
 my $option_verbose;
@@ -612,9 +615,27 @@ sub main
 			     ],
 	      };
 
+	my $apply_time
+	    = {
+	       simulation => [
+			      {
+			       arguments => [ 0, { verbose => 0, }, ],
+			       method => 'advance',
+			      },
+			     ],
+	      };
+
 	if (defined $option_verbose)
 	{
 	    $apply->{simulation}->[0]->{arguments}->[1]->{verbose} = $option_verbose;
+	}
+
+	# setting the number of steps cannot be combined with inject duration and delay
+
+	if (defined $option_steps
+	    and (defined $option_inject_delay or defined $option_inject_duration))
+	{
+	    die "$0: option inject-delay and option inject-duration cannot be combined with option steps";
 	}
 
 	# set number of steps
@@ -624,7 +645,61 @@ sub main
 	    $apply->{simulation}->[0]->{arguments}->[0] = $option_steps;
 	}
 
-	$scheduler->{apply} = $apply;
+	# set simulation time
+
+	if (defined $option_time)
+	{
+	    if (not defined $option_inject_delay and not defined $option_inject_duration)
+	    {
+		$apply_time->{simulation}->[0]->{arguments}->[0] = $option_time;
+	    }
+	    else
+	    {
+		my $time_termination = $option_time - $option_inject_delay - $option_inject_duration;
+
+		$apply_time
+		    = {
+		       simulation => [
+				      {
+				       arguments => [ $option_inject_delay, { verbose => 0, }, ],
+				       method => 'advance',
+				      },
+				      {
+				       arguments => [
+						     {
+						      component_name => "/$model_root/segments/soma",
+						      field => 'INJECT',
+						      value => $option_inject_soma,
+						     },
+						    ],
+				       method => 'apply_granular_parameters',
+				      },
+				      {
+				       arguments => [ $option_inject_duration, { verbose => 0, }, ],
+				       method => 'advance',
+				      },
+				      {
+				       arguments => [
+						     {
+						      component_name => "/$model_root/segments/soma",
+						      field => 'INJECT',
+						      value => 0,
+						     },
+						    ],
+				       method => 'apply_granular_parameters',
+				      },
+				      {
+				       arguments => [ $time_termination, { verbose => 0, }, ],
+				       method => 'advance',
+				      },
+				     ],
+		      };
+	    }
+	}
+
+	defined $option_steps
+	    ? $scheduler->{apply} = $apply
+		: $scheduler->{apply} = $apply_time;
 
 	# dump the schedule
 
@@ -666,6 +741,7 @@ sub read_cmd_line
 	     "solverclass=s" => \$option_solverclass,
 	     "spine-prototype=s" => \$option_spine_prototype,
 	     "steps=i" => \$option_steps,
+	     "time=s" => \$option_time,
 	     "time-step=s" => \$option_time_step,
 	     "transformator=s" => \$option_transformator,
 	     "v|verbose+" => \$option_verbose,
@@ -684,7 +760,7 @@ $0: run simulations, given an ssp configuration, or using a builtin configuratio
 
 try $0 --builtins for information of how to run a simulation easily
 
-options :
+options:
     builtins           give help about supported builtin configurations.
     cell               use the cell builtin configuration.
     daemonize          detach from terminal, close shared resources and run in the background,
@@ -708,6 +784,7 @@ options :
     solverclass        set the solver class to use (when using a builtin configuration).
     spine-prototype    add spines with this prototype.
     steps              number of simulation steps, when using one of the builtin configurations.
+    time               set simulation time (in seconds).
     time-step          sets the time step, when using one of the builtin configurations.
     transformator      feed the configuration through this transformator before running.
     verbose            set verbosity level.

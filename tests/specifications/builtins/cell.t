@@ -53,9 +53,9 @@ application_classes:
 apply:
   simulation:
     - arguments:
-        - 2500
+        - 0.05
         - verbose: 0
-      method: steps
+      method: advance
 models:
   - granular_parameters: \[\]
     modelname: /stand_alone
@@ -144,9 +144,9 @@ application_classes:
 apply:
   simulation:
     - arguments:
-        - 2500
+        - 0.05
         - verbose: 0
-      method: steps
+      method: advance
 models:
   - granular_parameters:
       - component_name: /stand_alone/segments/soma
@@ -238,9 +238,9 @@ application_classes:
 apply:
   simulation:
     - arguments:
-        - 2500
+        - 0.05
         - verbose: 0
-      method: steps
+      method: advance
 models:
   - granular_parameters:
       - component_name: /stand_alone/segments/soma

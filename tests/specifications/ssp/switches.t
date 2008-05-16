@@ -27,7 +27,7 @@ my $test
 
 try .*ssp --builtins for information of how to run a simulation easily
 
-options :
+options:
     builtins           give help about supported builtin configurations.
     cell               use the cell builtin configuration.
     daemonize          detach from terminal, close shared resources and run in the background,
@@ -51,10 +51,12 @@ options :
     solverclass        set the solver class to use \(when using a builtin configuration\).
     spine-prototype    add spines with this prototype.
     steps              number of simulation steps, when using one of the builtin configurations.
+    time               set simulation time \(in seconds\).
     time-step          sets the time step, when using one of the builtin configurations.
     transformator      feed the configuration through this transformator before running.
     verbose            set verbosity level.
-', ],
+',
+							   ],
 						   timeout => 3,
 						   write => undef,
 						  },
