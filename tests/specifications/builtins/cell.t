@@ -98,7 +98,7 @@ solverclasses:
 				arguments => [
 					      '--cell',
 					      'cells/stand_alone.ndf',
-					      '--inject',
+					      '--inject-magnitude',
 					      '2e-8',
 					      '--emit',
 					      '--output',
