@@ -440,7 +440,9 @@ sub main
 
 	my $granular_parameters;
 
-	if ($option_inject_magnitude)
+	if ($option_inject_magnitude
+	   and !$option_inject_delay
+	   and !$option_inject_duration)
 	{
 	    $granular_parameters
 		= [

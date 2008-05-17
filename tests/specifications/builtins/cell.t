@@ -360,10 +360,7 @@ apply:
         - verbose: 0
       method: advance
 models:
-  - granular_parameters:
-      - component_name: /stand_alone/segments/soma
-        field: INJECT
-        value: 2e-8
+  - granular_parameters: \[\]
     modelname: /stand_alone
     solverclass: heccer
 name: \'builtin cell configuration, applied to: stand_alone\'
