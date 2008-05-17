@@ -35,7 +35,7 @@ options:
                        so be cautious with it.
     emit-schedules     print schedules to stdout instead of running them.
     help               print usage information.
-    inject-soma        amount of current injected into the soma.
+    inject-magnitude   amount of current injected into the soma.
     model-directory    name of the directory where to look for non-std models.
     model-filename     filename of the model description file \(when using a builtin configuration\).
     model-name         name of the model \(when using a builtin configuration\).

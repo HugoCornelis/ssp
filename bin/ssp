@@ -48,7 +48,7 @@ my $option_daemonize;
 my $option_emit_schedules;
 my $option_inject_delay;
 my $option_inject_duration;
-my $option_inject_soma;
+my $option_inject_magnitude;
 my $option_model_directory;
 my $option_model_filename;
 my $option_model_name;
@@ -440,14 +440,14 @@ sub main
 
 	my $granular_parameters;
 
-	if ($option_inject_soma)
+	if ($option_inject_magnitude)
 	{
 	    $granular_parameters
 		= [
 		   {
 		    component_name => "/$model_root/segments/soma",
 		    field => 'INJECT',
-		    value => $option_inject_soma,
+		    value => $option_inject_magnitude,
 		   },
 		  ];
 	}
@@ -669,7 +669,7 @@ sub main
 						     {
 						      component_name => "/$model_root/segments/soma",
 						      field => 'INJECT',
-						      value => $option_inject_soma,
+						      value => $option_inject_magnitude,
 						     },
 						    ],
 				       method => 'apply_granular_parameters',
@@ -728,7 +728,7 @@ sub read_cmd_line
 	     "daemonize!" => \$option_daemonize,
 	     "emit-schedules!" => \$option_emit_schedules,
 	     "help!" => \$option_help,
-	     "inject-soma=s" => \$option_inject_soma,
+	     "inject-magnitude=s" => \$option_inject_magnitude,
 	     "model-directory=s" => \$option_model_directory,
 	     "model-filename=s" => \$option_model_filename,
 	     "model-name=s" => \$option_model_name,
@@ -768,7 +768,7 @@ options:
                        so be cautious with it.
     emit-schedules     print schedules to stdout instead of running them.
     help               print usage information.
-    inject-soma        amount of current injected into the soma.
+    inject-magnitude   amount of current injected into the soma.
     model-directory    name of the directory where to look for non-std models.
     model-filename     filename of the model description file (when using a builtin configuration).
     model-name         name of the model (when using a builtin configuration).
