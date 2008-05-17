@@ -126,6 +126,8 @@ sub apply_granular_parameters
 
     my $result = 1;
 
+    die "$0: not implemented yet.";
+
     # return result
 
     return $result;
