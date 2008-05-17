@@ -394,8 +394,13 @@ sub get_time_step
 
 	my $time_step = $schedulee->get_time_step();
 
-	if (!defined $result
-	    or $time_step < $result)
+	if (!defined $result)
+	{
+	    $result = $time_step;
+	}
+
+	if (defined $time_step
+	    and $time_step < $result)
 	{
 	    $result = $time_step;
 	}
