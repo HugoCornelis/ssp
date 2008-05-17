@@ -728,6 +728,8 @@ sub read_cmd_line
 	     "daemonize!" => \$option_daemonize,
 	     "emit-schedules!" => \$option_emit_schedules,
 	     "help!" => \$option_help,
+	     "inject-delay=s" => \$option_inject_delay,
+	     "inject-duration=s" => \$option_inject_duration,
 	     "inject-magnitude=s" => \$option_inject_magnitude,
 	     "model-directory=s" => \$option_model_directory,
 	     "model-filename=s" => \$option_model_filename,
