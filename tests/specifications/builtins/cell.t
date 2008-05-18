@@ -11,12 +11,12 @@ my $test
 				arguments => [
 					      '--cell',
 					      'cells/stand_alone.ndf',
-					      '--emit',
+					      '--emit-schedules',
 					     ],
 				command => './bin/ssp',
 				command_tests => [
 						  {
-						   description => "Can we run a single neuron model from the cell builtin schedule ?",
+						   description => "Can we construct a schedule of a single neuron model from the cell builtin schedule ?",
 						   read => [
 							    '-re',
 							    '
@@ -92,7 +92,7 @@ solverclasses:
 						   write => undef,
 						  },
 						 ],
-				description => "single neuron model from the cell builtin schedule",
+				description => "schedule construction of a single neuron model from the cell builtin schedule",
 			       },
 			       {
 				arguments => [
@@ -100,14 +100,14 @@ solverclasses:
 					      'cells/stand_alone.ndf',
 					      '--inject-magnitude',
 					      '2e-8',
-					      '--emit',
+					      '--emit-schedules',
 					      '--output',
 					      "/stand_alone/segments/soma->Vm",
 					     ],
 				command => './bin/ssp',
 				command_tests => [
 						  {
-						   description => "Can we run a single neuron model from the cell builtin schedule, soma Vm output, soma current injection ?",
+						   description => "Can we construct a schedule of a single neuron model from the cell builtin schedule, soma Vm output, soma current injection ?",
 						   read => [
 							    '-re',
 							    '
@@ -186,7 +186,7 @@ solverclasses:
 						   write => undef,
 						  },
 						 ],
-				description => "single neuron model from the cell builtin schedule, soma Vm output, soma current injection",
+				description => "schedule construction of a single neuron model from the cell builtin schedule, soma Vm output, soma current injection",
 			       },
 			       {
 				arguments => [
@@ -194,14 +194,14 @@ solverclasses:
 					      'cells/stand_alone.ndf',
 					      '--parameter',
 					      "/stand_alone/segments/soma->INJECT=2e-8",
-					      '--emit',
+					      '--emit-schedules',
 					      '--output',
 					      "/stand_alone/segments/soma->Vm",
 					     ],
 				command => './bin/ssp',
 				command_tests => [
 						  {
-						   description => "Can we run a single neuron model from the cell builtin schedule, soma Vm output, soma current injection specified as a parameter ?",
+						   description => "Can we construct a schedule of a single neuron model from the cell builtin schedule, soma Vm output, soma current injection specified as a parameter ?",
 						   read => [
 							    '-re',
 							    '
@@ -280,7 +280,7 @@ solverclasses:
 						   write => undef,
 						  },
 						 ],
-				description => "single neuron model from the cell builtin schedule, soma Vm output, soma current injection specified as a parameter",
+				description => "schedule construction of a single neuron model from the cell builtin schedule, soma Vm output, soma current injection specified as a parameter",
 			       },
 			       {
 				arguments => [
@@ -294,14 +294,14 @@ solverclasses:
 					      '0.03',
 					      '--time',
 					      '0.06',
-					      '--emit',
+					      '--emit-schedules',
 					      '--output',
 					      "/stand_alone/segments/soma->Vm",
 					     ],
 				command => './bin/ssp',
 				command_tests => [
 						  {
-						   description => "Can we run a single neuron model from the cell builtin schedule, soma Vm output, soma current injection with set duration and simulation time ?",
+						   description => "Can we construct a schedule of a single neuron model from the cell builtin schedule, soma Vm output, soma current injection with set duration and simulation time ?",
 						   read => [
 							    '-re',
 							    '
@@ -344,6 +344,7 @@ apply:
     - arguments:
         - component_name: /stand_alone/segments/soma
           field: INJECT
+          modelname: /stand_alone
           value: 2e-8
       method: apply_granular_parameters
     - arguments:
@@ -353,6 +354,7 @@ apply:
     - arguments:
         - component_name: /stand_alone/segments/soma
           field: INJECT
+          modelname: /stand_alone
           value: 0
       method: apply_granular_parameters
     - arguments:
@@ -395,7 +397,35 @@ solverclasses:
 						   write => undef,
 						  },
 						 ],
-				description => "single neuron model from the cell builtin schedule, soma Vm output, soma current injection with set duration and simulation time",
+				description => "schedule construction of a single neuron model from the cell builtin schedule, soma Vm output, soma current injection with set duration and simulation time",
+			       },
+			       {
+				arguments => [
+					      '--cell',
+					      'cells/stand_alone.ndf',
+					      '--inject-magnitude',
+					      '2e-8',
+					      '--inject-delay',
+					      '0.01',
+					      '--inject-duration',
+					      '0.03',
+					      '--time',
+					      '0.06',
+					      '--output',
+					      "/stand_alone/segments/soma->Vm",
+					      "--emit-output",
+					      "output/stand_alone",
+					     ],
+				command => './bin/ssp',
+				command_tests => [
+						  {
+						   description => "Can we run a schedule of a single neuron model from the cell builtin schedule, soma Vm output, soma current injection with set duration and simulation time ?",
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/stand_alone-inject2e-8-0.01-0.03-0.06.txt`),
+						   timeout => 3,
+						   write => undef,
+						  },
+						 ],
+				description => "simulation of a single neuron model from the cell builtin schedule, soma Vm output, soma current injection with set duration and simulation time",
 			       },
 			      ],
        description => "cell builtin schedule",

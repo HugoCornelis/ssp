@@ -3,22 +3,31 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
+                                  'text' => '    my $result = $backend->addressable($fieldinfo);
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '1728'
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
                                   'text' => '	my $success = $object->$method($peer, @$arguments);
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '1067'
+                                  'line' => '1306'
                                 }
                               ],
            '_<bin/ssp' => [
                             {
                               'expr' => undef,
                               'value' => '1',
-                              'text' => '	my $model_root = $option_model_name;
+                              'text' => '	schedule($scheduler);
 ',
                               'fname' => 'bin/ssp',
                               'type' => 'user',
-                              'line' => 363
+                              'line' => '717'
                             },
                             {
                               'expr' => undef,
@@ -27,16 +36,7 @@ $files = {
 ',
                               'fname' => 'bin/ssp',
                               'type' => 'user',
-                              'line' => '700'
-                            },
-                            {
-                              'expr' => undef,
-                              'value' => '1',
-                              'text' => '	schedule($scheduler);
-',
-                              'fname' => 'bin/ssp',
-                              'type' => 'user',
-                              'line' => '543'
+                              'line' => '885'
                             }
                           ]
          };

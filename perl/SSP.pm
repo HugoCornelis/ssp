@@ -122,11 +122,59 @@ sub apply_granular_parameters
 {
     my $self = shift;
 
+    my $scheduler = shift;
+
+    my $runtime_settings = [ @_, ];
+
     # set default result: ok
 
     my $result = 1;
 
-    die "$0: not implemented yet.";
+    # loop over all the runtime_settings
+
+    my $solverclasses = $self->{solverclasses};
+
+    foreach my $runtime_setting (@$runtime_settings)
+    {
+	# fetch the model registration
+
+	my $modelname = $runtime_setting->{modelname};
+
+	my $model = $self->lookup_model($modelname);
+
+	my $solverclass = $model->{solverclass};
+
+	my $service = $self->{services}->{$solverclasses->{$solverclass}->{service_name}}->{ssp_service};
+
+	my $solverinfo = $service->input_2_solverinfo($runtime_setting);
+
+	if (!ref $solverinfo)
+	{
+	    die "$0: Failed to construct solver info for the runtime_setting " . $runtime_setting->{component_name} . "->" . $runtime_setting->{field} . " ($solverinfo)";
+	}
+
+	# lookup the solver
+
+	my $solver_engine = $self->lookup_solver_engine($solverinfo->{solver});
+
+# 	# get the input field from the solver (is a double *)
+
+# 	my $solverfield = $solver_engine->solverfield($solverinfo);
+
+# 	if (!defined $solverfield)
+# 	{
+# 	    die "$0: The runtime_setting " . $runtime_setting->{component_name} . "->" . $runtime_setting->{field} . " cannot be found";
+# 	}
+
+	# apply the setting to the solver
+
+	my $application = $solver_engine->set_solverfield($solverinfo, $runtime_setting->{value});
+
+	if ($application)
+	{
+	    die "$0: Failed to set the runtime_setting " . $runtime_setting->{component_name} . "->" . $runtime_setting->{field} . " ($application)";
+	}
+    }
 
     # return result
 
@@ -420,6 +468,14 @@ sub initiate
 
     my $result = 1;
 
+    # first update the time
+
+    $self->{simulation_time}
+	= {
+	   steps => 0,
+	   time => 0,
+	  };
+
     # loop over all schedulees
 
     my $schedule = $self->{schedule};
@@ -592,7 +648,7 @@ sub instantiate_inputs
 
 	if (!ref $solverinfo)
 	{
-	    die "Failed to construct solver info for the input " . $input->{component_name} . "->" . $input->{field} . " ($solverinfo)";
+	    die "$0: Failed to construct solver info for the input " . $input->{component_name} . "->" . $input->{field} . " ($solverinfo)";
 	}
 
 	# lookup the solver
@@ -605,7 +661,7 @@ sub instantiate_inputs
 
 	if (!defined $solverfield)
 	{
-	    die "The input " . $input->{component_name} . "->" . $input->{field} . " cannot be found";
+	    die "$0: The input " . $input->{component_name} . "->" . $input->{field} . " cannot be found";
 	}
 
 	# find the input for the input class
@@ -616,7 +672,7 @@ sub instantiate_inputs
 
 	if (!defined $inputclass)
 	{
-	    die "The input " . $input->{component_name} . "->" . $input->{field} . " has as inputclass $inputclass_name, but this class cannot be found";
+	    die "$0: The input " . $input->{component_name} . "->" . $input->{field} . " has as inputclass $inputclass_name, but this class cannot be found";
 	}
 
 	# add the input field to the input engine
@@ -636,7 +692,7 @@ sub instantiate_inputs
 
 	if (!$connected)
 	{
-	    die "The input " . $input->{component_name} . "->" . $input->{field} . " cannot be connected to its input engine (which is determined by the input class in the schedule).";
+	    die "$0: The input " . $input->{component_name} . "->" . $input->{field} . " cannot be connected to its input engine (which is determined by the input class in the schedule).";
 	}
     }
 
@@ -868,6 +924,42 @@ $@";
     # return success
 
     return 1;
+}
+
+
+sub lookup_model
+{
+    my $self = shift;
+
+    my $modelname = shift;
+
+    # default result: not found
+
+    my $result;
+
+    # loop over all models
+
+    my $models = $self->{models};
+
+    foreach my $model (@$models)
+    {
+	# if modelname matches
+
+	if ($model->{modelname} eq $modelname)
+	{
+	    # set result
+
+	    $result = $model;
+
+	    # break searching loop
+
+	    last;
+	}
+    }
+
+    # return result
+
+    return $result;
 }
 
 
@@ -1226,9 +1318,9 @@ sub run
 	    die "while running $self->{name}: $method failed";
 	}
 
-	# register the method that done the work
+	# register the method and arguments
 
-	$self->{status}->{$method}++;
+	push @{$self->{status}->{$method}}, $arguments;
     }
 }
 
@@ -1341,6 +1433,10 @@ sub steps
 	$backend->report( $schedulee, { %$options, steps => undef, }, );
     }
 
+    # initialize current simulation time steps
+
+    my $simulation_steps = $self->{simulation_time}->{steps};
+
     # a couple of times
 
     foreach my $step (0 .. $steps - 1)
@@ -1353,7 +1449,7 @@ sub steps
 	{
 	    # advance the engine
 
-	    my $error = $schedulee->step( $self, { %$options, steps => $step, }, );
+	    my $error = $schedulee->step( $self, { %$options, steps => $simulation_steps, }, );
 
 	    if ($error)
 	    {
@@ -1364,8 +1460,25 @@ sub steps
 
 	    my $backend = $schedulee->backend();
 
-	    $backend->report( $schedulee, { %$options, steps => $step, }, );
+	    $backend->report( $schedulee, { %$options, steps => $simulation_steps, }, );
 	}
+
+	# update the global time
+
+	$simulation_steps++;
+    }
+
+    # maintain global simulation time
+
+    $self->{simulation_time}->{steps} = $simulation_steps;
+
+    if ($options->{time_step})
+    {
+	$self->{simulation_time}->{time} += $simulation_steps * $options->{time_step};
+    }
+    else
+    {
+	undef $self->{simulation_time}->{time};
     }
 
     # final report
@@ -1610,6 +1723,24 @@ sub new
     bless $self, $package;
 
     return $self;
+}
+
+
+sub set_solverfield
+{
+    my $self = shift;
+
+    my $fieldinfo = shift;
+
+    my $value = shift;
+
+    my $backend = $self->backend();
+
+    #t should give $self as first argument
+
+    my $result = $backend->set_addressable($fieldinfo, $value);
+
+    return $result;
 }
 
 

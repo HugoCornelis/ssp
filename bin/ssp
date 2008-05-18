@@ -45,6 +45,7 @@ $SIG{__DIE__}
 
 my $option_configuration_cell;
 my $option_daemonize;
+my $option_emit_output = [];
 my $option_emit_schedules;
 my $option_inject_delay;
 my $option_inject_duration;
@@ -324,7 +325,10 @@ sub main
 		die "option_model_name cannot be determined from the option_model_filename due to a regex mismatch, bailing out";
 	    }
 
-	    print "Inferring model name from $option_model_filename, model name set to $option_model_name\nUse the --model-name option to overwrite\n";
+	    if ($option_verbose)
+	    {
+		print "Inferring model name from $option_model_filename, model name set to $option_model_name\nUse the --model-name option to overwrite\n";
+	    }
 	}
 
 	# construct a schedule from a builtin
@@ -671,6 +675,7 @@ sub main
 						     {
 						      component_name => "/$model_root/segments/soma",
 						      field => 'INJECT',
+						      modelname => "/$model_root",
 						      value => $option_inject_magnitude,
 						     },
 						    ],
@@ -685,6 +690,7 @@ sub main
 						     {
 						      component_name => "/$model_root/segments/soma",
 						      field => 'INJECT',
+						      modelname => "/$model_root",
 						      value => 0,
 						     },
 						    ],
@@ -714,6 +720,19 @@ sub main
 
 	schedule($scheduler);
     }
+
+    # now emit all the output files
+
+    if ($option_verbose)
+    {
+	print "\noutput files follow\n---\n";
+    }
+
+    foreach my $emit_output (@$option_emit_output)
+    {
+	system "cat", $emit_output;
+    }
+
 }
 
 
@@ -728,6 +747,7 @@ sub read_cmd_line
 	     "builtins!" => \$option_builtins,
 	     "cell=s" => \$option_configuration_cell,
 	     "daemonize!" => \$option_daemonize,
+	     "emit-output=s" => $option_emit_output,
 	     "emit-schedules!" => \$option_emit_schedules,
 	     "help!" => \$option_help,
 	     "inject-delay=s" => \$option_inject_delay,
