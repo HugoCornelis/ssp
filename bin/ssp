@@ -538,7 +538,7 @@ sub main
 
 	my $option_output_directory = './output';
 
-	my $option_output_filename = $option_output_directory . '/' . $model_root;
+	my $option_output_filename = $option_output_directory . '/' . $model_root . ".out";
 
 	$option_output_filename =~ m((.*)/);
 

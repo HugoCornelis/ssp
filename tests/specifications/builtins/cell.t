@@ -65,7 +65,7 @@ outputclasses:
   double_2_ascii:
     module_name: Heccer
     options:
-      filename: ./output/stand_alone
+      filename: ./output/stand_alone\.out
     package: Heccer::Output
 outputs:
   - component_name: /stand_alone/segments/soma
@@ -159,7 +159,7 @@ outputclasses:
   double_2_ascii:
     module_name: Heccer
     options:
-      filename: ./output/stand_alone
+      filename: ./output/stand_alone\.out
     package: Heccer::Output
 outputs:
   - component_name: /stand_alone/segments/soma
@@ -253,7 +253,7 @@ outputclasses:
   double_2_ascii:
     module_name: Heccer
     options:
-      filename: ./output/stand_alone
+      filename: ./output/stand_alone\.out
     package: Heccer::Output
 outputs:
   - component_name: /stand_alone/segments/soma
@@ -370,7 +370,7 @@ outputclasses:
   double_2_ascii:
     module_name: Heccer
     options:
-      filename: ./output/stand_alone
+      filename: ./output/stand_alone\.out
     package: Heccer::Output
 outputs:
   - component_name: /stand_alone/segments/soma
@@ -414,7 +414,7 @@ solverclasses:
 					      '--output',
 					      "/stand_alone/segments/soma->Vm",
 					      "--emit-output",
-					      "output/stand_alone",
+					      "output/stand_alone.out",
 					     ],
 				command => './bin/ssp',
 				command_tests => [
