@@ -540,9 +540,9 @@ sub main
 
 	my $option_output_filename = $option_output_directory . '/' . $model_root . ".out";
 
-	$option_output_filename =~ m((.*)/);
-
 	# create the directory for the output file
+
+	$option_output_filename =~ m((.*)/);
 
 	my $directory = $1;
 
