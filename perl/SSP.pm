@@ -208,6 +208,8 @@ sub compile
 
 	my $service = $self->{services}->{$solverclasses->{$solverclass}->{service_name}};
 
+	my $event_distributor = $self->{services}->{$solverclasses->{$solverclass}->{event_distributor_name}};
+
 	# apply the conceptual parameter settings to the model
 
 	if ($model->{conceptual_parameters})
@@ -241,6 +243,7 @@ sub compile
 	my $options
 	    = {
 	       %$solverclass_options,
+	       event_distributor => $event_distributor,
 	       modelname => $modelname,
 	       solverclass => $solverclass,
 	       service => $service,
@@ -1599,6 +1602,8 @@ sub compile
 
     my $service_name = $self->{service_name};
 
+    my $event_distributor_name = $self->{event_distributor_name};
+
     my $solver_module = $self->{module_name};
 
     #! the service points into the scheduler, but is not the service object
@@ -1608,6 +1613,10 @@ sub compile
     my $service = $self->{service}->{ssp_service};
 
     my $service_backend = $service->backend();
+
+    my $event_distributor = $self->{event_distributor}->{ssp_service};
+
+    my $event_distributor_backend = $event_distributor->backend();
 
     eval
     {
@@ -1641,11 +1650,20 @@ $@";
 	      #t can create a circular reference but is convenient, not sure
 
 	      %$constructor_settings,
+
+	      #t it would be much better if the constructor uses the
+	      #t services of SSP: model_container, event_distributor and
+	      #t possibly others.
+
 	      model_source => {
 			       service_name => $service_name,
 			       service_backend => $service_backend,
 			       modelname => $modelname,
 			      },
+	      event_distributor => {
+				    event_distributor_name => $event_distributor_name,
+				    event_distributor_backend => $event_distributor_backend,
+				   },
 	     },
 	    );
 

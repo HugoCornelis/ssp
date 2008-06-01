@@ -204,6 +204,7 @@ sub main
 									 },
 						 module_name => 'Heccer',
 						 service_name => 'neurospaces',
+						 event_distributor_name => 'event_distributor',
 						},
 				     },
 		   },

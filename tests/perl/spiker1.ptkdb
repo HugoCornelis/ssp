@@ -12,11 +12,20 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
+                                  'text' => '	if (!$engine->compile($self))
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '256'
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
                                   'text' => '	    my $success = $backend->$method($ssp_service, @$arguments);
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '911'
+                                  'line' => 911
                                 }
                               ],
            '_<tests/perl/spiker1' => [
@@ -27,7 +36,7 @@ $files = {
 ',
                                          'fname' => 'tests/perl/spiker1',
                                          'type' => 'user',
-                                         'line' => 227
+                                         'line' => 228
                                        }
                                      ]
          };
