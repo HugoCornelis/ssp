@@ -416,7 +416,7 @@ sub finish
 
 	if (!$success)
 	{
-	    die "Finishing failed";
+	    die "$0: Finishing failed";
 	}
     }
 
@@ -556,7 +556,7 @@ sub initiate
 
 # 	    if (!$success)
 # 	    {
-# 		die "$0: initializer $method for $communicator_name failed";
+# 		die "$0: Initializer $method for $communicator_name failed";
 # 	    }
 # 	}
 
@@ -601,7 +601,7 @@ sub instantiate_inputs
 
 	if (!$input_engine)
 	{
-	    die "Unable to create an input_engine for $inputclass_name";
+	    die "$0: Unable to create an input_engine for $inputclass_name";
 	}
 
 	# link the input engine to the input class
@@ -732,7 +732,7 @@ sub instantiate_outputs
 
 	if (!$output_engine)
 	{
-	    die "Unable to create an output_engine for $outputclass_name";
+	    die "$0: Unable to create an output_engine for $outputclass_name";
 	}
 
 	# link the output engine to the output class
@@ -779,7 +779,7 @@ sub instantiate_outputs
 
 	if (!ref $solverinfo)
 	{
-	    die "Failed to construct solver info for the output " . $output->{component_name} . "->" . $output->{field} . " ($solverinfo)";
+	    die "$0: Failed to construct solver info for the output " . $output->{component_name} . "->" . $output->{field} . " ($solverinfo)";
 	}
 
 	# lookup the solver
@@ -812,7 +812,7 @@ sub instantiate_outputs
 
 	    if (!defined $solverfield)
 	    {
-		die "The output " . $output->{component_name} . "->" . $output->{field} . " cannot be found";
+		die "$0: The output " . $output->{component_name} . "->" . $output->{field} . " cannot be found";
 	    }
 
 	    # find the output for the output class
@@ -823,7 +823,7 @@ sub instantiate_outputs
 
 	    if (!defined $outputclass)
 	    {
-		die "The output " . $output->{component_name} . "->" . $output->{field} . " has as outputclass $outputclass_name, but this class cannot be found";
+		die "$0: The output " . $output->{component_name} . "->" . $output->{field} . " has as outputclass $outputclass_name, but this class cannot be found";
 	    }
 
 	    # add the output field to the output engine
@@ -843,7 +843,7 @@ sub instantiate_outputs
 
 	    if (!$connected)
 	    {
-		die "The output " . $output->{component_name} . "->" . $output->{field} . " cannot be connected to its output engine (which is determined by the output class in the schedule).";
+		die "$0: The output " . $output->{component_name} . "->" . $output->{field} . " cannot be connected to its output engine (which is determined by the output class in the schedule).";
 	    }
 	}
     }
@@ -1315,7 +1315,7 @@ sub run
 
 	if (!$success)
 	{
-	    die "while running $self->{name}: $method failed";
+	    die "$0: While running $self->{name}: $method failed";
 	}
 
 	# register the method and arguments
@@ -1453,7 +1453,7 @@ sub steps
 
 	    if ($error)
 	    {
-		die "Scheduling for $steps failed";
+		die "$0: Scheduling for $steps failed";
 	    }
 
 	    # dump
