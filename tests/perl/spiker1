@@ -55,13 +55,48 @@ sub main
 
     my $args = [ "$0", "-P", "tests/networks/$modelname.ndf" ];
 
+    # load things related to the neurospaces studio
+
+    #! for proper error reporting of loading modules (Renderer etc),
+    #! 'require' must be used, not 'use'.
+
+    require Neurospaces;
+    require Neurospaces::Traversal;
+    require Neurospaces::Studio;
+
+    #! this comes later in the neurospaces script, no clue why
+
+    require Neurospaces::GUI;
+
     # instantiate a scheduler
 
     my $scheduler
 	= SSP->new(
 		   {
 		    apply => {
+			      results => [
+					  {
+					   arguments => [
+							 {
+							  commands => [ "cat /tmp/output_vm", ],
+							 },
+							 {
+							  commands => [ "cat /tmp/output_spike", ],
+							 },
+							],
+					   method => 'shell',
+					  },
+					 ],
 			      simulation => [
+					     ($ARGV[0]
+					      ? (
+						 {
+						  arguments => [ $0, ],
+						  method => 'Neurospaces::GUI::gui',
+						 },
+						)
+					      : ()
+					     ),
 					     {
 					      arguments => [ 10000, { verbose => 2, }, ],
 					      method => 'steps',
