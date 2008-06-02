@@ -426,6 +426,22 @@ solverclasses:
 						  },
 						 ],
 				description => "simulation of a single neuron model from the cell builtin schedule, soma Vm output, soma current injection with set duration and simulation time",
+				preparation => {
+						description => "No preparation necessary",
+						preparer =>
+						sub
+						{
+						    1;
+						},
+					       },
+				reparation => {
+					       description => "Removing the output from the distribution, needed for distcheck to work properly",
+					       reparer =>
+					       sub
+					       {
+						   `rm output/stand_alone.out && rmdir output`;
+					       },
+					      },
 			       },
 			      ],
        description => "cell builtin schedule",
