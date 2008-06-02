@@ -1616,7 +1616,8 @@ sub compile
 
     my $event_distributor = $self->{event_distributor}->{ssp_service};
 
-    my $event_distributor_backend = $event_distributor->backend();
+    my $event_distributor_backend
+	= $event_distributor && $event_distributor->backend();
 
     eval
     {
