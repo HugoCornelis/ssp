@@ -1389,21 +1389,22 @@ sub shell
 
     my $scheduler = shift;
 
-    my $options = shift;
-
     my $result = 1;
 
-    my $commands = $options->{commands};
-
-    foreach my $command (@$commands)
+    while (my $options = shift)
     {
-	system "$command";
+	my $commands = $options->{commands};
 
-	if ($?)
+	foreach my $command (@$commands)
 	{
-	    print "$0: '$command' failed: $?";
+	    system "$command";
 
-	    $result = 0;
+	    if ($?)
+	    {
+		print "$0: '$command' failed: $?";
+
+		$result = 0;
+	    }
 	}
     }
 
