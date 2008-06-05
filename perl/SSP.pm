@@ -806,6 +806,46 @@ sub instantiate_outputs
 	    #t connect the service with the output engine
 
 	    #t fills in the output object and OutputGeneratorAnnotatedStep() in the distributor_service
+
+	    # get the output field from the solver (is a double *)
+
+	    my $solverfield = $solver_engine->solverfield($solverinfo);
+
+	    if (!defined $solverfield)
+	    {
+		die "$0: The output " . $output->{component_name} . "->" . $output->{field} . " cannot be found";
+	    }
+
+	    # find the output for the output class
+
+	    my $outputclass_name = $output->{outputclass};
+
+	    my $outputclass = $self->{outputclasses}->{$outputclass_name};
+
+	    if (!defined $outputclass)
+	    {
+		die "$0: The output " . $output->{component_name} . "->" . $output->{field} . " has as outputclass $outputclass_name, but this class cannot be found";
+	    }
+
+	    # add the output field to the output engine
+
+	    #! note that outputclass is not an object
+
+	    my $output_backend = $outputclass->{ssp_outputclass};
+
+	    my $connected
+		= $output_backend->add
+		    (
+		     {
+		      address => $solverfield,
+		      service_request => $output,
+		     },
+		    );
+
+	    if (!$connected)
+	    {
+		die "$0: The output " . $output->{component_name} . "->" . $output->{field} . " cannot be connected to its output engine (which is determined by the output class in the schedule).";
+	    }
 	}
 	else
 	{
