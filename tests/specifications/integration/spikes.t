@@ -25,7 +25,7 @@ my $test
 						  },
 						 ],
 				description => "sodium and potassium channel, single spike",
-				numerical_compare => 'small arithmetic rounding differences',
+				numerical_compare => 'arithmetic rounding differences due to the model container aritmetic',
 			       },
 			       {
 				arguments => [
