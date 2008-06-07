@@ -208,7 +208,12 @@ sub compile
 
 	my $service = $self->{services}->{$solverclasses->{$solverclass}->{service_name}};
 
-	my $event_distributor = $self->{services}->{$solverclasses->{$solverclass}->{event_distributor_name}};
+	my $event_distributor
+	    = (
+	       defined $solverclasses->{$solverclass}->{event_distributor_name}
+	       ? $self->{services}->{$solverclasses->{$solverclass}->{event_distributor_name}}
+	       : undef
+	      );
 
 	# apply the conceptual parameter settings to the model
 
