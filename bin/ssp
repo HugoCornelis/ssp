@@ -45,6 +45,7 @@ $SIG{__DIE__}
 
 my $option_configuration_cell;
 my $option_daemonize;
+my $option_debug;
 my $option_emit_output = [];
 my $option_emit_schedules;
 my $option_inject_delay;
@@ -65,7 +66,7 @@ my $option_steps;
 my $option_time = 0.050;
 my $option_time_step;
 my $option_transformator = "";
-my $option_verbose;
+our $option_verbose;
 
 my $exit_code = 0;
 
@@ -747,6 +748,7 @@ sub read_cmd_line
 	     "builtins!" => \$option_builtins,
 	     "cell=s" => \$option_configuration_cell,
 	     "daemonize!" => \$option_daemonize,
+	     "debug=s" => \$option_debug,
 	     "emit-output=s" => $option_emit_output,
 	     "emit-schedules!" => \$option_emit_schedules,
 	     "help!" => \$option_help,
@@ -790,6 +792,7 @@ options:
     daemonize          detach from terminal, close shared resources and run in the background,
                        note that this option currently inhibits any feedback of the process,
                        so be cautious with it.
+    debug              set to a string of the debugging package, 1 for a default of SSP::Debug.
     emit-schedules     print schedules to stdout instead of running them.
     help               print usage information.
     inject-magnitude   amount of current injected into the soma.
@@ -849,11 +852,29 @@ sub schedule
 {
     my $scheduler = shift;
 
+    # determine the package name of the scheduler
+
+    my $package_name = "SSP";
+
+    if ($option_debug)
+    {
+	$package_name = $option_debug;
+
+	if ($package_name eq 1)
+	{
+	    $package_name = "SSP::Debug";
+	}
+    }
+
+    # now check if we indeed have a valid scheduler from that package name
+
     use UNIVERSAL qw( isa can );
 
-    if (!isa($scheduler, "SSP"))
+    if (!isa($scheduler, $package_name))
     {
-	$scheduler = SSP->new($scheduler);
+	# no, construct one
+
+	$scheduler = $package_name->new( { %$scheduler, verbose => $option_verbose, }, );
     }
 
     # apply the local settings
@@ -900,7 +921,7 @@ sub schedule
 	    print "$0: Running schedule $scheduler->{name}\n";
 	}
 
-	$scheduler->run( { verbosity => $option_verbose, }, );
+	$scheduler->run();
     }
 
 }

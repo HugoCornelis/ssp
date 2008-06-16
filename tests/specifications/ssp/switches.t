@@ -33,6 +33,7 @@ options:
     daemonize          detach from terminal, close shared resources and run in the background,
                        note that this option currently inhibits any feedback of the process,
                        so be cautious with it.
+    debug              set to a string of the debugging package, 1 for a default of SSP::Debug.
     emit-schedules     print schedules to stdout instead of running them.
     help               print usage information.
     inject-magnitude   amount of current injected into the soma.

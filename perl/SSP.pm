@@ -1354,7 +1354,7 @@ sub run
 	#t
 	#t needs to be sorted out.
 
-	if ($options->{verbosity})
+	if ($self->{verbose})
 	{
 	    print "$0: applying method '$method' to $self->{name}\n";
 	}
@@ -1542,6 +1542,70 @@ sub steps
     # return result
 
     return $result;
+}
+
+
+package SSP::Debug;
+
+
+our $debug_output_file;
+
+
+sub AUTOLOAD
+{
+    no strict "refs";
+
+    my $subname = $SSP::Debug::AUTOLOAD;
+
+    my $report = { '1_DEBUG_subname' => $subname, '2_DEBUG_arguments' => \@_ };
+
+    require YAML;
+
+    my $report_text = YAML::Dump($report);
+
+    if ($debug_output_file)
+    {
+	print $debug_output_file $report_text;
+    }
+    else
+    {
+	print $report_text;
+    }
+
+    #! this assumes that there is only one possible SSP package,
+    #! something that seems true for the foreseeable future.
+
+    $subname =~ s/::Debug//;
+
+    # these methods do not get defined perhaps, so we should not call them if so
+
+    my $undefined_methods
+	= {
+	   '::DESTROY' => 1,
+	   'others ?' => 0,
+	  };
+
+    # if attempt to call an undefined method
+
+    foreach my $undefined_method (grep { $undefined_methods->{$_} } keys %$undefined_methods)
+    {
+	if ($subname =~ /$undefined_method$/
+	    && !eval "defined(\&$undefined_method)")
+	{
+	    if ($::option_verbose)
+	    {
+		print "undefined_method $subname\n";
+	    }
+
+	    # just return success
+
+	    #! or should we return something else ?  perhaps undef ?
+
+	    return 1;
+	}
+    }
+
+    return &$subname(@_);
 }
 
 

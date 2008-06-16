@@ -1,0 +1,1914 @@
+Inferring model name from cells/stand_alone.ndf, model name set to stand_alone
+Use the --model-name option to overwrite
+--- Running schedule
+---
+apply:
+  simulation:
+    - arguments:
+        - 0.05
+        - verbose: 0
+      method: advance
+models:
+  - granular_parameters: []
+    modelname: /stand_alone
+    solverclass: heccer
+name: 'builtin cell configuration, applied to: stand_alone'
+outputclasses:
+  double_2_ascii:
+    module_name: Heccer
+    options:
+      filename: ./output/stand_alone.out
+    package: Heccer::Output
+outputs:
+  - component_name: /stand_alone/segments/soma
+    field: Vm
+    outputclass: double_2_ascii
+services:
+  neurospaces:
+    initializers:
+      - arguments:
+          -
+            - ./bin/ssp
+            - -P
+            - cells/stand_alone.ndf
+        method: read
+    module_name: Neurospaces
+solverclasses:
+  heccer:
+    module_name: Heccer
+    service_name: neurospaces
+usage: |2
+  
+  	Simulate a single model neuron, default is to output the membrane potential of the soma.
+  	Use the options to inject current in the soma (--inject-magnitude).
+  	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+  
+          The name of the model neuron is inferred from the name of the model description file.
+          (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+          called "hh_neuron").
+  
+  	--model-name overwrite the default model name.
+  	--steps sets number of steps
+---
+1_DEBUG_subname: SSP::Debug::new
+2_DEBUG_arguments:
+  - SSP::Debug
+  - apply:
+      simulation:
+        - arguments:
+            - 0.05
+            - verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options:
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    services:
+      neurospaces:
+        initializers:
+          - arguments:
+              -
+                - ./bin/ssp
+                - -P
+                - cells/stand_alone.ndf
+            method: read
+        module_name: Neurospaces
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+---
+1_DEBUG_subname: SSP::Debug::salvage
+2_DEBUG_arguments:
+  - !!perl/hash:SSP::Debug
+    analyzers: {}
+    apply:
+      simulation:
+        - arguments:
+            - 0.05
+            - verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options:
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    services:
+      neurospaces:
+        initializers:
+          - arguments:
+              -
+                - ./bin/ssp
+                - -P
+                - cells/stand_alone.ndf
+            method: read
+        module_name: Neurospaces
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+./bin/ssp: Running schedule builtin cell configuration, applied to: stand_alone
+---
+1_DEBUG_subname: SSP::Debug::run
+2_DEBUG_arguments:
+  - !!perl/hash:SSP::Debug
+    analyzers: {}
+    application_classes:
+      analyzers:
+        default:
+          - method: analyze
+        priority: 95
+      finishers:
+        default:
+          - method: finish
+        priority: 140
+      initializers:
+        default:
+          - method: compile
+          - method: instantiate_inputs
+          - method: instantiate_outputs
+          - method: initiate
+        priority: 80
+      modifiers:
+        default: []
+        priority: 50
+      results:
+        default: []
+        priority: 170
+      services:
+        default:
+          - method: instantiate_services
+        priority: 20
+      simulation:
+        default: []
+        priority: 110
+    apply:
+      simulation:
+        - arguments:
+            - 0.05
+            - verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options:
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    services:
+      neurospaces:
+        initializers:
+          - arguments:
+              -
+                - ./bin/ssp
+                - -P
+                - cells/stand_alone.ndf
+            method: read
+        model_library: /usr/local/neurospaces/models/library
+        module_name: Neurospaces
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+---
+1_DEBUG_subname: SSP::Debug::salvage
+2_DEBUG_arguments:
+  - !!perl/hash:SSP::Debug
+    analyzers: {}
+    application_classes:
+      analyzers:
+        default:
+          - method: analyze
+        priority: 95
+      finishers:
+        default:
+          - method: finish
+        priority: 140
+      initializers:
+        default:
+          - method: compile
+          - method: instantiate_inputs
+          - method: instantiate_outputs
+          - method: initiate
+        priority: 80
+      modifiers:
+        default: []
+        priority: 50
+      results:
+        default: []
+        priority: 170
+      services:
+        default:
+          - method: instantiate_services
+        priority: 20
+      simulation:
+        default: []
+        priority: 110
+    apply:
+      simulation:
+        - arguments:
+            - 0.05
+            - verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options:
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    services:
+      neurospaces:
+        initializers:
+          - arguments:
+              -
+                - ./bin/ssp
+                - -P
+                - cells/stand_alone.ndf
+            method: read
+        model_library: /usr/local/neurospaces/models/library
+        module_name: Neurospaces
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+./bin/ssp: applying method 'instantiate_services' to builtin cell configuration, applied to: stand_alone
+---
+1_DEBUG_subname: SSP::Debug::instantiate_services
+2_DEBUG_arguments:
+  - &1 !!perl/hash:SSP::Debug
+    analyzers: {}
+    application_classes:
+      analyzers:
+        default: &2
+          - method: analyze
+        priority: 95
+      finishers:
+        default: &3
+          - method: finish
+        priority: 140
+      initializers:
+        default: &4
+          - method: compile
+          - method: instantiate_inputs
+          - method: instantiate_outputs
+          - method: initiate
+        priority: 80
+      modifiers:
+        default: &5 []
+        priority: 50
+      results:
+        default: &6 []
+        priority: 170
+      services:
+        default: &7
+          - method: instantiate_services
+        priority: 20
+      simulation:
+        default: []
+        priority: 110
+    apply:
+      analyzers: *2
+      finishers: *3
+      initializers: *4
+      modifiers: *5
+      results: *6
+      services: *7
+      simulation:
+        - arguments:
+            - 0.05
+            - verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options:
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    services:
+      neurospaces:
+        initializers:
+          - arguments:
+              -
+                - ./bin/ssp
+                - -P
+                - cells/stand_alone.ndf
+            method: read
+        model_library: /usr/local/neurospaces/models/library
+        module_name: Neurospaces
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+  - *1
+./bin/ssp: applying method 'compile' to builtin cell configuration, applied to: stand_alone
+---
+1_DEBUG_subname: SSP::Debug::compile
+2_DEBUG_arguments:
+  - &1 !!perl/hash:SSP::Debug
+    analyzers: {}
+    application_classes:
+      analyzers:
+        default: &2
+          - method: analyze
+        priority: 95
+      finishers:
+        default: &3
+          - method: finish
+        priority: 140
+      initializers:
+        default: &4
+          - method: compile
+          - method: instantiate_inputs
+          - method: instantiate_outputs
+          - method: initiate
+        priority: 80
+      modifiers:
+        default: &5 []
+        priority: 50
+      results:
+        default: &6 []
+        priority: 170
+      services:
+        default: &7
+          - method: instantiate_services
+        priority: 20
+      simulation:
+        default: []
+        priority: 110
+    apply:
+      analyzers: *2
+      finishers: *3
+      initializers: *4
+      modifiers: *5
+      results: *6
+      services: *7
+      simulation:
+        - arguments:
+            - 0.05
+            - verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options:
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    services:
+      neurospaces:
+        initializers: &8
+          - arguments:
+              -
+                - ./bin/ssp
+                - -P
+                - cells/stand_alone.ndf
+                - -m
+                - /usr/local/neurospaces/models/library
+            method: read
+        model_library: /usr/local/neurospaces/models/library
+        module_name: Neurospaces
+        ssp_service: !!perl/hash:SSP::Service
+          backend: !!perl/hash:Neurospaces
+            initializers: *8
+            model_library: /usr/local/neurospaces/models/library
+            module_name: Neurospaces
+            neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
+          scheduler: *1
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    status:
+      instantiate_services:
+        - []
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+  - *1
+./bin/ssp: applying method 'instantiate_inputs' to builtin cell configuration, applied to: stand_alone
+---
+1_DEBUG_subname: SSP::Debug::instantiate_inputs
+2_DEBUG_arguments:
+  - &1 !!perl/hash:SSP::Debug
+    analyzers: {}
+    application_classes:
+      analyzers:
+        default: &2
+          - method: analyze
+        priority: 95
+      finishers:
+        default: &3
+          - method: finish
+        priority: 140
+      initializers:
+        default: &4
+          - method: compile
+          - method: instantiate_inputs
+          - method: instantiate_outputs
+          - method: initiate
+        priority: 80
+      modifiers:
+        default: &5 []
+        priority: 50
+      results:
+        default: &6 []
+        priority: 170
+      services:
+        default: &7
+          - method: instantiate_services
+        priority: 20
+      simulation:
+        default: []
+        priority: 110
+    apply:
+      analyzers: *2
+      finishers: *3
+      initializers: *4
+      modifiers: *5
+      results: *6
+      services: *7
+      simulation:
+        - arguments:
+            - 0.05
+            - verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options:
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    schedule:
+      - !!perl/hash:SSP::Engine
+        backend: !!perl/hash:Heccer
+          event_distributor:
+            event_distributor_backend: ~
+            event_distributor_name: ~
+          heccer: !!perl/hash:SwiggableHeccer::Heccer {}
+          model_source:
+            modelname: /stand_alone
+            service_backend: &8 !!perl/hash:Neurospaces
+              initializers: &9
+                - arguments:
+                    -
+                      - ./bin/ssp
+                      - -P
+                      - cells/stand_alone.ndf
+                      - -m
+                      - /usr/local/neurospaces/models/library
+                  method: read
+              model_library: /usr/local/neurospaces/models/library
+              module_name: Neurospaces
+              neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
+            service_name: neurospaces
+        event_distributor: {}
+        modelname: /stand_alone
+        module_name: Heccer
+        scheduler: *1
+        service: &10
+          initializers: *9
+          model_library: /usr/local/neurospaces/models/library
+          module_name: Neurospaces
+          ssp_service: !!perl/hash:SSP::Service
+            backend: *8
+            scheduler: *1
+        service_name: neurospaces
+        solverclass: heccer
+    services:
+      neurospaces: *10
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    status:
+      compile:
+        - []
+      instantiate_services:
+        - []
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+  - *1
+./bin/ssp: applying method 'instantiate_outputs' to builtin cell configuration, applied to: stand_alone
+---
+1_DEBUG_subname: SSP::Debug::instantiate_outputs
+2_DEBUG_arguments:
+  - &1 !!perl/hash:SSP::Debug
+    analyzers: {}
+    application_classes:
+      analyzers:
+        default: &2
+          - method: analyze
+        priority: 95
+      finishers:
+        default: &3
+          - method: finish
+        priority: 140
+      initializers:
+        default: &4
+          - method: compile
+          - method: instantiate_inputs
+          - method: instantiate_outputs
+          - method: initiate
+        priority: 80
+      modifiers:
+        default: &5 []
+        priority: 50
+      results:
+        default: &6 []
+        priority: 170
+      services:
+        default: &7
+          - method: instantiate_services
+        priority: 20
+      simulation:
+        default: []
+        priority: 110
+    apply:
+      analyzers: *2
+      finishers: *3
+      initializers: *4
+      modifiers: *5
+      results: *6
+      services: *7
+      simulation:
+        - arguments:
+            - 0.05
+            - verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options:
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    schedule:
+      - !!perl/hash:SSP::Engine
+        backend: !!perl/hash:Heccer
+          event_distributor:
+            event_distributor_backend: ~
+            event_distributor_name: ~
+          heccer: !!perl/hash:SwiggableHeccer::Heccer {}
+          model_source:
+            modelname: /stand_alone
+            service_backend: &8 !!perl/hash:Neurospaces
+              initializers: &9
+                - arguments:
+                    -
+                      - ./bin/ssp
+                      - -P
+                      - cells/stand_alone.ndf
+                      - -m
+                      - /usr/local/neurospaces/models/library
+                  method: read
+              model_library: /usr/local/neurospaces/models/library
+              module_name: Neurospaces
+              neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
+            service_name: neurospaces
+        event_distributor: {}
+        modelname: /stand_alone
+        module_name: Heccer
+        scheduler: *1
+        service: &10
+          initializers: *9
+          model_library: /usr/local/neurospaces/models/library
+          module_name: Neurospaces
+          ssp_service: !!perl/hash:SSP::Service
+            backend: *8
+            scheduler: *1
+        service_name: neurospaces
+        solverclass: heccer
+    services:
+      neurospaces: *10
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    status:
+      compile:
+        - []
+      instantiate_inputs:
+        - []
+      instantiate_services:
+        - []
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+  - *1
+---
+1_DEBUG_subname: SSP::Debug::lookup_solver_engine
+2_DEBUG_arguments:
+  - &1 !!perl/hash:SSP::Debug
+    analyzers: {}
+    application_classes:
+      analyzers:
+        default: &2
+          - method: analyze
+        priority: 95
+      finishers:
+        default: &3
+          - method: finish
+        priority: 140
+      initializers:
+        default: &4
+          - method: compile
+          - method: instantiate_inputs
+          - method: instantiate_outputs
+          - method: initiate
+        priority: 80
+      modifiers:
+        default: &5 []
+        priority: 50
+      results:
+        default: &6 []
+        priority: 170
+      services:
+        default: &7
+          - method: instantiate_services
+        priority: 20
+      simulation:
+        default: []
+        priority: 110
+    apply:
+      analyzers: *2
+      finishers: *3
+      initializers: *4
+      modifiers: *5
+      results: *6
+      services: *7
+      simulation:
+        - arguments:
+            - 0.05
+            - verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options: &8
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+        ssp_outputclass: &9 !!perl/hash:SSP::Output
+          backend: !!perl/hash:Heccer::Output
+            backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+            filename: ./output/stand_alone.out
+            module_name: Heccer
+            name: double_2_ascii
+            options: *8
+            package: Heccer::Output
+            scheduler: *1
+          module_name: Heccer
+          name: double_2_ascii
+          options: *8
+          package: Heccer::Output
+          scheduler: *1
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    schedule:
+      - !!perl/hash:SSP::Engine
+        backend: !!perl/hash:Heccer
+          event_distributor:
+            event_distributor_backend: ~
+            event_distributor_name: ~
+          heccer: !!perl/hash:SwiggableHeccer::Heccer {}
+          model_source:
+            modelname: /stand_alone
+            service_backend: &10 !!perl/hash:Neurospaces
+              initializers: &11
+                - arguments:
+                    -
+                      - ./bin/ssp
+                      - -P
+                      - cells/stand_alone.ndf
+                      - -m
+                      - /usr/local/neurospaces/models/library
+                  method: read
+              model_library: /usr/local/neurospaces/models/library
+              module_name: Neurospaces
+              neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
+            service_name: neurospaces
+        event_distributor: {}
+        modelname: /stand_alone
+        module_name: Heccer
+        scheduler: *1
+        service: &12
+          initializers: *11
+          model_library: /usr/local/neurospaces/models/library
+          module_name: Neurospaces
+          ssp_service: !!perl/hash:SSP::Service
+            backend: *10
+            scheduler: *1
+        service_name: neurospaces
+        solverclass: heccer
+      - *9
+    services:
+      neurospaces: *12
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    status:
+      compile:
+        - []
+      instantiate_inputs:
+        - []
+      instantiate_services:
+        - []
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+  - neurospaces::/stand_alone
+./bin/ssp: applying method 'initiate' to builtin cell configuration, applied to: stand_alone
+---
+1_DEBUG_subname: SSP::Debug::initiate
+2_DEBUG_arguments:
+  - &1 !!perl/hash:SSP::Debug
+    analyzers: {}
+    application_classes:
+      analyzers:
+        default: &2
+          - method: analyze
+        priority: 95
+      finishers:
+        default: &3
+          - method: finish
+        priority: 140
+      initializers:
+        default: &4
+          - method: compile
+          - method: instantiate_inputs
+          - method: instantiate_outputs
+          - method: initiate
+        priority: 80
+      modifiers:
+        default: &5 []
+        priority: 50
+      results:
+        default: &6 []
+        priority: 170
+      services:
+        default: &7
+          - method: instantiate_services
+        priority: 20
+      simulation:
+        default: []
+        priority: 110
+    apply:
+      analyzers: *2
+      finishers: *3
+      initializers: *4
+      modifiers: *5
+      results: *6
+      services: *7
+      simulation:
+        - arguments:
+            - 0.05
+            - verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options: &8
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+        ssp_outputclass: &9 !!perl/hash:SSP::Output
+          backend: !!perl/hash:Heccer::Output
+            backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+            filename: ./output/stand_alone.out
+            module_name: Heccer
+            name: double_2_ascii
+            options: *8
+            package: Heccer::Output
+            scheduler: *1
+          module_name: Heccer
+          name: double_2_ascii
+          options: *8
+          package: Heccer::Output
+          scheduler: *1
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    schedule:
+      - !!perl/hash:SSP::Engine
+        backend: !!perl/hash:Heccer
+          event_distributor:
+            event_distributor_backend: ~
+            event_distributor_name: ~
+          heccer: !!perl/hash:SwiggableHeccer::Heccer {}
+          model_source:
+            modelname: /stand_alone
+            service_backend: &10 !!perl/hash:Neurospaces
+              initializers: &11
+                - arguments:
+                    -
+                      - ./bin/ssp
+                      - -P
+                      - cells/stand_alone.ndf
+                      - -m
+                      - /usr/local/neurospaces/models/library
+                  method: read
+              model_library: /usr/local/neurospaces/models/library
+              module_name: Neurospaces
+              neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
+            service_name: neurospaces
+        event_distributor: {}
+        modelname: /stand_alone
+        module_name: Heccer
+        scheduler: *1
+        service: &12
+          initializers: *11
+          model_library: /usr/local/neurospaces/models/library
+          module_name: Neurospaces
+          ssp_service: !!perl/hash:SSP::Service
+            backend: *10
+            scheduler: *1
+        service_name: neurospaces
+        solverclass: heccer
+      - *9
+    services:
+      neurospaces: *12
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    status:
+      compile:
+        - []
+      instantiate_inputs:
+        - []
+      instantiate_outputs:
+        - []
+      instantiate_services:
+        - []
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+  - *1
+./bin/ssp: applying method 'analyze' to builtin cell configuration, applied to: stand_alone
+---
+1_DEBUG_subname: SSP::Debug::analyze
+2_DEBUG_arguments:
+  - &1 !!perl/hash:SSP::Debug
+    analyzers: {}
+    application_classes:
+      analyzers:
+        default: &2
+          - method: analyze
+        priority: 95
+      finishers:
+        default: &3
+          - method: finish
+        priority: 140
+      initializers:
+        default: &4
+          - method: compile
+          - method: instantiate_inputs
+          - method: instantiate_outputs
+          - method: initiate
+        priority: 80
+      modifiers:
+        default: &5 []
+        priority: 50
+      results:
+        default: &6 []
+        priority: 170
+      services:
+        default: &7
+          - method: instantiate_services
+        priority: 20
+      simulation:
+        default: []
+        priority: 110
+    apply:
+      analyzers: *2
+      finishers: *3
+      initializers: *4
+      modifiers: *5
+      results: *6
+      services: *7
+      simulation:
+        - arguments:
+            - 0.05
+            - verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options: &8
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+        ssp_outputclass: &9 !!perl/hash:SSP::Output
+          backend: !!perl/hash:Heccer::Output
+            backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+            filename: ./output/stand_alone.out
+            module_name: Heccer
+            name: double_2_ascii
+            options: *8
+            package: Heccer::Output
+            scheduler: *1
+          module_name: Heccer
+          name: double_2_ascii
+          options: *8
+          package: Heccer::Output
+          scheduler: *1
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    schedule:
+      - !!perl/hash:SSP::Engine
+        backend: !!perl/hash:Heccer
+          event_distributor:
+            event_distributor_backend: ~
+            event_distributor_name: ~
+          heccer: !!perl/hash:SwiggableHeccer::Heccer {}
+          model_source:
+            modelname: /stand_alone
+            service_backend: &10 !!perl/hash:Neurospaces
+              initializers: &11
+                - arguments:
+                    -
+                      - ./bin/ssp
+                      - -P
+                      - cells/stand_alone.ndf
+                      - -m
+                      - /usr/local/neurospaces/models/library
+                  method: read
+              model_library: /usr/local/neurospaces/models/library
+              module_name: Neurospaces
+              neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
+            service_name: neurospaces
+        event_distributor: {}
+        modelname: /stand_alone
+        module_name: Heccer
+        scheduler: *1
+        service: &12
+          initializers: *11
+          model_library: /usr/local/neurospaces/models/library
+          module_name: Neurospaces
+          ssp_service: !!perl/hash:SSP::Service
+            backend: *10
+            scheduler: *1
+        service_name: neurospaces
+        solverclass: heccer
+      - *9
+    services:
+      neurospaces: *12
+    simulation_time:
+      steps: 0
+      time: 0
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    status:
+      compile:
+        - []
+      initiate:
+        - []
+      instantiate_inputs:
+        - []
+      instantiate_outputs:
+        - []
+      instantiate_services:
+        - []
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+  - *1
+./bin/ssp: applying method 'advance' to builtin cell configuration, applied to: stand_alone
+---
+1_DEBUG_subname: SSP::Debug::advance
+2_DEBUG_arguments:
+  - &1 !!perl/hash:SSP::Debug
+    analyzers: {}
+    application_classes:
+      analyzers:
+        default: &2
+          - method: analyze
+        priority: 95
+      finishers:
+        default: &3
+          - method: finish
+        priority: 140
+      initializers:
+        default: &4
+          - method: compile
+          - method: instantiate_inputs
+          - method: instantiate_outputs
+          - method: initiate
+        priority: 80
+      modifiers:
+        default: &5 []
+        priority: 50
+      results:
+        default: &6 []
+        priority: 170
+      services:
+        default: &7
+          - method: instantiate_services
+        priority: 20
+      simulation:
+        default: []
+        priority: 110
+    apply:
+      analyzers: *2
+      finishers: *3
+      initializers: *4
+      modifiers: *5
+      results: *6
+      services: *7
+      simulation:
+        - arguments:
+            - 0.05
+            - &8
+              verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options: &9
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+        ssp_outputclass: &10 !!perl/hash:SSP::Output
+          backend: !!perl/hash:Heccer::Output
+            backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+            filename: ./output/stand_alone.out
+            module_name: Heccer
+            name: double_2_ascii
+            options: *9
+            package: Heccer::Output
+            scheduler: *1
+          module_name: Heccer
+          name: double_2_ascii
+          options: *9
+          package: Heccer::Output
+          scheduler: *1
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    schedule:
+      - !!perl/hash:SSP::Engine
+        backend: !!perl/hash:Heccer
+          event_distributor:
+            event_distributor_backend: ~
+            event_distributor_name: ~
+          heccer: !!perl/hash:SwiggableHeccer::Heccer {}
+          model_source:
+            modelname: /stand_alone
+            service_backend: &11 !!perl/hash:Neurospaces
+              initializers: &12
+                - arguments:
+                    -
+                      - ./bin/ssp
+                      - -P
+                      - cells/stand_alone.ndf
+                      - -m
+                      - /usr/local/neurospaces/models/library
+                  method: read
+              model_library: /usr/local/neurospaces/models/library
+              module_name: Neurospaces
+              neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
+            service_name: neurospaces
+        event_distributor: {}
+        modelname: /stand_alone
+        module_name: Heccer
+        scheduler: *1
+        service: &13
+          initializers: *12
+          model_library: /usr/local/neurospaces/models/library
+          module_name: Neurospaces
+          ssp_service: !!perl/hash:SSP::Service
+            backend: *11
+            scheduler: *1
+        service_name: neurospaces
+        solverclass: heccer
+      - *10
+    services:
+      neurospaces: *13
+    simulation_time:
+      steps: 0
+      time: 0
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    status:
+      analyze:
+        - []
+      compile:
+        - []
+      initiate:
+        - []
+      instantiate_inputs:
+        - []
+      instantiate_outputs:
+        - []
+      instantiate_services:
+        - []
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+  - *1
+  - 0.05
+  - *8
+---
+1_DEBUG_subname: SSP::Debug::get_time_step
+2_DEBUG_arguments:
+  - &1 !!perl/hash:SSP::Debug
+    analyzers: {}
+    application_classes:
+      analyzers:
+        default: &2
+          - method: analyze
+        priority: 95
+      finishers:
+        default: &3
+          - method: finish
+        priority: 140
+      initializers:
+        default: &4
+          - method: compile
+          - method: instantiate_inputs
+          - method: instantiate_outputs
+          - method: initiate
+        priority: 80
+      modifiers:
+        default: &5 []
+        priority: 50
+      results:
+        default: &6 []
+        priority: 170
+      services:
+        default: &7
+          - method: instantiate_services
+        priority: 20
+      simulation:
+        default: []
+        priority: 110
+    apply:
+      analyzers: *2
+      finishers: *3
+      initializers: *4
+      modifiers: *5
+      results: *6
+      services: *7
+      simulation:
+        - arguments:
+            - 0.05
+            - verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options: &8
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+        ssp_outputclass: &9 !!perl/hash:SSP::Output
+          backend: !!perl/hash:Heccer::Output
+            backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+            filename: ./output/stand_alone.out
+            module_name: Heccer
+            name: double_2_ascii
+            options: *8
+            package: Heccer::Output
+            scheduler: *1
+          module_name: Heccer
+          name: double_2_ascii
+          options: *8
+          package: Heccer::Output
+          scheduler: *1
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    schedule:
+      - !!perl/hash:SSP::Engine
+        backend: !!perl/hash:Heccer
+          event_distributor:
+            event_distributor_backend: ~
+            event_distributor_name: ~
+          heccer: !!perl/hash:SwiggableHeccer::Heccer {}
+          model_source:
+            modelname: /stand_alone
+            service_backend: &10 !!perl/hash:Neurospaces
+              initializers: &11
+                - arguments:
+                    -
+                      - ./bin/ssp
+                      - -P
+                      - cells/stand_alone.ndf
+                      - -m
+                      - /usr/local/neurospaces/models/library
+                  method: read
+              model_library: /usr/local/neurospaces/models/library
+              module_name: Neurospaces
+              neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
+            service_name: neurospaces
+        event_distributor: {}
+        modelname: /stand_alone
+        module_name: Heccer
+        scheduler: *1
+        service: &12
+          initializers: *11
+          model_library: /usr/local/neurospaces/models/library
+          module_name: Neurospaces
+          ssp_service: !!perl/hash:SSP::Service
+            backend: *10
+            scheduler: *1
+        service_name: neurospaces
+        solverclass: heccer
+      - *9
+    services:
+      neurospaces: *12
+    simulation_time:
+      steps: 0
+      time: 0
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    status:
+      analyze:
+        - []
+      compile:
+        - []
+      initiate:
+        - []
+      instantiate_inputs:
+        - []
+      instantiate_outputs:
+        - []
+      instantiate_services:
+        - []
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+---
+1_DEBUG_subname: SSP::Debug::steps
+2_DEBUG_arguments:
+  - &1 !!perl/hash:SSP::Debug
+    analyzers: {}
+    application_classes:
+      analyzers:
+        default: &2
+          - method: analyze
+        priority: 95
+      finishers:
+        default: &3
+          - method: finish
+        priority: 140
+      initializers:
+        default: &4
+          - method: compile
+          - method: instantiate_inputs
+          - method: instantiate_outputs
+          - method: initiate
+        priority: 80
+      modifiers:
+        default: &5 []
+        priority: 50
+      results:
+        default: &6 []
+        priority: 170
+      services:
+        default: &7
+          - method: instantiate_services
+        priority: 20
+      simulation:
+        default: []
+        priority: 110
+    apply:
+      analyzers: *2
+      finishers: *3
+      initializers: *4
+      modifiers: *5
+      results: *6
+      services: *7
+      simulation:
+        - arguments:
+            - 0.05
+            - verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options: &8
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+        ssp_outputclass: &9 !!perl/hash:SSP::Output
+          backend: !!perl/hash:Heccer::Output
+            backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+            filename: ./output/stand_alone.out
+            module_name: Heccer
+            name: double_2_ascii
+            options: *8
+            package: Heccer::Output
+            scheduler: *1
+          module_name: Heccer
+          name: double_2_ascii
+          options: *8
+          package: Heccer::Output
+          scheduler: *1
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    schedule:
+      - !!perl/hash:SSP::Engine
+        backend: !!perl/hash:Heccer
+          event_distributor:
+            event_distributor_backend: ~
+            event_distributor_name: ~
+          heccer: !!perl/hash:SwiggableHeccer::Heccer {}
+          model_source:
+            modelname: /stand_alone
+            service_backend: &10 !!perl/hash:Neurospaces
+              initializers: &11
+                - arguments:
+                    -
+                      - ./bin/ssp
+                      - -P
+                      - cells/stand_alone.ndf
+                      - -m
+                      - /usr/local/neurospaces/models/library
+                  method: read
+              model_library: /usr/local/neurospaces/models/library
+              module_name: Neurospaces
+              neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
+            service_name: neurospaces
+        event_distributor: {}
+        modelname: /stand_alone
+        module_name: Heccer
+        scheduler: *1
+        service: &12
+          initializers: *11
+          model_library: /usr/local/neurospaces/models/library
+          module_name: Neurospaces
+          ssp_service: !!perl/hash:SSP::Service
+            backend: *10
+            scheduler: *1
+        service_name: neurospaces
+        solverclass: heccer
+      - *9
+    services:
+      neurospaces: *12
+    simulation_time:
+      steps: 0
+      time: 0
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    status:
+      analyze:
+        - []
+      compile:
+        - []
+      initiate:
+        - []
+      instantiate_inputs:
+        - []
+      instantiate_outputs:
+        - []
+      instantiate_services:
+        - []
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+  - *1
+  - 2500
+./bin/ssp: applying method 'finish' to builtin cell configuration, applied to: stand_alone
+---
+1_DEBUG_subname: SSP::Debug::finish
+2_DEBUG_arguments:
+  - &1 !!perl/hash:SSP::Debug
+    analyzers: {}
+    application_classes:
+      analyzers:
+        default: &2
+          - method: analyze
+        priority: 95
+      finishers:
+        default: &3
+          - method: finish
+        priority: 140
+      initializers:
+        default: &4
+          - method: compile
+          - method: instantiate_inputs
+          - method: instantiate_outputs
+          - method: initiate
+        priority: 80
+      modifiers:
+        default: &5 []
+        priority: 50
+      results:
+        default: &6 []
+        priority: 170
+      services:
+        default: &7
+          - method: instantiate_services
+        priority: 20
+      simulation:
+        default: []
+        priority: 110
+    apply:
+      analyzers: *2
+      finishers: *3
+      initializers: *4
+      modifiers: *5
+      results: *6
+      services: *7
+      simulation:
+        - arguments: &8
+            - 0.05
+            - verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options: &9
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+        ssp_outputclass: &10 !!perl/hash:SSP::Output
+          backend: !!perl/hash:Heccer::Output
+            backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+            filename: ./output/stand_alone.out
+            module_name: Heccer
+            name: double_2_ascii
+            options: *9
+            package: Heccer::Output
+            scheduler: *1
+          module_name: Heccer
+          name: double_2_ascii
+          options: *9
+          package: Heccer::Output
+          scheduler: *1
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    schedule:
+      - !!perl/hash:SSP::Engine
+        backend: !!perl/hash:Heccer
+          event_distributor:
+            event_distributor_backend: ~
+            event_distributor_name: ~
+          heccer: !!perl/hash:SwiggableHeccer::Heccer {}
+          model_source:
+            modelname: /stand_alone
+            service_backend: &11 !!perl/hash:Neurospaces
+              initializers: &12
+                - arguments:
+                    -
+                      - ./bin/ssp
+                      - -P
+                      - cells/stand_alone.ndf
+                      - -m
+                      - /usr/local/neurospaces/models/library
+                  method: read
+              model_library: /usr/local/neurospaces/models/library
+              module_name: Neurospaces
+              neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
+            service_name: neurospaces
+        event_distributor: {}
+        modelname: /stand_alone
+        module_name: Heccer
+        scheduler: *1
+        service: &13
+          initializers: *12
+          model_library: /usr/local/neurospaces/models/library
+          module_name: Neurospaces
+          ssp_service: !!perl/hash:SSP::Service
+            backend: *11
+            scheduler: *1
+        service_name: neurospaces
+        solverclass: heccer
+      - *10
+    services:
+      neurospaces: *13
+    simulation_time:
+      steps: 2500
+      time: ~
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    status:
+      advance:
+        - *8
+      analyze:
+        - []
+      compile:
+        - []
+      initiate:
+        - []
+      instantiate_inputs:
+        - []
+      instantiate_outputs:
+        - []
+      instantiate_services:
+        - []
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+  - *1
+
+output files follow
+---
+---
+1_DEBUG_subname: SSP::Debug::DESTROY
+2_DEBUG_arguments:
+  - !!perl/hash:SSP::Debug
+    analyzers: {}
+    application_classes:
+      analyzers:
+        default: &1
+          - method: analyze
+        priority: 95
+      finishers:
+        default: &2
+          - method: finish
+        priority: 140
+      initializers:
+        default: &3
+          - method: compile
+          - method: instantiate_inputs
+          - method: instantiate_outputs
+          - method: initiate
+        priority: 80
+      modifiers:
+        default: &4 []
+        priority: 50
+      results:
+        default: &5 []
+        priority: 170
+      services:
+        default: &6
+          - method: instantiate_services
+        priority: 20
+      simulation:
+        default: []
+        priority: 110
+    apply:
+      analyzers: *1
+      finishers: *2
+      initializers: *3
+      modifiers: *4
+      results: *5
+      services: *6
+      simulation:
+        - arguments: &7
+            - 0.05
+            - verbose: 0
+          method: advance
+    models:
+      - granular_parameters: []
+        modelname: /stand_alone
+        solverclass: heccer
+    name: 'builtin cell configuration, applied to: stand_alone'
+    outputclasses:
+      double_2_ascii:
+        module_name: Heccer
+        options:
+          filename: ./output/stand_alone.out
+        package: Heccer::Output
+        ssp_outputclass: ~
+    outputs:
+      - component_name: /stand_alone/segments/soma
+        field: Vm
+        outputclass: double_2_ascii
+    schedule:
+      - ~
+      - ~
+    services:
+      neurospaces:
+        initializers:
+          - arguments:
+              -
+                - ./bin/ssp
+                - -P
+                - cells/stand_alone.ndf
+                - -m
+                - /usr/local/neurospaces/models/library
+            method: read
+        model_library: /usr/local/neurospaces/models/library
+        module_name: Neurospaces
+        ssp_service: !!perl/hash:SSP::Service
+          backend: ~
+          scheduler: ~
+    simulation_time:
+      steps: 2500
+      time: ~
+    solverclasses:
+      heccer:
+        module_name: Heccer
+        service_name: neurospaces
+    status:
+      advance:
+        - *7
+      analyze:
+        - []
+      compile:
+        - []
+      finish:
+        - []
+      initiate:
+        - []
+      instantiate_inputs:
+        - []
+      instantiate_outputs:
+        - []
+      instantiate_services:
+        - []
+    usage: |2
+      
+      	Simulate a single model neuron, default is to output the membrane potential of the soma.
+      	Use the options to inject current in the soma (--inject-magnitude).
+      	The model's soma segment must reside in a SEGMENT_GROUP with name "segments".
+      
+              The name of the model neuron is inferred from the name of the model description file.
+              (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+              called "hh_neuron").
+      
+      	--model-name overwrite the default model name.
+      	--steps sets number of steps
+    verbose: 1
+undefined_method SSP::DESTROY

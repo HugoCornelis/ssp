@@ -443,6 +443,41 @@ solverclasses:
 					       },
 					      },
 			       },
+			       {
+				arguments => [
+					      '--cell',
+					      'cells/stand_alone.ndf',
+					      '--debug',
+					      '1',
+					      '--verbose',
+					     ],
+				command => './bin/ssp',
+				command_tests => [
+						  {
+						   description => "Can we run a schedule of a single neuron model from the cell builtin schedule, debug option turned on ?",
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/debug_stand_alone.txt`),
+						   timeout => 3,
+						   write => undef,
+						  },
+						 ],
+				description => "simulation of a single neuron model from the cell builtin schedule, debug option turned on",
+				preparation => {
+						description => "No preparation necessary",
+						preparer =>
+						sub
+						{
+						    1;
+						},
+					       },
+				reparation => {
+					       description => "Removing the output from the distribution, needed for distcheck to work properly",
+					       reparer =>
+					       sub
+					       {
+						   `rm output/stand_alone.out && rmdir output`;
+					       },
+					      },
+			       },
 			      ],
        description => "cell builtin schedule",
        name => 'cell.t',
