@@ -1,5 +1,7 @@
 -*- outline -*-
 
+* Add appropriate copyright messages to all files.
+
 * rename
 in SSP.pm: service_name to model_container.
 
