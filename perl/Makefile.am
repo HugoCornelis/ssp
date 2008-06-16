@@ -7,7 +7,7 @@
 ##'
 ##' SSP
 ##'
-##' Copyright (C) 2007 Hugo Cornelis
+##' Copyright (C) 2007-2008 Hugo Cornelis
 ##'
 ##' Hugo Cornelis, hugo.cornelis@gmail.com
 ##'
