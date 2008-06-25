@@ -37,7 +37,7 @@ $files = {
                                   'line' => 264
                                 }
                               ],
-           '_<bin/ssp' => [
+           '_<tests/perl/table-nap' => [
                             {
                               'expr' => undef,
                               'value' => '1',
