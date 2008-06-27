@@ -1,5 +1,13 @@
 -*- outline -*-
 
+* enhance execution annotation with time stamps.
+See this code in SSP->run():
+
+	# register the method and arguments
+
+	push @{$self->{status}->{$method}}, $arguments;
+
+
 * Add appropriate copyright messages to all files.
 
 * rename
