@@ -403,20 +403,21 @@ sub main
 
 	my $model_root = $option_model_name;
 
-# 	if (!$model_root)
-# 	{
-# 	    $model_root = $option_model_filename;
+	# add an initial slash to the model name if necessary
 
-# 	    $model_root =~ s/^.*\///;
-# 	    $model_root =~ s/\..*$//;
-# 	}
+	if ($model_root !~ m|^/|)
+	{
+	    print "add an initial slash to the model name if necessary $model_root\n";
+
+	    $model_root = "/$model_root";
+	}
 
 	# link model name with solver class
 
 	my $models
 	    = [
 	       {
-		modelname => "/$model_root",
+		modelname => $model_root,
 		solverclass => $option_solverclass,
 	       },
 	      ];
@@ -452,7 +453,7 @@ sub main
 	    $granular_parameters
 		= [
 		   {
-		    component_name => "/$model_root/segments/soma",
+		    component_name => "$model_root/segments/soma",
 		    field => 'INJECT',
 		    value => $option_inject_magnitude,
 		   },
@@ -539,7 +540,7 @@ sub main
 
 	my $option_output_directory = './output';
 
-	my $option_output_filename = $option_output_directory . '/' . $model_root . ".out";
+	my $option_output_filename = $option_output_directory . $model_root . ".out";
 
 	# create the directory for the output file
 
@@ -579,7 +580,7 @@ sub main
 
 	if (!@$option_output_fields)
 	{
-	    $option_output_fields = [ "/$model_root/segments/soma->Vm", ];
+	    $option_output_fields = [ "$model_root/segments/soma->Vm", ];
 	}
 
 	my $outputs
@@ -674,9 +675,9 @@ sub main
 				      {
 				       arguments => [
 						     {
-						      component_name => "/$model_root/segments/soma",
+						      component_name => "$model_root/segments/soma",
 						      field => 'INJECT',
-						      modelname => "/$model_root",
+						      modelname => "$model_root",
 						      value => $option_inject_magnitude,
 						     },
 						    ],
@@ -689,9 +690,9 @@ sub main
 				      {
 				       arguments => [
 						     {
-						      component_name => "/$model_root/segments/soma",
+						      component_name => "$model_root/segments/soma",
 						      field => 'INJECT',
-						      modelname => "/$model_root",
+						      modelname => "$model_root",
 						      value => 0,
 						     },
 						    ],
