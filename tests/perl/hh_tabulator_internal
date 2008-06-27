@@ -73,7 +73,6 @@ sub main
 # 							     format => 'alpha-beta',
 # 							     format => 'steadystate-tau',
 # 							     format => 'A-B',
-# # 							     format => 'internal*dt',
 							     format => 'internal',
 							     output => 'stdout',
 							     source => "/$modelname/segments/soma/na/na_gate_activation/A",
@@ -83,7 +82,16 @@ sub main
 					      object => 'tabulator',
 					     },
 					     {
-					      arguments => [ { source => "/$modelname/segments/soma/na/na_gate_activation/B", }, ],
+					      arguments => [
+							    {
+# 							     format => 'alpha-beta',
+# 							     format => 'steadystate-tau',
+# 							     format => 'A-B',
+							     format => 'internal',
+							     output => 'stdout',
+							     source => "/$modelname/segments/soma/na/na_gate_activation/B",
+							    },
+							   ],
 					      method => 'dump',
 					      object => 'tabulator',
 					     },

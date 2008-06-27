@@ -1,0 +1,207 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb -w
+#
+
+use strict;
+
+
+$| = 1;
+
+
+BEGIN
+{
+    #! make check
+
+    push @INC, '../perl';
+
+    #! make distcheck
+
+    push @INC, '../../perl';
+
+    #! normal run
+
+    push @INC, './perl';
+
+    #! after install
+
+    push @INC, '/usr/local/glue/swig/perl';
+}
+
+
+use SwiggableHeccer;
+
+use SSP;
+
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+$ENV{NEUROSPACES_NMC_MODELS} = '/usr/local/neurospaces/models/library';
+
+
+sub main
+{
+    # model specification array
+
+    my $modelname = $0;
+
+    $modelname =~ s/.*\///;
+
+    $modelname =~ s/-/_/g;
+
+    #! Should merge back to the hh1 test script, perhaps.
+    #! Or, perhaps, automate the generation of the tabulator test scripts.
+
+    $modelname = "hh1";
+
+    my $args = [ "$0", "-P", "tests/cells/$modelname.ndf" ];
+
+    # instantiate a scheduler
+
+    my $scheduler
+	= SSP->new(
+		   {
+		    apply => {
+			      simulation => [
+					     {
+					      arguments => [
+							    {
+# 							     format => 'alpha-beta',
+# 							     format => 'steadystate-tau',
+							     format => 'A-B',
+# 							     format => 'internal',
+							     output => 'stdout',
+							     source => "/$modelname/segments/soma/na/na_gate_activation/A",
+							    },
+							   ],
+					      method => 'dump',
+					      object => 'tabulator',
+					     },
+					     {
+					      arguments => [
+							    {
+# 							     format => 'alpha-beta',
+# 							     format => 'steadystate-tau',
+							     format => 'A-B',
+# 							     format => 'internal',
+							     output => 'stdout',
+							     source => "/$modelname/segments/soma/na/na_gate_activation/B",
+							    },
+							   ],
+					      method => 'dump',
+					      object => 'tabulator',
+					     },
+					    ],
+			     },
+		    analyzers => {
+				  tabulator => {
+						module_name => 'Heccer',
+						package => 'Heccer::Tabulator',
+						initializers => [
+								 {
+								  arguments => [ { source => "neurospaces::/$modelname", }, ],
+								  method => 'serve',
+								 },
+								],
+					       },
+				 },
+		    models => [
+			       {
+				modelname => "/$modelname",
+				granular_parameters => [
+							{
+							 component_name => "/$modelname/segments/soma",
+							 field => 'INJECT',
+							 value => 3e-10,
+							},
+						       ],
+				solverclass => "heccer",
+			       },
+			      ],
+		    name => $modelname,
+		    outputclasses => {
+				      double_2_ascii => {
+							 options => {
+								     filename => '/tmp/output',
+								    },
+							 module_name => 'Heccer',
+							 package => 'Heccer::Output',
+							},
+				     },
+		    outputs => [
+				{
+				 component_name => "/$modelname/segments/soma",
+				 field => 'Vm',
+				 outputclass => 'double_2_ascii',
+				},
+			       ],
+		    services => {
+				 neurospaces => {
+						 initializers => [
+								  {
+								   arguments => [ $args, ],
+								   method => 'read',
+								  },
+								 ],
+						 module_name => 'Neurospaces',
+						},
+				},
+		    solverclasses => {
+				      heccer => {
+						 constructor_settings => {
+									  configuration => {
+											    reporting => {
+													  granularity => 10000,
+													  tested_things => (
+															    $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
+															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
+															    | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+															   ),
+													 },
+											   },
+									  dStep => 5e-7,
+									  options => {
+										      iIntervalEntries => 10,
+										     },
+									 },
+						 module_name => 'Heccer',
+						 service_name => 'neurospaces',
+						},
+				     },
+		   },
+		  );
+
+    use YAML;
+
+    my $scheduler_yaml;
+
+    {
+	local $/;
+
+	if (-e "./yaml/$modelname.yml")
+	{
+	    $scheduler_yaml = Load(`cat ./yaml/$modelname.yml`);
+	}
+    }
+
+    # run the schedule
+
+    $scheduler->run();
+
+    system 'cat /tmp/output';
+}
+
+
+main();
+
+
+exit 0;
+
+
