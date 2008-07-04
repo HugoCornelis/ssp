@@ -1,0 +1,228 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb -w
+#
+
+use strict;
+
+
+$| = 1;
+
+
+BEGIN
+{
+    #! make check
+
+    push @INC, '../perl';
+
+    #! make distcheck
+
+    push @INC, '../../perl';
+
+    #! normal run
+
+    push @INC, './perl';
+
+    #! after install
+
+    push @INC, '/usr/local/glue/swig/perl';
+}
+
+
+use SwiggableHeccer;
+
+use SSP;
+
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+$ENV{NEUROSPACES_NMC_MODELS} = '/usr/local/neurospaces/models/library';
+
+
+sub main
+{
+    # model specification array
+
+    my $modelname = $0;
+
+    $modelname =~ s/.*\///;
+
+    $modelname =~ s/-/_/g;
+
+    my $args = [ "$0", "-P", "tests/cells/$modelname.ndf" ];
+
+    # instantiate a scheduler
+
+    my $scheduler
+	= SSP->new(
+		   {
+		    apply => {
+			      simulation => [
+					     {
+					      arguments => [ 10, { verbose => 2, }, ],
+					      method => 'steps',
+					     },
+					    ],
+			     },
+		    models => [
+			       {
+				granular_parameters => [
+							{
+							 component_name => "/$modelname/segments/c1/cat/cat_gate_activation",
+							 field => 'state_init',
+							 value => 0.039478155609280696,
+							},
+							{
+							 component_name => "/$modelname/segments/c1/cat/cat_gate_inactivation",
+							 field => 'state_init',
+							 value => 0.08211379989188651,
+							},
+							{
+							 component_name => "/$modelname/segments/c1/kdr/kdr_steadystate",
+							 field => 'state_init',
+							 value => 0.003599440607,
+							},
+							{
+							 component_name => "/$modelname/segments/c1/kdr/kdr_tau",
+							 field => 'state_init',
+							 value => 0.9999799396,
+							},
+							{
+							 component_name => "/$modelname/segments/c1/nap/nap",
+							 field => 'state_init',
+							 value => 0.7612305421,
+							},
+							{
+							 component_name => "/$modelname/segments/c1/naf/naf_gate_activation",
+							 field => 'state_init',
+							 value => 0.0078406449371415214,
+							},
+							{
+							 component_name => "/$modelname/segments/c1/naf/naf_gate_inactivation",
+							 field => 'state_init',
+							 value => 0.26397776926502026,
+							},
+						       ],
+				modelname => "/$modelname",
+				solverclass => "heccer",
+			       },
+			      ],
+		    name => $modelname,
+		    outputclasses => {
+				      double_2_ascii => {
+							 module_name => 'Heccer',
+							 package => 'Heccer::Output',
+							},
+				     },
+		    outputs => [
+				{
+				 component_name => "/$modelname",
+				 field => 'aggregator[0]',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname",
+				 field => 'aggregator[1]',
+				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname",
+				 field => 'aggregator[2]',
+				 outputclass => 'double_2_ascii',
+				},
+			       ],
+		    services => {
+				 neurospaces => {
+						 initializers => [
+								  {
+								   arguments => [ $args, ],
+								   method => 'read',
+								  },
+								 ],
+						 module_name => 'Neurospaces',
+						},
+				},
+		    solverclasses => {
+				      heccer => {
+						 constructor_settings => {
+# 									  dStep => (1e-5),
+									  configuration => {
+											    reporting => {
+# 													  granularity => 1,
+													  tested_things => (
+															    $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
+															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
+															    | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+															    | $SwiggableHeccer::HECCER_DUMP_VM_AGGREGATORS
+															   ),
+													 },
+											   },
+									  options => {
+										      iOptions => (
+												   $SwiggableHeccer::HECCER_OPTION_ENABLE_AGGREGATORS
+												   | $SwiggableHeccer::HECCER_OPTION_ENABLE_INDIVIDUAL_CURRENTS
+												  ),
+										     },
+									 },
+						 module_name => 'Heccer',
+						 service_name => 'neurospaces',
+						},
+				     },
+		   },
+		  );
+
+    use YAML;
+
+    use IO::File;
+
+    my $configuration = IO::File->new(">./yaml/$modelname.yml");
+
+    if (defined $configuration)
+    {
+	print $configuration Dump($scheduler);
+
+	$configuration->close();
+    }
+
+    my $scheduler_yaml;
+
+    {
+	local $/;
+
+	if (-e "./yaml/$modelname.yml")
+	{
+	    $scheduler_yaml = Load(`cat ./yaml/$modelname.yml`);
+	}
+    }
+
+    # run the schedule
+
+    $scheduler->run();
+
+    my $output = [ `cat /tmp/OutputGenerator`, ];
+
+    $output->[$#$output] =~ m/(\S+)(?:\s+)(\S+)(?:\s+)(\S+)(?:\s+)(\S+)/;
+
+    my $aggregator0 = $2;
+    my $aggregator1 = $3;
+    my $aggregator2 = $4;
+
+    print "pdAggregator0 is $aggregator0\n";
+    print "pdAggregator1 is $aggregator1\n";
+    print "pdAggregator2 is $aggregator2\n";
+}
+
+
+main();
+
+
+exit 0;
+
+
