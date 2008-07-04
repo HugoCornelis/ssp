@@ -58,6 +58,18 @@ models:
       - component_name: /addressing_aggregator1/segments/c1/naf/naf_gate_inactivation
         field: state_init
         value: 0.26397776926502
+      - component_name: /addressing_aggregator1/segments/c1/cat
+        field: MODEL_SOURCE_TYPE
+        value: 0
+      - component_name: /addressing_aggregator1/segments/c1/kdr
+        field: MODEL_SOURCE_TYPE
+        value: 1
+      - component_name: /addressing_aggregator1/segments/c1/nap
+        field: MODEL_SOURCE_TYPE
+        value: 2
+      - component_name: /addressing_aggregator1/segments/c1/naf
+        field: MODEL_SOURCE_TYPE
+        value: 2
     modelname: /addressing_aggregator1
     solverclass: heccer
 name: addressing_aggregator1

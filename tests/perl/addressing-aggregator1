@@ -71,41 +71,69 @@ sub main
 		    models => [
 			       {
 				granular_parameters => [
-							{
-							 component_name => "/$modelname/segments/c1/cat/cat_gate_activation",
-							 field => 'state_init',
-							 value => 0.039478155609280696,
-							},
-							{
-							 component_name => "/$modelname/segments/c1/cat/cat_gate_inactivation",
-							 field => 'state_init',
-							 value => 0.08211379989188651,
-							},
-							{
-							 component_name => "/$modelname/segments/c1/kdr/kdr_steadystate",
-							 field => 'state_init',
-							 value => 0.003599440607,
-							},
-							{
-							 component_name => "/$modelname/segments/c1/kdr/kdr_tau",
-							 field => 'state_init',
-							 value => 0.9999799396,
-							},
-							{
-							 component_name => "/$modelname/segments/c1/nap/nap",
-							 field => 'state_init',
-							 value => 0.7612305421,
-							},
-							{
-							 component_name => "/$modelname/segments/c1/naf/naf_gate_activation",
-							 field => 'state_init',
-							 value => 0.0078406449371415214,
-							},
-							{
-							 component_name => "/$modelname/segments/c1/naf/naf_gate_inactivation",
-							 field => 'state_init',
-							 value => 0.26397776926502026,
-							},
+							(
+							 # initial states
+
+							 {
+							  component_name => "/$modelname/segments/c1/cat/cat_gate_activation",
+							  field => 'state_init',
+							  value => 0.039478155609280696,
+							 },
+							 {
+							  component_name => "/$modelname/segments/c1/cat/cat_gate_inactivation",
+							  field => 'state_init',
+							  value => 0.08211379989188651,
+							 },
+							 {
+							  component_name => "/$modelname/segments/c1/kdr/kdr_steadystate",
+							  field => 'state_init',
+							  value => 0.003599440607,
+							 },
+							 {
+							  component_name => "/$modelname/segments/c1/kdr/kdr_tau",
+							  field => 'state_init',
+							  value => 0.9999799396,
+							 },
+							 {
+							  component_name => "/$modelname/segments/c1/nap/nap",
+							  field => 'state_init',
+							  value => 0.7612305421,
+							 },
+							 {
+							  component_name => "/$modelname/segments/c1/naf/naf_gate_activation",
+							  field => 'state_init',
+							  value => 0.0078406449371415214,
+							 },
+							 {
+							  component_name => "/$modelname/segments/c1/naf/naf_gate_inactivation",
+							  field => 'state_init',
+							  value => 0.26397776926502026,
+							 },
+							),
+							(
+							 # aggregators
+
+							 {
+							  component_name => "/$modelname/segments/c1/cat",
+							  field => 'MODEL_SOURCE_TYPE',
+							  value => 0,
+							 },
+							 {
+							  component_name => "/$modelname/segments/c1/kdr",
+							  field => 'MODEL_SOURCE_TYPE',
+							  value => 1,
+							 },
+							 {
+							  component_name => "/$modelname/segments/c1/nap",
+							  field => 'MODEL_SOURCE_TYPE',
+							  value => 2,
+							 },
+							 {
+							  component_name => "/$modelname/segments/c1/naf",
+							  field => 'MODEL_SOURCE_TYPE',
+							  value => 2,
+							 },
+							),
 						       ],
 				modelname => "/$modelname",
 				solverclass => "heccer",
