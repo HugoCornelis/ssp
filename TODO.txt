@@ -1,5 +1,8 @@
 -*- outline -*-
 
+* have ssp take as default model one called 'main'
+unless overriden by options.
+
 * enhance execution annotation with time stamps.
 See this code in SSP->run():
 
