@@ -20,7 +20,7 @@ outputclasses:
   double_2_ascii:
     module_name: Heccer
     options:
-      filename: /tmp/purk_test_soma
+      filename: /tmp/purk_test_soma_aggregators
     package: Heccer::Output
 outputs:
   - component_name: /purk_test_soma/segments/soma
@@ -68,5 +68,7 @@ solverclasses:
           granularity: 1000
           tested_things: 6225920
       dStep: 1e-06
+      options:
+        iOptions: 96
     module_name: Heccer
     service_name: neurospaces

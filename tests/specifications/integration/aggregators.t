@@ -54,6 +54,36 @@ my $test
 						 ],
 				description => "single channel currents summation, single compartment, three aggregators",
 			       },
+			       {
+				arguments => [
+					      "$::config->{core_directory}/yaml/purk_test_soma.yml",
+					     ],
+				command => 'bin/ssp',
+				command_tests => [
+						  {
+						   description => "Is the purkinje cell soma solved correctly, no aggregators ?",
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purk_test_soma.txt`),
+						   timeout => 100,
+						   write => undef,
+						  },
+						 ],
+				description => "purkinje cell soma, no aggregators",
+			       },
+			       {
+				arguments => [
+					      "$::config->{core_directory}/yaml/purk_test_soma_aggregators.yml",
+					     ],
+				command => 'bin/ssp',
+				command_tests => [
+						  {
+						   description => "Is the purkinje cell soma solved correctly, with aggregators ?",
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purk_test_soma_aggregators.txt`),
+						   timeout => 100,
+						   write => undef,
+						  },
+						 ],
+				description => "purkinje cell soma, with aggregators",
+			       },
 			      ],
        description => "heccer aggregator options",
        name => 'aggregators.t',
