@@ -11,7 +11,7 @@ use strict;
 
 {
     # $Format: "system 'mkdir --parents \"/tmp/${package}/${label}\"'"$
-system 'mkdir --parents "/tmp/ssp/network-10"'
+system 'mkdir --parents "/tmp/ssp/network-11"'
 }
 
 if ($?)
@@ -22,7 +22,7 @@ if ($?)
 
 {
     # $Format: "system \"cp '${package}-${label}.tar.gz' '/tmp/${package}/${label}'\""$
-system "cp 'ssp-network-10.tar.gz' '/tmp/ssp/network-10'"
+system "cp 'ssp-network-11.tar.gz' '/tmp/ssp/network-11'"
 }
 
 if ($?)
@@ -33,7 +33,7 @@ if ($?)
 
 {
     # $Format: "chdir \"/tmp/${package}/${label}\""$
-chdir "/tmp/ssp/network-10"
+chdir "/tmp/ssp/network-11"
 }
 
 if ($?)
@@ -44,7 +44,7 @@ if ($?)
 
 {
     # $Format: "system \"tar xfz '${package}-${label}.tar.gz'\""$
-system "tar xfz 'ssp-network-10.tar.gz'"
+system "tar xfz 'ssp-network-11.tar.gz'"
 }
 
 if ($?)
@@ -55,7 +55,7 @@ if ($?)
 
 {
     # $Format: "chdir \"${package}-${label}\""$
-chdir "ssp-network-10"
+chdir "ssp-network-11"
 }
 
 if ($?)

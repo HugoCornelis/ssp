@@ -18,12 +18,12 @@ dnl ##########################################################################
 AC_PREREQ(2.59)
 
 # $Format: "AC_INIT(${package}, ${label}, ${email})"$
-AC_INIT(ssp, network-10, hugo.cornelis@gmail.com)
+AC_INIT(ssp, network-11, hugo.cornelis@gmail.com)
 
 AC_CONFIG_SRCDIR([ssp_test.pm])
 
 # $Format: "AM_INIT_AUTOMAKE(${package}, ${label})"$
-AM_INIT_AUTOMAKE(ssp, network-10)
+AM_INIT_AUTOMAKE(ssp, network-11)
 
 PERL_MODULES=`(cd perl && find . -name "*.pm" -printf "%p ")`
 AC_SUBST(PERL_MODULES)
