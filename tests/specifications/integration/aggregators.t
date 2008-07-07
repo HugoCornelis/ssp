@@ -99,6 +99,11 @@ my $test
 				 command_tests => [
 						   {
 						    description => "Is the purkinje cell solved correctly, without aggregators ?",
+						    disabled => (((join '', `cat /usr/local/include/heccer/config.h`) =~ m/define RANDOM.*ran1/
+								  ? (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf"
+								     ? "purkinje cell potassium channels not found"
+								     : "")
+								  : "ran1 not defined as rng in heccer config")),
 						    read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt`),
 						    timeout => 500,
 						    write => undef,
@@ -114,6 +119,11 @@ my $test
 				 command_tests => [
 						   {
 						    description => "Is the purkinje cell solved correctly, with aggregators ?",
+						    disabled => (((join '', `cat /usr/local/include/heccer/config.h`) =~ m/define RANDOM.*ran1/
+								  ? (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf"
+								     ? "purkinje cell potassium channels not found"
+								     : "")
+								  : "ran1 not defined as rng in heccer config")),
 						    read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt`),
 						    timeout => 500,
 						    write => undef,
