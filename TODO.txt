@@ -1,5 +1,7 @@
 -*- outline -*-
 
+* have a facility to monitor progress
+
 * have ssp take as default model one called 'main'
 unless overriden by options.
 
