@@ -663,6 +663,11 @@ sub main
 	    }
 	    else
 	    {
+		if (!defined $option_inject_delay)
+		{
+		    $option_inject_delay = 0;
+		}
+
 		my $time_termination = $option_time - $option_inject_delay - $option_inject_duration;
 
 		$apply_time
