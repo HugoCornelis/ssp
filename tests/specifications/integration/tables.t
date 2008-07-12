@@ -155,6 +155,20 @@ my $test
 						 ],
 				description => "Persistent sodium gate tabulation",
 			       },
+			       {
+				arguments => [
+					     ],
+				command => 'tests/perl/hardcoded-tables1',
+				command_tests => [
+						  {
+						   description => "Are gates tabulated correctly, hardcoded tables (1) ?",
+						   read => (join '', 'ljasdf;lkjasdflkalksdlkfasdjsadjasjf;lksajd;lkjsad', `cat /usr/local/heccer/tests/specifications/strings/hardcoded-tables1.txt`),
+						   timeout => 9,
+						   write => undef,
+						  },
+						 ],
+				description => "tables hardcoded in the model container",
+			       },
 			      ],
        description => "Raw gate tabulation calculations",
        name => 'tables.t',
