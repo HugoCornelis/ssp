@@ -162,7 +162,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, hardcoded tables (1) ?",
-						   read => (join '', 'ljasdf;lkjasdflkalksdlkfasdjsadjasjf;lksajd;lkjsad', `cat /usr/local/heccer/tests/specifications/strings/hardcoded-tables1.txt`),
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/hardcoded-tables1.txt`),
 						   timeout => 9,
 						   write => undef,
 						  },

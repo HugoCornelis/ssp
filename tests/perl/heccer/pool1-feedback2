@@ -193,14 +193,14 @@ sub main
 															      },
 														powered_activator => {
 																      iPower => 2,
-																      activator => {
-																		    dInitActivation => 0.0099009900989999993,
-																		    iActivator => 1,
-																		    parameters => {
-																				   dBasalLevel => 4.0e-3,
-																				   dTau => 0.010,
-																				  },
-																		   },
+																      concentration_activator => {
+																				  dInitActivation => 0.0099009900989999993,
+																				  iActivator => 1,
+																				  parameters => {
+																						 dBasalLevel => 4.0e-3,
+																						 dTau => 0.010,
+																						},
+																				 },
 																     },
 													       },
 													      ),
