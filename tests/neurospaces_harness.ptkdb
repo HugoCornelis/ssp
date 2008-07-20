@@ -1,60 +1,15 @@
 $files = {
-           '_<tests/run' => [
-                              {
-                                'expr' => undef,
-                                'value' => '1',
-                                'text' => '    while (scalar @$numbers1 > scalar @$numbers2)
+           '_<tests/neurospaces_harness' => [
+                                              {
+                                                'expr' => undef,
+                                                'value' => '1',
+                                                'text' => '	    if (ref $command eq \'CODE\')
 ',
-                                'fname' => 'tests/run',
-                                'type' => 'user',
-                                'line' => '888'
-                              },
-                              {
-                                'expr' => undef,
-                                'value' => '1',
-                                'text' => '				$error = numerical_compare($command_test, $before_match, $read, $error);
-',
-                                'fname' => 'tests/run',
-                                'type' => 'user',
-                                'line' => 510
-                              },
-                              {
-                                'expr' => undef,
-                                'value' => '1',
-                                'text' => '	    return \'numerical_compare(): texts differ ($texts1->[$index] ne $texts2->[$index]), aborting with error\';
-',
-                                'fname' => 'tests/run',
-                                'type' => 'user',
-                                'line' => '924'
-                              },
-                              {
-                                'expr' => undef,
-                                'value' => '1',
-                                'text' => '		return \'numerical_compare(): numbers differ above accuracy ($numbers1->[$index] != $numbers2->[$index]), aborting with error\';
-',
-                                'fname' => 'tests/run',
-                                'type' => 'user',
-                                'line' => '940'
-                              },
-                              {
-                                'expr' => undef,
-                                'value' => '1',
-                                'text' => '    foreach my $text (@$texts1)
-',
-                                'fname' => 'tests/run',
-                                'type' => 'user',
-                                'line' => 856
-                              },
-                              {
-                                'expr' => undef,
-                                'value' => '1',
-                                'text' => '    return $result;
-',
-                                'fname' => 'tests/run',
-                                'type' => 'user',
-                                'line' => '945'
-                              }
-                            ]
+                                                'fname' => 'tests/neurospaces_harness',
+                                                'type' => 'user',
+                                                'line' => '413'
+                                              }
+                                            ]
          };
 $expr_list = [
                {

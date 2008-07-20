@@ -13,6 +13,8 @@ my $test
 					      'cells/purkinje/edsjb1994.ndf',
 					      '--model-name',
 					      '/Purkinje',
+					      '--emit-output',
+					      'output/Purkinje.out',
 					     ],
 				command => 'bin/ssp',
 				command_tests => [
@@ -33,6 +35,8 @@ my $test
 					      '/Purkinje',
 					      '--inject-magnitude',
 					      '1e-9',
+					      '--emit-output',
+					      'output/Purkinje.out',
 					     ],
 				command => 'bin/ssp',
 				command_tests => [
