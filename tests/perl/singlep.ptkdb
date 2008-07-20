@@ -1,25 +1,50 @@
 $files = {
-           '_<perl/SSP.pm' => [
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '    my $engine
+           '_</local_home/local_home/hugo/neurospaces_project/ssp/source/perl/snapshots/0/tests/perl/singlep' => [
+                                                                                                                   {
+                                                                                                                     'expr' => undef,
+                                                                                                                     'value' => '1',
+                                                                                                                     'text' => '    $scheduler->run();
 ',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => '391'
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '    $result = $engine->compile();
+                                                                                                                     'fname' => '/local_home/local_home/hugo/neurospaces_project/ssp/source/perl/snapshots/0/tests/perl/singlep',
+                                                                                                                     'type' => 'user',
+                                                                                                                     'line' => 115
+                                                                                                                   }
+                                                                                                                 ],
+           '_</usr/local/glue/swig/perl/SSP.pm' => [
+                                                     {
+                                                       'expr' => undef,
+                                                       'value' => '1',
+                                                       'text' => '	my $success = $object->$method($peer, @$arguments);
 ',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 405
-                                }
-                              ]
+                                                       'fname' => '/usr/local/glue/swig/perl/SSP.pm',
+                                                       'type' => 'user',
+                                                       'line' => 1362
+                                                     },
+                                                     {
+                                                       'expr' => undef,
+                                                       'value' => '1',
+                                                       'text' => '	if (!$engine->compile($self))
+',
+                                                       'fname' => '/usr/local/glue/swig/perl/SSP.pm',
+                                                       'type' => 'user',
+                                                       'line' => '264'
+                                                     },
+                                                     {
+                                                       'expr' => undef,
+                                                       'value' => '1',
+                                                       'text' => '    if (ref $engine)
+',
+                                                       'fname' => '/usr/local/glue/swig/perl/SSP.pm',
+                                                       'type' => 'user',
+                                                       'line' => '1785'
+                                                     }
+                                                   ]
          };
-$expr_list = [];
+$expr_list = [
+               {
+                 'expr' => '$method',
+                 'depth' => -1
+               }
+             ];
 $eval_saved_text = undef;
 $main_win_geometry = '1592x1114+0+0';
