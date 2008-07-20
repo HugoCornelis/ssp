@@ -407,8 +407,6 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 
 	    my $command = $command_definition->{command};
 
-	    next if $command !~ /singlep/;
-
 	    my $spawn_new;
 
 	    if (ref $command eq 'CODE')
