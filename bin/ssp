@@ -589,7 +589,10 @@ sub main
 	       {
 		   my $address = $_;
 
-		   $address =~ m/^(.*)->(.*)$/;
+		   if ($address !~ m/^(.*)->(.*)$/)
+		   {
+		       die "$0: unknown output specification $address.  Output specifications must be in the format 'component_name'->'field_name' (eg. --output '/Purkinje/segments/soma->Vm')";
+		   }
 
 		   my $component_name = $1;
 
