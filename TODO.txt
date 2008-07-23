@@ -1,5 +1,8 @@
 -*- outline -*-
 
+* the neurospaces-studio option
+does not work together with the cell builtin.
+
 * have a facility to monitor progress
 
 * have ssp take as default model one called 'main'
