@@ -196,65 +196,6 @@ sub execute
 	    }
 	}
 
-	# if option to replace the simulation routine with calls to the neurospaces studio
-
-	if ($option_neurospaces_studio)
-	{
-	    # load things related to the neurospaces studio
-
-	    #! for proper error reporting of loading modules (Renderer etc),
-	    #! 'require' must be used, not 'use'.
-
-	    require Neurospaces;
-	    require Neurospaces::Traversal;
-	    require Neurospaces::Studio;
-
-	    #! this comes later in the neurospaces script, no clue why
-
-	    require Neurospaces::GUI;
-
-	    # replace the simulation routine
-
-	    $scheduler->{apply}->{simulation}
-		= [
-		   {
-		    arguments => [ $0, ],
-		    method => 'Neurospaces::GUI::gui',
-		   },
-		  ];
-
-	    # remove the compilation and initiation parts, to prevent
-	    # that output files get overwritten
-
-	    $scheduler->{apply}->{initializers} = [ undef, ];
-	}
-
-	# if option to daemonize
-
-	if ($option_daemonize)
-	{
-	    # we tell to add the daemonizing call to the current initializers
-
-	    $scheduler->{apply}->{initializers}
-		= {
-		   push => [
-			    {
-			     #! arguments: close_files, options hash
-
-			     #! only STDIN, STDOUT, STDERR, because I think some of the GUI
-			     #! things have potentially already opened filehandles, or so.
-			     #! simply closing all filehandles inhibits the GUI when used
-			     #! invocated from the webserver.
-
-			     arguments => [ 2, ],
-			     method => 'daemonize',
-			    },
-			   ],
-		   have => $scheduler->{apply}->{initializers},
-		   type => 'push',
-		  };
-	}
-
 	# and run it
 
 	schedule($scheduler);
@@ -861,6 +802,67 @@ Known builtin configurations:
 sub schedule
 {
     my $scheduler = shift;
+
+    {
+	# if option to replace the simulation routine with calls to the neurospaces studio
+
+	if ($option_neurospaces_studio)
+	{
+	    # load things related to the neurospaces studio
+
+	    #! for proper error reporting of loading modules (Renderer etc),
+	    #! 'require' must be used, not 'use'.
+
+	    require Neurospaces;
+	    require Neurospaces::Traversal;
+	    require Neurospaces::Studio;
+
+	    #! this comes later in the neurospaces script, no clue why
+
+	    require Neurospaces::GUI;
+
+	    # replace the simulation routine
+
+	    $scheduler->{apply}->{simulation}
+		= [
+		   {
+		    arguments => [ $0, ],
+		    method => 'Neurospaces::GUI::gui',
+		   },
+		  ];
+
+	    # remove the compilation and initiation parts, to prevent
+	    # that output files get overwritten
+
+	    $scheduler->{apply}->{initializers} = [ undef, ];
+	}
+
+	# if option to daemonize
+
+	if ($option_daemonize)
+	{
+	    # we tell to add the daemonizing call to the current initializers
+
+	    $scheduler->{apply}->{initializers}
+		= {
+		   push => [
+			    {
+			     #! arguments: close_files, options hash
+
+			     #! only STDIN, STDOUT, STDERR, because I think some of the GUI
+			     #! things have potentially already opened filehandles, or so.
+			     #! simply closing all filehandles inhibits the GUI when used
+			     #! invocated from the webserver.
+
+			     arguments => [ 2, ],
+			     method => 'daemonize',
+			    },
+			   ],
+		   have => $scheduler->{apply}->{initializers},
+		   type => 'push',
+		  };
+	}
+    }
 
     # determine the package name of the scheduler
 

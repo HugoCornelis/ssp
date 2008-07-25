@@ -479,6 +479,71 @@ solverclasses:
 					       },
 					      },
 			       },
+			       {
+				arguments => [
+					      '--cell',
+					      'examples/hh_neuron.ndf',
+					      '--time',
+					      '0.5',
+					      '--inject-magnitude',
+					      '2e-8',
+					      '--neurospaces-studio',
+					      '--emit-schedule',
+					     ],
+				command => './bin/ssp',
+				command_tests => [
+						  {
+						   description => "Can we invoke the neurospaces studio when using the cell builtin ?",
+						   read => [
+							    '-re',
+							    'apply:
+  initializers:
+    - ~
+  simulation:
+    - arguments:
+        - (.*?)/bin/ssp
+      method: Neurospaces::GUI::gui
+models:
+  - granular_parameters:
+      - component_name: /hh_neuron/segments/soma
+        field: INJECT
+        value: 2e-8
+    modelname: /hh_neuron
+    solverclass: heccer
+name: \'builtin cell configuration, applied to: hh_neuron\'
+outputclasses:
+  double_2_ascii:
+    module_name: Heccer
+    options:
+      filename: \./output/hh_neuron\.out
+    package: Heccer::Output
+outputs:
+  - component_name: /hh_neuron/segments/soma
+    field: Vm
+    outputclass: double_2_ascii
+services:
+  neurospaces:
+    initializers:
+      - arguments:
+          -
+            - (.*?)/bin/ssp
+            - -P
+            - examples/hh_neuron\.ndf
+        method: read
+    model_library: /usr/local/neurospaces/models/library
+    module_name: Neurospaces
+solverclasses:
+  heccer:
+    module_name: Heccer
+    service_name: neurospaces
+',
+							   ],
+						   timeout => 3,
+						   write => undef,
+						  },
+						 ],
+				description => "invocation of the neurospaces studio when using the cell builtin",
+			       },
 			      ],
        description => "cell builtin schedule",
        name => 'cell.t',
