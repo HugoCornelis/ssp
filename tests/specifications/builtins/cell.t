@@ -4,6 +4,15 @@
 use strict;
 
 
+my $loaded;
+
+eval
+{
+    local $SIG{__DIE__};
+
+    { $loaded = eval "require Neurospaces::Studio"; };
+};
+
 my $test
     = {
        command_definitions => [
@@ -543,6 +552,9 @@ solverclasses:
 						  },
 						 ],
 				description => "invocation of the neurospaces studio when using the cell builtin",
+				disabled => ($loaded
+					     ? 0
+					     : "cannot load the neurospaces studio"),
 			       },
 			      ],
        description => "cell builtin schedule",
