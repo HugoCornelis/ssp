@@ -154,7 +154,7 @@ my $test
 						  {
 						   description => "Are ten passive compartments with different properties and injected current solved correctly ?",
 						   read => (join '', `cat $::config->{tests_directory}/strings/tensizesp.txt`),
-						   timeout => 18,
+						   timeout => 28,
 						   write => undef,
 						  },
 						 ],
