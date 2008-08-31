@@ -162,7 +162,22 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, hardcoded tables (1) ?",
+						   disabled => "This test has been replaced with tests/perl/hardcoded-tables2",
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/hardcoded-tables1.txt`),
+						   timeout => 9,
+						   write => undef,
+						  },
+						 ],
+				description => "tables hardcoded in the model container",
+			       },
+			       {
+				arguments => [
+					     ],
+				command => 'tests/perl/hardcoded-tables2',
+				command_tests => [
+						  {
+						   description => "Are gates tabulated correctly, hardcoded tables (2) ?",
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/hardcoded-tables2.txt`),
 						   timeout => 9,
 						   write => undef,
 						  },
