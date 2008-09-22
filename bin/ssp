@@ -691,6 +691,7 @@ sub read_cmd_line
 {
     my $option_builtins;
     my $option_help;
+    my $option_version;
 
     my $result
 	= GetOptions
@@ -721,7 +722,17 @@ sub read_cmd_line
 	     "time-step=s" => \$option_time_step,
 	     "transformator=s" => \$option_transformator,
 	     "v|verbose+" => \$option_verbose,
+	     "version" => \$option_version,
 	    );
+
+    if ($option_version)
+    {
+	my $version = SSP::version();
+
+	print $version . "\n";
+
+	exit 1;
+    }
 
     if ($option_help
 	|| !@ARGV

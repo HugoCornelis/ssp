@@ -1545,6 +1545,15 @@ sub steps
 }
 
 
+sub version
+{
+    # $Format: "    my $version=\"${package}-${label}\";"$
+    my $version="ssp-python-1";
+
+    return $version;
+}
+
+
 package SSP::Debug;
 
 
