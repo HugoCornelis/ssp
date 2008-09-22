@@ -1605,6 +1605,8 @@ sub AUTOLOAD
 	}
     }
 
+    # call method, return result
+
     return &$subname(@_);
 }
 
