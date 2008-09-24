@@ -418,7 +418,7 @@ sub finish
 
     foreach my $schedulee (@$schedule)
     {
-	# advance the engine
+	# allow the engine to finish pending operations
 
 	my $success = $schedulee->finish();
 

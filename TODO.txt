@@ -1,5 +1,10 @@
 -*- outline -*-
 
+* user notifications
+** use the method 'shell'
+see example yaml/purkinje/edsjb1994-perfectclamp.yml
+to email someone at the end of the simulation.
+
 * the neurospaces-studio option
 does not work together with the cell builtin.
 
