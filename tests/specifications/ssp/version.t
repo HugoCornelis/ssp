@@ -15,9 +15,9 @@ my $test
 				command_tests => [
 						  {
 						   # $Format: "description => \"Does the version information match with ${package}-${label} ?\","$
-description => "Does the version information match with ssp-python-1 ?",
+description => "Does the version information match with ssp-python-2 ?",
 						   # $Format: "read => \"${package}-${label}\","$
-read => "ssp-python-1",
+read => "ssp-python-2",
 						  },
 						 ],
 				description => "check version information",
