@@ -722,7 +722,7 @@ html-upload-prepare:
 	tar cfh - tests/html | ( cd html/htdocs/neurospaces_project/ssp && tar vxf - )
 
 html-upload: html-upload-prepare
-	scp -pr html/htdocs/* hcornelis@shell.sourceforge.net:/home/groups/n/ne/neurospaces/htdocs/
+	scp -pr html/htdocs/* hcornelis,neurospaces@web.sourceforge.net:/home/groups/n/ne/neurospaces/htdocs/
 
 test: check
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
