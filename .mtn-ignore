@@ -11,3 +11,4 @@ synaptic-test.patch
 ^tests/html
 ^tests/output
 gz$
+_Inline
