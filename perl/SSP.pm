@@ -9,6 +9,65 @@ use strict;
 package SSP;
 
 
+use Inline C => <<'END_C';
+
+
+
+struct schedulee
+{
+    int (*pf)();
+    void *pv;
+};
+
+
+#define MAX_SCHEDULEES 100
+
+static struct schedulee pschedule[MAX_SCHEDULEES];
+
+static int iSchedule = 0;
+
+int c_register_driver(void *pf, void *pv)
+{
+    pschedule[iSchedule].pf = pf;
+    pschedule[iSchedule].pv = pv;
+
+    iSchedule++;
+
+    if (iSchedule >= MAX_SCHEDULEES)
+    {
+	return -1;
+    }
+
+    return iSchedule;
+}
+
+
+int c_steps(int iSteps, double dStep)
+{
+    int i;
+
+    for (i = 0; i < iSteps ; i++)
+    {
+	double dSimulationTime = i * dStep + (1e-9);
+
+	int j;
+
+	for (j = 0 ; j < iSchedule ; j++)
+	{
+	    if (pschedule[j].pf(pschedule[j].pv, dSimulationTime) == 0)
+	    {
+		return(0);
+	    }
+	}
+    }
+
+    return(1);
+}
+
+
+END_C
+
+
 sub advance
 {
     my $self = shift;
@@ -490,13 +549,62 @@ sub initiate
 
     foreach my $schedulee (@$schedule)
     {
-	# advance the engine
+	# initiate the engine
 
 	my $success = $schedulee->initiate();
 
 	if (!$success)
 	{
 	    die "$0: Initiation failed";
+	}
+    }
+
+    # return result
+
+    return $result;
+}
+
+
+sub optimize
+{
+    my $self = shift;
+
+    # set default result: ok
+
+    my $result = 1;
+
+    # first update the time
+
+    $self->{simulation_time}
+	= {
+	   steps => 0,
+	   time => 0,
+	  };
+
+    # we try to optimize the schedule
+
+    my $optimize = $self->{optimize};
+
+    # if we should try to optimize
+
+    if ($optimize)
+    {
+	# loop over all schedulees
+
+	my $schedule = $self->{schedule};
+
+	foreach my $schedulee (@$schedule)
+	{
+	    # optimize the engine
+
+	    my $driver = $schedulee->get_driver();
+
+	    if (!$driver)
+	    {
+		die "$0: SSP::optimize() failed, no driver found for $schedulee->{name}";
+	    }
+
+	    $self->register_driver($driver->{method}, $driver->{data});
 	}
     }
 
@@ -1184,6 +1292,21 @@ sub new
 }
 
 
+sub register_driver
+{
+    my $self = shift;
+
+    my $driver = shift;
+
+    my $driver_data = shift;
+
+    if (c_register_driver($driver, $driver_data) == -1)
+    {
+	die "$0: register_driver() failed, error return from c_register_driver(), too many entries in the schedule";
+    }
+}
+
+
 sub run
 {
     my $self = shift;
@@ -1399,6 +1522,7 @@ sub salvage
 					    { method => 'instantiate_inputs', },
 					    { method => 'instantiate_outputs', },
 					    { method => 'initiate', },
+					    { method => 'optimize', },
 					   ],
 				priority => 80,
 			       },
@@ -1471,6 +1595,18 @@ sub steps
 
     my $result = 1;
 
+    my $optimize = $self->{optimize};
+
+    if ($optimize)
+    {
+	if (c_steps($steps, $self->{simulation_time}->{time}) == 0)
+	{
+	    die "$0: scheduling for $steps failed";
+	}
+
+	return $result;
+    }
+
     # initial dump
 
     my $schedule = $self->{schedule};
@@ -1502,7 +1638,7 @@ sub steps
 
 	    if ($error)
 	    {
-		die "$0: Scheduling for $steps failed";
+		die "$0: scheduling for $steps failed";
 	    }
 
 	    # dump
@@ -1620,7 +1756,7 @@ sub AUTOLOAD
 }
 
 
-package SSP::Glue;
+package SSP::Base;
 
 
 
@@ -1632,25 +1768,58 @@ sub backend
 }
 
 
+# sub optimize
+# {
+#     my $self = shift;
+
+#     my $backend = $self->backend();
+
+# #     my $method = $backend->optimize();
+
+#     return 0;
+# }
+
+
+package SSP::Schedulee;
+
+
+BEGIN { our @ISA = qw(SSP::Base); }
+
+
+sub get_driver
+{
+    my $self = shift;
+
+    my $backend = $self->backend();
+
+    my $result = $backend->get_driver();
+
+    return $result;
+}
+
+
+sub get_time_step
+{
+    my $self = shift;
+
+    my $backend = $self->backend();
+
+    my $result = $backend->get_time_step($self);
+
+    return $result;
+}
+
+
 package SSP::Analyzer;
 
 
-
-BEGIN { our @ISA = qw(SSP::Glue); }
+BEGIN { our @ISA = qw(SSP::Base); }
 
 
 sub analyze
 {
     my $self = shift;
 }
-
-
-# sub backend
-# {
-#     my $self = shift;
-
-#     return $self->{backend};
-# }
 
 
 sub new
@@ -1673,7 +1842,7 @@ sub new
 package SSP::Engine;
 
 
-BEGIN { our @ISA = qw(SSP::Glue); }
+BEGIN { our @ISA = qw(SSP::Schedulee); }
 
 
 sub advance
@@ -1820,18 +1989,6 @@ sub finish
 }
 
 
-sub get_time_step
-{
-    my $self = shift;
-
-    my $backend = $self->backend();
-
-    my $result = $backend->get_time_step($self);
-
-    return $result;
-}
-
-
 sub initiate
 {
     my $self = shift;
@@ -1903,6 +2060,8 @@ sub solverfield
 sub step
 {
     my $self = shift;
+
+    #t my $scheduler = shift;
 
     my $options = shift;
 
@@ -1977,7 +2136,7 @@ sub steps
 package SSP::Input;
 
 
-BEGIN { our @ISA = qw(SSP::Glue); }
+BEGIN { our @ISA = qw(SSP::Schedulee); }
 
 
 sub add
@@ -2021,18 +2180,6 @@ sub finish
     my $backend = $self->backend();
 
     return $backend->finish($self);
-}
-
-
-sub get_time_step
-{
-    my $self = shift;
-
-    my $backend = $self->backend();
-
-    my $result = $backend->get_time_step($self);
-
-    return $result;
 }
 
 
@@ -2137,7 +2284,7 @@ sub step
 
     if (!$success)
     {
-	$result = "HeccerHecc() failed";
+	$result = "SSP::Input::step() failed";
     }
 
     # return result
@@ -2149,7 +2296,7 @@ sub step
 package SSP::Output;
 
 
-BEGIN { our @ISA = qw(SSP::Glue); }
+BEGIN { our @ISA = qw(SSP::Schedulee); }
 
 
 sub add
@@ -2193,18 +2340,6 @@ sub finish
     my $backend = $self->backend();
 
     return $backend->finish($self);
-}
-
-
-sub get_time_step
-{
-    my $self = shift;
-
-    my $backend = $self->backend();
-
-    my $result = $backend->get_time_step($self);
-
-    return $result;
 }
 
 
@@ -2320,7 +2455,7 @@ sub step
 
     if (!$success)
     {
-	$result = "HeccerHecc() failed";
+	$result = "SSP::Output::step() failed";
     }
 
     # return result
@@ -2332,7 +2467,7 @@ sub step
 package SSP::Service;
 
 
-BEGIN { our @ISA = qw(SSP::Glue); }
+BEGIN { our @ISA = qw(SSP::Base); }
 
 
 sub apply_conceptual_parameters

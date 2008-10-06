@@ -154,7 +154,7 @@ sub main
 													  granularity => 1,
 													  tested_things => (
 															    $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
-															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX_DIAGONALS
 															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
 															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
 															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS

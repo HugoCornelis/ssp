@@ -45,6 +45,7 @@ application_classes:
       - method: instantiate_inputs
       - method: instantiate_outputs
       - method: initiate
+      - method: optimize
     priority: 80
   modifiers:
     default: \[\]
@@ -136,6 +137,7 @@ application_classes:
       - method: instantiate_inputs
       - method: instantiate_outputs
       - method: initiate
+      - method: optimize
     priority: 80
   modifiers:
     default: \[\]
@@ -230,6 +232,7 @@ application_classes:
       - method: instantiate_inputs
       - method: instantiate_outputs
       - method: initiate
+      - method: optimize
     priority: 80
   modifiers:
     default: \[\]
@@ -330,6 +333,7 @@ application_classes:
       - method: instantiate_inputs
       - method: instantiate_outputs
       - method: initiate
+      - method: optimize
     priority: 80
   modifiers:
     default: \[\]
