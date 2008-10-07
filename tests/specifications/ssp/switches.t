@@ -44,6 +44,7 @@ options:
     neurospaces-models directory where to find the neurospaces library.
     neurospaces-studio replace the simulation routine with calls to the neurospaces studio,
                        this allows to explore the model after all modifiers have completed.
+    optimize           turn on the schedule optimizer.
     outputs            define an output, can be given multiple times.
     parameters         set a specific parameter value, can be given multiple times.
     set-name           overwrite the schedule name with the name of the file that contains the schedule.

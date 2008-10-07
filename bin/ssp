@@ -56,6 +56,7 @@ my $option_model_filename;
 my $option_model_name;
 my $option_neurospaces_models = '/usr/local/neurospaces/models/library';
 my $option_neurospaces_studio;
+my $option_optimize;
 my $option_output_fields = [];
 my $option_parameters = [];
 my $option_set_name;
@@ -348,7 +349,7 @@ sub main
 
 	if ($model_root !~ m|^/|)
 	{
-	    print "add an initial slash to the model name if necessary $model_root\n";
+	    print "adding an initial slash to the model name $model_root\n";
 
 	    $model_root = "/$model_root";
 	}
@@ -711,6 +712,7 @@ sub read_cmd_line
 	     "model-name=s" => \$option_model_name,
 	     "neurospaces-models=s" => \$option_neurospaces_models,
 	     "neurospaces-studio" => \$option_neurospaces_studio,
+	     "optimize!" => \$option_optimize,
 	     "output-fields=s" => $option_output_fields,
 	     "parameters=s" => $option_parameters,
 	     "set-name=s" => \$option_set_name,
@@ -764,6 +766,7 @@ options:
     neurospaces-models directory where to find the neurospaces library.
     neurospaces-studio replace the simulation routine with calls to the neurospaces studio,
                        this allows to explore the model after all modifiers have completed.
+    optimize           turn on the schedule optimizer.
     outputs            define an output, can be given multiple times.
     parameters         set a specific parameter value, can be given multiple times.
     set-name           overwrite the schedule name with the name of the file that contains the schedule.
@@ -873,6 +876,13 @@ sub schedule
 		   type => 'push',
 		  };
 	}
+    }
+
+    # turn on ssp optimization if requested
+
+    if ($option_optimize)
+    {
+	$scheduler->{optimize} = $option_optimize;
     }
 
     # determine the package name of the scheduler
