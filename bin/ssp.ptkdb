@@ -3,49 +3,22 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '	$result = $engine->compile();
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => '1787'
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
                                   'text' => '	my $success = $object->$method($peer, @$arguments);
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 1362
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '    return &$subname(@_);
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 1608
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	if (!$engine->compile($self))
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 264
+                                  'line' => '1485'
                                 }
                               ],
            '_<bin/ssp' => [
                             {
                               'expr' => undef,
                               'value' => '1',
-                              'text' => '	schedule($scheduler);
+                              'text' => '	$scheduler->run();
 ',
                               'fname' => 'bin/ssp',
                               'type' => 'user',
-                              'line' => 722
+                              'line' => '957'
                             }
                           ]
          };
