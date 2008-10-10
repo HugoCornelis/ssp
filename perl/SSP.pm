@@ -25,8 +25,11 @@ static struct schedulee pschedule[MAX_SCHEDULEES];
 
 static int iSchedule = 0;
 
-int c_register_driver(void *pf, void *pv)
+int c_register_driver(SV *psvPF, SV *psvPV)
 {
+    void *pf = (void *)SvIV(SvRV((SV *)psvPF));
+    void *pv = (void *)SvIV(SvRV((SV *)psvPV));
+
     pschedule[iSchedule].pf = pf;
     pschedule[iSchedule].pv = pv;
 
