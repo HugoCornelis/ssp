@@ -1601,7 +1601,7 @@ sub steps
 
     if ($optimize)
     {
-	if (c_steps($steps, $self->{simulation_time}->{time}) == 0)
+	if (c_steps($steps, $self->get_time_step()) == 0)
 	{
 	    die "$0: scheduling for $steps failed";
 	}
