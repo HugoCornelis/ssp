@@ -58,6 +58,7 @@ options:
     time-step          sets the time step, when using one of the builtin configurations.
     transformator      feed the configuration through this transformator before running.
     verbose            set verbosity level.
+    version            give version information.
 ',
 							   ],
 						   timeout => 3,
