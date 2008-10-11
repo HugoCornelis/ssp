@@ -50,7 +50,7 @@ int c_steps(int iSteps, double dStep)
 
     for (i = 0; i < iSteps ; i++)
     {
-	double dSimulationTime = i * dStep + (1e-9);
+	double dSimulationTime = i * dStep;/*  + (1e-9); */
 
 	int j;
 
