@@ -40,7 +40,6 @@ dist-hook: dist-keywords
 	find $(distdir) -name _Inline -exec chmod u+w -R \{\} \;
 	$(RM) -fr `find $(distdir) -name _Inline`
 	cp $(srcdir)/license.txt $(distdir)
-	cp $(srcdir)/ssp_test.pm $(distdir)
 	cp -R $(srcdir)/docs $(distdir)
 	$(srcdir)/install-sh -d $(distdir)/tests
 	$(srcdir)/install-sh -d $(distdir)/tests/html
@@ -74,7 +73,7 @@ html-upload: html-upload-prepare
 
 #perl_HEADERS = perl/SSP.pm ssp_test.pm
 
-TESTS = ssp_test.pm
+#TESTS = ssp_test.pm
 
 test: check
 
