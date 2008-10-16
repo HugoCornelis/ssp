@@ -134,6 +134,7 @@ sub main
 							 module_name => 'Heccer',
 							 options => {
 								     filename => "/tmp/output_vm",
+								     format => 'steps',
 								    },
 							 package => 'Heccer::Output',
 							},

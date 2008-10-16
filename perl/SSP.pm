@@ -97,7 +97,7 @@ sub advance
 
     # do a number of steps based on this time step
 
-    my $result = $self->steps($scheduler, $steps);
+    my $result = $self->steps($scheduler, $steps, { time_step => $time_step_min, }, );
 
     # return result
 
@@ -1593,6 +1593,11 @@ sub steps
 
     my $options = shift || {};
 
+    if (!$options->{time_step})
+    {
+	$options->{time_step} = $self->get_time_step();
+    }
+
     # set default result: ok
 
     my $result = 1;
@@ -1609,6 +1614,12 @@ sub steps
 	return $result;
     }
 
+    # initialize current simulation time
+
+    my $simulation_time = $self->{simulation_time}->{time} || 0;
+
+    my $simulation_steps = $self->{simulation_time}->{steps};
+
     # initial dump
 
     my $schedule = $self->{schedule};
@@ -1617,17 +1628,15 @@ sub steps
     {
 	my $backend = $schedulee->backend();
 
-	$backend->report( $schedulee, { %$options, steps => undef, }, );
+	$backend->report( $schedulee, { %$options, steps => undef, time => $simulation_time, }, );
     }
-
-    # initialize current simulation time steps
-
-    my $simulation_steps = $self->{simulation_time}->{steps};
 
     # a couple of times
 
     foreach my $step (0 .. $steps - 1)
     {
+	$simulation_time += $options->{time_step};
+
 	# loop over all schedulees
 
 	my $schedule = $self->{schedule};
@@ -1636,7 +1645,7 @@ sub steps
 	{
 	    # advance the engine
 
-	    my $error = $schedulee->step( $self, { %$options, steps => $simulation_steps, }, );
+	    my $error = $schedulee->step( $self, { %$options, steps => $simulation_steps, time => $simulation_time, }, );
 
 	    if ($error)
 	    {
@@ -1647,7 +1656,7 @@ sub steps
 
 	    my $backend = $schedulee->backend();
 
-	    $backend->report( $schedulee, { %$options, steps => $simulation_steps, }, );
+	    $backend->report( $schedulee, { %$options, steps => $simulation_steps, time => $simulation_time, }, );
 	}
 
 	# update the global time
@@ -1659,14 +1668,16 @@ sub steps
 
     $self->{simulation_time}->{steps} = $simulation_steps;
 
-    if ($options->{time_step})
-    {
-	$self->{simulation_time}->{time} += $simulation_steps * $options->{time_step};
-    }
-    else
-    {
-	undef $self->{simulation_time}->{time};
-    }
+    $self->{simulation_time}->{time} = $simulation_time;
+
+#     if ($options->{time_step})
+#     {
+# 	$self->{simulation_time}->{time} += $simulation_steps * $options->{time_step};
+#     }
+#     else
+#     {
+# 	undef $self->{simulation_time}->{time};
+#     }
 
     # final report
 
@@ -1674,7 +1685,7 @@ sub steps
     {
 	my $backend = $schedulee->backend();
 
-	$backend->report( $schedulee, { %$options, steps => -1, }, );
+	$backend->report( $schedulee, { %$options, steps => -1, time => $simulation_time, }, );
     }
 
     # return result
