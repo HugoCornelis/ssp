@@ -36,7 +36,7 @@ int c_steps(int iSteps, double dStep)
 {
     int i;
 
-    for (i = 0; i < iSteps ; i++)
+    for (i = 1; i <= iSteps ; i++)
     {
 	double dSimulationTime = i * dStep;/*  + (1e-9); */
 
