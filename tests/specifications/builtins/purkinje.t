@@ -52,7 +52,7 @@ my $test
 			       },
 			      ],
        description => "cell builtin schedule applied to the Purkinje cell model",
-       name => 'purkinje.t',
+       name => 'builtins/purkinje.t',
       };
 
 

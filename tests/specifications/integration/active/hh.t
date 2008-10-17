@@ -28,7 +28,7 @@ my $test
 			       },
 			      ],
        description => "interaction between regular HH channels testing",
-       name => 'hh.t',
+       name => 'integration/active/hh.t',
       };
 
 

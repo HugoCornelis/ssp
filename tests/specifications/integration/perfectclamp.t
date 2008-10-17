@@ -50,7 +50,7 @@ my $test
 			       },
 			      ],
        description => "perfect clamp testing",
-       name => 'perfectclamp.t',
+       name => 'integration/perfectclamp.t',
       };
 
 

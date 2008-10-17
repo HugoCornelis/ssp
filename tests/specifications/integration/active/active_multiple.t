@@ -45,7 +45,7 @@ my $test
 			       },
 			      ],
        description => "active compartment testing",
-       name => 'active_multiple.t',
+       name => 'integration/active/active_multiple.t',
       };
 
 

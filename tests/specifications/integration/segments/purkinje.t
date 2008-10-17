@@ -29,7 +29,7 @@ my $test
 			       },
 			      ],
        description => "purkinje segments",
-       name => 'purkinje.t',
+       name => 'integration/segments/purkinje.t',
       };
 
 

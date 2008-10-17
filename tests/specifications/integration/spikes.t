@@ -59,7 +59,7 @@ my $test
 			       },
 			      ],
        description => "spiking behaviour",
-       name => 'spikes.t',
+       name => 'integration/spikes.t',
       };
 
 

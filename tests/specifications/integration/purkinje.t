@@ -50,7 +50,7 @@ my $test
 			       },
 			      ],
        description => "purkinje model testing",
-       name => 'purkinje.t',
+       name => 'integration/purkinje.t',
       };
 
 

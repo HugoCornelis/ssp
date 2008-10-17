@@ -74,7 +74,7 @@ my $test
 			       },
 			      ],
        description => "synaptic channels",
-       name => 'synaptic.t',
+       name => 'integration/synaptic.t',
       };
 
 

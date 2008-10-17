@@ -163,7 +163,7 @@ my $test
 			       },
 			      ],
        description => "simple passive model testing",
-       name => 'passive.t',
+       name => 'integration/heccer/passive.t',
       };
 
 

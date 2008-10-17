@@ -186,7 +186,7 @@ my $test
 			       },
 			      ],
        description => "Raw gate tabulation calculations",
-       name => 'tables.t',
+       name => 'integration/tables.t',
       };
 
 

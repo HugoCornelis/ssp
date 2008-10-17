@@ -134,7 +134,7 @@ my $test
 			       ),
 			      ],
        description => "heccer aggregator options",
-       name => 'aggregators.t',
+       name => 'integration/aggregators.t',
       };
 
 

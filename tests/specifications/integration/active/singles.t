@@ -28,7 +28,7 @@ my $test
 			       },
 			      ],
        description => "active single compartment testing",
-       name => 'singles.t',
+       name => 'integration/active/singles.t',
       };
 
 

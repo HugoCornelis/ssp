@@ -29,7 +29,7 @@ my $test
 			       },
 			      ],
        description => "active models in passive mode testing",
-       name => 'passive-only.t',
+       name => 'integration/passive-only.t',
       };
 
 

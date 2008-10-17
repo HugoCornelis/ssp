@@ -98,7 +98,7 @@ my $test
 			       },
 			      ],
        description => "pool integration & related",
-       name => 'pools.t',
+       name => 'integration/pools.t',
       };
 
 

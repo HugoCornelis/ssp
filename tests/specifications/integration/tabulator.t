@@ -390,7 +390,7 @@ hi:
 			       },
 			      ],
        description => "Gate tabulation high-level interfacing",
-       name => 'tabulator.t',
+       name => 'integration/tabulator.t',
       };
 
 

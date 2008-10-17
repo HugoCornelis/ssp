@@ -162,7 +162,7 @@ my $test
 			       },
 			      ],
        description => "simple passive model testing",
-       name => 'passive.t',
+       name => 'integration/passive.t',
       };
 
 
