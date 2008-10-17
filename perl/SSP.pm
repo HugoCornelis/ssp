@@ -44,7 +44,7 @@ int c_register_driver(SV *psvPF, SV *psvPV)
 }
 
 
-int c_steps(int iSteps, double dSimulationTime, double dStep)
+double c_steps(int iSteps, double dSimulationTime, double dStep)
 {
     int i;
 
@@ -58,12 +58,12 @@ int c_steps(int iSteps, double dSimulationTime, double dStep)
 	{
 	    if (pschedule[j].pf(pschedule[j].pv, dSimulationTime) == 0)
 	    {
-		return(0);
+		return(-1);
 	    }
 	}
     }
 
-    return(1);
+    return(dSimulationTime);
 }
 
 
@@ -1616,10 +1616,15 @@ sub steps
     {
 	# use the optimizer
 
-	if (c_steps($steps, $simulation_time, $self->get_time_step()) == 0)
+	$simulation_time = c_steps($steps, $simulation_time, $self->get_time_step());
+
+	if ($simulation_time == -1)
 	{
 	    die "$0: scheduling for $steps failed";
 	}
+
+	$self->{simulation_time}->{steps} += $steps;
+	$self->{simulation_time}->{time} = $simulation_time;
 
 	return $result;
     }

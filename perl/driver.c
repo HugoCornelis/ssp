@@ -32,7 +32,7 @@ int c_register_driver(SV *psvPF, SV *psvPV)
 }
 
 
-int c_steps(int iSteps, double dSimulationTime, double dStep)
+double c_steps(int iSteps, double dSimulationTime, double dStep)
 {
     int i;
 
@@ -46,12 +46,12 @@ int c_steps(int iSteps, double dSimulationTime, double dStep)
 	{
 	    if (pschedule[j].pf(pschedule[j].pv, dSimulationTime) == 0)
 	    {
-		return(0);
+		return(-1);
 	    }
 	}
     }
 
-    return(1);
+    return(dSimulationTime);
 }
 
 
