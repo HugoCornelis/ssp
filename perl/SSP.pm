@@ -44,13 +44,13 @@ int c_register_driver(SV *psvPF, SV *psvPV)
 }
 
 
-int c_steps(int iSteps, double dStep)
+int c_steps(int iSteps, double dSimulationTime, double dStep)
 {
     int i;
 
     for (i = 1; i <= iSteps ; i++)
     {
-	double dSimulationTime = i * dStep;/*  + (1e-9); */
+	dSimulationTime += dStep;/*  + (1e-9); */
 
 	int j;
 
@@ -1602,23 +1602,27 @@ sub steps
 
     my $result = 1;
 
+    # initialize current simulation time
+
+    my $simulation_time = $self->{simulation_time}->{time} || 0;
+
+    my $simulation_steps = $self->{simulation_time}->{steps};
+
+    # if optimization enabled
+
     my $optimize = $self->{optimize};
 
     if ($optimize)
     {
-	if (c_steps($steps, $self->get_time_step()) == 0)
+	# use the optimizer
+
+	if (c_steps($steps, $simulation_time, $self->get_time_step()) == 0)
 	{
 	    die "$0: scheduling for $steps failed";
 	}
 
 	return $result;
     }
-
-    # initialize current simulation time
-
-    my $simulation_time = $self->{simulation_time}->{time} || 0;
-
-    my $simulation_steps = $self->{simulation_time}->{steps};
 
     # initial dump
 

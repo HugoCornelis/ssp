@@ -32,13 +32,13 @@ int c_register_driver(SV *psvPF, SV *psvPV)
 }
 
 
-int c_steps(int iSteps, double dStep)
+int c_steps(int iSteps, double dSimulationTime, double dStep)
 {
     int i;
 
     for (i = 1; i <= iSteps ; i++)
     {
-	double dSimulationTime = i * dStep;/*  + (1e-9); */
+	dSimulationTime += dStep;/*  + (1e-9); */
 
 	int j;
 
