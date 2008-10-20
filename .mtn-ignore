@@ -1,7 +1,7 @@
 Tutil.pm
 synaptic-test.patch
 
-^Makefile$
+Makefile$
 ^config.log$
 ^config.status$
 ^example.out$
@@ -10,5 +10,5 @@ synaptic-test.patch
 ^output
 ^tests/html
 ^tests/output
-gz$
 _Inline
+gz$
