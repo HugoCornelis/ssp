@@ -36,39 +36,39 @@ apply:
       method: steps
 models:
   - granular_parameters:
-      - component_name: /purk_test_axon/segments/axon
+      - component_name: /purk_test_segment/segments/test_segment
         field: INJECT
         value: 2e-09
-    modelname: /purk_test_axon
+    modelname: /purk_test_segment
     solverclass: heccer
-name: purk_test_axon
+name: purk_test_segment
 outputclasses:
   double_2_ascii:
     module_name: Heccer
     package: Heccer::Output
 outputs:
-  - component_name: /purk_test_axon/segments/axon
+  - component_name: /purk_test_segment/segments/test_segment
     field: Vm
     outputclass: double_2_ascii
-  - component_name: /purk_test_axon/segments/axon/cat/cat_gate_activation
+  - component_name: /purk_test_segment/segments/test_segment/cat/cat_gate_activation
     field: state_m
     outputclass: double_2_ascii
-  - component_name: /purk_test_axon/segments/axon/cat/cat_gate_inactivation
+  - component_name: /purk_test_segment/segments/test_segment/cat/cat_gate_inactivation
     field: state_h
     outputclass: double_2_ascii
-  - component_name: /purk_test_axon/segments/axon/kdr
+  - component_name: /purk_test_segment/segments/test_segment/kdr
     field: state_m
     outputclass: double_2_ascii
-  - component_name: /purk_test_axon/segments/axon/kdr
+  - component_name: /purk_test_segment/segments/test_segment/kdr
     field: state_h
     outputclass: double_2_ascii
-  - component_name: /purk_test_axon/segments/axon/nap
+  - component_name: /purk_test_segment/segments/test_segment/nap
     field: state_n
     outputclass: double_2_ascii
-  - component_name: /purk_test_axon/segments/axon/naf
+  - component_name: /purk_test_segment/segments/test_segment/naf
     field: state_m
     outputclass: double_2_ascii
-  - component_name: /purk_test_axon/segments/axon/naf
+  - component_name: /purk_test_segment/segments/test_segment/naf
     field: state_h
     outputclass: double_2_ascii
 services:
@@ -76,9 +76,9 @@ services:
     initializers:
       - arguments:
           -
-            - tests/perl/purk_test_axon
+            - tests/perl/purk_test_segment
             - -P
-            - tests/cells/purk_test_axon.ndf
+            - tests/cells/purk_test_segment.ndf
         method: read
     module_name: Neurospaces
 solverclasses:

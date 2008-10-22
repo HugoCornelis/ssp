@@ -15,16 +15,16 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => 'tests/perl/purk_test_axon',
+				command => 'tests/perl/purk_test_segment',
 				command_tests => [
 						  {
-						   description => "Is the undocumented purkinje axon solved correctly ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/segments/purk_test_axon.txt`),
+						   description => "Is the simplified purkinje segment solved correctly ?",
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/segments/purk_test_segment.txt`),
 						   timeout => 8,
 						   write => undef,
 						  },
 						 ],
-				description => "purkinje undocumented axon segment",
+				description => "purkinje simplified segment",
 				disabled => (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf" ? "purkinje cell potassium channels not found" : ""),
 			       },
 			      ],

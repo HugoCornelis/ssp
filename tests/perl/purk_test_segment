@@ -77,7 +77,7 @@ sub main
 				modelname => "/$modelname",
 				granular_parameters => [
 							{
-							 component_name => "/$modelname/segments/axon",
+							 component_name => "/$modelname/segments/test_segment",
 							 field => 'INJECT',
 							 value => 2e-9,  # 0,
 							},
@@ -94,42 +94,42 @@ sub main
 				     },
 		    outputs => [
 				{
-				 component_name => "/$modelname/segments/axon",
+				 component_name => "/$modelname/segments/test_segment",
 				 field => 'Vm',
 				 outputclass => 'double_2_ascii',
 				},
 				{
-				 component_name => "/$modelname/segments/axon/cat/cat_gate_activation",
+				 component_name => "/$modelname/segments/test_segment/cat/cat_gate_activation",
 				 field => 'state_m',
 				 outputclass => 'double_2_ascii',
 				},
 				{
-				 component_name => "/$modelname/segments/axon/cat/cat_gate_inactivation",
+				 component_name => "/$modelname/segments/test_segment/cat/cat_gate_inactivation",
 				 field => 'state_h',
 				 outputclass => 'double_2_ascii',
 				},
 				{
-				 component_name => "/$modelname/segments/axon/kdr",
+				 component_name => "/$modelname/segments/test_segment/kdr",
 				 field => 'state_m',
 				 outputclass => 'double_2_ascii',
 				},
 				{
-				 component_name => "/$modelname/segments/axon/kdr",
+				 component_name => "/$modelname/segments/test_segment/kdr",
 				 field => 'state_h',
 				 outputclass => 'double_2_ascii',
 				},
 				{
-				 component_name => "/$modelname/segments/axon/nap",
+				 component_name => "/$modelname/segments/test_segment/nap",
 				 field => 'state_n',
 				 outputclass => 'double_2_ascii',
 				},
 				{
-				 component_name => "/$modelname/segments/axon/naf",
+				 component_name => "/$modelname/segments/test_segment/naf",
 				 field => 'state_m',
 				 outputclass => 'double_2_ascii',
 				},
 				{
-				 component_name => "/$modelname/segments/axon/naf",
+				 component_name => "/$modelname/segments/test_segment/naf",
 				 field => 'state_h',
 				 outputclass => 'double_2_ascii',
 				},
