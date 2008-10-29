@@ -3,11 +3,11 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '	$result = $engine->compile();
+                                  'text' => '    if (ref $engine)
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '1787'
+                                  'line' => '1987'
                                 },
                                 {
                                   'expr' => undef,
@@ -16,16 +16,7 @@ $files = {
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 1362
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '    return &$subname(@_);
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 1608
+                                  'line' => 1487
                                 },
                                 {
                                   'expr' => undef,
@@ -34,20 +25,20 @@ $files = {
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 264
+                                  'line' => '325'
                                 }
                               ],
-           '_<tests/perl/table-nap' => [
-                            {
-                              'expr' => undef,
-                              'value' => '1',
-                              'text' => '	schedule($scheduler);
+           '_<./tests/perl/table-nap' => [
+                                           {
+                                             'expr' => undef,
+                                             'value' => '1',
+                                             'text' => '    $scheduler->run();
 ',
-                              'fname' => 'bin/ssp',
-                              'type' => 'user',
-                              'line' => 722
-                            }
-                          ]
+                                             'fname' => './tests/perl/table-nap',
+                                             'type' => 'user',
+                                             'line' => 124
+                                           }
+                                         ]
          };
 $expr_list = [
                {
