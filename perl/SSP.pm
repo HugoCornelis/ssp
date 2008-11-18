@@ -78,7 +78,7 @@ sub advance
 
     my $time = shift;
 
-    my $options = shift;
+    my $options = shift || {};
 
     # determine the time step
 
@@ -97,7 +97,7 @@ sub advance
 
     # do a number of steps based on this time step
 
-    my $result = $self->steps($scheduler, $steps, { time_step => $time_step_min, }, );
+    my $result = $self->steps($scheduler, $steps, { %$options, time_step => $time_step_min, }, );
 
     # return result
 
@@ -1024,20 +1024,37 @@ sub instantiate_services
     {
 	my $service = $services->{$service_name};
 
-	# construct the service backend
+	# start constructing the SSP proxy for the service
 
-	my $service_module = $service->{module_name};
+	my $ssp_service;
 
-	eval
+	# if the schedule provides an instantiated backend
+
+	if ($service->{backend})
 	{
-	    local $SIG{__DIE__};
+	    # construct the SSP service for this backend
 
-	    require "$service_module.pm";
-	};
+	    $ssp_service = SSP::Service->new( { backend => $service->{backend}, scheduler => $self, }, );
+	}
 
-	if ($@)
+	# else we have to construct the backend
+
+	else
 	{
-	    die "$0: Cannot load service module ($service_module.pm) for service $service_name
+	    # construct the service backend
+
+	    my $service_module = $service->{module_name};
+
+	    eval
+	    {
+		local $SIG{__DIE__};
+
+		require "$service_module.pm";
+	    };
+
+	    if ($@)
+	    {
+		die "$0: Cannot load service module ($service_module.pm) for service $service_name
 
 Possible solutions:
 1. Set perl include variable \@INC, using the -I switch, or by modifying your program code that uses SSP.
@@ -1046,31 +1063,32 @@ Possible solutions:
 4. Contact your system administrator.
 
 $@";
-	}
+	    }
 
-	my $package = $service->{package} || $service_module;
+	    my $package = $service->{package} || $service_module;
 
-	my $backend = $package->new($service);
+	    my $backend = $package->new($service);
 
-	# construct the SSP service for this backend
+	    # construct the SSP service for this backend
 
-	my $ssp_service = SSP::Service->new( { backend => $backend, scheduler => $self, }, );
+	    $ssp_service = SSP::Service->new( { backend => $backend, scheduler => $self, }, );
 
-	# initialize the service backend with the user settings
+	    # initialize the service backend with the user settings
 
-	my $initializers = $service->{initializers};
+	    my $initializers = $service->{initializers};
 
-	foreach my $initializer (@$initializers)
-	{
-	    my $method = $initializer->{method};
-
-	    my $arguments = $initializer->{arguments};
-
-	    my $success = $backend->$method($ssp_service, @$arguments);
-
-	    if (!$success)
+	    foreach my $initializer (@$initializers)
 	    {
-		die "$0: Initializer $method for $service_name failed";
+		my $method = $initializer->{method};
+
+		my $arguments = $initializer->{arguments};
+
+		my $success = $backend->$method($ssp_service, @$arguments);
+
+		if (!$success)
+		{
+		    die "$0: Initializer $method for $service_name failed";
+		}
 	    }
 	}
 
