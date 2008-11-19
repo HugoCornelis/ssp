@@ -897,7 +897,16 @@ sub instantiate_outputs
 
 	if (!ref $solverinfo)
 	{
-	    die "$0: Failed to construct solver info for the output " . $output->{component_name} . "->" . $output->{field} . " ($solverinfo)";
+	    if ($output->{warn_only})
+	    {
+		warn "$0: *** Warning: Failed to construct solver info for the output " . $output->{component_name} . "->" . $output->{field} . " ($solverinfo): " . $output->{warn_only};
+
+		next;
+	    }
+	    else
+	    {
+		die "$0: Failed to construct solver info for the output " . $output->{component_name} . "->" . $output->{field} . " ($solverinfo)";
+	    }
 	}
 
 	# lookup the solver
