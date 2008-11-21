@@ -616,6 +616,36 @@ sub optimize
 }
 
 
+sub pause
+{
+    my $self = shift;
+
+    # set default result: ok
+
+    my $result = 1;
+
+    # loop over all schedulees
+
+    my $schedule = $self->{schedule};
+
+    foreach my $schedulee (@$schedule)
+    {
+	# tell the schedulee that we are pausing the simulation
+
+	my $success = $schedulee->pause();
+
+	if (!$success)
+	{
+	    die "$0: pause() failed";
+	}
+    }
+
+    # return result
+
+    return $result;
+}
+
+
 # sub instantiate_communicators
 # {
 #     my $self = shift;
@@ -1856,6 +1886,25 @@ sub get_time_step
     my $result = $backend->get_time_step($self);
 
     return $result;
+}
+
+
+sub pause
+{
+    my $self = shift;
+
+    my $backend = $self->backend();
+
+    # if this schedulee does not know about pause
+
+    if ($backend->can('pause'))
+    {
+	return $backend->pause();
+    }
+    else
+    {
+	return 1;
+    }
 }
 
 

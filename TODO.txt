@@ -1,5 +1,8 @@
 -*- outline -*-
 
+* pause method
+Implement tests for this one.
+
 * user notifications
 ** use the method 'shell'
 see example yaml/purkinje/edsjb1994-perfectclamp.yml
