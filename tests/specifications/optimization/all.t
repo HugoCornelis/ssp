@@ -39,7 +39,7 @@ my $test
 						  {
 						   description => "Can we run a schedule of a single neuron model from the cell builtin schedule, soma Vm output, soma current injection with set duration and simulation time ?",
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/stand_alone-inject2e-8-0.01-0.03-0.06.txt`),
-						   timeout => 3,
+						   timeout => 10,
 						   write => undef,
 						  },
 						 ],
@@ -75,7 +75,7 @@ my $test
 						  {
 						   description => "Can we run a schedule of a single neuron model from the cell builtin schedule, debug option turned on ?",
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/debug_stand_alone.txt`),
-						   timeout => 3,
+						   timeout => 10,
 						   write => undef,
 						  },
 						 ],
