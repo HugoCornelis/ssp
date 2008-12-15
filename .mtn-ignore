@@ -12,3 +12,6 @@ Makefile$
 ^tests/output
 _Inline
 gz$
+docs/html
+docs/doxygen.tag
+

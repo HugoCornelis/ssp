@@ -25,6 +25,9 @@ RELEASE_MAJOR=`release-extract --major`
 RELEASE_MINOR=`release-extract --minor`
 RELEASE_MICRO=`release-extract --micro`
 
+EXTRA_DIST = \
+	doxygen.cfg 
+
 CLEANFILES = \
 	$(top_srcdir)/docs/doxygen.tag
 
