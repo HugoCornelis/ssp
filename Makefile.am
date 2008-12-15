@@ -25,6 +25,12 @@ RELEASE_MAJOR=`release-extract --major`
 RELEASE_MINOR=`release-extract --minor`
 RELEASE_MICRO=`release-extract --micro`
 
+CLEANFILES = \
+	$(top_srcdir)/docs/doxygen.tag
+
+clean-local:
+	$(RM) -rf $(top_srcdir)/docs/html
+
 show-release-labels:
 	echo "Release information (major-minor-micro): $(RELEASE_MAJOR)-$(RELEASE_MINOR)-$(RELEASE_MICRO)"
 
@@ -76,4 +82,7 @@ html-upload: html-upload-prepare
 #TESTS = ssp_test.pm
 
 test: check
+
+doxygen:
+	doxygen doxygen.cfg
 
