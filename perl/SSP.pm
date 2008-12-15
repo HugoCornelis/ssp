@@ -541,9 +541,9 @@ sub help
 usage: |-
   The simple scheduler in perl binds together software components for
   running simulations.  It is based on services and solvers: services
-  provide functionality to assist solver to construct an efficient
-  simulation run-time environment, solvers apply algorithms to solve
-  the problem posed, numerically or otherwise.
+  provide functionality to assist the solvers to construct an
+  efficient simulation run-time environment, solvers apply algorithms
+  to solve the problem posed, numerically or otherwise.
 ";
 
     return "*** Ok";
