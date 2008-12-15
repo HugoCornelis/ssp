@@ -2075,6 +2075,31 @@ $@";
 }
 
 
+sub deserialize
+{
+    my $self = shift;
+
+    my $filename = shift;
+
+    my $backend = $self->backend();
+
+    # we replace the backend with the one we create from the file
+
+    my $new_backend = $backend->deserialize2($filename);
+
+    if ($new_backend)
+    {
+	$self->{backend} = $new_backend;
+
+	return 1;
+    }
+    else
+    {
+	return 0;
+    }
+}
+
+
 sub finish
 {
     my $self = shift;
@@ -2136,6 +2161,18 @@ sub set_solverfield
     my $result = $backend->set_addressable($fieldinfo, $value);
 
     return $result;
+}
+
+
+sub serialize
+{
+    my $self = shift;
+
+    my $filename = shift;
+
+    my $backend = $self->backend();
+
+    return $backend->serialize($filename);
 }
 
 
