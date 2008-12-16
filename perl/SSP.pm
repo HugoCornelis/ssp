@@ -2121,6 +2121,18 @@ sub deserialize
 }
 
 
+sub deserialize_state
+{
+    my $self = shift;
+
+    my $filename = shift;
+
+    my $backend = $self->backend();
+
+    return $backend->deserialize_state($filename);
+}
+
+
 sub finish
 {
     my $self = shift;
@@ -2194,6 +2206,18 @@ sub serialize
     my $backend = $self->backend();
 
     return $backend->serialize($filename);
+}
+
+
+sub serialize_state
+{
+    my $self = shift;
+
+    my $filename = shift;
+
+    my $backend = $self->backend();
+
+    return $backend->serialize_state($filename);
 }
 
 
