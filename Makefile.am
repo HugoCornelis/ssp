@@ -87,7 +87,7 @@ html-upload: html-upload-prepare
 test: check
 
 doxygen:
-	doxygen doxygen.cfg
+	$(DOXYGEN) doxygen.cfg
 
 docs: doxygen html-upload-prepare
 

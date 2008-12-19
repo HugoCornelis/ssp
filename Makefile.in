@@ -664,7 +664,7 @@ html-upload: html-upload-prepare
 test: check
 
 doxygen:
-	doxygen doxygen.cfg
+	$(DOXYGEN) doxygen.cfg
 
 docs: doxygen html-upload-prepare
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
