@@ -89,3 +89,5 @@ test: check
 doxygen:
 	doxygen doxygen.cfg
 
+docs: doxygen html-upload-prepare
+
