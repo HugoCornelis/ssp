@@ -14,18 +14,20 @@ In a quick list, what SSP offers:
 
 From the Neurospaces website:
 
-Both Neurospaces and Heccer are stand-alone components. They need to
-be glued together before they are useful. Besides that, they also need
-to be activated correctly, such that they can work together on a
-single simulation. This is exactly what the SSP scheduler does. The
-Simple Scheduler in Perl, activates other software components
-according to a configurable schedule. Because the SSP scheduler does
-not have any computational load, its implementation is very simple,
-and configurable. It is actually the configuration that connects SSP
-to Neurospaces and Heccer. Other configurations will connect SSP to
-other modeling services or solvers. SSP achieves this by loading on
-the fly, the integration modules that are referenced in its
-configuration. Other modules are not loaded.
+Both the Neurospaces model container and Heccer are stand-alone
+components. They need to be glued together before they are
+useful. Besides that, they also need to be activated correctly, such
+that they can work together on a single simulation. This is exactly
+what the SSP scheduler does. The Simple Scheduler in Perl, activates
+other software components according to a configurable
+schedule. Because the SSP scheduler does not have any computational
+load, its implementation is very simple, and configurable. It is
+actually the configuration that connects SSP to the model container
+for internal storage of model and to Heccer for numerical integration
+of biological models.  Other configurations will connect SSP to other
+modeling services or solvers.  SSP achieves this by loading on the fly
+those software modules referenced in its configuration.  Other modules
+are not loaded.
 
 Two examples
 ============
@@ -36,13 +38,14 @@ the end, or, alternatively, start with a light-readable example
 section, then, give a more 'specification'-like manual.
 
 Below is a typical configuration file for SSP. It first configures SSP
-to use Neurospaces as the modeling service. Then, it instructs SSP to
-load a model called 'cells/tensizesp.ndf', and to instantiate a solver
-called 'Heccer' for a part of the model (namely '/tensizesp'). The
-simulation of the model is run using the 'apply' entry in the
-configuration file (note that the order in the configuration file
-below is alphabetical, not chronological.  A user may specify the
-entries in any order that he chooses.).
+to use the Neurospaces model container for internal storage of
+biological models (called Neurospaces for legacy reasons).  It then
+instructs SSP to load a model called 'cells/tensizesp.ndf', and to
+instantiate a solver called 'Heccer' for that part of the model
+('/tensizesp').  The simulation of the model is run using the 'apply'
+entry in the configuration file (note that the order in the
+configuration file below is alphabetical, not chronological.  A user
+may specify these entries in any order.).
 
 ::
 
