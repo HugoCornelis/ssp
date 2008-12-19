@@ -92,6 +92,7 @@ AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
+DOXYGEN = @DOXYGEN@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
@@ -117,26 +118,32 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 TEST_SPECIFICATION_FILES = @TEST_SPECIFICATION_FILES@
 VERSION = @VERSION@
-ac_ct_STRIP = @ac_ct_STRIP@
 am__leading_dot = @am__leading_dot@
 am__tar = @am__tar@
 am__untar = @am__untar@
 bindir = @bindir@
 build_alias = @build_alias@
 datadir = @datadir@
+datarootdir = @datarootdir@
+docdir = @docdir@
+dvidir = @dvidir@
 exec_prefix = @exec_prefix@
 host_alias = @host_alias@
+htmldir = @htmldir@
 includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
 libdir = @libdir@
 libexecdir = @libexecdir@
+localedir = @localedir@
 localstatedir = @localstatedir@
 mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
+pdfdir = @pdfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
+psdir = @psdir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
@@ -148,6 +155,9 @@ nobase_dist_ssptest_DATA = @TEST_SPECIFICATION_FILES@
 RELEASE_MAJOR = `release-extract --major`
 RELEASE_MINOR = `release-extract --minor`
 RELEASE_MICRO = `release-extract --micro`
+CLEANFILES = \
+	$(top_srcdir)/docs/doxygen.tag
+
 all: all-recursive
 
 .SUFFIXES:
@@ -526,6 +536,7 @@ install-strip:
 mostlyclean-generic:
 
 clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
@@ -535,7 +546,7 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-recursive
 
-clean-am: clean-generic mostlyclean-am
+clean-am: clean-generic clean-local mostlyclean-am
 
 distclean: distclean-recursive
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
@@ -586,7 +597,7 @@ uninstall-am: uninstall-dist_binSCRIPTS uninstall-info-am \
 uninstall-info: uninstall-info-recursive
 
 .PHONY: $(RECURSIVE_TARGETS) CTAGS GTAGS all all-am am--refresh check \
-	check-am clean clean-generic clean-recursive ctags \
+	check-am clean clean-generic clean-local clean-recursive ctags \
 	ctags-recursive dist dist-all dist-bzip2 dist-gzip dist-hook \
 	dist-shar dist-tarZ dist-zip distcheck distclean \
 	distclean-generic distclean-recursive distclean-tags \
@@ -602,6 +613,9 @@ uninstall-info: uninstall-info-recursive
 	uninstall-dist_binSCRIPTS uninstall-info-am \
 	uninstall-nobase_dist_ssptestDATA
 
+
+clean-local:
+	$(RM) -rf $(top_srcdir)/docs/html
 
 show-release-labels:
 	echo "Release information (major-minor-micro): $(RELEASE_MAJOR)-$(RELEASE_MINOR)-$(RELEASE_MICRO)"
@@ -651,6 +665,9 @@ html-upload: html-upload-prepare
 #TESTS = ssp_test.pm
 
 test: check
+
+doxygen:
+	doxygen doxygen.cfg
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

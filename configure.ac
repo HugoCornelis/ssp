@@ -49,6 +49,8 @@ AC_SUBST(TEST_SPECIFICATION_FILES)
 dnl YAML_FILES=`find yaml -name "*.yml" -printf "%p "`
 dnl AC_SUBST(YAML_FILES)
 
+AC_PATH_PROGS(DOXYGEN,doxygen,[NULL])
+
 
 AC_CONFIG_FILES([Makefile
 		 perl/Makefile
