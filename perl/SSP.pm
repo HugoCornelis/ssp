@@ -1784,7 +1784,7 @@ sub steps
 sub version
 {
     # $Format: "    my $version=\"${package}-${label}\";"$
-    my $version="ssp-python-2";
+    my $version="ssp-python-3";
 
     return $version;
 }
