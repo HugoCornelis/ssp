@@ -20,7 +20,7 @@ AC_PREREQ(2.59)
 # $Format: "AC_INIT(${package}, ${label}, ${email})"$
 AC_INIT(ssp, python-3, hugo.cornelis@gmail.com)
 
-AC_CONFIG_SRCDIR([release-expand.config])
+AC_CONFIG_SRCDIR([doxygen.cfg])
 
 # $Format: "AM_INIT_AUTOMAKE(${package}, ${label})"$
 AM_INIT_AUTOMAKE(ssp, python-3)
