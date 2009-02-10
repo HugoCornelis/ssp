@@ -1796,6 +1796,10 @@ package SSP::Debug;
 our $debug_output_file;
 
 
+# the SSP::Debug package dumps a small report on each scheduler method
+# invocation, then forwards each invocation to the original package
+# (by removing ::Debug from the name of the package of the sub).
+
 sub AUTOLOAD
 {
     no strict "refs";
