@@ -28,37 +28,37 @@ my $test
 try .*ssp --builtins for information of how to run a simulation easily
 
 options:
-    builtins           give help about supported builtin configurations.
-    cell               use the cell builtin configuration.
-    daemonize          detach from terminal, close shared resources and run in the background,
-                       note that this option currently inhibits any feedback of the process,
-                       so be cautious with it.
-    debug              set to a string of the debugging package, 1 for a default of SSP::Debug.
-    emit-output        files to write to stdout after the simulation finishes.
-    emit-schedules     print schedules to stdout instead of running them.
-    help               print usage information.
-    inject-magnitude   amount of current injected into the soma.
-    model-directory    name of the directory where to look for non-std models.
-    model-filename     filename of the model description file \(when using a builtin configuration\).
-    model-name         name of the model \(when using a builtin configuration\).
-    neurospaces-models directory where to find the neurospaces library.
-    neurospaces-studio replace the simulation routine with calls to the neurospaces studio,
-                       this allows to explore the model after all modifiers have completed.
-    optimize           turn on the schedule optimizer.
-    outputs            define an output, can be given multiple times.
-    parameters         set a specific parameter value, can be given multiple times.
-    set-name           overwrite the schedule name with the name of the file that contains the schedule.
-    set-outputclass-filename
-                       overwrite the outputclass filename with something derived from the name of the
-                       file that contains the schedule.
-    solverclass        set the solver class to use \(when using a builtin configuration\).
-    spine-prototype    add spines with this prototype.
-    steps              number of simulation steps, when using one of the builtin configurations.
-    time               set simulation time \(in seconds\).
-    time-step          sets the time step, when using one of the builtin configurations.
-    transformator      feed the configuration through this transformator before running.
-    verbose            set verbosity level.
-    version            give version information.
+    --builtins           give help about supported builtin configurations.
+    --cell               use the cell builtin configuration.
+    --daemonize          detach from terminal, close shared resources and run in the background,
+                         note that this option currently inhibits any feedback of the process,
+                         so be cautious with it.
+    --debug              set to a string of the debugging package, 1 for a default of SSP::Debug.
+    --emit-output        files to write to stdout after the simulation finishes.
+    --emit-schedules     print schedules to stdout instead of running them.
+    --help               print usage information.
+    --inject-magnitude   amount of current injected into the soma.
+    --model-directory    name of the directory where to look for non-std models.
+    --model-filename     filename of the model description file \(when using a builtin configuration\).
+    --model-name         name of the model \(when using a builtin configuration\).
+    --neurospaces-models directory where to find the neurospaces library.
+    --neurospaces-studio replace the simulation routine with calls to the neurospaces studio,
+                         this allows to explore the model after all modifiers have completed.
+    --optimize           turn on the schedule optimizer.
+    --outputs            define an output, can be given multiple times.
+    --parameters         set a specific parameter value, can be given multiple times.
+    --set-name           overwrite the schedule name with the name of the file that contains the schedule.
+    --set-outputclass-filename
+                         overwrite the outputclass filename with something derived from the name of the
+                         file that contains the schedule.
+    --solverclass        set the solver class to use \(when using a builtin configuration\).
+    --spine-prototype    add spines with this prototype.
+    --steps              number of simulation steps, when using one of the builtin configurations.
+    --time               set simulation time \(in seconds\).
+    --time-step          sets the time step, when using one of the builtin configurations.
+    --transformator      feed the configuration through this transformator before running.
+    --verbose            set verbosity level.
+    --version            give version information.
 ',
 							   ],
 						   timeout => 3,
