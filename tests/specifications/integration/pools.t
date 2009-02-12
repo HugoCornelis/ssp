@@ -20,7 +20,7 @@ my $test
 						  {
 						   description => "Is a pool integrated correctly, one compartment, single pool case ?",
 						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/pool1.txt`),
-						   timeout => 8,
+						   timeout => 18,
 						   write => undef,
 						  },
 						 ],
@@ -34,7 +34,7 @@ my $test
 						  {
 						   description => "Is a pool integrated correctly, two compartments, two pools case ?",
 						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/pool2.txt`),
-						   timeout => 8,
+						   timeout => 18,
 						   write => undef,
 						  },
 						 ],
@@ -48,7 +48,7 @@ my $test
 						  {
 						   description => "Is a pool integrated correctly, one compartment, one pool with a feedback loop ?",
 						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/pool1-feedback1.txt`),
-						   timeout => 8,
+						   timeout => 18,
 						   write => undef,
 						  },
 						 ],
@@ -62,7 +62,7 @@ my $test
 						  {
 						   description => "Is a pool integrated correctly, one compartment, one pool with a feedback loop, reversed order ?",
 						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/pool1-feedback2.txt`),
-						   timeout => 8,
+						   timeout => 18,
 						   write => undef,
 						  },
 						 ],
@@ -76,7 +76,7 @@ my $test
 						  {
 						   description => "Is a pool integrated correctly, one pool, two feeding channels ?",
 						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/pool1-contributors2.txt`),
-						   timeout => 8,
+						   timeout => 18,
 						   write => undef,
 						  },
 						 ],
