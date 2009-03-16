@@ -40,7 +40,7 @@ my $test
 						  },
 						 ],
 				description => "single source, single spike, multiple targets, hardcoded connection matrix",
-				disabled => 'working on it',
+				disabled => 'not possible to do this one with ssp, this test is only available for heccer/des',
 			       },
 			       {
 				arguments => [
