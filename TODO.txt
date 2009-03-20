@@ -1,5 +1,9 @@
 -*- outline -*-
 
+* put version information in schedule
+** components used (model-container, ssp, heccer)
+** model checksum ?
+
 * pause method
 Implement tests for this one.
 
