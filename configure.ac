@@ -25,10 +25,10 @@ AC_CONFIG_SRCDIR([doxygen.cfg])
 # $Format: "AM_INIT_AUTOMAKE(${package}, ${label})"$
 AM_INIT_AUTOMAKE(ssp, python-5)
 
-PERL_MODULES=`(cd perl && find . -name "*.pm" -printf "%p ")`
+PERL_MODULES=`(cd perl && find . -name "*.pm" | perl -pe 's/\n/ /g')`
 AC_SUBST(PERL_MODULES)
 
-PERL_DATA=`(cd perl && find . -name "numbers-7x11.txt" -printf "%p ")`
+PERL_DATA=`(cd perl && find . -name "numbers-7x11.txt" | perl -pe 's/\n/ /g')`
 AC_SUBST(PERL_DATA)
 
 # Checks for programs.

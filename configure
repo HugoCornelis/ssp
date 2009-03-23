@@ -2136,10 +2136,10 @@ am__tar='${AMTAR} chof - "$$tardir"'; am__untar='${AMTAR} xf -'
 
 
 
-PERL_MODULES=`(cd perl && find . -name "*.pm" -printf "%p ")`
+PERL_MODULES=`(cd perl && find . -name "*.pm" | perl -pe 's/\n/ /g')`
 
 
-PERL_DATA=`(cd perl && find . -name "numbers-7x11.txt" -printf "%p ")`
+PERL_DATA=`(cd perl && find . -name "numbers-7x11.txt" | perl -pe 's/\n/ /g')`
 
 
 # Checks for programs.
