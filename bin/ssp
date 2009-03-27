@@ -46,6 +46,7 @@ $SIG{__DIE__}
 my $option_configuration_cell;
 my $option_daemonize;
 my $option_debug;
+my $option_dump;
 my $option_emit_output = [];
 my $option_emit_schedules;
 my $option_inject_delay;
@@ -283,6 +284,25 @@ sub main
 	# assign name
 
 	$scheduler->{name} = "builtin cell configuration, applied to: $option_model_name";
+
+	# install dumper analyzers
+
+	if ($option_dump)
+	{
+	    $scheduler->{analyzers}
+		= {
+		   dumper => {
+			      module_name => 'Heccer',
+			      package => 'Heccer::Dumper',
+			      initializers => [
+					       {
+						arguments => [ { source => "neurospaces::/$option_model_name", }, ],
+						method => 'dump',
+					       },
+					      ],
+			     },
+		  };
+	}
 
 	# process service options
 
@@ -701,6 +721,7 @@ sub read_cmd_line
 	     "cell=s" => \$option_configuration_cell,
 	     "daemonize!" => \$option_daemonize,
 	     "debug=s" => \$option_debug,
+	     "dump!" => \$option_dump,
 	     "emit-output=s" => $option_emit_output,
 	     "emit-schedules!" => \$option_emit_schedules,
 	     "help!" => \$option_help,
@@ -756,6 +777,7 @@ options:
                          note that this option currently inhibits any feedback of the process,
                          so be cautious with it.
     --debug              set to a string of the debugging package, 1 for a default of SSP::Debug.
+    --dump               install dumpers for analyzers.
     --emit-output        files to write to stdout after the simulation finishes.
     --emit-schedules     print schedules to stdout instead of running them.
     --help               print usage information.
