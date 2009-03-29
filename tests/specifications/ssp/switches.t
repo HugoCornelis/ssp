@@ -34,6 +34,7 @@ options:
                          note that this option currently inhibits any feedback of the process,
                          so be cautious with it.
     --debug              set to a string of the debugging package, 1 for a default of SSP::Debug.
+    --dump               install dumpers for analyzers.
     --emit-output        files to write to stdout after the simulation finishes.
     --emit-schedules     print schedules to stdout instead of running them.
     --help               print usage information.
