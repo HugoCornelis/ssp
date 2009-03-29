@@ -88,7 +88,7 @@ services:
     initializers:
       - arguments:
           -
-            - bin/ssp
+            - ./../bin/ssp
             - -P
             - tests/cells/singlep.ndf
         method: read
