@@ -1,6 +1,9 @@
 Tutil.pm
 synaptic-test.patch
-
+.*Makefile\.in$
+^configure$
+^aclocal.m4$
+^autom4te.cache$
 Makefile$
 ^config.log$
 ^config.status$
