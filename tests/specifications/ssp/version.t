@@ -24,7 +24,7 @@ read => "ssp-python-5",
 			       },
 			      ],
        description => "run-time versioning",
-       name => 'version.t',
+       name => 'ssp/version.t',
       };
 
 

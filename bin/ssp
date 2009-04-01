@@ -60,6 +60,7 @@ my $option_neurospaces_studio;
 my $option_optimize;
 my $option_output_fields = [];
 my $option_parameters = [];
+my $option_perfectclamp;
 my $option_set_name;
 my $option_set_outputclass_filename;
 my $option_solverclass = 'heccer';
@@ -86,7 +87,8 @@ my $builtin_configurations
 			 },
 		usage => '
 	Simulate a single model neuron, default is to output the membrane potential of the soma.
-	Use the options to inject current in the soma (--inject-magnitude).
+	Use the options to inject current in the soma (--inject-magnitude), or alternatively
+	to set a command voltage (--perfectclamp).
 	The model\'s soma segment must reside in a SEGMENT_GROUP with name "segments".
 
         The name of the model neuron is inferred from the name of the model description file.
@@ -409,8 +411,8 @@ sub main
 	my $granular_parameters;
 
 	if ($option_inject_magnitude
-	   and !$option_inject_delay
-	   and !$option_inject_duration)
+	    and !$option_inject_delay
+	    and !$option_inject_duration)
 	{
 	    $granular_parameters
 		= [
@@ -497,6 +499,41 @@ sub main
 	# fill in solver class in the schedule
 
 	$scheduler->{solverclasses} = $solverclasses;
+
+	# define inputclasses and inputs according to the options
+
+	if (defined $option_perfectclamp)
+	{
+	    my $perfectclamp_inputclassname = "perfectclamp";
+
+	    my $inputclass
+		= {
+		   module_name => "Heccer",
+		   options => {
+			       command => $option_perfectclamp,
+			       name => "perfectclamp set to $option_perfectclamp",
+			      },
+		   package => "Heccer::PerfectClamp",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $perfectclamp_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$perfectclamp_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
 
 	# define an output filename
 
@@ -736,6 +773,7 @@ sub read_cmd_line
 	     "optimize!" => \$option_optimize,
 	     "output-fields=s" => $option_output_fields,
 	     "parameters=s" => $option_parameters,
+	     "perfectclamp=s" => \$option_perfectclamp,
 	     "set-name=s" => \$option_set_name,
 	     "set-outputclass-filename=s" => \$option_set_outputclass_filename,
 	     "solverclass=s" => \$option_solverclass,
@@ -791,6 +829,7 @@ options:
     --optimize           turn on the schedule optimizer.
     --outputs            define an output, can be given multiple times.
     --parameters         set a specific parameter value, can be given multiple times.
+    --perfectclamp       set the command voltage for the perfect clamp protocol.
     --set-name           overwrite the schedule name with the name of the file that contains the schedule.
     --set-outputclass-filename
                          overwrite the outputclass filename with something derived from the name of the

@@ -48,6 +48,7 @@ options:
     --optimize           turn on the schedule optimizer.
     --outputs            define an output, can be given multiple times.
     --parameters         set a specific parameter value, can be given multiple times.
+    --perfectclamp       set the command voltage for the perfect clamp protocol.
     --set-name           overwrite the schedule name with the name of the file that contains the schedule.
     --set-outputclass-filename
                          overwrite the outputclass filename with something derived from the name of the
@@ -90,7 +91,8 @@ cell:
 
 
 	Simulate a single model neuron, default is to output the membrane potential of the soma.
-	Use the options to inject current in the soma \(--inject-magnitude\).
+	Use the options to inject current in the soma \(--inject-magnitude\), or alternatively
+	to set a command voltage \(--perfectclamp\).
 	The model\'s soma segment must reside in a SEGMENT_GROUP with name "segments".
 
         The name of the model neuron is inferred from the name of the model description file.
@@ -108,7 +110,7 @@ cell:
 			       },
 			      ],
        description => "command line switches",
-       name => 'switches.t',
+       name => 'ssp/switches.t',
       };
 
 

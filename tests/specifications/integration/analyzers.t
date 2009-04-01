@@ -101,7 +101,8 @@ solverclasses:
 usage: |2
   
   	Simulate a single model neuron, default is to output the membrane potential of the soma.
-  	Use the options to inject current in the soma (--inject-magnitude).
+  	Use the options to inject current in the soma (--inject-magnitude), or alternatively
+  	to set a command voltage (--perfectclamp).
   	The model\'s soma segment must reside in a SEGMENT_GROUP with name "segments".
   
           The name of the model neuron is inferred from the name of the model description file.

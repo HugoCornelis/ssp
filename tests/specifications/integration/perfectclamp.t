@@ -20,9 +20,6 @@ my $test
 				command_tests => [
 						  {
 						   description => "Can we do a perfect clamp on the full purkinje cell model using a constant command voltage ?",
-						   disabled => (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf"
-								? "purkinje cell potassium channels not found"
-								: ""),
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-perfectclamp.txt`),
 						   timeout => 300,
 						   write => undef,
@@ -38,9 +35,6 @@ my $test
 				command_tests => [
 						  {
 						   description => "Can we do a perfect clamp on the full purkinje cell model using a file with command voltages ?",
-						   disabled => (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf"
-								? "purkinje cell potassium channels not found"
-								: ""),
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-perfectclamp-filename.txt`),
 						   timeout => 300,
 						   write => undef,
