@@ -1,5 +1,10 @@
 -*- outline -*-
 
+* perl packages for input/output
+separate files for import - construct - save config.
+** SSP::Input
+** SSP::Output
+
 * put version information in schedule
 ** components used (model-container, ssp, heccer)
 ** model checksum ?
