@@ -412,7 +412,7 @@ sub daemonize
 
 #     mlog("daemonize ($$)", "forked : cd");
 
-    use POSIX;
+    use POSIX qw(_SC_OPEN_MAX);
 
     POSIX::setsid();
     chdir('/');
