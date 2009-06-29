@@ -7,20 +7,27 @@ $files = {
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '1485'
-                                }
-                              ],
-           '_<bin/ssp' => [
-                            {
-                              'expr' => undef,
-                              'value' => '1',
-                              'text' => '	$scheduler->run();
+                                  'line' => '1565'
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '	$result = $engine->compile();
 ',
-                              'fname' => 'bin/ssp',
-                              'type' => 'user',
-                              'line' => '957'
-                            }
-                          ]
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '2090'
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '	if (!$engine->compile($self))
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '325'
+                                }
+                              ]
          };
 $expr_list = [
                {
