@@ -1163,6 +1163,30 @@ $@";
 }
 
 
+sub load
+{
+    my $self = shift;
+
+    my $filename = shift;
+
+    require YAML;
+
+    my $self;
+
+    eval
+    {
+	$self = YAML::LoadFile($filename);
+    };
+
+    if ($@)
+    {
+	$self = $@;
+    }
+
+    return $self;
+}
+
+
 sub lookup_model
 {
     my $self = shift;
@@ -1629,6 +1653,23 @@ sub salvage
 	      };
 
     }
+}
+
+
+sub save
+{
+    my $self = shift;
+
+    my $filename = shift;
+
+    require YAML;
+
+    eval
+    {
+	YAML::DumpFile($filename, $self);
+    };
+
+    return $@;
 }
 
 
