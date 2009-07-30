@@ -1165,13 +1165,11 @@ $@";
 
 sub load
 {
-    my $self = shift;
+    my $package = shift;
 
     my $filename = shift;
 
     require YAML;
-
-    my $self;
 
     eval
     {
