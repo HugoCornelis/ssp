@@ -172,7 +172,7 @@ VM Membrane Potentials (pdVms[0]) : (-0.068)
 			       },
 			      ],
        description => "Gate tabulation high-level interfacing",
-       name => 'integration/tabulator.t',
+       name => 'integration/analyzers.t',
       };
 
 
