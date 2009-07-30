@@ -1171,6 +1171,8 @@ sub load
 
     require YAML;
 
+    my $self;
+
     eval
     {
 	$self = YAML::LoadFile($filename);
