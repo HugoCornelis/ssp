@@ -495,6 +495,45 @@ sub finish
 }
 
 
+sub get_engine_outputs
+{
+    my $self = shift;
+
+    my $engine = shift;
+
+    # start with empty result
+
+    my $result = [];
+
+    # get modelname from this engine
+
+    my $modelname = $engine->{model_source}->{modelname};
+
+    # loop over all outputs
+
+    my $outputs = $self->{outputs};
+
+    foreach my $output (@$outputs)
+    {
+	# if this output belongs to this engine
+
+	#t this test should be using solver registrations in the
+	#t model-container service
+
+	if ($output->{component_name} =~ /^$modelname/)
+	{
+	    # add to result
+
+	    push @$result, $output;
+	}
+    }
+
+    # return result
+
+    return $result;
+}
+
+
 sub get_time_step
 {
     my $self = shift;
@@ -2128,7 +2167,7 @@ $@";
 
     if (ref $engine)
     {
-	$result = $engine->compile();
+	$result = $engine->compile($scheduler);
     }
     else
     {

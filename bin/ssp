@@ -597,6 +597,11 @@ sub main
 
 		   my $field = $2;
 
+		   if ($component_name !~ /^\//)
+		   {
+		       $component_name = "/$component_name";
+		   }
+
 		   my $result
 		       = {
 			  component_name => $component_name,
