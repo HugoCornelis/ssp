@@ -18,8 +18,9 @@ my $test
 				command_tests => [
 						  {
 						   description => "What does a schedule look like when we apply a perfect clamp to obtain a channel's response ?",
-						   read => 'adding an initial slash to the model name channel_response
---- !!perl/hash:SSP
+						   read => [
+							    '-re',
+							    '
 analyzers:
   dumper:
     initializers:
@@ -46,17 +47,17 @@ application_classes:
       - method: optimize
     priority: 80
   modifiers:
-    default: []
+    default: \[\]
     priority: 50
   results:
-    default: []
+    default: \[\]
     priority: 170
   services:
     default:
       - method: instantiate_services
     priority: 20
   simulation:
-    default: []
+    default: \[\]
     priority: 110
 apply:
   simulation:
@@ -65,7 +66,7 @@ apply:
         - verbose: 0
       method: advance
 models:
-  - granular_parameters: []
+  - granular_parameters: \[\]
     modelname: /channel_response
     solverclass: heccer
 name: \'builtin cell configuration, applied to: channel_response\'
@@ -84,7 +85,7 @@ services:
     initializers:
       - arguments:
           -
-            - bin/ssp
+            - .*?/ssp
             - -P
             - tests/cells/channel_response.ndf
         method: read
@@ -94,21 +95,22 @@ solverclasses:
   heccer:
     module_name: Heccer
     service_name: neurospaces
-usage: |2
+usage: \|2
   
   	Simulate a single model neuron, default is to output the membrane potential of the soma.
-  	Use the options to inject current in the soma (--inject-magnitude), or alternatively
-  	to set a command voltage (--perfectclamp).
+  	Use the options to inject current in the soma \(--inject-magnitude\), or alternatively
+  	to set a command voltage \(--perfectclamp\).
   	The model\'s soma segment must reside in a SEGMENT_GROUP with name "segments".
   
           The name of the model neuron is inferred from the name of the model description file.
-          (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
-          called "hh_neuron").
+          \(e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+          called "hh_neuron"\).
   
   	--model-name overwrite the default model name.
   	--steps sets number of steps
 verbose: ~
 ',
+							   ],
 						  },
 						 ],
 				description => "using perfect clamp to obtain a channel response, schedule output",
@@ -132,7 +134,7 @@ verbose: ~
 						   description => "What does a schedule look like when we apply a perfect clamp to obtain a channel's response ?",
 						   read => {
 							    application_output_file => 'output/channel_response.out',
-							    expected_output_file => '/usr/local/heccer/tests/specifications/strings/addressing-current.txt',
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/channel-response.txt",
 							   },
 						   wait => 2,
 						  },
