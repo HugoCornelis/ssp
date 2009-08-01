@@ -20,8 +20,7 @@ my $test
 						  {
 						   description => "Is a single compartment with a naf conductance solved correctly ?",
 						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/active/singlea-naf.txt`),
-						   timeout => 5,
-						   write => undef,
+						   timeout => 10,
 						  },
 						 ],
 				description => "single compartment with a naf conductance.",
