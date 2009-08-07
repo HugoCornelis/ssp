@@ -1,8 +1,5 @@
 -*- outline -*-
 
-* replace neurospaces service
-with 'model_container'.
-
 * perl packages for input/output
 separate files for import - construct - save config.
 ** SSP::Input
