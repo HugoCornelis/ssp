@@ -191,7 +191,7 @@ sub main
 
 											# solver info translation service
 
-											service => 'neurospaces',
+											service => 'model_container',
 										       },
 										      ],
 									 method => 'compile',

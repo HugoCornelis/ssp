@@ -7,7 +7,7 @@ $files = {
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '1514'
+                                  'line' => '1628'
                                 }
                               ],
            '_<tests/perl/spiker1' => [
@@ -18,7 +18,7 @@ $files = {
 ',
                                          'fname' => 'tests/perl/spiker1',
                                          'type' => 'user',
-                                         'line' => '264'
+                                         'line' => 264
                                        }
                                      ]
          };
