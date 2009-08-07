@@ -53,7 +53,7 @@ outputs:
     field: Vm
     outputclass: double_2_ascii
 services:
-  neurospaces:
+  model_container:
     initializers:
       - arguments:
           - filename: cells/purkinje/edsjb1994.ndf
@@ -75,4 +75,4 @@ solverclasses:
       options:
         iOptions: 4
     module_name: Heccer
-    service_name: neurospaces
+    service_name: model_container

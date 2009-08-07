@@ -137,7 +137,7 @@ outputs:
     field: state_h
     outputclass: double_2_ascii
 services:
-  neurospaces:
+  model_container:
     initializers:
       - arguments:
           -
@@ -155,4 +155,4 @@ solverclasses:
           tested_things: 6225920
       dStep: 2e-05
     module_name: Heccer
-    service_name: neurospaces
+    service_name: model_container

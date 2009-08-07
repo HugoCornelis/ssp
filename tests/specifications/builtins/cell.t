@@ -82,7 +82,7 @@ outputs:
     field: Vm
     outputclass: double_2_ascii
 services:
-  neurospaces:
+  model_container:
     initializers:
       - arguments:
           -
@@ -95,7 +95,7 @@ services:
 solverclasses:
   heccer:
     module_name: Heccer
-    service_name: neurospaces
+    service_name: model_container
 ',
 							   ],
 						   timeout => 3,
@@ -177,7 +177,7 @@ outputs:
     field: Vm
     outputclass: double_2_ascii
 services:
-  neurospaces:
+  model_container:
     initializers:
       - arguments:
           -
@@ -190,7 +190,7 @@ services:
 solverclasses:
   heccer:
     module_name: Heccer
-    service_name: neurospaces
+    service_name: model_container
 ',
 							   ],
 						   timeout => 3,
@@ -272,7 +272,7 @@ outputs:
     field: Vm
     outputclass: double_2_ascii
 services:
-  neurospaces:
+  model_container:
     initializers:
       - arguments:
           -
@@ -285,7 +285,7 @@ services:
 solverclasses:
   heccer:
     module_name: Heccer
-    service_name: neurospaces
+    service_name: model_container
 ',
 							   ],
 						   timeout => 3,
@@ -390,7 +390,7 @@ outputs:
     field: Vm
     outputclass: double_2_ascii
 services:
-  neurospaces:
+  model_container:
     initializers:
       - arguments:
           -
@@ -403,7 +403,7 @@ services:
 solverclasses:
   heccer:
     module_name: Heccer
-    service_name: neurospaces
+    service_name: model_container
 ',
 							   ],
 						   timeout => 3,
@@ -535,7 +535,7 @@ outputs:
     field: Vm
     outputclass: double_2_ascii
 services:
-  neurospaces:
+  model_container:
     initializers:
       - arguments:
           -
@@ -548,7 +548,7 @@ services:
 solverclasses:
   heccer:
     module_name: Heccer
-    service_name: neurospaces
+    service_name: model_container
 ',
 							   ],
 						   timeout => 3,

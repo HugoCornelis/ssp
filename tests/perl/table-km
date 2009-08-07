@@ -80,7 +80,7 @@ sub main
 			      ],
 		    name => $modelname,
 		    services => {
-				 neurospaces => {
+				 model_container => {
 						 initializers => [
 								  {
 								   arguments => [ $args, ],
@@ -101,7 +101,7 @@ sub main
 										     },
 									 },
 						 module_name => 'Heccer',
-						 service_name => 'neurospaces',
+						 service_name => 'model_container',
 						},
 				     },
 		   },

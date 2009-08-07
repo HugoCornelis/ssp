@@ -24,7 +24,7 @@ outputs:
     field: Vm
     outputclass: double_2_ascii
 services:
-  neurospaces:
+  model_container:
     initializers:
       - arguments:
           -
@@ -36,7 +36,7 @@ services:
 solverclasses:
   heccer:
     module_name: Heccer
-    service_name: neurospaces
+    service_name: model_container
 usage: |2
   
   	Simulate a single model neuron, default is to output the membrane potential of the soma.
@@ -76,7 +76,7 @@ usage: |2
         field: Vm
         outputclass: double_2_ascii
     services:
-      neurospaces:
+      model_container:
         initializers:
           - arguments:
               -
@@ -88,7 +88,7 @@ usage: |2
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     usage: |2
       
       	Simulate a single model neuron, default is to output the membrane potential of the soma.
@@ -130,7 +130,7 @@ usage: |2
         field: Vm
         outputclass: double_2_ascii
     services:
-      neurospaces:
+      model_container:
         initializers:
           - arguments:
               -
@@ -142,7 +142,7 @@ usage: |2
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     usage: |2
       
       	Simulate a single model neuron, default is to output the membrane potential of the soma.
@@ -214,7 +214,7 @@ usage: |2
         field: Vm
         outputclass: double_2_ascii
     services:
-      neurospaces:
+      model_container:
         initializers:
           - arguments:
               -
@@ -227,7 +227,7 @@ usage: |2
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     usage: |2
       
       	Simulate a single model neuron, default is to output the membrane potential of the soma.
@@ -298,7 +298,7 @@ usage: |2
         field: Vm
         outputclass: double_2_ascii
     services:
-      neurospaces:
+      model_container:
         initializers:
           - arguments:
               -
@@ -311,7 +311,7 @@ usage: |2
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     usage: |2
       
       	Simulate a single model neuron, default is to output the membrane potential of the soma.
@@ -389,7 +389,7 @@ usage: |2
         field: Vm
         outputclass: double_2_ascii
     services:
-      neurospaces:
+      model_container:
         initializers:
           - arguments:
               -
@@ -402,7 +402,7 @@ usage: |2
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     usage: |2
       
       	Simulate a single model neuron, default is to output the membrane potential of the soma.
@@ -481,7 +481,7 @@ usage: |2
         field: Vm
         outputclass: double_2_ascii
     services:
-      neurospaces:
+      model_container:
         initializers: &8
           - arguments:
               -
@@ -503,7 +503,7 @@ usage: |2
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     status:
       instantiate_services:
         - []
@@ -606,7 +606,7 @@ usage: |2
               model_library: /usr/local/neurospaces/models/library
               module_name: Neurospaces
               neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
-            service_name: neurospaces
+            service_name: model_container
         event_distributor: {}
         modelname: /stand_alone
         module_name: Heccer
@@ -618,14 +618,14 @@ usage: |2
           ssp_service: !!perl/hash:SSP::Service
             backend: *8
             scheduler: *1
-        service_name: neurospaces
+        service_name: model_container
         solverclass: heccer
     services:
-      neurospaces: *10
+      model_container: *10
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     status:
       compile:
         - []
@@ -730,7 +730,7 @@ usage: |2
               model_library: /usr/local/neurospaces/models/library
               module_name: Neurospaces
               neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
-            service_name: neurospaces
+            service_name: model_container
         event_distributor: {}
         modelname: /stand_alone
         module_name: Heccer
@@ -742,14 +742,14 @@ usage: |2
           ssp_service: !!perl/hash:SSP::Service
             backend: *8
             scheduler: *1
-        service_name: neurospaces
+        service_name: model_container
         solverclass: heccer
     services:
-      neurospaces: *10
+      model_container: *10
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     status:
       compile:
         - []
@@ -869,7 +869,7 @@ usage: |2
               model_library: /usr/local/neurospaces/models/library
               module_name: Neurospaces
               neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
-            service_name: neurospaces
+            service_name: model_container
         event_distributor: {}
         modelname: /stand_alone
         module_name: Heccer
@@ -881,7 +881,7 @@ usage: |2
           ssp_service: !!perl/hash:SSP::Service
             backend: *10
             scheduler: *1
-        service_name: neurospaces
+        service_name: model_container
         solverclass: heccer
       - *9
     services:
@@ -889,7 +889,7 @@ usage: |2
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     status:
       compile:
         - []
@@ -911,7 +911,7 @@ usage: |2
       	--model-name overwrite the default model name.
       	--steps sets number of steps
     verbose: 1
-  - neurospaces::/stand_alone
+  - model_container::/stand_alone
 ./bin/ssp: applying method 'initiate' to builtin cell configuration, applied to: stand_alone
 ---
 1_DEBUG_subname: SSP::Debug::initiate
@@ -1010,7 +1010,7 @@ usage: |2
               model_library: /usr/local/neurospaces/models/library
               module_name: Neurospaces
               neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
-            service_name: neurospaces
+            service_name: model_container
         event_distributor: {}
         modelname: /stand_alone
         module_name: Heccer
@@ -1022,7 +1022,7 @@ usage: |2
           ssp_service: !!perl/hash:SSP::Service
             backend: *10
             scheduler: *1
-        service_name: neurospaces
+        service_name: model_container
         solverclass: heccer
       - *9
     services:
@@ -1030,7 +1030,7 @@ usage: |2
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     status:
       compile:
         - []
@@ -1153,7 +1153,7 @@ usage: |2
               model_library: /usr/local/neurospaces/models/library
               module_name: Neurospaces
               neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
-            service_name: neurospaces
+            service_name: model_container
         event_distributor: {}
         modelname: /stand_alone
         module_name: Heccer
@@ -1165,18 +1165,18 @@ usage: |2
           ssp_service: !!perl/hash:SSP::Service
             backend: *10
             scheduler: *1
-        service_name: neurospaces
+        service_name: model_container
         solverclass: heccer
       - *9
     services:
-      neurospaces: *12
+      model_container: *12
     simulation_time:
       steps: 0
       time: 0
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     status:
       compile:
         - []
@@ -1302,7 +1302,7 @@ usage: |2
               model_library: /usr/local/neurospaces/models/library
               module_name: Neurospaces
               neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
-            service_name: neurospaces
+            service_name: model_container
         event_distributor: {}
         modelname: /stand_alone
         module_name: Heccer
@@ -1314,18 +1314,18 @@ usage: |2
           ssp_service: !!perl/hash:SSP::Service
             backend: *11
             scheduler: *1
-        service_name: neurospaces
+        service_name: model_container
         solverclass: heccer
       - *10
     services:
-      neurospaces: *13
+      model_container: *13
     simulation_time:
       steps: 0
       time: 0
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     status:
       analyze:
         - []
@@ -1453,7 +1453,7 @@ usage: |2
               model_library: /usr/local/neurospaces/models/library
               module_name: Neurospaces
               neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
-            service_name: neurospaces
+            service_name: model_container
         event_distributor: {}
         modelname: /stand_alone
         module_name: Heccer
@@ -1465,18 +1465,18 @@ usage: |2
           ssp_service: !!perl/hash:SSP::Service
             backend: *10
             scheduler: *1
-        service_name: neurospaces
+        service_name: model_container
         solverclass: heccer
       - *9
     services:
-      neurospaces: *12
+      model_container: *12
     simulation_time:
       steps: 0
       time: 0
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     status:
       analyze:
         - []
@@ -1601,7 +1601,7 @@ usage: |2
               model_library: /usr/local/neurospaces/models/library
               module_name: Neurospaces
               neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
-            service_name: neurospaces
+            service_name: model_container
         event_distributor: {}
         modelname: /stand_alone
         module_name: Heccer
@@ -1613,18 +1613,18 @@ usage: |2
           ssp_service: !!perl/hash:SSP::Service
             backend: *10
             scheduler: *1
-        service_name: neurospaces
+        service_name: model_container
         solverclass: heccer
       - *9
     services:
-      neurospaces: *12
+      model_container: *12
     simulation_time:
       steps: 0
       time: 0
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     status:
       analyze:
         - []
@@ -1752,7 +1752,7 @@ usage: |2
               model_library: /usr/local/neurospaces/models/library
               module_name: Neurospaces
               neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
-            service_name: neurospaces
+            service_name: model_container
         event_distributor: {}
         modelname: /stand_alone
         module_name: Heccer
@@ -1764,18 +1764,18 @@ usage: |2
           ssp_service: !!perl/hash:SSP::Service
             backend: *11
             scheduler: *1
-        service_name: neurospaces
+        service_name: model_container
         solverclass: heccer
       - *10
     services:
-      neurospaces: *13
+      model_container: *13
     simulation_time:
       steps: 2500
       time: ~
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     status:
       advance:
         - *8
@@ -1875,7 +1875,7 @@ output files follow
       - ~
       - ~
     services:
-      neurospaces:
+      model_container:
         initializers:
           - arguments:
               -
@@ -1896,7 +1896,7 @@ output files follow
     solverclasses:
       heccer:
         module_name: Heccer
-        service_name: neurospaces
+        service_name: model_container
     status:
       advance:
         - *7

@@ -78,20 +78,20 @@ sub main
 			      ],
 		    name => $modelname,
 		    services => {
-				 neurospaces => {
-						 initializers => [
-								  {
-								   arguments => [ $args, ],
-								   method => 'read',
-								  },
-								 ],
-						 module_name => 'Neurospaces',
-						},
+				 model_container => {
+						     initializers => [
+								      {
+								       arguments => [ $args, ],
+								       method => 'read',
+								      },
+								     ],
+						     module_name => 'Neurospaces',
+						    },
 				},
 		    solverclasses => {
 				      heccer => {
 						 module_name => 'Heccer',
-						 service_name => 'neurospaces',
+						 service_name => 'model_container',
 						},
 				     },
 		   },

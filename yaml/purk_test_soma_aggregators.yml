@@ -51,7 +51,7 @@ outputs:
 #    field: state_h
 #    outputclass: double_2_ascii
 services:
-  neurospaces:
+  model_container:
     initializers:
       - arguments:
           -
@@ -71,4 +71,4 @@ solverclasses:
       options:
         iOptions: 96
     module_name: Heccer
-    service_name: neurospaces
+    service_name: model_container

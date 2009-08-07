@@ -100,7 +100,7 @@ sub main
 				},
 			       ],
 		    services => {
-				 neurospaces => {
+				 model_container => {
 						 initializers => [
 								  {
 								   arguments => [ $args, ],
@@ -129,7 +129,7 @@ sub main
 									  dStep => 5e-7,
 									 },
 						 module_name => 'Heccer',
-						 service_name => 'neurospaces',
+						 service_name => 'model_container',
 						},
 				     },
 		   },
