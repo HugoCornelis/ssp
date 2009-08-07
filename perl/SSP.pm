@@ -1119,7 +1119,19 @@ sub instantiate_services
 
     my $services = $self->{services};
 
-    foreach my $service_name (keys %$services)
+    foreach my $service_name (sort
+			      {
+				  (
+				   (
+				    defined $services->{$a}->{order}
+				    and defined $services->{$b}->{order}
+				    and $services->{$a}->{order} <=> $services->{$b}->{order}
+				   )
+				   ||
+				   1
+				  )
+			      }
+			      keys %$services)
     {
 	my $service = $services->{$service_name};
 

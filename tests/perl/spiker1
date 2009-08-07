@@ -172,14 +172,15 @@ sub main
 			       ],
 		    services => {
 				 model_container => {
-						 initializers => [
-								  {
-								   arguments => [ $args, ],
-								   method => 'read',
-								  },
-								 ],
-						 module_name => 'Neurospaces',
-						},
+						     initializers => [
+								      {
+								       arguments => [ $args, ],
+								       method => 'read',
+								      },
+								     ],
+						     module_name => 'Neurospaces',
+						     order => 1,
+						    },
 				 event_distributor => {
 						       initializers => [
 									{
@@ -207,6 +208,7 @@ sub main
 # 									},
 								       ],
 						       module_name => 'Heccer',
+						       order => 2,
 						       package => 'Heccer::DES::Distributor',
 						      },
 # 				 event_queuer => {
