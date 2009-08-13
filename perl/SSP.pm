@@ -1713,11 +1713,61 @@ sub save
 
     my $filename = shift;
 
+    # simplify the schedule to keep important keys only
+
+    #t perhaps should use Storable::dclone() here
+
+    require Clone;
+
+    my $schedule = Clone::clone($self);
+
+    delete $schedule->{application_classes};
+
+    if (!keys %{$schedule->{analyzers}})
+    {
+	delete $schedule->{analyzers};
+    }
+
+    foreach my $applicator (keys %{$schedule->{apply}})
+    {
+	if (!@{$schedule->{apply}->{$applicator}})
+	{
+	    delete $schedule->{apply}->{$applicator};
+	}
+    }
+
+    if (!keys %{$schedule->{inputclasses}})
+    {
+	delete $schedule->{inputclasses};
+    }
+
+    if (!@{$schedule->{inputs}})
+    {
+	delete $schedule->{inputs};
+    }
+
+    foreach my $model (@{$schedule->{models}})
+    {
+	if (!@{$model->{conceptual_parameters}})
+	{
+	    delete $model->{conceptual_parameters};
+	}
+
+	if (!@{$model->{granular_parameters}})
+	{
+	    delete $model->{granular_parameters};
+	}
+    }
+
+    #t settings for event distributor in the heccer solver
+
+    # now put the schedule in the file
+
     require YAML;
 
     eval
     {
-	YAML::DumpFile($filename, $self);
+	YAML::DumpFile($filename, $schedule);
     };
 
     return $@;
