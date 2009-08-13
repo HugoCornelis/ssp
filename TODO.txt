@@ -1,5 +1,9 @@
 -*- outline -*-
 
+* add entries to $schedule->{status}
+** user descriptions that describe why and what was done.
+** software components that track everything done.
+
 * perl packages for input/output
 separate files for import - construct - save config.
 ** SSP::Input
