@@ -656,95 +656,6 @@ sub initiate
 }
 
 
-sub optimize
-{
-    my $self = shift;
-
-    # set default result: ok
-
-    my $result = 1;
-
-    # first update the time
-
-    $self->{simulation_time}
-	= {
-	   steps => 0,
-	   time => 0,
-	  };
-
-    # we try to optimize the schedule
-
-    my $optimize = $self->{optimize};
-
-    # if we should try to optimize
-
-    if ($optimize)
-    {
-	# loop over all schedulees
-
-	my $schedule = $self->{schedule};
-
-	foreach my $schedulee (@$schedule)
-	{
-	    # optimize the engine
-
-	    my $driver = $schedulee->get_driver();
-
-	    if (!$driver)
-	    {
-		die "$0: SSP::optimize() failed, no driver found for $schedulee->{name}";
-	    }
-
-	    $self->register_driver($driver->{method}, $driver->{data});
-	}
-    }
-
-    # return result
-
-    return $result;
-}
-
-
-sub pause
-{
-    my $self = shift;
-
-    # set default result: ok
-
-    my $result = 1;
-
-    # loop over all schedulees
-
-    my $schedule = $self->{schedule};
-
-    foreach my $schedulee (@$schedule)
-    {
-	# tell the schedulee that we are pausing the simulation
-
-	my $success = $schedulee->pause();
-
-	if (!$success)
-	{
-	    die "$0: pause() failed";
-	}
-    }
-
-    # return result
-
-    return $result;
-}
-
-
-sub reconstruct
-{
-    my $self = shift;
-
-    #t go through the history and reconstruct the simulation
-
-    return "SSP::reconstruct() is not implemented yet";
-}
-
-
 # sub instantiate_communicators
 # {
 #     my $self = shift;
@@ -1483,6 +1394,95 @@ sub new
     $self->salvage();
 
     return $self;
+}
+
+
+sub optimize
+{
+    my $self = shift;
+
+    # set default result: ok
+
+    my $result = 1;
+
+    # first update the time
+
+    $self->{simulation_time}
+	= {
+	   steps => 0,
+	   time => 0,
+	  };
+
+    # we try to optimize the schedule
+
+    my $optimize = $self->{optimize};
+
+    # if we should try to optimize
+
+    if ($optimize)
+    {
+	# loop over all schedulees
+
+	my $schedule = $self->{schedule};
+
+	foreach my $schedulee (@$schedule)
+	{
+	    # optimize the engine
+
+	    my $driver = $schedulee->get_driver();
+
+	    if (!$driver)
+	    {
+		die "$0: SSP::optimize() failed, no driver found for $schedulee->{name}";
+	    }
+
+	    $self->register_driver($driver->{method}, $driver->{data});
+	}
+    }
+
+    # return result
+
+    return $result;
+}
+
+
+sub pause
+{
+    my $self = shift;
+
+    # set default result: ok
+
+    my $result = 1;
+
+    # loop over all schedulees
+
+    my $schedule = $self->{schedule};
+
+    foreach my $schedulee (@$schedule)
+    {
+	# tell the schedulee that we are pausing the simulation
+
+	my $success = $schedulee->pause();
+
+	if (!$success)
+	{
+	    die "$0: pause() failed";
+	}
+    }
+
+    # return result
+
+    return $result;
+}
+
+
+sub reconstruct
+{
+    my $self = shift;
+
+    #t go through the history and reconstruct the simulation
+
+    return "SSP::reconstruct() is not implemented yet";
 }
 
 
