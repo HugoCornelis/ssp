@@ -735,6 +735,16 @@ sub pause
 }
 
 
+sub reconstruct
+{
+    my $self = shift;
+
+    #t go through the history and reconstruct the simulation
+
+    return "SSP::reconstruct() is not implemented yet";
+}
+
+
 # sub instantiate_communicators
 # {
 #     my $self = shift;

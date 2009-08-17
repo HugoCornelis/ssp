@@ -47,6 +47,15 @@ sub ssp_load
 	return "*** Error: loading schedule failed: does not match with $modelname";
     }
 
+    # go through the history and reconstruct the simulation
+
+    my $error = $scheduler->reconstruct();
+
+    if ($error)
+    {
+	return $error;
+    }
+
     # register the scheduler
 
     $GENESIS3::schedulers->{$modelname} = $scheduler;
