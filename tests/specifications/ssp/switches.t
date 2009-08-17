@@ -38,6 +38,9 @@ options:
     --emit-output        files to write to stdout after the simulation finishes.
     --emit-schedules     print schedules to stdout instead of running them.
     --help               print usage information.
+    --history            emit a record of the history of the simulation after it finishes.
+    --inject-delay       delay of the current injection protocol.
+    --inject-duration    duration of the current injection protocol.
     --inject-magnitude   amount of current injected into the soma.
     --model-directory    name of the directory where to look for non-std models.
     --model-filename     filename of the model description file \(when using a builtin configuration\).

@@ -460,6 +460,90 @@ solverclasses:
 				arguments => [
 					      '--cell',
 					      'cells/stand_alone.ndf',
+					      '--inject-magnitude',
+					      '2e-8',
+					      '--inject-delay',
+					      '0.01',
+					      '--inject-duration',
+					      '0.03',
+					      '--time',
+					      '0.06',
+					      '--output',
+					      "/stand_alone/segments/soma->Vm",
+					      "--history",
+					     ],
+				command => './bin/ssp',
+				command_tests => [
+						  {
+						   description => "What is the method history when we run a schedule of a single neuron model from the cell builtin schedule, soma Vm output, soma current injection with set duration and simulation time ?",
+						   read => "
+history:
+  - arguments: []
+    method: instantiate_services
+  - arguments: []
+    method: compile
+  - arguments: []
+    method: instantiate_inputs
+  - arguments: []
+    method: instantiate_outputs
+  - arguments: []
+    method: initiate
+  - arguments: []
+    method: optimize
+  - arguments: []
+    method: analyze
+  - arguments:
+      - 0.01
+      - verbose: 0
+    method: advance
+  - arguments:
+      - component_name: /stand_alone/segments/soma
+        field: INJECT
+        modelname: /stand_alone
+        value: 2e-8
+    method: apply_granular_parameters
+  - arguments:
+      - 0.03
+      - verbose: 0
+    method: advance
+  - arguments:
+      - component_name: /stand_alone/segments/soma
+        field: INJECT
+        modelname: /stand_alone
+        value: 0
+    method: apply_granular_parameters
+  - arguments:
+      - 0.02
+      - verbose: 0
+    method: advance
+  - arguments: []
+    method: finish
+",
+						   timeout => 3,
+						  },
+						 ],
+				description => "method history of a simulation of a single neuron model from the cell builtin schedule, soma Vm output, soma current injection with set duration and simulation time",
+				preparation => {
+						description => "No preparation necessary",
+						preparer =>
+						sub
+						{
+						    1;
+						},
+					       },
+				reparation => {
+					       description => "Removing the output from the distribution, needed for distcheck to work properly",
+					       reparer =>
+					       sub
+					       {
+						   `rm output/stand_alone.out && rmdir output`;
+					       },
+					      },
+			       },
+			       {
+				arguments => [
+					      '--cell',
+					      'cells/stand_alone.ndf',
 					      '--debug',
 					      '1',
 					      '--verbose',

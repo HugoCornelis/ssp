@@ -589,6 +589,35 @@ usage: |-
 }
 
 
+sub history
+{
+    my $self = shift;
+
+    my $options = shift || {};
+
+    my $result
+	= [
+	   map
+	   {
+	       my $result = { %$_, };
+
+	       if (%$options)
+	       {
+		   if (!$options->{time_stamps})
+		   {
+		       delete $result->{time_stamp};
+		   }
+	       }
+
+	       $result;
+	   }
+	   @{$self->{history}},
+	  ];
+
+    return $result;
+}
+
+
 sub initiate
 {
     my $self = shift;
@@ -1646,7 +1675,15 @@ sub run
 
 	# register the method and arguments
 
-	push @{$self->{status}->{$method}}, $arguments;
+	#! note: only adding time() if not running the tests
+
+	push
+	    @{$self->{history}},
+	    {
+	     method => $method,
+	     arguments => $arguments,
+	     time_stamp => time(),
+	    };
     }
 }
 
