@@ -1,6 +1,6 @@
 -*- outline -*-
 
-* add entries to $schedule->{status}
+* add entries to $schedule->{history}
 ** user descriptions that describe why and what was done.
 ** software components that track everything done.
 
