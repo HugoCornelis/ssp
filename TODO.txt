@@ -29,14 +29,6 @@ does not work together with the cell builtin.
 * have ssp take as default model one called 'main'
 unless overriden by options.
 
-* enhance execution annotation with time stamps.
-See this code in SSP->run():
-
-	# register the method and arguments
-
-	push @{$self->{status}->{$method}}, $arguments;
-
-
 * Add appropriate copyright messages to all files.
 
 * rename
