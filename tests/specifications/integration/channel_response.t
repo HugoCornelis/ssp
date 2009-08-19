@@ -136,7 +136,7 @@ verbose: ~
 							    application_output_file => 'output/channel_response.out',
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/channel-response.txt",
 							   },
-						   wait => 2,
+						   wait => 4,
 						  },
 						 ],
 				description => "using perfect clamp to obtain a channel response",
