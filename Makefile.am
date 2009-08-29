@@ -33,6 +33,7 @@ CLEANFILES = \
 
 clean-local:
 	$(RM) -rf $(top_srcdir)/docs/html
+	$(RM) -rf $(top_srcdir)/tests/html
 
 show-release-labels:
 	echo "Release information (major-minor-micro): $(RELEASE_MAJOR)-$(RELEASE_MINOR)-$(RELEASE_MICRO)"
@@ -74,8 +75,8 @@ test: check
 html-upload-prepare:
 	( cd tests && ./tests_2_html --introduction introduction.html )
 	rm -fr html/htdocs/neurospaces_project/ssp/
-	mkdir --parents html/htdocs/neurospaces_project/ssp
-	mkdir --parents html/htdocs/neurospaces_project/ssp/html_source
+	mkdir -p html/htdocs/neurospaces_project/ssp
+	mkdir -p html/htdocs/neurospaces_project/ssp/html_source
 	tar cfh - tests/html | ( cd html/htdocs/neurospaces_project/ssp && tar vxf - )
 
 html-upload: html-upload-prepare
@@ -95,4 +96,4 @@ doxygen: doxygen.cfg
 	$(DOXYGEN) doxygen.cfg
 
 docs: doxygen html-upload-prepare
-
+	echo "Generated doxygen docs and regression tests"
