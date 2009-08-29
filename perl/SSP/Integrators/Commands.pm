@@ -93,7 +93,7 @@ sub ssp_save
 
     # reset the schedule
 
-    if ($scheduler->save($filename))
+    if ($scheduler->save($filename, { no_history_time_stamps => 1, }, ))
     {
 	return "*** Error: saving schedule failed ($@)";
     }

@@ -1760,6 +1760,8 @@ sub save
 
     my $filename = shift;
 
+    my $options = shift;
+
     # simplify the schedule to keep important keys only
 
     #t perhaps should use Storable::dclone() here
@@ -1803,6 +1805,18 @@ sub save
 	if (!@{$model->{granular_parameters}})
 	{
 	    delete $model->{granular_parameters};
+	}
+    }
+
+    # process timestamps if requested
+
+    if ($options->{no_history_time_stamps})
+    {
+	my $history = $schedule->{history};
+
+	foreach my $event (@$history)
+	{
+	    delete $event->{time_stamp};
 	}
     }
 
