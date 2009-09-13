@@ -45,7 +45,7 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => 'tests/code/spiker3',
+				command => 'tests/perl/spiker3',
 				command_tests => [
 						  {
 						   description => "Is a single spike reported properly, single source, single spike, multiple targets ?",
