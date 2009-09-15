@@ -953,9 +953,9 @@ sub instantiate_outputs
 
 	my $solver_engine = $self->lookup_solver_engine($solverinfo->{solver});
 
-	# if there is a relay service
+	# if this is a discrete output
 
-	if ($output->{distributor_service})
+	if ($output->{field} eq 'spike')
 	{
 	    #1
 

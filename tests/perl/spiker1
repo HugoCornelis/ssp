@@ -161,11 +161,9 @@ sub main
 				{
 				 component_name => "/$modelname/source/soma/spikegen",
 
-				 # but the connection is relayed over the event_distributor
+				 # but spike fields are relayed over the event_distributor
 
 				 #! note that distributor_services should be possible for continuous valued variables
-
-				 distributor_service => 'event_distributor',
 				 field => 'spike',
 				 outputclass => 'event_2_ascii',
 				},
