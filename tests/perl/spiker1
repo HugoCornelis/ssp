@@ -164,6 +164,7 @@ sub main
 				 # but spike fields are relayed over the event_distributor
 
 				 #! note that distributor_services should be possible for continuous valued variables
+
 				 field => 'spike',
 				 outputclass => 'event_2_ascii',
 				},
