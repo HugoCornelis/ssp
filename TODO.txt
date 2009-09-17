@@ -1,5 +1,19 @@
 -*- outline -*-
 
+* services, solverclasses and events
+** what it should be:
+*** case 1: event delivery to an ascii file
+**** event_2_ascii is an output solver.
+**** heccer is a mathematical solver.
+*** case 2: internal event delivery
+**** event_distributor is a topology solver
+**** event_queuer is an informatics solver
+**** heccer is a mathematical solver.
+**** event_2_ascii is an output solver.
+** current discrepancies:
+*** case 1:
+**** why is there a event_distributor?
+
 * add entries to $schedule->{history}
 ** user descriptions that describe why and what was done.
 ** software components that track everything done.
