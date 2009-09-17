@@ -37,7 +37,7 @@ spike has been generated.
 Add some logic to the output object such that it only emits values
 that are different from 0.
 **** other
-This removes the necessaty to have an event_distributor for case 1.
+This removes the necessity to have an event_distributor for case 1.
 
 * add entries to $schedule->{history}
 ** user descriptions that describe why and what was done.
