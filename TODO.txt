@@ -13,6 +13,14 @@
 ** current discrepancies:
 *** case 1:
 **** why is there a event_distributor?
+The following reasons might be true or not:
+
+1) Because the model container can have only one solver per component.
+That should be solved first: spike fields should be mappable to
+separate solvers.
+
+2) Perhaps also because the output object saves a value for every call
+to its output function.
 
 * add entries to $schedule->{history}
 ** user descriptions that describe why and what was done.
