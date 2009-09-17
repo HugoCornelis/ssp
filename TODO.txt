@@ -28,6 +28,17 @@ separate solvers.
 2) Perhaps also because the output object saves a value for every call
 to its output function.
 
+** suggested solutions:
+*** case 1:
+**** struct MatsEventGenerate
+has a dSpike field that is set to 0 except for those time steps a
+spike has been generated.
+**** output object
+Add some logic to the output object such that it only emits values
+that are different from 0.
+**** other
+This removes the necessaty to have an event_distributor for case 1.
+
 * add entries to $schedule->{history}
 ** user descriptions that describe why and what was done.
 ** software components that track everything done.
