@@ -1,5 +1,11 @@
 -*- outline -*-
 
+* SSP::instantiate_outputs()
+Rather than having $output->{service_name}, we should have the
+service_name on the outputclasses, because solverclasses also have
+service_name.  Likely the same for inputs.  This unifies inputs,
+outputs and solvers more.
+
 * services, solverclasses and events
 ** what it should be:
 *** case 1: event delivery to an ascii file
