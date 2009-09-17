@@ -782,21 +782,10 @@ sub instantiate_inputs
     {
 	# determine the service for this input
 
-	my $service_name;
+	# determine the service for this output
 
-	if (exists $input->{service_name})
-	{
-	    $service_name = $input->{service_name};
-	}
-	else
-	{
-	    #t the service of the first model ...  not really good
-	    #t basically this says that SSP can currently only run one service at a time.
-
-	    my $solverclass = $self->{models}->[0]->{solverclass};
-
-	    $service_name = $self->{solverclasses}->{$solverclass}->{service_name};
-	}
+	my $service_name
+	    = $input->{service_name} || 'model_container';
 
 	# ask the service the solverinfo for this input
 
