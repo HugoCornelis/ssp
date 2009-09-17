@@ -795,7 +795,16 @@ sub instantiate_inputs
 
 	if (!ref $solverinfo)
 	{
-	    die "$0: Failed to construct solver info for the input " . $input->{component_name} . "->" . $input->{field} . " ($solverinfo)";
+	    if ($input->{warn_only})
+	    {
+		warn "$0: *** Warning: Failed to construct solver info for the input " . $input->{component_name} . "->" . $input->{field} . " ($solverinfo): " . $input->{warn_only};
+
+		next;
+	    }
+	    else
+	    {
+		die "$0: Failed to construct solver info for the input " . $input->{component_name} . "->" . $input->{field} . " ($solverinfo)";
+	    }
 	}
 
 	# lookup the solver
