@@ -913,21 +913,8 @@ sub instantiate_outputs
     {
 	# determine the service for this output
 
-	my $service_name;
-
-	if (exists $output->{service_name})
-	{
-	    $service_name = $output->{service_name};
-	}
-	else
-	{
-	    #t the service of the first model ...  not really good
-	    #t basically this says that SSP can currently only run one service at a time.
-
-	    my $solverclass = $self->{models}->[0]->{solverclass};
-
-	    $service_name = $self->{solverclasses}->{$solverclass}->{service_name};
-	}
+	my $service_name
+	    = $output->{service_name} || 'model_container';
 
 	# ask the service the solverinfo for this output
 
