@@ -31,8 +31,8 @@ to its output function.
 ** suggested solutions:
 *** case 1:
 **** struct MatsEventGenerate
-has a dSpike field that is set to 0 except for those time steps a
-spike has been generated.
+Has a dSpike field that is set to 0 except for those time steps a
+spike has been generated.  This field is addressable.
 **** output object
 Add some logic to the output object such that it only emits values
 that are different from 0.
