@@ -1,0 +1,33 @@
+#!/usr/bin/perl -w
+#
+
+use strict;
+
+
+my $test
+    = {
+       command_definitions => [
+			       {
+				arguments => [
+					      '--help',
+					     ],
+				command => './bin/ssp',
+				command_tests => [
+						  {
+						   comment => "This is supposed to be the first test, and is supposed to compile the inline module of the optimized scheduler.  This can take a couple of seconds.",
+						   description => "Can we start the ssp Unix shell command ?",
+						   read => "ssp-userdocs-6",
+						   timeout => 20,
+						  },
+						 ],
+				description => "simple startup",
+			       },
+			      ],
+       description => "starting the Unix shell command",
+       name => '0_startup.t',
+      };
+
+
+return $test;
+
+
