@@ -23,3 +23,8 @@ docs/doxygen.tag
 docs/html
 gz$
 synaptic-test.patch
+.deb$
+.changes$
+.dsc$
+.log$
+

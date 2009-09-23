@@ -18,12 +18,12 @@ dnl ##########################################################################
 AC_PREREQ(2.59)
 
 # $Format: "AC_INIT(${package}, ${label}, ${email})"$
-AC_INIT(ssp, userdocs-6, hugo.cornelis@gmail.com)
+AC_INIT(ssp, b4cee614d722fb2369e1d0c760f72621ca294804-0, hugo.cornelis@gmail.com)
 
 AC_CONFIG_SRCDIR([doxygen.cfg])
 
 # $Format: "AM_INIT_AUTOMAKE(${package}, ${label})"$
-AM_INIT_AUTOMAKE(ssp, userdocs-6)
+AM_INIT_AUTOMAKE(ssp, b4cee614d722fb2369e1d0c760f72621ca294804-0)
 
 PERL_MODULES=`(cd perl && find . -name "*.pm" | perl -pe 's/\n/ /g')`
 AC_SUBST(PERL_MODULES)
