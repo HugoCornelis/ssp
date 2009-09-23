@@ -16,7 +16,7 @@ my $test
 						  {
 						   comment => "This is supposed to be the first test, and is supposed to compile the inline module of the optimized scheduler.  This can take a couple of seconds.",
 						   description => "Can we start the ssp Unix shell command ?",
-						   read => "ssp-userdocs-6",
+						   read => "options:",
 						   timeout => 20,
 						  },
 						 ],
