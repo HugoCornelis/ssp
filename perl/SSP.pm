@@ -174,7 +174,7 @@ $@";
 
     # return success
 
-    return 1;
+    return '';
 
 }
 
@@ -189,7 +189,7 @@ sub apply_granular_parameters
 
     # set default result: ok
 
-    my $result = 1;
+    my $result = '';
 
     # loop over all the runtime_settings
 
@@ -249,7 +249,7 @@ sub compile
 
     # set default result: ok
 
-    my $result = 1;
+    my $result = '';
 
     # construct a schedule
 
@@ -322,16 +322,20 @@ sub compile
 
 	# compile the model
 
-	if (!$engine->compile($self))
+	my $compilation_result = $engine->compile($self);
+
+	if ($compilation_result)
 	{
-	    return 0;
+	    return $compilation_result;
 	}
 
 	# register the schedulee in the service
 
-	if (!$service->{ssp_service}->register_engine($engine, $modelname))
+	my $registration_result = $service->{ssp_service}->register_engine($engine, $modelname);
+
+	if ($registration_result)
 	{
-	    return 0;
+	    return $registration_result;
 	}
 
 	# register the schedulee in the schedule
@@ -471,7 +475,7 @@ sub finish
 
     # set default result: ok
 
-    my $result = 1;
+    my $result = '';
 
     # loop over all schedulees
 
@@ -624,7 +628,7 @@ sub initiate
 
     # set default result: ok
 
-    my $result = 1;
+    my $result = '';
 
     # first update the time
 
@@ -854,7 +858,7 @@ sub instantiate_inputs
 
     # return success
 
-    return 1;
+    return '';
 }
 
 
@@ -1042,7 +1046,7 @@ sub instantiate_outputs
 
     # return success
 
-    return 1;
+    return '';
 }
 
 
@@ -1145,7 +1149,7 @@ $@";
 
     # return success
 
-    return 1;
+    return '';
 }
 
 
@@ -1388,7 +1392,7 @@ sub optimize
 
     # set default result: ok
 
-    my $result = 1;
+    my $result = '';
 
     # first update the time
 
@@ -1437,7 +1441,7 @@ sub pause
 
     # set default result: ok
 
-    my $result = 1;
+    my $result = '';
 
     # loop over all schedulees
 
@@ -1661,11 +1665,11 @@ sub run
 	    print "$0: applying method '$method' to $self->{name}\n";
 	}
 
-	my $success = $object->$method($peer, @$arguments);
+	my $error = $object->$method($peer, @$arguments);
 
-	if (!$success)
+	if ($error)
 	{
-	    die "$0: While running $self->{name}: $method failed";
+	    die "$0: While running $self->{name}: $method failed ($error)";
 	}
 
 	# register the method and arguments
@@ -1826,7 +1830,7 @@ sub shell
 
     my $scheduler = shift;
 
-    my $result = 1;
+    my $result = '';
 
     while (my $options = shift)
     {
@@ -1838,9 +1842,9 @@ sub shell
 
 	    if ($?)
 	    {
-		print "$0: '$command' failed: $?";
+		print "$0: shell '$command' failed: $?";
 
-		$result = 0;
+		$result = "$0: shell '$command' failed: $?";
 	    }
 	}
     }
@@ -1866,7 +1870,7 @@ sub steps
 
     # set default result: ok
 
-    my $result = 1;
+    my $result = '';
 
     # initialize current simulation time
 
@@ -2191,7 +2195,7 @@ sub compile
 
     # set default result: ok
 
-    my $result = 1;
+    my $result = '';
 
     #t do better error checking for this method
 
@@ -2279,7 +2283,7 @@ $@";
     }
     else
     {
-	$result = 0;
+	$result = "error: $engine";
     }
 
     # return result
