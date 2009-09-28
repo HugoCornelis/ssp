@@ -1684,6 +1684,8 @@ sub run
 	     time_stamp => time(),
 	    };
     }
+
+    return undef;
 }
 
 

@@ -3,31 +3,42 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '    my $engine
+                                  'text' => '	my $error = $object->$method($peer, @$arguments);
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '1365'
+                                  'line' => 1668
                                 },
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '	    my $success = $backend->$method($ssp_service, @$arguments);
+                                  'text' => '    if (ref $engine)
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 712
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	my $success = $object->$method($peer, @$arguments);
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 1067
+                                  'line' => '2282'
                                 }
-                              ]
+                              ],
+           '_<./tests/perl/heccer/singlep' => [
+                                                {
+                                                  'expr' => undef,
+                                                  'value' => '1',
+                                                  'text' => '    my $scheduler
+',
+                                                  'fname' => './tests/perl/heccer/singlep',
+                                                  'type' => 'user',
+                                                  'line' => 53
+                                                },
+                                                {
+                                                  'expr' => undef,
+                                                  'value' => '1',
+                                                  'text' => '    $scheduler->run();
+',
+                                                  'fname' => './tests/perl/heccer/singlep',
+                                                  'type' => 'user',
+                                                  'line' => 139
+                                                }
+                                              ]
          };
 $expr_list = [
                {

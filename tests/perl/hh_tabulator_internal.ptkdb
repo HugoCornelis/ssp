@@ -3,22 +3,24 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '	    my $success = $backend->$method($ssp_analyzer, @$arguments);
+                                  'text' => '	my $error = $object->$method($peer, @$arguments);
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 102
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	my $success = $object->$method($peer, @$arguments);
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => '1061'
+                                  'line' => '1668'
                                 }
-                              ]
+                              ],
+           '_<tests/perl/hh_tabulator_internal' => [
+                                                     {
+                                                       'expr' => undef,
+                                                       'value' => '1',
+                                                       'text' => '    $scheduler->run();
+',
+                                                       'fname' => 'tests/perl/hh_tabulator_internal',
+                                                       'type' => 'user',
+                                                       'line' => '196'
+                                                     }
+                                                   ]
          };
 $expr_list = [
                {
