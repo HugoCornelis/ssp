@@ -8,7 +8,7 @@ package SSP::Integrators::Commands;
 use strict;
 
 
-use SSP;
+# use SSP;
 
 
 our $g3_commands
