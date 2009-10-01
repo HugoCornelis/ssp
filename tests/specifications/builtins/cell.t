@@ -522,6 +522,7 @@ history:
 						   timeout => 3,
 						  },
 						 ],
+				comment => 'The --history option removes the time stamps from the output, making it less useful.',
 				description => "method history of a simulation of a single neuron model from the cell builtin schedule, soma Vm output, soma current injection with set duration and simulation time",
 				preparation => {
 						description => "No preparation necessary",
