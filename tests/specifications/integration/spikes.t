@@ -57,6 +57,22 @@ my $test
 				description => "single source, single spike, multiple targets",
 				disabled => 'working on it',
 			       },
+			       {
+				arguments => [
+					     ],
+				command => 'tests/perl/spiker4',
+				command_tests => [
+						  {
+						   comment => "This case is the same as spiker1 above, but without an event_distributor.",
+						   description => "Is a single spike reported properly, single spike ?",
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/spiker1.txt | perl -pe 's/spiker1/unnamed test/g'`),
+						   timeout => 8,
+						   write => undef,
+						  },
+						 ],
+				description => "sodium and potassium channel, single spike (2)",
+				numerical_compare => 'arithmetic rounding differences due to the model container arithmetic',
+			       },
 			      ],
        description => "spiking behaviour",
        name => 'integration/spikes.t',

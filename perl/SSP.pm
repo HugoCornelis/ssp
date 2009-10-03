@@ -1932,7 +1932,7 @@ sub steps
 
 	    if ($error)
 	    {
-		die "$0: scheduling for $steps failed";
+		die "$0: scheduling for $steps failed ($error)";
 	    }
 
 	    # dump
