@@ -62,6 +62,7 @@ my $option_optimize;
 my $option_output_fields = [];
 my $option_parameters = [];
 my $option_perfectclamp;
+my $option_pulsegen_width;
 my $option_set_name;
 my $option_set_outputclass_filename;
 my $option_solverclass = 'heccer';
@@ -536,6 +537,39 @@ sub main
 	    push @{$scheduler->{inputs}}, @$inputs;
 	}
 
+	if (defined $option_pulsegen_width)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Heccer",
+		   options => {
+			       command => $option_pulsegen_width,
+			       name => "pulsegen set to $option_pulsegen",
+			      },
+		   package => "Heccer::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
 	# define an output filename
 
 	my $option_output_directory = './output';
@@ -781,6 +815,7 @@ sub read_cmd_line
 	     "output-fields=s" => $option_output_fields,
 	     "parameters=s" => $option_parameters,
 	     "perfectclamp=s" => \$option_perfectclamp,
+	     "pulsegen-width=s" => \$option_pulsegen_width,
 	     "set-name=s" => \$option_set_name,
 	     "set-outputclass-filename=s" => \$option_set_outputclass_filename,
 	     "solverclass=s" => \$option_solverclass,
@@ -840,6 +875,7 @@ options:
     --outputs            define an output, can be given multiple times.
     --parameters         set a specific parameter value, can be given multiple times.
     --perfectclamp       set the command voltage for the perfect clamp protocol.
+    --pulsegen-width     set the pulse width for the pulsegen protocol.
     --set-name           overwrite the schedule name with the name of the file that contains the schedule.
     --set-outputclass-filename
                          overwrite the outputclass filename with something derived from the name of the
