@@ -546,7 +546,7 @@ sub main
 		   module_name => "Heccer",
 		   options => {
 			       command => $option_pulsegen_width,
-			       name => "pulsegen set to $option_pulsegen",
+			       name => "pulsegen set to $option_pulsegen_width",
 			      },
 		   package => "Heccer::Pulsegen",
 		  };
