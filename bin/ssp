@@ -61,8 +61,15 @@ my $option_neurospaces_studio;
 my $option_optimize;
 my $option_output_fields = [];
 my $option_parameters = [];
-my $option_perfectclamp;
-my $option_pulsegen_width;
+my $option_perfectclamp; 
+my $option_pulsegen_level1;
+my $option_pulsegen_width1;
+my $option_pulsegen_delay1;
+my $option_pulsegen_level2;
+my $option_pulsegen_width2;
+my $option_pulsegen_delay2;
+my $option_pulsegen_baselvel;
+my $option_pulsegen_triggermode;
 my $option_set_name;
 my $option_set_outputclass_filename;
 my $option_solverclass = 'heccer';
@@ -537,7 +544,7 @@ sub main
 	    push @{$scheduler->{inputs}}, @$inputs;
 	}
 
-	if (defined $option_pulsegen_width)
+	if (defined $option_pulsegen_width1)
 	{
 	    my $pulsegen_inputclassname = "pulsegen";
 
@@ -545,8 +552,8 @@ sub main
 		= {
 		   module_name => "Heccer",
 		   options => {
-			       command => $option_pulsegen_width,
-			       name => "pulsegen set to $option_pulsegen_width",
+			       command => $option_pulsegen_width1,
+			       name => "pulsegen set to $option_pulsegen_width1",
 			      },
 		   package => "Heccer::Pulsegen",
 		  };
@@ -815,7 +822,14 @@ sub read_cmd_line
 	     "output-fields=s" => $option_output_fields,
 	     "parameters=s" => $option_parameters,
 	     "perfectclamp=s" => \$option_perfectclamp,
-	     "pulsegen-width=s" => \$option_pulsegen_width,
+	     "pulsegen-level1=s" => \$option_pulsegen_level1,
+	     "pulsegen-width1=s" => \$option_pulsegen_width1,
+	     "pulsegen-delay1=s" => \$option_pulsegen_delay1,
+	     "pulsegen-level2=s" => \$option_pulsegen_level2,
+	     "pulsegen-width2=s" => \$option_pulsegen_width2,
+	     "pulsegen-delay2=s" => \$option_pulsegen_delay2,
+	     "pulsegen-baselevel=s" => \$option_pulsegen_baselvel,
+	     "pulsegen-triggermode=s" => \$option_pulsegen_triggermode,
 	     "set-name=s" => \$option_set_name,
 	     "set-outputclass-filename=s" => \$option_set_outputclass_filename,
 	     "solverclass=s" => \$option_solverclass,
