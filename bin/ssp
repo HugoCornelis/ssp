@@ -13,7 +13,6 @@ BEGIN
     #! make check
 
     push @INC, '../perl';
-
     #! make distcheck
 
     push @INC, '../../perl';
@@ -68,7 +67,7 @@ my $option_pulsegen_delay1;
 my $option_pulsegen_level2;
 my $option_pulsegen_width2;
 my $option_pulsegen_delay2;
-my $option_pulsegen_baselvel;
+my $option_pulsegen_baselevel;
 my $option_pulsegen_triggermode;
 my $option_set_name;
 my $option_set_outputclass_filename;
@@ -577,6 +576,242 @@ sub main
 	    push @{$scheduler->{inputs}}, @$inputs;
 	}
 
+
+	if (defined $option_pulsegen_level1)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Heccer",
+		   options => {
+			       command => $option_pulsegen_level1,
+			       name => "pulsegen set to $option_pulsegen_level1",
+			      },
+		   package => "Heccer::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+	if (defined $option_pulsegen_delay1)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Heccer",
+		   options => {
+			       command => $option_pulsegen_delay1,
+			       name => "pulsegen set to $option_pulsegen_delay1",
+			      },
+		   package => "Heccer::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+	if (defined $option_pulsegen_width2)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Heccer",
+		   options => {
+			       command => $option_pulsegen_width2,
+			       name => "pulsegen set to $option_pulsegen_width2",
+			      },
+		   package => "Heccer::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+
+	if (defined $option_pulsegen_level2)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Heccer",
+		   options => {
+			       command => $option_pulsegen_level2,
+			       name => "pulsegen set to $option_pulsegen_level2",
+			      },
+		   package => "Heccer::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+	if (defined $option_pulsegen_delay2)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Heccer",
+		   options => {
+			       command => $option_pulsegen_delay2,
+			       name => "pulsegen set to $option_pulsegen_delay2",
+			      },
+		   package => "Heccer::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+
+	if (defined $option_pulsegen_baselevel)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Heccer",
+		   options => {
+			       command => $option_pulsegen_baselevel,
+			       name => "pulsegen set to $option_pulsegen_baselevel",
+			      },
+		   package => "Heccer::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+
+	if (defined $option_pulsegen_triggermode)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Heccer",
+		   options => {
+			       command => $option_pulsegen_triggermode,
+			       name => "pulsegen set to $option_pulsegen_triggermode",
+			      },
+		   package => "Heccer::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+
 	# define an output filename
 
 	my $option_output_directory = './output';
@@ -828,7 +1063,7 @@ sub read_cmd_line
 	     "pulsegen-level2=s" => \$option_pulsegen_level2,
 	     "pulsegen-width2=s" => \$option_pulsegen_width2,
 	     "pulsegen-delay2=s" => \$option_pulsegen_delay2,
-	     "pulsegen-baselevel=s" => \$option_pulsegen_baselvel,
+	     "pulsegen-baselevel=s" => \$option_pulsegen_baselevel,
 	     "pulsegen-triggermode=s" => \$option_pulsegen_triggermode,
 	     "set-name=s" => \$option_set_name,
 	     "set-outputclass-filename=s" => \$option_set_outputclass_filename,
@@ -889,7 +1124,14 @@ options:
     --outputs            define an output, can be given multiple times.
     --parameters         set a specific parameter value, can be given multiple times.
     --perfectclamp       set the command voltage for the perfect clamp protocol.
-    --pulsegen-width     set the pulse width for the pulsegen protocol.
+    --pulsegen-width1    set the pulse width for the pulsegen protocol.
+    --pulsegen-level1    set the pulse level for the pulsegen protocol.
+    --pulsegen-delay1    set the pulse delay for the pulsegen protocol.
+    --pulsegen-width2    set the pulse width for the pulsegen protocol.
+    --pulsegen-level2    set the pulse level for the pulsegen protocol.
+    --pulsegen-delay2    set the pulse delay for the pulsegen protocol.
+    --pulsegen-baselevel set the pulse base level for the pulsegen protocol.
+    --pulsegen-triggermode  set the triggermode for the pulsegen protocol.
     --set-name           overwrite the schedule name with the name of the file that contains the schedule.
     --set-outputclass-filename
                          overwrite the outputclass filename with something derived from the name of the
