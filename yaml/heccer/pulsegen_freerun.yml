@@ -23,11 +23,11 @@ inputclasses:
       triggermode: 0
     package: Heccer::Pulsegen
 inputs:
-  - component_name: /PulseGen_1
+  - component_name: /Purkinje/segments/soma
     field: Vm
     inputclass: pulsegen
 models:
-  - modelname: /PulseGen_1
+  - modelname: /Purkinje
     solverclass: heccer
 name: purkinje cell perfect clamp
 outputclasses:
@@ -37,16 +37,16 @@ outputclasses:
       filename: /tmp/output
     package: Heccer::Output
 outputs:
-  - component_name: /PulseGen_1
+  - component_name: /Purkinje/segments/soma
     field: Vm
 services:
   model_container:
     initializers:
       - arguments:
-          - filename: pulsegen/pulsegen1.ndf
+          - filename: cells/purkinje/edsjb1994.ndf
             no-use-library: 1
           -
-            - ssp configuration for edsjb1994
+            - ssp configuration for edsjb1994 using pulsegen
             - -R
             - -A
         method: load
