@@ -52,7 +52,14 @@ options:
     --outputs            define an output, can be given multiple times.
     --parameters         set a specific parameter value, can be given multiple times.
     --perfectclamp       set the command voltage for the perfect clamp protocol.
-    --pulsegen-width     set the pulse width for the pulsegen protocol.
+    --pulsegen-width1    set the pulse width for the pulsegen protocol.
+    --pulsegen-level1    set the pulse level for the pulsegen protocol.
+    --pulsegen-delay1    set the pulse delay for the pulsegen protocol.
+    --pulsegen-width2    set the pulse width for the pulsegen protocol.
+    --pulsegen-level2    set the pulse level for the pulsegen protocol.
+    --pulsegen-delay2    set the pulse delay for the pulsegen protocol.
+    --pulsegen-baselevel set the pulse base level for the pulsegen protocol.
+    --pulsegen-triggermode  set the triggermode for the pulsegen protocol.
     --set-name           overwrite the schedule name with the name of the file that contains the schedule.
     --set-outputclass-filename
                          overwrite the outputclass filename with something derived from the name of the
