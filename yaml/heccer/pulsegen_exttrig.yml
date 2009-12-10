@@ -3,7 +3,7 @@ apply:
   results:
     - arguments:
         - commands:
-            - perl -e 'my $result = [ `cat /tmp/output`, ]'
+            - perl -e 'my $result = [ `cat /tmp/output`, ]; foreach (1..25) { print $result->[$_ * 1000 - 1] }'
       method: shell
   simulation:
     - arguments:
@@ -20,7 +20,7 @@ inputclasses:
       width2: 5.0
       delay2: 8.0
       baselevel: 10.0
-      triggermode: 0
+      triggermode: 1
     package: Heccer::PulseGen
 inputs:
   - component_name: /Purkinje/segments/soma
