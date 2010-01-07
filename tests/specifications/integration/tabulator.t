@@ -20,7 +20,7 @@ my $test
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
 						   read => [ '-re', 'table index is 0(.|
-)*?Heccer::Tabulator::Result
+)*
 A:
   - 22.5694792145875
   - 74.6294414550961
@@ -50,7 +50,7 @@ hi:
   step: 0.015
 (.|
 )*table index is 1(.|
-)*?Heccer::Tabulator::Result
+)*
 A:
   - 313.718234923665
   - 148.190001162887
@@ -92,7 +92,7 @@ hi:
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
 						   read => [ '-re', 'table index is 0(.|
-)*?Heccer::Tabulator::Result
+)*
 A:
   - 22.5694792145875
   - 74.6294414550961
@@ -122,7 +122,7 @@ hi:
   step: 0.015
 (.|
 )*table index is 1(.|
-)*?Heccer::Tabulator::Result
+)*
 A:
   - 313.718234923665
   - 148.190001162887
@@ -164,7 +164,7 @@ hi:
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
 						   read => [ '-re', 'table index is 0(.|
-)*?Heccer::Tabulator::Result
+)*
 A:
   - 22.5694792145875
   - 74.6294414550961
@@ -216,7 +216,7 @@ tau:
   - 0.000124775438517893
 (.|
 )*table index is 1(.|
-)*?Heccer::Tabulator::Result
+)*
 A:
   - 313.718234923665
   - 148.190001162887
@@ -280,7 +280,7 @@ tau:
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
 						   read => [ '-re', 'table index is 0(.|
-)*?Heccer::Tabulator::Result
+)*
 A:
   - 22.5694792145875
   - 74.6294414550961
@@ -332,7 +332,7 @@ hi:
   step: 0.015
 (.|
 )*table index is 1(.|
-)*?Heccer::Tabulator::Result
+)*
 A:
   - 313.718234923665
   - 148.190001162887
