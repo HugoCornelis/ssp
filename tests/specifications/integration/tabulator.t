@@ -19,8 +19,8 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
-						   read => [ '-re', 'table index is 0(.|
-)*
+						   read => '
+--- !!perl/hash:Heccer::Tabulator::Result
 A:
   - 22.5694792145875
   - 74.6294414550961
@@ -48,9 +48,7 @@ hi:
   end: 0.05
   start: -0.1
   step: 0.015
-(.|
-)*table index is 1(.|
-)*
+--- !!perl/hash:Heccer::Tabulator::Result
 A:
   - 313.718234923665
   - 148.190001162887
@@ -78,8 +76,7 @@ hi:
   end: 0.05
   start: -0.1
   step: 0.015
-', ],
-						   write => undef,
+',
 						  },
 						 ],
 				description => "high level querying of gate tables, heccer internal format",
@@ -91,8 +88,8 @@ hi:
 				command_tests => [
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
-						   read => [ '-re', 'table index is 0(.|
-)*
+						   read => '
+--- !!perl/hash:Heccer::Tabulator::Result
 A:
   - 22.5694792145875
   - 74.6294414550961
@@ -120,9 +117,7 @@ hi:
   end: 0.05
   start: -0.1
   step: 0.015
-(.|
-)*table index is 1(.|
-)*
+--- !!perl/hash:Heccer::Tabulator::Result
 A:
   - 313.718234923665
   - 148.190001162887
@@ -150,8 +145,7 @@ hi:
   end: 0.05
   start: -0.1
   step: 0.015
-', ],
-						   write => undef,
+',
 						  },
 						 ],
 				description => "high level querying of gate tables, A-B format",
@@ -163,8 +157,8 @@ hi:
 				command_tests => [
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
-						   read => [ '-re', 'table index is 0(.|
-)*
+						   read => '
+--- !!perl/hash:Heccer::Tabulator::Result
 A:
   - 22.5694792145875
   - 74.6294414550961
@@ -214,9 +208,7 @@ tau:
   - 0.000196234892571856
   - 0.000152981482337636
   - 0.000124775438517893
-(.|
-)*table index is 1(.|
-)*
+--- !!perl/hash:Heccer::Tabulator::Result
 A:
   - 313.718234923665
   - 148.190001162887
@@ -266,8 +258,7 @@ tau:
   - 0.00100942877175295
   - 0.00100169787127957
   - 0.00100018548674793
-', ],
-						   write => undef,
+',
 						  },
 						 ],
 				description => "high level querying of gate tables, steadystate-tau format",
@@ -279,8 +270,8 @@ tau:
 				command_tests => [
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
-						   read => [ '-re', 'table index is 0(.|
-)*
+						   read => '
+--- !!perl/hash:Heccer::Tabulator::Result
 A:
   - 22.5694792145875
   - 74.6294414550961
@@ -330,9 +321,7 @@ hi:
   end: 0.05
   start: -0.1
   step: 0.015
-(.|
-)*table index is 1(.|
-)*
+--- !!perl/hash:Heccer::Tabulator::Result
 A:
   - 313.718234923665
   - 148.190001162887
@@ -382,8 +371,7 @@ hi:
   end: 0.05
   start: -0.1
   step: 0.015
-', ],
-						   write => undef,
+',
 						  },
 						 ],
 				description => "high level querying of gate tables, alpha-beta format",
