@@ -21,6 +21,8 @@ Tutil.pm
 _Inline
 docs/doxygen.tag
 docs/html
+docs/man
+docs/rtf
 gz$
 synaptic-test.patch
 .deb$
