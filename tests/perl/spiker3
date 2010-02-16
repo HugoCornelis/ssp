@@ -120,6 +120,7 @@ sub main
 				},
 		    solverclasses => {
 				      heccer => {
+						 compile_priority => 'numerical',
 						 constructor_settings => {
 									  dStep => (1e-6),
 									  configuration => {
@@ -140,6 +141,7 @@ sub main
 						 service_name => 'model_container',
 						},
 				      event_distributor => {
+							    compile_priority => 'events',
 							    initializers => [
 									     {
 									      arguments => [],
@@ -150,6 +152,7 @@ sub main
 							    package => 'Heccer::DES',
 							   },
 				      event_queuer => {
+						       compile_priority => 'events',
 						       initializers => [
 									{
 									 arguments => [],

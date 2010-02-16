@@ -261,7 +261,27 @@ sub compile
 
     my $models = $self->{models};
 
-    foreach my $model (@$models)
+    #t models must be sorted according to their solverclasses:
+    #t first numerical solvers phase 1: internals, then event processors, then numerical solvers phase 2: externals.
+
+    my $compile_priorities
+	= {
+	   events => 3,
+	   numerical => 1,
+	  };
+
+    foreach my $model (
+		       # sorted by solver class priority
+
+		       sort
+		       {
+			   my $compile_priority1 = $solverclasses->{$a->{solverclass}}->{compile_priority} || -1;
+
+			   my $compile_priority2 = $solverclasses->{$b->{solverclass}}->{compile_priority} || 0;
+
+			   $compile_priorities->{$compile_priority1} <=> $compile_priorities->{$compile_priority2}
+		       }
+		       @$models)
     {
 	my $modelname = $model->{modelname};
 
