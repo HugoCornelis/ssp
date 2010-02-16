@@ -255,16 +255,25 @@ sub compile
 
     my $schedule = $self->{schedule} || [];
 
-    # loop over all models
+    # assign a compile priority to each model
 
     my $solverclasses = $self->{solverclasses};
 
     my $models = $self->{models};
 
-    #t models must be sorted according to their solverclasses:
-    #t first numerical solvers phase 1: internals, then event processors, then numerical solvers phase 2: externals.
+    foreach my $model (@$models)
+    {
+	if (!defined $solverclasses->{$model->{solverclass}}->{compilation_priority})
+	{
+	    # and the default is numerical (solver)
 
-    my $compile_priorities
+	    $solverclasses->{$model->{solverclass}}->{compilation_priority} = 'numerical';
+	}
+    }
+
+    # loop over all models
+
+    my $compilation_priorities
 	= {
 	   events => 3,
 	   numerical => 1,
@@ -275,11 +284,11 @@ sub compile
 
 		       sort
 		       {
-			   my $compile_priority1 = $solverclasses->{$a->{solverclass}}->{compile_priority} || -1;
+			   my $compilation_priority1 = $solverclasses->{$a->{solverclass}}->{compilation_priority};
 
-			   my $compile_priority2 = $solverclasses->{$b->{solverclass}}->{compile_priority} || 0;
+			   my $compilation_priority2 = $solverclasses->{$b->{solverclass}}->{compilation_priority};
 
-			   $compile_priorities->{$compile_priority1} <=> $compile_priorities->{$compile_priority2}
+			   $compilation_priorities->{$compilation_priority1} <=> $compilation_priorities->{$compilation_priority2}
 		       }
 		       @$models)
     {
