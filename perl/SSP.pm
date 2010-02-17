@@ -255,6 +255,14 @@ sub compile
 
     my $schedule = $self->{schedule} || [];
 
+    # define the compilation_priorities
+
+    my $compilation_priorities
+	= {
+	   events => 3,
+	   numerical => 1,
+	  };
+
     # assign a compile priority to each model
 
     my $solverclasses = $self->{solverclasses};
@@ -272,12 +280,6 @@ sub compile
     }
 
     # loop over all models
-
-    my $compilation_priorities
-	= {
-	   events => 3,
-	   numerical => 1,
-	  };
 
     foreach my $model (
 		       # sorted by solver class priority
@@ -375,6 +377,37 @@ sub compile
     # register the schedule
 
     $self->{schedule} = $schedule;
+
+    # return result
+
+    return $result;
+}
+
+
+#
+# connect()
+#
+# Connect the numerical solvers and the event processors.
+#
+
+sub connect
+{
+    my $self = shift;
+
+    # set default result: ok
+
+    my $result = '';
+
+    # loop over all schedulees
+
+    my $schedule = $self->{schedule};
+
+    foreach my $schedulee (@$schedule)
+    {
+	# connect the schedulee
+
+	$schedulee->connect($self);
+    }
 
     # return result
 
@@ -2318,6 +2351,28 @@ $@";
     {
 	$result = "error: $engine";
     }
+
+    # return result
+
+    return $result;
+}
+
+
+sub connect
+{
+    my $self = shift;
+
+    my $scheduler = shift;
+
+    # set default result: ok
+
+    my $result = '';
+
+    # connect this solver
+
+    my $backend = $self->{backend};
+
+    $backend->connect($scheduler);
 
     # return result
 
