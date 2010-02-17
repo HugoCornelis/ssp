@@ -1774,6 +1774,7 @@ sub salvage
 	       initializers => {
 				default => [
 					    { method => 'compile', },
+					    { method => 'connect', },
 					    { method => 'instantiate_inputs', },
 					    { method => 'instantiate_outputs', },
 					    { method => 'initiate', },

@@ -42,6 +42,7 @@ application_classes:
   initializers:
     default:
       - method: compile
+      - method: connect
       - method: instantiate_inputs
       - method: instantiate_outputs
       - method: initiate
@@ -134,6 +135,7 @@ application_classes:
   initializers:
     default:
       - method: compile
+      - method: connect
       - method: instantiate_inputs
       - method: instantiate_outputs
       - method: initiate
@@ -229,6 +231,7 @@ application_classes:
   initializers:
     default:
       - method: compile
+      - method: connect
       - method: instantiate_inputs
       - method: instantiate_outputs
       - method: initiate
@@ -330,6 +333,7 @@ application_classes:
   initializers:
     default:
       - method: compile
+      - method: connect
       - method: instantiate_inputs
       - method: instantiate_outputs
       - method: initiate
@@ -482,6 +486,8 @@ history:
     method: instantiate_services
   - arguments: []
     method: compile
+  - arguments: []
+    method: connect
   - arguments: []
     method: instantiate_inputs
   - arguments: []
