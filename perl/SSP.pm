@@ -406,7 +406,12 @@ sub connect
     {
 	# connect the schedulee
 
-	$schedulee->connect($self);
+	my $success = $schedulee->connect($self);
+
+	if (!$success)
+	{
+	    die "$0: connect failed";
+	}
     }
 
     # return result
@@ -2317,7 +2322,7 @@ $@";
     my $package = $self->{package} || $solver_module;
 
     my $engine
-	= $solver_module->new
+	= $package->new
 	    (
 	     {
 	      #t can create a circular reference but is convenient, not sure
@@ -2367,13 +2372,13 @@ sub connect
 
     # set default result: ok
 
-    my $result = '';
+    my $result = 1;
 
     # connect this solver
 
     my $backend = $self->{backend};
 
-    $backend->connect($scheduler);
+    $result = $backend->connect($scheduler);
 
     # return result
 

@@ -3,55 +3,50 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '	if ($@)
+                                  'text' => '	my $error = $object->$method($peer, @$arguments);
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '365'
+                                  'line' => 1730
                                 },
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '	if (!$success)
+                                  'text' => '	my $service = $self->{services}->{$solverclasses->{$solverclass}->{service_name}};
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 522
+                                  'line' => '301'
                                 },
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '	if (!$engine->compile($self))
+                                  'text' => '	if (!ref($object_name))
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '117'
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	my $success = $self->$method(@$arguments);
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 520
+                                  'line' => 1688
                                 }
                               ],
            '_<tests/perl/spiker3' => [
                                        {
                                          'expr' => undef,
                                          'value' => '1',
-                                         'text' => '    $scheduler->run();
+                                         'text' => 'main();
 ',
                                          'fname' => 'tests/perl/spiker3',
                                          'type' => 'user',
-                                         'line' => 142
+                                         'line' => 196
                                        }
                                      ]
          };
 $expr_list = [
                {
                  'expr' => '$method',
+                 'depth' => -1
+               },
+               {
+                 'expr' => '$modelname',
                  'depth' => -1
                }
              ];

@@ -92,6 +92,10 @@ sub main
 				modelname => "/$modelname/target2",
 				solverclass => "heccer",
 			       },
+			       {
+				modelname => "/$modelname/projection1",
+				solverclass => "des",
+			       },
 			      ],
 		    name => $modelname,
 		    outputclasses => {
@@ -140,28 +144,33 @@ sub main
 						 module_name => 'Heccer',
 						 service_name => 'model_container',
 						},
-				      event_distributor => {
-							    compile_priority => 'events',
-							    initializers => [
-									     {
-									      arguments => [],
-									      method => 'add_distributor',
-									     },
-									    ],
-							    module_name => 'Heccer',
-							    package => 'Heccer::DES',
-							   },
-				      event_queuer => {
-						       compile_priority => 'events',
-						       initializers => [
-									{
-									 arguments => [],
-									 method => 'add_queuer',
-									},
-								       ],
-						       module_name => 'Heccer',
-						       package => 'Heccer::DES',
-						      },
+# 				      event_distributor => {
+# 							    compile_priority => 'events',
+# 							    initializers => [
+# 									     {
+# 									      arguments => [],
+# 									      method => 'add_distributor',
+# 									     },
+# 									    ],
+# 							    module_name => 'Heccer',
+# 							    package => 'Heccer::DES',
+# 							   },
+# 				      event_queuer => {
+# 						       compile_priority => 'events',
+# 						       initializers => [
+# 									{
+# 									 arguments => [],
+# 									 method => 'add_queuer',
+# 									},
+# 								       ],
+# 						       module_name => 'Heccer',
+# 						       package => 'Heccer::DES',
+# 						      },
+				      des => {
+					      module_name => 'Heccer',
+					      package => 'Heccer::DES',
+					      service_name => 'model_container',
+					     },
 				     },
 		   },
 		  );
