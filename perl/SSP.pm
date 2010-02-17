@@ -300,12 +300,12 @@ sub compile
 
 	my $service = $self->{services}->{$solverclasses->{$solverclass}->{service_name}};
 
-	my $event_distributor
-	    = (
-	       defined $solverclasses->{$solverclass}->{event_distributor_name}
-	       ? $self->{services}->{$solverclasses->{$solverclass}->{event_distributor_name}}
-	       : undef
-	      );
+# 	my $event_distributor
+# 	    = (
+# 	       defined $solverclasses->{$solverclass}->{event_distributor_name}
+# 	       ? $self->{services}->{$solverclasses->{$solverclass}->{event_distributor_name}}
+# 	       : undef
+# 	      );
 
 	# apply the conceptual parameter settings to the model
 
@@ -340,7 +340,7 @@ sub compile
 	my $options
 	    = {
 	       %$solverclass_options,
-	       event_distributor => $event_distributor,
+# 	       event_distributor => $event_distributor,
 	       modelname => $modelname,
 	       solverclass => $solverclass,
 	       service => $service,
@@ -2273,7 +2273,7 @@ sub compile
 
     my $service_name = $self->{service_name};
 
-    my $event_distributor_name = $self->{event_distributor_name};
+#     my $event_distributor_name = $self->{event_distributor_name};
 
     my $solver_module = $self->{module_name};
 
@@ -2285,10 +2285,10 @@ sub compile
 
     my $service_backend = $service->backend();
 
-    my $event_distributor = $self->{event_distributor}->{ssp_service};
+#     my $event_distributor = $self->{event_distributor}->{ssp_service};
 
-    my $event_distributor_backend
-	= $event_distributor && $event_distributor->backend();
+#     my $event_distributor_backend
+# 	= $event_distributor && $event_distributor->backend();
 
     eval
     {
@@ -2332,10 +2332,10 @@ $@";
 			       service_backend => $service_backend,
 			       modelname => $modelname,
 			      },
-	      event_distributor => {
-				    event_distributor_name => $event_distributor_name,
-				    event_distributor_backend => $event_distributor_backend,
-				   },
+# 	      event_distributor => {
+# 				    event_distributor_name => $event_distributor_name,
+# 				    event_distributor_backend => $event_distributor_backend,
+# 				   },
 	     },
 	    );
 
