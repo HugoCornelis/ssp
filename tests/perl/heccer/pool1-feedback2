@@ -233,7 +233,6 @@ sub main
 									  dStep => (1e-6),
 									 },
 						 module_name => 'Heccer',
-						 package => 'Heccer::Intermediary::Compiler',
 						 service_name => 'heccer_intermediary',
 						},
 				     },

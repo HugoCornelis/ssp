@@ -41,6 +41,7 @@ application_classes:
   initializers:
     default:
       - method: compile
+      - method: connect
       - method: instantiate_inputs
       - method: instantiate_outputs
       - method: initiate
@@ -131,7 +132,7 @@ verbose: ~
 				command => 'bin/ssp',
 				command_tests => [
 						  {
-						   description => "What does a schedule look like when we apply a perfect clamp to obtain a channel's response ?",
+						   description => "What is the current and conductance output of this simulation ?",
 						   read => {
 							    application_output_file => 'output/channel_response.out',
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/channel-response.txt",
@@ -139,10 +140,10 @@ verbose: ~
 						   wait => 4,
 						  },
 						 ],
-				description => "using perfect clamp to obtain a channel response",
+				description => "current and conductance output of this simulation",
 			       },
 			      ],
-       description => "Using perfect clamp to obtain a channel response",
+       description => "using perfect clamp to obtain a channel response",
        name => 'integration/channel_response.t',
       };
 

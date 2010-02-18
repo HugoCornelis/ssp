@@ -197,7 +197,6 @@ sub main
 		    solverclasses => {
 				      heccer => {
 						 module_name => 'Heccer',
-						 package => 'Heccer::Intermediary::Compiler',
 						 service_name => 'heccer_intermediary',
 						},
 				     },

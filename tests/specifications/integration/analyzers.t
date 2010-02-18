@@ -24,6 +24,7 @@ my $test
 						  {
 						   description => "What does a schedule look like when we use the Heccer dumper for an analyzer ?",
 						   read => '
+--- !!perl/hash:SSP
 analyzers:
   dumper:
     initializers:
@@ -44,6 +45,7 @@ application_classes:
   initializers:
     default:
       - method: compile
+      - method: connect
       - method: instantiate_inputs
       - method: instantiate_outputs
       - method: initiate
