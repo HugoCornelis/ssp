@@ -14,12 +14,11 @@ my $test
        command_definitions => [
 			       {
 				arguments => [
-					      "$::config->{core_directory}/heccer/pulsegen_freerun.yml",
+					      "$::config->{core_directory}/yaml/heccer/pulsegen_freerun.yml",
 					     ],
 				command => 'bin/ssp',
 				command_tests => [
 						  {
-						   disabled => "Still working on this",
 						   description => "Can we perform a pulsegen on a basic compartment in free run mode ?",
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-perfectclamp.txt`),
 						   timeout => 300,
@@ -32,12 +31,11 @@ my $test
 
 			       {
 				arguments => [
-					      "$::config->{core_directory}/heccer/pulsegen_exttrig.yml",
+					      "$::config->{core_directory}/yaml/heccer/pulsegen_exttrig.yml",
 					     ],
 				command => 'bin/ssp',
 				command_tests => [
 						  {
-						   disabled => "Still working on this",
 						   description => "Can we perform a pulsegen on a basic compartment in ext trigger mode ?",
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-perfectclamp.txt`),
 						   timeout => 300,
@@ -50,12 +48,11 @@ my $test
 
 			       {
 				arguments => [
-					      "$::config->{core_directory}/heccer/pulsegen_extgate.yml",
+					      "$::config->{core_directory}/yaml/heccer/pulsegen_extgate.yml",
 					     ],
 				command => 'bin/ssp',
 				command_tests => [
 						  {
-						   disabled => "Still working on this",
 						   description => "Can we perform a pulsegen on a basic compartment in ext gate mode ?",
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-perfectclamp.txt`),
 						   timeout => 300,
