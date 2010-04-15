@@ -1121,7 +1121,7 @@ options:
     --neurospaces-studio replace the simulation routine with calls to the neurospaces studio,
                          this allows to explore the model after all modifiers have completed.
     --optimize           turn on the schedule optimizer.
-    --outputs            define an output, can be given multiple times.
+    --output-fields      define an output, can be given multiple times.
     --parameters         set a specific parameter value, can be given multiple times.
     --perfectclamp       set the command voltage for the perfect clamp protocol.
     --pulsegen-width1    set the pulse width for the pulsegen protocol.
