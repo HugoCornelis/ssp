@@ -20,7 +20,8 @@ my $test
 				command_tests => [
 						  {
 						   description => "Can we perform a pulsegen on a basic compartment in free run mode ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-perfectclamp.txt`),
+						   application_output_file => '/tmp/output',
+						   expected_output_file => '$::config->{core_directory}/tests/specifications/strings/pulse0.txt',
 						   timeout => 300,
 						   write => undef,
 						  },
@@ -37,7 +38,8 @@ my $test
 				command_tests => [
 						  {
 						   description => "Can we perform a pulsegen on a basic compartment in ext trigger mode ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-perfectclamp.txt`),
+						   application_output_file => '/tmp/output',
+						   expected_output_file => '$::config->{core_directory}/tests/specifications/strings/pulse1.txt',
 						   timeout => 300,
 						   write => undef,
 						  },
@@ -54,7 +56,8 @@ my $test
 				command_tests => [
 						  {
 						   description => "Can we perform a pulsegen on a basic compartment in ext gate mode ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-perfectclamp.txt`),
+						   application_output_file => '/tmp/output',
+						   expected_output_file => '$::config->{core_directory}/tests/specifications/strings/pulse2.txt',
 						   timeout => 300,
 						   write => undef,
 						  },
