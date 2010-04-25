@@ -16,7 +16,8 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/yaml/heccer/pulsegen_freerun.yml",
 					     ],
-				command => 'bin/ssp',
+# 				command => 'bin/ssp',
+				command => '/usr/local/bin/model-container',
 				command_tests => [
 						  {
 						   description => "Can we perform a pulsegen on a basic compartment in free run mode ?",
@@ -33,7 +34,8 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/yaml/heccer/pulsegen_exttrig.yml",
 					     ],
-				command => 'bin/ssp',
+# 				command => 'bin/ssp',
+				command => '/usr/local/bin/model-container',
 				command_tests => [
 						  {
 						   description => "Can we perform a pulsegen on a basic compartment in ext trigger mode ?",
@@ -50,7 +52,8 @@ my $test
 				arguments => [
 					      "$::config->{core_directory}/yaml/heccer/pulsegen_extgate.yml",
 					     ],
-				command => 'bin/ssp',
+# 				command => 'bin/ssp',
+				command => '/usr/local/bin/model-container',
 				command_tests => [
 						  {
 						   description => "Can we perform a pulsegen on a basic compartment in ext gate mode ?",
