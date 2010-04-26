@@ -13,6 +13,7 @@ my $test
     = {
        command_definitions => [
 			       {
+				disabled => "fixing numerical error",
 				arguments => [
 					      "$::config->{core_directory}/yaml/heccer/pulsegen_freerun.yml",
 					     ],
@@ -28,10 +29,28 @@ my $test
 						  },
 						 ],
 				description => "pulsegen on a basic compartment, free run mode",
+				preparation => {
+						description => "Delete the output file",
+						preparer =>
+						sub
+						{
+						    `rm -f /tmp/output`;
+						},
+					       },
+				reparation => {
+					       description => "Remove the generated output files in the results directory",
+					       reparer =>
+					       sub
+					       {
+ 						   `rm -f /tmp/out`;
+					       },
+					      },
 			       },
 
 
 			       {
+
+				disabled => "fixing numerical error",
 				arguments => [
 					      "$::config->{core_directory}/yaml/heccer/pulsegen_exttrig.yml",
 					     ],
@@ -47,10 +66,28 @@ my $test
 						  },
 						 ],
 				description => "pulsegen on a basic compartment, ext trigger mode",
+				preparation => {
+						description => "Delete the output file",
+						preparer =>
+						sub
+						{
+						    `rm -f /tmp/output`;
+						},
+					       },
+				reparation => {
+					       description => "Remove the generated output files in the results directory",
+					       reparer =>
+					       sub
+					       {
+ 						   `rm -f /tmp/out`;
+					       },
+					      },
 			       },
 
 
 			       {
+
+				disabled => "fixing numerical error",
 				arguments => [
 					      "$::config->{core_directory}/yaml/heccer/pulsegen_extgate.yml",
 					     ],
@@ -66,6 +103,22 @@ my $test
 						  },
 						 ],
 				description => "pulsegen on a basic compartment, ext gate mode",
+				preparation => {
+						description => "Delete the output file",
+						preparer =>
+						sub
+						{
+						    `rm -f /tmp/output`;
+						},
+					       },
+				reparation => {
+					       description => "Remove the generated output files in the results directory",
+					       reparer =>
+					       sub
+					       {
+ 						   `rm -f /tmp/out`;
+					       },
+					      },
 			       },
 
 			      ],
