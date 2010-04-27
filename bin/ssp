@@ -24,6 +24,19 @@ BEGIN
     #! after install
 
     push @INC, '/usr/local/glue/swig/perl';
+
+    # check for ".genesis3" directory. If not present we create
+    # it and set a directory for perl inline code. 
+    my $inline_path = "$ENV{HOME}/.genesis3/ssp/InlineCode";
+    if(! -e $inline_path)
+    {
+      use File::Path;
+
+      &File::Path::mkpath($inline_path);
+    }
+
+    $ENV{PERL_INLINE_DIRECTORY} = $inline_path;
+
 }
 
 

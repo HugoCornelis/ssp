@@ -34,6 +34,7 @@ CLEANFILES = \
 clean-local:
 	$(RM) -rf $(top_srcdir)/docs/html
 	$(RM) -rf $(top_srcdir)/tests/html
+	$(RM) -rf ~/.genesis3/ssp/InlinePerlCode
 
 show-release-labels:
 	echo "Release information (major-minor-micro): $(RELEASE_MAJOR)-$(RELEASE_MINOR)-$(RELEASE_MICRO)"
