@@ -35,6 +35,7 @@ options:
                          so be cautious with it.
     --debug              set to a string of the debugging package, 1 for a default of SSP::Debug.
     --dump               install dumpers for analyzers.
+    --dump-tables        also dump discretized tables when dumping internal state.
     --emit-output        files to write to stdout after the simulation finishes.
     --emit-schedules     print schedules to stdout instead of running them.
     --help               print usage information.
@@ -75,7 +76,6 @@ options:
 ',
 							   ],
 						   timeout => 3,
-						   write => undef,
 						  },
 						 ],
 				description => "help message",
@@ -114,7 +114,6 @@ cell:
 	--steps sets number of steps
 ', ],
 						   timeout => 3,
-						   write => undef,
 						  },
 						 ],
 				description => "builtin configuration message",
