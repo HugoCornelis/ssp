@@ -59,7 +59,7 @@ my $option_configuration_cell;
 my $option_daemonize;
 my $option_debug;
 my $option_dump;
-my $option_dump_tables;
+my $option_dump_extended;
 my $option_emit_output = [];
 my $option_emit_schedules;
 my $option_history;
@@ -313,6 +313,27 @@ sub main
 
 	if ($option_dump)
 	{
+	    no warnings;
+
+	    my $extended_dump_selection
+		= ($SwiggableHeccer::HECCER_DUMP_INDEXERS_SUMMARY
+		   + $SwiggableHeccer::HECCER_DUMP_INDEXERS_STRUCTURE
+		   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_COMPARTMENTS_PARAMETERS
+		   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_COMPARTMENT_SUMMARY
+		   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_MECHANISM_SUMMARY
+		   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_STRUCTURE
+		   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_SUMMARY
+		   + $SwiggableHeccer::HECCER_DUMP_TABLE_GATE_SUMMARY
+		   + $SwiggableHeccer::HECCER_DUMP_TABLE_GATE_TABLES
+		   + $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
+		   + $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX_DIAGONALS
+		   + $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
+		   + $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
+		   + $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
+		   + $SwiggableHeccer::HECCER_DUMP_VM_CHANNEL_POOL_FLUXES
+		   + $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+		   + $SwiggableHeccer::HECCER_DUMP_VM_AGGREGATORS);
+
 	    $scheduler->{analyzers}
 		= {
 		   dumper => {
@@ -320,17 +341,22 @@ sub main
 			      package => 'Heccer::Dumper',
 			      initializers => [
 					       {
-						arguments => [ { source => "model_container::/$option_model_name", }, ],
+						arguments => [
+							      { source => "model_container::/$option_model_name", },
+
+							      #! If I am correct, the next arguments are FILE* (undef for NULL), and dump selection
+
+							      undef,
+
+							      ($option_dump_extended
+							       ? $extended_dump_selection
+							       : undef),
+							     ],
 						method => 'dump',
 					       },
 					      ],
 			     },
 		  };
-
-	    if ($option_dump_tables)
-	    {
-		
-	    }
 	}
 
 	# process service options
@@ -1060,7 +1086,7 @@ sub read_cmd_line
 	     "daemonize!" => \$option_daemonize,
 	     "debug=s" => \$option_debug,
 	     "dump!" => \$option_dump,
-	     "dump-tables!", => \$option_dump_tables,
+	     "dump-extended!", => \$option_dump_extended,
 	     "emit-output=s" => $option_emit_output,
 	     "emit-schedules!" => \$option_emit_schedules,
 	     "help!" => \$option_help,
@@ -1127,7 +1153,7 @@ options:
                          so be cautious with it.
     --debug              set to a string of the debugging package, 1 for a default of SSP::Debug.
     --dump               install dumpers for analyzers.
-    --dump-tables        also dump discretized tables when dumping internal state.
+    --dump-extended      dump more, also dumps discretized tables ao.
     --emit-output        files to write to stdout after the simulation finishes.
     --emit-schedules     print schedules to stdout instead of running them.
     --help               print usage information.
