@@ -26,6 +26,8 @@ analyzers:
     initializers:
       - arguments:
           - source: model_container::/channel_response
+          - ~
+          - ~
         method: dump
     module_name: Heccer
     package: Heccer::Dumper

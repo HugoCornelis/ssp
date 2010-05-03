@@ -23,13 +23,17 @@ my $test
 				command_tests => [
 						  {
 						   description => "What does a schedule look like when we use the Heccer dumper for an analyzer ?",
-						   read => '
+						   read => [
+							    '-re',
+							    '
 --- !!perl/hash:SSP
 analyzers:
   dumper:
     initializers:
       - arguments:
           - source: model_container::/singlep
+          - ~
+          - ~
         method: dump
     module_name: Heccer
     package: Heccer::Dumper
@@ -52,17 +56,17 @@ application_classes:
       - method: optimize
     priority: 80
   modifiers:
-    default: []
+    default: \[\]
     priority: 50
   results:
-    default: []
+    default: \[\]
     priority: 170
   services:
     default:
       - method: instantiate_services
     priority: 20
   simulation:
-    default: []
+    default: \[\]
     priority: 110
 apply:
   simulation:
@@ -71,7 +75,7 @@ apply:
         - verbose: 0
       method: advance
 models:
-  - granular_parameters: []
+  - granular_parameters: \[\]
     modelname: /singlep
     solverclass: heccer
 name: \'builtin cell configuration, applied to: singlep\'
@@ -90,7 +94,7 @@ services:
     initializers:
       - arguments:
           -
-            - ./../bin/ssp
+            - .*?/ssp
             - -P
             - tests/cells/singlep.ndf
         method: read
@@ -103,18 +107,19 @@ solverclasses:
 usage: |2
   
   	Simulate a single model neuron, default is to output the membrane potential of the soma.
-  	Use the options to inject current in the soma (--inject-magnitude), or alternatively
-  	to set a command voltage (--perfectclamp).
+  	Use the options to inject current in the soma \(--inject-magnitude\), or alternatively
+  	to set a command voltage \(--perfectclamp\).
   	The model\'s soma segment must reside in a SEGMENT_GROUP with name "segments".
   
           The name of the model neuron is inferred from the name of the model description file.
-          (e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
-          called "hh_neuron").
+          \(e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+          called "hh_neuron"\).
   
   	--model-name overwrite the default model name.
   	--steps sets number of steps
 verbose: ~
 ',
+							   ],
 						  },
 						 ],
 				description => "using the Heccer dumper for an analyzer, schedule output",
