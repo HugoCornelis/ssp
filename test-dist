@@ -11,7 +11,7 @@ use strict;
 
 {
     # $Format: "system 'mkdir --parents \"/tmp/${package}/${label}\"'"$
-system 'mkdir --parents "/tmp/ssp/b4cee614d722fb2369e1d0c760f72621ca294804-0"'
+system 'mkdir --parents "/tmp/ssp/6b4eb26b633a00d90247d65b13d984cb8232f51f.0"'
 }
 
 if ($?)
@@ -22,7 +22,7 @@ if ($?)
 
 {
     # $Format: "system \"cp '${package}-${label}.tar.gz' '/tmp/${package}/${label}'\""$
-system "cp 'ssp-b4cee614d722fb2369e1d0c760f72621ca294804-0.tar.gz' '/tmp/ssp/b4cee614d722fb2369e1d0c760f72621ca294804-0'"
+system "cp 'ssp-6b4eb26b633a00d90247d65b13d984cb8232f51f.0.tar.gz' '/tmp/ssp/6b4eb26b633a00d90247d65b13d984cb8232f51f.0'"
 }
 
 if ($?)
@@ -33,7 +33,7 @@ if ($?)
 
 {
     # $Format: "chdir \"/tmp/${package}/${label}\""$
-chdir "/tmp/ssp/b4cee614d722fb2369e1d0c760f72621ca294804-0"
+chdir "/tmp/ssp/6b4eb26b633a00d90247d65b13d984cb8232f51f.0"
 }
 
 if ($?)
@@ -44,7 +44,7 @@ if ($?)
 
 {
     # $Format: "system \"tar xfz '${package}-${label}.tar.gz'\""$
-system "tar xfz 'ssp-b4cee614d722fb2369e1d0c760f72621ca294804-0.tar.gz'"
+system "tar xfz 'ssp-6b4eb26b633a00d90247d65b13d984cb8232f51f.0.tar.gz'"
 }
 
 if ($?)
@@ -55,7 +55,7 @@ if ($?)
 
 {
     # $Format: "chdir \"${package}-${label}\""$
-chdir "ssp-b4cee614d722fb2369e1d0c760f72621ca294804-0"
+chdir "ssp-6b4eb26b633a00d90247d65b13d984cb8232f51f.0"
 }
 
 if ($?)

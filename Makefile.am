@@ -35,12 +35,19 @@ clean-local:
 	$(RM) -rf $(top_srcdir)/docs/html
 	$(RM) -rf $(top_srcdir)/tests/html
 	$(RM) -rf ~/.genesis3/ssp/InlinePerlCode
+	$(RM) -rf RPM_BUILD
+	$(RM) -f $(top_srcdir)/*.dsc
+	$(RM) -f $(top_srcdir)/*.changes
+	$(RM) -f $(top_srcdir)/*.deb
+	$(RM) -f build_rpm.log
+	$(RM) -f build_deb.log
+	$(RM) -f ssp-*.tar.gz
 
 show-release-labels:
 	echo "Release information (major-minor-micro): $(RELEASE_MAJOR)-$(RELEASE_MINOR)-$(RELEASE_MICRO)"
 
 dist-keywords:
-	release-expand ssp $(RELEASE_MAJOR) $(RELEASE_MINOR) $(RELEASE_MICRO) $(RELEASE_MAJOR)-$(RELEASE_MINOR) hugo.cornelis@gmail.com --verbose
+	release-expand ssp $(RELEASE_MAJOR) $(RELEASE_MINOR) $(RELEASE_MICRO) $(RELEASE_MAJOR).$(RELEASE_MINOR) hugo.cornelis@gmail.com --verbose
 #	release-expand ssp des 10 0 des-10 hugo.cornelis@gmail.com --verbose
 
 
@@ -119,3 +126,6 @@ TMP_DIR = tmp
 # Create a deb package
 pkg-deb: dist
 	nspkg-deb $(TMP_DIR) $(PACKAGE) $(VERSION)
+
+pkg-rpm: dist
+	nspkg-rpm $(PACKAGE) $(VERSION)

@@ -15,9 +15,9 @@ my $test
 				command_tests => [
 						  {
 						   # $Format: "description => \"Does the version information match with ${package}-${label} ?\","$
-description => "Does the version information match with ssp-b4cee614d722fb2369e1d0c760f72621ca294804-0 ?",
+description => "Does the version information match with ssp-6b4eb26b633a00d90247d65b13d984cb8232f51f.0 ?",
 						   # $Format: "read => \"${package}-${label}\","$
-read => "ssp-b4cee614d722fb2369e1d0c760f72621ca294804-0",
+read => "ssp-6b4eb26b633a00d90247d65b13d984cb8232f51f.0",
 						  },
 						 ],
 				description => "check version information",

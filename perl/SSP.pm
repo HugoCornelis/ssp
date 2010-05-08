@@ -2048,7 +2048,7 @@ sub steps
 sub version
 {
     # $Format: "    my $version=\"${package}-${label}\";"$
-    my $version="ssp-b4cee614d722fb2369e1d0c760f72621ca294804-0";
+    my $version="ssp-6b4eb26b633a00d90247d65b13d984cb8232f51f.0";
 
     return $version;
 }
