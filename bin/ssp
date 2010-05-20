@@ -313,7 +313,7 @@ sub main
 
 	if ($option_dump)
 	{
-	    no warnings;
+	    use Heccer;
 
 	    my $extended_dump_selection
 		= ($SwiggableHeccer::HECCER_DUMP_INDEXERS_SUMMARY
