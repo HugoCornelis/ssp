@@ -53,7 +53,7 @@ dist-keywords:
 
 # The variable EXTRA_DIST could also be used here.
 
-dist-hook: dist-keywords
+dist-hook: 
 	if test -n "$$NEUROSPACES_RELEASE" ; then cd $(srcdir) && if test -n "`mtn ls changed `" ; then false ; else true ; fi ; else true ; fi
 	find $(distdir) -name _Inline -exec chmod u+w -R \{\} \;
 	$(RM) -fr `find $(distdir) -name _Inline`
