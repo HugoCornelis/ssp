@@ -43,7 +43,7 @@ AC_SUBST(PERL_DATA)
 
 # determine the test library to install
 
-TEST_SPECIFICATION_FILES=`/bin/echo -n "tests/introduction.html " && find tests/specifications -name "*.t" | perl -pe 's/\n/ /g' && find tests/specifications/strings -name "*.txt" | perl -pe 's/\n/ /g'`
+TEST_SPECIFICATION_FILES=`/bin/echo -n "tests/introduction.html " && find tests/specifications -name "*.t" | perl -pe 's/\n/ /g' && find tests/specifications/strings -type f | perl -pe 's/\n/ /g'`
 AC_SUBST(TEST_SPECIFICATION_FILES)
 
 dnl YAML_FILES=`find yaml -name "*.yml" -printf "%p "`
