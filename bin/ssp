@@ -13,6 +13,7 @@ BEGIN
     #! make check
 
     push @INC, '../perl';
+
     #! make distcheck
 
     push @INC, '../../perl';
