@@ -474,6 +474,13 @@ sub main
 		    component_name => "$model_root/segments/soma",
 		    field => 'INJECT',
 		    value => $option_inject_magnitude,
+		    warn_only => 'the component_name is a default, its address may be wrong',
+		   },
+		   {
+		    component_name => "$model_root/soma",
+		    field => 'INJECT',
+		    value => $option_inject_magnitude,
+		    warn_only => 'the component_name is a default, its address may be wrong',
 		   },
 		  ];
 	}
@@ -1016,7 +1023,7 @@ sub main
 						      value => $option_inject_magnitude,
 						     },
 						    ],
-				       method => 'apply_granular_parameters',
+				       method => 'apply_runtime_parameters',
 				      },
 				      {
 				       arguments => [ $option_inject_duration, { verbose => 0, }, ],
@@ -1031,7 +1038,7 @@ sub main
 						      value => 0,
 						     },
 						    ],
-				       method => 'apply_granular_parameters',
+				       method => 'apply_runtime_parameters',
 				      },
 				      {
 				       arguments => [ $time_termination, { verbose => 0, }, ],

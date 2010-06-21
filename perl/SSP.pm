@@ -179,7 +179,7 @@ $@";
 }
 
 
-sub apply_granular_parameters
+sub apply_runtime_parameters
 {
     my $self = shift;
 
@@ -211,7 +211,16 @@ sub apply_granular_parameters
 
 	if (!ref $solverinfo)
 	{
-	    die "$0: Failed to construct solver info for the runtime_setting " . $runtime_setting->{component_name} . "->" . $runtime_setting->{field} . " ($solverinfo)";
+	    if ($runtime_setting->{warn_only})
+	    {
+		warn "$0: Failed to construct solver info for the runtime_setting " . $runtime_setting->{component_name} . "->" . $runtime_setting->{field} . " ($solverinfo)";
+
+		next;
+	    }
+	    else
+	    {
+		die "$0: Failed to construct solver info for the runtime_setting " . $runtime_setting->{component_name} . "->" . $runtime_setting->{field} . " ($solverinfo)";
+	    }
 	}
 
 	# lookup the solver
@@ -324,12 +333,24 @@ sub compile
 
 	if ($model->{granular_parameters})
 	{
-	    my $granular_parameter_application
-		= $service->{ssp_service}->apply_granular_parameters($model->{granular_parameters});
+	    my $granular_parameters = $model->{granular_parameters};
 
-	    if (defined $granular_parameter_application)
+	    foreach my $granular_parameter (@$granular_parameters)
 	    {
-		die "$0: Cannot apply granular_parameters: $granular_parameter_application";
+		my $granular_parameter_application
+		    = $service->{ssp_service}->apply_granular_parameters( [ $granular_parameter, ], );
+
+		if (defined $granular_parameter_application)
+		{
+		    if ($granular_parameter->{warn_only})
+		    {
+			warn "$0: Cannot apply granular_parameters: $granular_parameter_application";
+		    }
+		    else
+		    {
+			die "$0: Cannot apply granular_parameters: $granular_parameter_application";
+		    }
+		}
 	    }
 	}
 

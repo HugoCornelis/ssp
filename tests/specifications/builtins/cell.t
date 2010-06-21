@@ -165,6 +165,11 @@ models:
       - component_name: /stand_alone/segments/soma
         field: INJECT
         value: 2e-8
+        warn_only: \'the component_name is a default, its address may be wrong\'
+      - component_name: /stand_alone/soma
+        field: INJECT
+        value: 2e-8
+        warn_only: \'the component_name is a default, its address may be wrong\'
     modelname: /stand_alone
     solverclass: heccer
 name: \'builtin cell configuration, applied to: stand_alone\'
@@ -363,7 +368,7 @@ apply:
           field: INJECT
           modelname: /stand_alone
           value: 2e-8
-      method: apply_granular_parameters
+      method: apply_runtime_parameters
     - arguments:
         - 0.03
         - verbose: 0
@@ -373,7 +378,7 @@ apply:
           field: INJECT
           modelname: /stand_alone
           value: 0
-      method: apply_granular_parameters
+      method: apply_runtime_parameters
     - arguments:
         - 0.02
         - verbose: 0
@@ -507,7 +512,7 @@ history:
         field: INJECT
         modelname: /stand_alone
         value: 2e-8
-    method: apply_granular_parameters
+    method: apply_runtime_parameters
   - arguments:
       - 0.03
       - verbose: 0
@@ -517,7 +522,7 @@ history:
         field: INJECT
         modelname: /stand_alone
         value: 0
-    method: apply_granular_parameters
+    method: apply_runtime_parameters
   - arguments:
       - 0.02
       - verbose: 0
@@ -612,6 +617,11 @@ models:
       - component_name: /hh_neuron/segments/soma
         field: INJECT
         value: 2e-8
+        warn_only: \'the component_name is a default, its address may be wrong\'
+      - component_name: /hh_neuron/soma
+        field: INJECT
+        value: 2e-8
+        warn_only: \'the component_name is a default, its address may be wrong\'
     modelname: /hh_neuron
     solverclass: heccer
 name: \'builtin cell configuration, applied to: hh_neuron\'
