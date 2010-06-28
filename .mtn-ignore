@@ -29,4 +29,5 @@ synaptic-test.patch
 .changes$
 .dsc$
 .log$
-^RPM_BUILD$
+_BUILD$
+.pkg$

@@ -35,12 +35,11 @@ clean-local:
 	$(RM) -rf $(top_srcdir)/docs/html
 	$(RM) -rf $(top_srcdir)/tests/html
 	$(RM) -rf ~/.genesis3/ssp/InlinePerlCode
-	$(RM) -rf RPM_BUILD
+	$(RM) -rf *_BUILD
 	$(RM) -f $(top_srcdir)/*.dsc
 	$(RM) -f $(top_srcdir)/*.changes
 	$(RM) -f $(top_srcdir)/*.deb
-	$(RM) -f build_rpm.log
-	$(RM) -f build_deb.log
+	$(RM) -f build_*.log
 	$(RM) -f ssp-*.tar.gz
 
 show-release-labels:
@@ -133,3 +132,7 @@ pkg-deb: dist
 
 pkg-rpm: dist
 	nspkg-rpm $(PACKAGE) $(VERSION)
+
+pkg-osx: 
+	nspkg-osx 
+
