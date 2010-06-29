@@ -35,12 +35,12 @@ clean-local:
 	$(RM) -rf $(top_srcdir)/docs/html
 	$(RM) -rf $(top_srcdir)/tests/html
 	$(RM) -rf ~/.genesis3/ssp/InlinePerlCode
-	$(RM) -rf *_BUILD
+	$(RM) -rf $(top_srcdir)/*_BUILD
 	$(RM) -f $(top_srcdir)/*.dsc
 	$(RM) -f $(top_srcdir)/*.changes
 	$(RM) -f $(top_srcdir)/*.deb
-	$(RM) -f build_*.log
-	$(RM) -f ssp-*.tar.gz
+	$(RM) -f $(top_srcdir)/build_*.log
+	$(RM) -f $(top_srcdir)/ssp-*.tar.gz
 
 show-release-labels:
 	echo "Release information (major-minor-micro): $(RELEASE_MAJOR)-$(RELEASE_MINOR)-$(RELEASE_MICRO)"
