@@ -128,7 +128,7 @@ TMP_DIR = tmp
 
 # Create a deb package
 pkg-deb: dist
-	nspkg-deb $(TMP_DIR) $(PACKAGE) $(VERSION)
+	nspkg-deb $(PACKAGE) $(VERSION)
 
 pkg-rpm: dist
 	nspkg-rpm $(PACKAGE) $(VERSION)
