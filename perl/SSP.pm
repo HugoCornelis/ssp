@@ -427,11 +427,11 @@ sub connect
     {
 	# connect the schedulee
 
-	my $success = $schedulee->connect($self);
+	my $error = $schedulee->connect($self);
 
-	if (!$success)
+	if ($error)
 	{
-	    die "$0: connect failed";
+	    die "$0: connect failed for $schedulee->{name}";
 	}
     }
 
