@@ -652,8 +652,7 @@ solverclasses:
     service_name: model_container
 ',
 							   ],
-						   timeout => 3,
-						   write => undef,
+						   timeout => 5,
 						  },
 						 ],
 				description => "invocation of the neurospaces studio when using the cell builtin",
