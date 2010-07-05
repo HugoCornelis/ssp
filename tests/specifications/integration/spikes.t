@@ -56,7 +56,7 @@ my $test
 						 ],
 				comment => 'See also in heccer: tests/code/spiker2 and the previous test',
 				description => "single source, single spike, multiple targets",
-# 				disabled => 'working on it',
+				disabled => 'working on it',
 			       },
 			       {
 				arguments => [
