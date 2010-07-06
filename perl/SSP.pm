@@ -264,12 +264,14 @@ sub compile
 
     my $schedule = $self->{schedule} || [];
 
+    $self->{schedule} = $schedule;
+
     # define the compilation_priorities
 
     my $compilation_priorities
 	= {
-	   events => 3,
-	   numerical => 1,
+	   events => 1,
+	   numerical => 3,
 	  };
 
     # assign a compile priority to each model
@@ -290,18 +292,22 @@ sub compile
 
     # loop over all models
 
-    foreach my $model (
-		       # sorted by solver class priority
+    $models
+	= [
+	   # sorted by solver class priority
 
-		       sort
-		       {
-			   my $compilation_priority1 = $solverclasses->{$a->{solverclass}}->{compilation_priority};
+	   sort
+	   {
+	       my $compilation_priority1 = $solverclasses->{$a->{solverclass}}->{compilation_priority};
 
-			   my $compilation_priority2 = $solverclasses->{$b->{solverclass}}->{compilation_priority};
+	       my $compilation_priority2 = $solverclasses->{$b->{solverclass}}->{compilation_priority};
 
-			   $compilation_priorities->{$compilation_priority1} <=> $compilation_priorities->{$compilation_priority2}
-		       }
-		       @$models)
+	       $compilation_priorities->{$compilation_priority1} <=> $compilation_priorities->{$compilation_priority2}
+	   }
+	   @$models,
+	  ];
+
+    foreach my $model (@$models)
     {
 	my $modelname = $model->{modelname};
 
@@ -394,10 +400,6 @@ sub compile
 
 	push @$schedule, $engine;
     }
-
-    # register the schedule
-
-    $self->{schedule} = $schedule;
 
     # return result
 

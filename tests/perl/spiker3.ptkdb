@@ -3,11 +3,20 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '	my $error = $object->$method($peer, @$arguments);
+                                  'text' => '	my $compilation_result = $engine->compile($self);
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 1730
+                                  'line' => '383'
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '	$result = $engine->compile($scheduler);
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '2377'
                                 },
                                 {
                                   'expr' => undef,
@@ -16,16 +25,7 @@ $files = {
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '301'
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	if (!ref($object_name))
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 1688
+                                  'line' => 316
                                 }
                               ],
            '_<tests/perl/spiker3' => [
@@ -36,7 +36,7 @@ $files = {
 ',
                                          'fname' => 'tests/perl/spiker3',
                                          'type' => 'user',
-                                         'line' => 196
+                                         'line' => 210
                                        }
                                      ]
          };

@@ -103,12 +103,24 @@ sub main
 							 module_name => 'Heccer',
 							 package => 'Heccer::Output',
 							},
+				      event_2_ascii => {
+							module_name => 'Heccer',
+							options => {
+								    filename => "/tmp/output_spike",
+								   },
+							package => 'Heccer::Event::Output',
+						       },
 				     },
 		    outputs => [
 				{
 				 component_name => "/$modelname/source/soma",
 				 field => 'Vm',
 				 outputclass => 'double_2_ascii',
+				},
+				{
+				 component_name => "/$modelname/source/soma/spikegen",
+				 field => 'spike',
+				 outputclass => 'event_2_ascii',
 				},
 			       ],
 		    services => {
@@ -124,7 +136,7 @@ sub main
 				},
 		    solverclasses => {
 				      heccer => {
-						 compile_priority => 'numerical',
+						 compilation_priority => 'numerical',
 						 constructor_settings => {
 									  dStep => (1e-6),
 									  configuration => {
@@ -145,7 +157,7 @@ sub main
 						 service_name => 'model_container',
 						},
 # 				      event_distributor => {
-# 							    compile_priority => 'events',
+# 							    compilation_priority => 'events',
 # 							    initializers => [
 # 									     {
 # 									      arguments => [],
@@ -156,7 +168,7 @@ sub main
 # 							    package => 'Heccer::DES',
 # 							   },
 # 				      event_queuer => {
-# 						       compile_priority => 'events',
+# 						       compilation_priority => 'events',
 # 						       initializers => [
 # 									{
 # 									 arguments => [],
@@ -167,7 +179,7 @@ sub main
 # 						       package => 'Heccer::DES',
 # 						      },
 				      des => {
-					      compile_priority => 'events',
+					      compilation_priority => 'events',
 					      module_name => 'Heccer',
 					      package => 'Heccer::DES',
 					      service_name => 'model_container',
