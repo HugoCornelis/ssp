@@ -25,8 +25,18 @@ static struct schedulee pschedule[MAX_SCHEDULEES];
 
 static int iSchedule = 0;
 
-int c_register_driver(SV *psvPF, SV *psvPV)
+int c_register_driver(SV *psvPF, SV *psvPV, char *pcName)
 {
+    if (!psvPF || !SvRV((SV *)psvPF))
+    {
+	return -1;
+    }
+
+    if (!psvPV || !SvRV((SV *)psvPV))
+    {
+	return -1;
+    }
+
     void *pf = (void *)SvIV(SvRV((SV *)psvPF));
     void *pv = (void *)SvIV(SvRV((SV *)psvPV));
 
@@ -315,12 +325,9 @@ sub compile
 
 	my $service = $self->{services}->{$solverclasses->{$solverclass}->{service_name}};
 
-# 	my $event_distributor
-# 	    = (
-# 	       defined $solverclasses->{$solverclass}->{event_distributor_name}
-# 	       ? $self->{services}->{$solverclasses->{$solverclass}->{event_distributor_name}}
-# 	       : undef
-# 	      );
+	my $event_distributor = $self->{services}->{event_distributor};
+
+	my $event_queuer = $self->{services}->{event_queuer};
 
 	# apply the conceptual parameter settings to the model
 
@@ -367,7 +374,8 @@ sub compile
 	my $options
 	    = {
 	       %$solverclass_options,
-# 	       event_distributor => $event_distributor,
+	       event_distributor => $event_distributor,
+	       event_queuer => $event_queuer,
 	       modelname => $modelname,
 	       solverclass => $solverclass,
 	       service => $service,
@@ -1444,6 +1452,11 @@ sub new
 
     my $self
 	= {
+	   # turning on optimize by default currently breaks DES based
+	   # simulations because it does not implement the
+	   # get_driver() method.
+
+# 	   optimize => 'by default turned on',
 	   %$options,
 	  };
 
@@ -1515,7 +1528,7 @@ sub optimize
 		die "$0: SSP::optimize() failed, no driver found for $schedulee->{name}";
 	    }
 
-	    $self->register_driver($driver->{method}, $driver->{data});
+	    $self->register_driver($driver->{method}, $driver->{data}, $driver->{name} || $schedulee->{name}, );
 	}
     }
 
@@ -1573,9 +1586,11 @@ sub register_driver
 
     my $driver_data = shift;
 
-    if (c_register_driver($driver, $driver_data) == -1)
+    my $driver_name = shift;
+
+    if (c_register_driver($driver, $driver_data, $driver_name) == -1)
     {
-	die "$0: register_driver() failed, error return from c_register_driver(), too many entries in the schedule";
+	die "$0: register_driver() failed for $driver_name, error return from c_register_driver()";
     }
 }
 
@@ -1914,6 +1929,27 @@ sub save
     };
 
     return $@;
+}
+
+
+sub service_register
+{
+    my $self = shift;
+
+    my $name = shift;
+
+    my $options = shift;
+
+    if ($self->{services}->{$name})
+    {
+	die "$0: multiple attempts to create an SSP service with name $name";
+    }
+
+    my $ssp_service = SSP::Service->new( $options, );
+
+    $self->{services}->{$name}->{ssp_service} = $ssp_service;
+
+    return undef;
 }
 
 
@@ -2302,8 +2338,6 @@ sub compile
 
     my $service_name = $self->{service_name};
 
-#     my $event_distributor_name = $self->{event_distributor_name};
-
     my $solver_module = $self->{module_name};
 
     #! the service points into the scheduler, but is not the service object
@@ -2314,10 +2348,15 @@ sub compile
 
     my $service_backend = $service->backend();
 
-#     my $event_distributor = $self->{event_distributor}->{ssp_service};
+    my $event_distributor = $self->{event_distributor}->{ssp_service};
 
-#     my $event_distributor_backend
-# 	= $event_distributor && $event_distributor->backend();
+    my $event_distributor_backend
+	= $event_distributor && $event_distributor->backend();
+
+    my $event_queuer = $self->{event_queuer}->{ssp_service};
+
+    my $event_queuer_backend
+	= $event_queuer && $event_queuer->backend();
 
     eval
     {
@@ -2361,10 +2400,14 @@ $@";
 			       service_backend => $service_backend,
 			       modelname => $modelname,
 			      },
-# 	      event_distributor => {
+	      event_distributor => {
 # 				    event_distributor_name => $event_distributor_name,
-# 				    event_distributor_backend => $event_distributor_backend,
-# 				   },
+				    event_distributor_backend => $event_distributor_backend,
+				   },
+	      event_queuer => {
+# 			       event_queuer_name => $event_queuer_name,
+			       event_queuer_backend => $event_queuer_backend,
+			      },
 	     },
 	    );
 

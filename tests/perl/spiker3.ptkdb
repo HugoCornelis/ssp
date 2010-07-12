@@ -7,16 +7,16 @@ $files = {
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '383'
+                                  'line' => 401
                                 },
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '	$result = $engine->compile($scheduler);
+                                  'text' => '	my $error = $object->$method($peer, @$arguments);
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '2377'
+                                  'line' => '1779'
                                 },
                                 {
                                   'expr' => undef,
@@ -25,7 +25,7 @@ $files = {
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 316
+                                  'line' => 326
                                 }
                               ],
            '_<tests/perl/spiker3' => [
@@ -36,7 +36,7 @@ $files = {
 ',
                                          'fname' => 'tests/perl/spiker3',
                                          'type' => 'user',
-                                         'line' => 210
+                                         'line' => 211
                                        }
                                      ]
          };

@@ -149,6 +149,7 @@ sub main
 															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
 															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
 															    | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+# 															    | $SwiggableHeccer::iHECCER_DUMP_ALL_EXTENDED
 															   ),
 													 },
 											   },
