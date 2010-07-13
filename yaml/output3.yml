@@ -12,6 +12,7 @@ application_classes:
   initializers:
     default:
       - method: compile
+      - method: connect
       - method: instantiate_inputs
       - method: instantiate_outputs
       - method: initiate
@@ -45,7 +46,7 @@ outputclasses:
     module_name: Heccer
     options:
       filename: /tmp/output
-      format: steps
+      output_mode: steps
       resolution: 10
     package: Heccer::Output
 outputs:

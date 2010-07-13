@@ -93,7 +93,7 @@ sub main
 							 module_name => 'Heccer',
 							 options => {
 								     filename => "/tmp/output",
-								     format => 'steps',
+								     output_mode => 'steps',
 								     resolution => 10,
 								    },
 							 package => 'Heccer::Output',

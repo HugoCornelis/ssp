@@ -86,7 +86,7 @@ sub main
 				      double_2_ascii => {
 							 options => {
 								     filename => '/tmp/output',
-								     format => 'steps',
+								     output_mode => 'steps',
 								    },
 							 module_name => 'Heccer',
 							 package => 'Heccer::Output',
