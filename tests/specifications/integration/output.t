@@ -30,11 +30,11 @@ my $test
 				command => 'tests/perl/output2',
 				command_tests => [
 						  {
-						   description => "Can we produce simple output with the steps format?",
+						   description => "Can we produce simple output with the steps mode?",
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/output2.txt`),
 						  },
 						 ],
-				description => "simple output with the steps format",
+				description => "simple output with the steps mode",
 			       },
 			       {
 				arguments => [
@@ -42,11 +42,23 @@ my $test
 				command => 'tests/perl/output3',
 				command_tests => [
 						  {
-						   description => "Can we produce output with the steps format at a coarser resolution?",
+						   description => "Can we produce output with the steps mode at a coarser resolution?",
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/output3.txt`),
 						  },
 						 ],
-				description => "output with the steps format at a coarser resolution",
+				description => "output with the steps mode at a coarser resolution",
+			       },
+			       {
+				arguments => [
+					     ],
+				command => 'tests/perl/output4',
+				command_tests => [
+						  {
+						   description => "Can we produce simple output with the steps mode and a format field?",
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/output4.txt`),
+						  },
+						 ],
+				description => "simple output with the steps mode",
 			       },
 			      ],
        description => "output functions",
