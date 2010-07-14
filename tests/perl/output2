@@ -109,14 +109,14 @@ sub main
 			       ],
 		    services => {
 				 model_container => {
-						 initializers => [
-								  {
-								   arguments => [ $args, ],
-								   method => 'read',
-								  },
-								 ],
-						 module_name => 'Neurospaces',
-						},
+						     initializers => [
+								      {
+								       arguments => [ $args, ],
+								       method => 'read',
+								      },
+								     ],
+						     module_name => 'Neurospaces',
+						    },
 				},
 		    solverclasses => {
 				      heccer => {
