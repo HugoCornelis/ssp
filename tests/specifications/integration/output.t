@@ -58,7 +58,7 @@ my $test
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/output4.txt`),
 						  },
 						 ],
-				description => "simple output with the steps mode",
+				description => "simple output with the steps mode and a format field",
 			       },
 			      ],
        description => "output functions",
