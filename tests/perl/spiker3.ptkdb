@@ -7,7 +7,7 @@ $files = {
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 401
+                                  'line' => 391
                                 },
                                 {
                                   'expr' => undef,
@@ -16,7 +16,16 @@ $files = {
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => '1779'
+                                  'line' => 1773
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '	    $ssp_service = SSP::Service->new( { backend => $backend, scheduler => $self, }, );
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '1222'
                                 },
                                 {
                                   'expr' => undef,
@@ -26,6 +35,15 @@ $files = {
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
                                   'line' => 326
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
+                                  'text' => '	$result = $engine->compile($scheduler);
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => 2420
                                 }
                               ],
            '_<tests/perl/spiker3' => [
