@@ -42,9 +42,9 @@ application_classes:
   initializers:
     default:
       - method: compile
-      - method: connect
       - method: instantiate_inputs
       - method: instantiate_outputs
+      - method: connect
       - method: initiate
       - method: optimize
     priority: 80
@@ -135,9 +135,9 @@ application_classes:
   initializers:
     default:
       - method: compile
-      - method: connect
       - method: instantiate_inputs
       - method: instantiate_outputs
+      - method: connect
       - method: initiate
       - method: optimize
     priority: 80
@@ -236,9 +236,9 @@ application_classes:
   initializers:
     default:
       - method: compile
-      - method: connect
       - method: instantiate_inputs
       - method: instantiate_outputs
+      - method: connect
       - method: initiate
       - method: optimize
     priority: 80
@@ -338,9 +338,9 @@ application_classes:
   initializers:
     default:
       - method: compile
-      - method: connect
       - method: instantiate_inputs
       - method: instantiate_outputs
+      - method: connect
       - method: initiate
       - method: optimize
     priority: 80
@@ -492,11 +492,11 @@ history:
   - arguments: []
     method: compile
   - arguments: []
-    method: connect
-  - arguments: []
     method: instantiate_inputs
   - arguments: []
     method: instantiate_outputs
+  - arguments: []
+    method: connect
   - arguments: []
     method: initiate
   - arguments: []

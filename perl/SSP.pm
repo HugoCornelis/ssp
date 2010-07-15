@@ -1817,9 +1817,9 @@ sub salvage
 	       initializers => {
 				default => [
 					    { method => 'compile', },
-					    { method => 'connect', },
 					    { method => 'instantiate_inputs', },
 					    { method => 'instantiate_outputs', },
+					    { method => 'connect', },
 					    { method => 'initiate', },
 					    { method => 'optimize', },
 					   ],
@@ -2707,6 +2707,18 @@ sub advance
 }
 
 
+sub connect
+{
+    my $self = shift;
+
+    # lookup the method
+
+    my $backend = $self->backend();
+
+    return $backend->connect($self);
+}
+
+
 sub finish
 {
     my $self = shift;
@@ -2864,6 +2876,18 @@ sub advance
     my $result = $backend->advance($self, $options);
 
     return $result;
+}
+
+
+sub connect
+{
+    my $self = shift;
+
+    # lookup the method
+
+    my $backend = $self->backend();
+
+    return $backend->connect($self);
 }
 
 

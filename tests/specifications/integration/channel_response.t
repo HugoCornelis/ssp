@@ -43,9 +43,9 @@ application_classes:
   initializers:
     default:
       - method: compile
-      - method: connect
       - method: instantiate_inputs
       - method: instantiate_outputs
+      - method: connect
       - method: initiate
       - method: optimize
     priority: 80
