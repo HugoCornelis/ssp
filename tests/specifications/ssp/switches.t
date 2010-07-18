@@ -40,6 +40,7 @@ options:
     --emit-schedules     print schedules to stdout instead of running them.
     --help               print usage information.
     --history            emit a record of the history of the simulation after it finishes.
+    --history-timestamps emit timestamps with schedule history records.
     --inject-delay       delay of the current injection protocol.
     --inject-duration    duration of the current injection protocol.
     --inject-magnitude   amount of current injected into the soma.
