@@ -1786,7 +1786,7 @@ sub run
 	    {
 	     method => $method,
 	     arguments => $arguments,
-	     time_stamp => time(),
+	     time_stamp => "" . localtime(time()),
 	    };
     }
 

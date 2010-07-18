@@ -64,6 +64,7 @@ my $option_dump_extended;
 my $option_emit_output = [];
 my $option_emit_schedules;
 my $option_history;
+my $option_history_timestamps;
 my $option_inject_delay;
 my $option_inject_duration;
 my $option_inject_magnitude;
@@ -1099,6 +1100,7 @@ sub read_cmd_line
 	     "emit-schedules!" => \$option_emit_schedules,
 	     "help!" => \$option_help,
 	     "history!" => \$option_history,
+	     "history-timestamps!" => \$option_history_timestamps,
 	     "inject-delay=s" => \$option_inject_delay,
 	     "inject-duration=s" => \$option_inject_duration,
 	     "inject-magnitude=s" => \$option_inject_magnitude,
@@ -1166,6 +1168,7 @@ options:
     --emit-schedules     print schedules to stdout instead of running them.
     --help               print usage information.
     --history            emit a record of the history of the simulation after it finishes.
+    --history-timestamps emit timestamps with schedule history records.
     --inject-delay       delay of the current injection protocol.
     --inject-duration    duration of the current injection protocol.
     --inject-magnitude   amount of current injected into the soma.
@@ -1380,7 +1383,7 @@ sub schedule
 
     if ($option_history)
     {
-	my $history = $scheduler->history( { time_stamps => 0, }, );
+	my $history = $scheduler->history( { time_stamps => $option_history_timestamps, }, );
 
 	use YAML;
 
