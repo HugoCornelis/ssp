@@ -29,7 +29,7 @@ try .*ssp --builtins for information of how to run a simulation easily
 
 options:
     --builtins           give help about supported builtin configurations.
-    --cell               use the cell builtin configuration.
+    --cell               use the cell builtin configuration, requires the cell model filename as argument.
     --daemonize          detach from terminal, close shared resources and run in the background,
                          note that this option currently inhibits any feedback of the process,
                          so be cautious with it.
@@ -102,17 +102,21 @@ Known builtin configurations:
 cell:
 
 
-	Simulate a single model neuron, default is to output the membrane potential of the soma.
+	Simulate a single neuron model, default is to output the membrane potential of the soma.
 	Use the options to inject current in the soma \(--inject-magnitude\), or alternatively
 	to set a command voltage \(--perfectclamp\).
-	The model\'s soma segment must reside in a SEGMENT_GROUP with name "segments".
+	The model\'s soma segment must reside in a SEGMENT_GROUP with name \"segments\".
 
         The name of the model neuron is inferred from the name of the model description file.
-        \(e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
-        called "hh_neuron"\).
+        \(e.g. a model description file called "examples/hh_neuron.ndf" is assumed to define a model neuron
+        called \"hh_neuron\"\).
+
+Additional Options Overriding Internal Default Settings:
 
 	--model-name overwrite the default model name.
 	--steps sets number of steps
+
+Example usage: ssp --cell examples/hh_neuron.ndf
 ', ],
 						   timeout => 3,
 						  },

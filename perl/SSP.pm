@@ -2613,7 +2613,7 @@ sub step
 
     if (!$success)
     {
-	$result = "HeccerHecc() failed";
+	$result = "SSP Engine backend: Step failed\n";
     }
 
     # return result
