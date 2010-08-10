@@ -90,13 +90,13 @@ sub main
 		    name => $modelname,
 		    outputclasses => {
 				      double_2_ascii => {
-							 module_name => 'Heccer',
+							 module_name => 'Experiment',
 							 options => {
 								     filename => "/tmp/output",
 								     format => ' %.3f',
 								     output_mode => 'steps',
 								    },
-							 package => 'Heccer::Output',
+							 package => 'Experiment::Output',
 							},
 				     },
 		    outputs => [

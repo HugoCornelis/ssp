@@ -11,11 +11,11 @@ apply:
       method: steps
 inputclasses:
   perfectclamp:
-    module_name: Heccer
+    module_name: Experiment
     options:
       filename: /usr/local/neurospaces/models/library/event_data/soma_vm_trace.yml
       name: purkinje cell perfect clamp
-    package: Heccer::PerfectClamp
+    package: Experiment::PerfectClamp
 inputs:
   - component_name: /Purkinje/segments/soma
     field: Vm
@@ -26,10 +26,10 @@ models:
 name: purkinje cell perfect clamp
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
+    module_name: Experiment
     options:
       filename: /tmp/output
-    package: Heccer::Output
+    package: Experiment::Output
 outputs:
   - component_name: /Purkinje/segments/soma
     field: Vm

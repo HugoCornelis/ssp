@@ -131,19 +131,19 @@ sub main
 		    name => $modelname,
 		    outputclasses => {
 				      double_2_ascii => {
-							 module_name => 'Heccer',
+							 module_name => 'Experiment',
 							 options => {
 								     filename => "/tmp/output_vm",
 								     output_mode => 'steps',
 								    },
-							 package => 'Heccer::Output',
+							 package => 'Experiment::Output',
 							},
 				      event_2_ascii => {
-							module_name => 'Heccer',
+							module_name => 'Experiment',
 							options => {
 								    filename => "/tmp/output_spike",
 								   },
-							package => 'Heccer::Event::Output',
+							package => 'Experiment::Event::Output',
 						       },
 				     },
 		    outputs => [

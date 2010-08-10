@@ -142,8 +142,8 @@ sub main
 		    name => $modelname,
 		    outputclasses => {
 				      double_2_ascii => {
-							 module_name => 'Heccer',
-							 package => 'Heccer::Output',
+							 module_name => 'Experiment',
+							 package => 'Experiment::Output',
 							},
 				     },
 		    outputs => [

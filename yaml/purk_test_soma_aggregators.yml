@@ -18,10 +18,10 @@ models:
 name: purk_test_soma
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
+    module_name: Experiment
     options:
       filename: /tmp/purk_test_soma_aggregators
-    package: Heccer::Output
+    package: Experiment::Output
 outputs:
   - component_name: /purk_test_soma/segments/soma
     field: Vm

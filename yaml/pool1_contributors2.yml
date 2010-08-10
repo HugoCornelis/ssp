@@ -41,8 +41,8 @@ models:
 name: pool1_contributors2
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
-    package: Heccer::Output
+    module_name: Experiment
+    package: Experiment::Output
 outputs:
   - component_name: '/pool1_contributors2/segments/main[0]'
     field: Vm

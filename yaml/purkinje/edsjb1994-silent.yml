@@ -15,10 +15,10 @@ models:
 name: purk_test
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
+    module_name: Experiment
     options:
       filename: /tmp/output
-    package: Heccer::Output
+    package: Experiment::Output
 outputs:
   - component_name: /Purkinje/segments/soma
     field: Vm

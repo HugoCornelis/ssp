@@ -11,7 +11,7 @@ apply:
       method: steps
 inputclasses:
   pulsegen:
-    module_name: Heccer
+    module_name: Experiment
     options:
       level1: 50.0
       width1: 3.0
@@ -21,7 +21,7 @@ inputclasses:
       delay2: 8.0
       baselevel: 10.0
       triggermode: 0
-    package: Heccer::PulseGen
+    package: Experiment::PulseGen
 inputs:
   - component_name: /Purkinje/segments/soma
     field: Vm
@@ -32,10 +32,10 @@ models:
 name: purkinje cell perfect clamp
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
+    module_name: Experiment
     options:
       filename: /tmp/output
-    package: Heccer::Output
+    package: Experiment::Output
 outputs:
   - component_name: /Purkinje/segments/soma
     field: Vm

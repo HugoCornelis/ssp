@@ -44,10 +44,10 @@ models:
 name: springmass4
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
+    module_name: Experiment
     options:
       filename: /tmp/output
-    package: Heccer::Output
+    package: Experiment::Output
 outputs:
   - component_name: /springmass4/segments/c1
     field: Vm

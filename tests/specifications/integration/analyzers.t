@@ -49,9 +49,9 @@ application_classes:
   initializers:
     default:
       - method: compile
-      - method: connect
       - method: instantiate_inputs
       - method: instantiate_outputs
+      - method: connect
       - method: initiate
       - method: optimize
     priority: 80
@@ -81,10 +81,10 @@ models:
 name: \'builtin cell configuration, applied to: singlep\'
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
+    module_name: Experiment
     options:
       filename: ./output/singlep.out
-    package: Heccer::Output
+    package: Experiment::Output
 outputs:
   - component_name: /singlep/segments/soma
     field: Vm
@@ -106,17 +106,21 @@ solverclasses:
     service_name: model_container
 usage: |2
   
-  	Simulate a single model neuron, default is to output the membrane potential of the soma.
-  	Use the options to inject current in the soma \(--inject-magnitude\), or alternatively
-  	to set a command voltage \(--perfectclamp\).
-  	The model\'s soma segment must reside in a SEGMENT_GROUP with name "segments".
+        Simulate a single neuron model, default is to output the membrane potential of the soma.
+        Use the options to inject current in the soma \(--inject-magnitude\), or alternatively
+        to set a command voltage \(--perfectclamp\).
+        The model\'s soma segment must reside in a SEGMENT_GROUP with name "segments".
   
           The name of the model neuron is inferred from the name of the model description file.
-          \(e.g. a model description file called "hh_neuron.ndf" is assumed to define a model neuron
+          \(e.g. a model description file called "examples/hh_neuron.ndf" is assumed to define a model neuron
           called "hh_neuron"\).
   
-  	--model-name overwrite the default model name.
-  	--steps sets number of steps
+  Additional Options Overriding Internal Default Settings:
+  
+        --model-name overwrite the default model name.
+        --steps sets number of steps
+  
+  Example usage: ssp --cell examples/hh_neuron.ndf
 verbose: ~
 ',
 							   ],

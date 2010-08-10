@@ -574,12 +574,12 @@ sub main
 
 	    my $inputclass
 		= {
-		   module_name => "Heccer",
+		   module_name => "Experiment",
 		   options => {
 			       command => $option_perfectclamp,
 			       name => "perfectclamp set to $option_perfectclamp",
 			      },
-		   package => "Heccer::PerfectClamp",
+		   package => "Experiment::PerfectClamp",
 		  };
 
 	    my $inputs
@@ -607,12 +607,12 @@ sub main
 
 	    my $inputclass
 		= {
-		   module_name => "Heccer",
+		   module_name => "Experiment",
 		   options => {
 			       command => $option_pulsegen_width1,
 			       name => "pulsegen set to $option_pulsegen_width1",
 			      },
-		   package => "Heccer::Pulsegen",
+		   package => "Experiment::Pulsegen",
 		  };
 
 	    my $inputs
@@ -641,12 +641,12 @@ sub main
 
 	    my $inputclass
 		= {
-		   module_name => "Heccer",
+		   module_name => "Experiment",
 		   options => {
 			       command => $option_pulsegen_level1,
 			       name => "pulsegen set to $option_pulsegen_level1",
 			      },
-		   package => "Heccer::Pulsegen",
+		   package => "Experiment::Pulsegen",
 		  };
 
 	    my $inputs
@@ -674,12 +674,12 @@ sub main
 
 	    my $inputclass
 		= {
-		   module_name => "Heccer",
+		   module_name => "Experiment",
 		   options => {
 			       command => $option_pulsegen_delay1,
 			       name => "pulsegen set to $option_pulsegen_delay1",
 			      },
-		   package => "Heccer::Pulsegen",
+		   package => "Experiment::Pulsegen",
 		  };
 
 	    my $inputs
@@ -707,12 +707,12 @@ sub main
 
 	    my $inputclass
 		= {
-		   module_name => "Heccer",
+		   module_name => "Experiment",
 		   options => {
 			       command => $option_pulsegen_width2,
 			       name => "pulsegen set to $option_pulsegen_width2",
 			      },
-		   package => "Heccer::Pulsegen",
+		   package => "Experiment::Pulsegen",
 		  };
 
 	    my $inputs
@@ -741,12 +741,12 @@ sub main
 
 	    my $inputclass
 		= {
-		   module_name => "Heccer",
+		   module_name => "Experiment",
 		   options => {
 			       command => $option_pulsegen_level2,
 			       name => "pulsegen set to $option_pulsegen_level2",
 			      },
-		   package => "Heccer::Pulsegen",
+		   package => "Experiment::Pulsegen",
 		  };
 
 	    my $inputs
@@ -774,12 +774,12 @@ sub main
 
 	    my $inputclass
 		= {
-		   module_name => "Heccer",
+		   module_name => "Experiment",
 		   options => {
 			       command => $option_pulsegen_delay2,
 			       name => "pulsegen set to $option_pulsegen_delay2",
 			      },
-		   package => "Heccer::Pulsegen",
+		   package => "Experiment::Pulsegen",
 		  };
 
 	    my $inputs
@@ -808,12 +808,12 @@ sub main
 
 	    my $inputclass
 		= {
-		   module_name => "Heccer",
+		   module_name => "Experiment",
 		   options => {
 			       command => $option_pulsegen_baselevel,
 			       name => "pulsegen set to $option_pulsegen_baselevel",
 			      },
-		   package => "Heccer::Pulsegen",
+		   package => "Experiment::Pulsegen",
 		  };
 
 	    my $inputs
@@ -842,12 +842,12 @@ sub main
 
 	    my $inputclass
 		= {
-		   module_name => "Heccer",
+		   module_name => "Experiment",
 		   options => {
 			       command => $option_pulsegen_triggermode,
 			       name => "pulsegen set to $option_pulsegen_triggermode",
 			      },
-		   package => "Heccer::Pulsegen",
+		   package => "Experiment::Pulsegen",
 		  };
 
 	    my $inputs
@@ -887,18 +887,16 @@ sub main
 	    `mkdir -p "$1"`;
 	}
 
-	# we assume the solver exports a suitable output class
+	# we use the output package of the experiment software component
 
-	#! not sure if this is a good idea
-
-	my $option_output_package = $option_solverclass_name . '::' . 'Output';
+	my $option_output_package = "Experiment" . '::' . 'Output';
 
 	# assemble output class definition
 
 	my $outputclasses
 	    = {
 	       double_2_ascii => {
-				  module_name => $option_solverclass_name,
+				  module_name => "Experiment",
 				  options => {
 					      filename => $option_output_filename,
 					     },

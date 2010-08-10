@@ -75,8 +75,8 @@ models:
 name: addressing_aggregator1
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
-    package: Heccer::Output
+    module_name: Experiment
+    package: Experiment::Output
 outputs:
   - component_name: /addressing_aggregator1
     field: 'aggregator[0]'

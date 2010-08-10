@@ -11,8 +11,8 @@ models:
 name: channel2_nernst2
 outputclasses:
   double_2_ascii:
-    constructor: Heccer::Output
-    module_name: Heccer
+    constructor: Experiment::Output
+    module_name: Experiment
 outputs:
   - component_name: '/channel2_nernst2/segments/main[0]'
     field: Vm

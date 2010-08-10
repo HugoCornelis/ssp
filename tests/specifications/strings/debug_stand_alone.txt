@@ -15,10 +15,10 @@ models:
 name: 'builtin cell configuration, applied to: stand_alone'
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
+    module_name: Experiment
     options:
       filename: ./output/stand_alone.out
-    package: Heccer::Output
+    package: Experiment::Output
 outputs:
   - component_name: /stand_alone/segments/soma
     field: Vm
@@ -67,10 +67,10 @@ usage: |2
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options:
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
     outputs:
       - component_name: /stand_alone/segments/soma
         field: Vm
@@ -121,10 +121,10 @@ usage: |2
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options:
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
     outputs:
       - component_name: /stand_alone/segments/soma
         field: Vm
@@ -205,10 +205,10 @@ usage: |2
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options:
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
     outputs:
       - component_name: /stand_alone/segments/soma
         field: Vm
@@ -289,10 +289,10 @@ usage: |2
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options:
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
     outputs:
       - component_name: /stand_alone/segments/soma
         field: Vm
@@ -380,10 +380,10 @@ usage: |2
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options:
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
     outputs:
       - component_name: /stand_alone/segments/soma
         field: Vm
@@ -472,10 +472,10 @@ usage: |2
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options:
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
     outputs:
       - component_name: /stand_alone/segments/soma
         field: Vm
@@ -576,10 +576,10 @@ usage: |2
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options:
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
     outputs:
       - component_name: /stand_alone/segments/soma
         field: Vm
@@ -700,10 +700,10 @@ usage: |2
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options:
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
     outputs:
       - component_name: /stand_alone/segments/soma
         field: Vm
@@ -825,23 +825,23 @@ usage: |2
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options: &8
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
         ssp_outputclass: &9 !!perl/hash:SSP::Output
-          backend: !!perl/hash:Heccer::Output
-            backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+          backend: !!perl/hash:Experiment::Output
+            backend: !!perl/hash:SwiggableExperiment::OutputGenerator {}
             filename: ./output/stand_alone.out
-            module_name: Heccer
+            module_name: Experiment
             name: double_2_ascii
             options: *8
-            package: Heccer::Output
+            package: Experiment::Output
             scheduler: *1
-          module_name: Heccer
+          module_name: Experiment
           name: double_2_ascii
           options: *8
-          package: Heccer::Output
+          package: Experiment::Output
           scheduler: *1
     outputs:
       - component_name: /stand_alone/segments/soma
@@ -966,23 +966,23 @@ usage: |2
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options: &8
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
         ssp_outputclass: &9 !!perl/hash:SSP::Output
-          backend: !!perl/hash:Heccer::Output
-            backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+          backend: !!perl/hash:Experiment::Output
+            backend: !!perl/hash:SwiggableExperiment::OutputGenerator {}
             filename: ./output/stand_alone.out
-            module_name: Heccer
+            module_name: Experiment
             name: double_2_ascii
             options: *8
-            package: Heccer::Output
+            package: Experiment::Output
             scheduler: *1
-          module_name: Heccer
+          module_name: Experiment
           name: double_2_ascii
           options: *8
-          package: Heccer::Output
+          package: Experiment::Output
           scheduler: *1
     outputs:
       - component_name: /stand_alone/segments/soma
@@ -1109,23 +1109,23 @@ usage: |2
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options: &8
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
         ssp_outputclass: &9 !!perl/hash:SSP::Output
-          backend: !!perl/hash:Heccer::Output
-            backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+          backend: !!perl/hash:Experiment::Output
+            backend: !!perl/hash:SwiggableExperiment::OutputGenerator {}
             filename: ./output/stand_alone.out
-            module_name: Heccer
+            module_name: Experiment
             name: double_2_ascii
             options: *8
-            package: Heccer::Output
+            package: Experiment::Output
             scheduler: *1
-          module_name: Heccer
+          module_name: Experiment
           name: double_2_ascii
           options: *8
-          package: Heccer::Output
+          package: Experiment::Output
           scheduler: *1
     outputs:
       - component_name: /stand_alone/segments/soma
@@ -1258,23 +1258,23 @@ usage: |2
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options: &9
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
         ssp_outputclass: &10 !!perl/hash:SSP::Output
-          backend: !!perl/hash:Heccer::Output
-            backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+          backend: !!perl/hash:Experiment::Output
+            backend: !!perl/hash:SwiggableExperiment::OutputGenerator {}
             filename: ./output/stand_alone.out
-            module_name: Heccer
+            module_name: Experiment
             name: double_2_ascii
             options: *9
-            package: Heccer::Output
+            package: Experiment::Output
             scheduler: *1
-          module_name: Heccer
+          module_name: Experiment
           name: double_2_ascii
           options: *9
-          package: Heccer::Output
+          package: Experiment::Output
           scheduler: *1
     outputs:
       - component_name: /stand_alone/segments/soma
@@ -1409,23 +1409,23 @@ usage: |2
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options: &8
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
         ssp_outputclass: &9 !!perl/hash:SSP::Output
-          backend: !!perl/hash:Heccer::Output
-            backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+          backend: !!perl/hash:Experiment::Output
+            backend: !!perl/hash:SwiggableExperiment::OutputGenerator {}
             filename: ./output/stand_alone.out
-            module_name: Heccer
+            module_name: Experiment
             name: double_2_ascii
             options: *8
-            package: Heccer::Output
+            package: Experiment::Output
             scheduler: *1
-          module_name: Heccer
+          module_name: Experiment
           name: double_2_ascii
           options: *8
-          package: Heccer::Output
+          package: Experiment::Output
           scheduler: *1
     outputs:
       - component_name: /stand_alone/segments/soma
@@ -1557,23 +1557,23 @@ usage: |2
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options: &8
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
         ssp_outputclass: &9 !!perl/hash:SSP::Output
-          backend: !!perl/hash:Heccer::Output
-            backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+          backend: !!perl/hash:Experiment::Output
+            backend: !!perl/hash:SwiggableExperiment::OutputGenerator {}
             filename: ./output/stand_alone.out
-            module_name: Heccer
+            module_name: Experiment
             name: double_2_ascii
             options: *8
-            package: Heccer::Output
+            package: Experiment::Output
             scheduler: *1
-          module_name: Heccer
+          module_name: Experiment
           name: double_2_ascii
           options: *8
-          package: Heccer::Output
+          package: Experiment::Output
           scheduler: *1
     outputs:
       - component_name: /stand_alone/segments/soma
@@ -1708,23 +1708,23 @@ usage: |2
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options: &9
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
         ssp_outputclass: &10 !!perl/hash:SSP::Output
-          backend: !!perl/hash:Heccer::Output
-            backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+          backend: !!perl/hash:Experiment::Output
+            backend: !!perl/hash:SwiggableExperiment::OutputGenerator {}
             filename: ./output/stand_alone.out
-            module_name: Heccer
+            module_name: Experiment
             name: double_2_ascii
             options: *9
-            package: Heccer::Output
+            package: Experiment::Output
             scheduler: *1
-          module_name: Heccer
+          module_name: Experiment
           name: double_2_ascii
           options: *9
-          package: Heccer::Output
+          package: Experiment::Output
           scheduler: *1
     outputs:
       - component_name: /stand_alone/segments/soma
@@ -1862,10 +1862,10 @@ output files follow
     name: 'builtin cell configuration, applied to: stand_alone'
     outputclasses:
       double_2_ascii:
-        module_name: Heccer
+        module_name: Experiment
         options:
           filename: ./output/stand_alone.out
-        package: Heccer::Output
+        package: Experiment::Output
         ssp_outputclass: ~
     outputs:
       - component_name: /stand_alone/segments/soma

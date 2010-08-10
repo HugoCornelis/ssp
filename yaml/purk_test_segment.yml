@@ -45,8 +45,8 @@ models:
 name: purk_test_segment
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
-    package: Heccer::Output
+    module_name: Experiment
+    package: Experiment::Output
 outputs:
   - component_name: /purk_test_segment/segments/test_segment
     field: Vm

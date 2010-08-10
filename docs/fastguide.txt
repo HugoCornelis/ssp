@@ -105,8 +105,8 @@ case using a default filename).
   name: pool1_feedback1
   outputclasses:
     double_2_ascii:
-      constructor: Heccer::Output
-      module_name: Heccer
+      constructor: Experiment::Output
+      module_name: Experiment
   outputs:
     - component_name: '/pool1_feedback1/segments/main[0]'
       field: Vm

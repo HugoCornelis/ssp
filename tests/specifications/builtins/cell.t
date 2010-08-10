@@ -74,10 +74,10 @@ models:
 name: \'builtin cell configuration, applied to: stand_alone\'
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
+    module_name: Experiment
     options:
       filename: ./output/stand_alone\.out
-    package: Heccer::Output
+    package: Experiment::Output
 outputs:
   - component_name: /stand_alone/segments/soma
     field: Vm
@@ -175,10 +175,10 @@ models:
 name: \'builtin cell configuration, applied to: stand_alone\'
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
+    module_name: Experiment
     options:
       filename: ./output/stand_alone\.out
-    package: Heccer::Output
+    package: Experiment::Output
 outputs:
   - component_name: /stand_alone/segments/soma
     field: Vm
@@ -271,10 +271,10 @@ models:
 name: \'builtin cell configuration, applied to: stand_alone\'
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
+    module_name: Experiment
     options:
       filename: ./output/stand_alone\.out
-    package: Heccer::Output
+    package: Experiment::Output
 outputs:
   - component_name: /stand_alone/segments/soma
     field: Vm
@@ -390,10 +390,10 @@ models:
 name: \'builtin cell configuration, applied to: stand_alone\'
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
+    module_name: Experiment
     options:
       filename: ./output/stand_alone\.out
-    package: Heccer::Output
+    package: Experiment::Output
 outputs:
   - component_name: /stand_alone/segments/soma
     field: Vm
@@ -627,10 +627,10 @@ models:
 name: \'builtin cell configuration, applied to: hh_neuron\'
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
+    module_name: Experiment
     options:
       filename: \./output/hh_neuron\.out
-    package: Heccer::Output
+    package: Experiment::Output
 outputs:
   - component_name: /hh_neuron/segments/soma
     field: Vm
