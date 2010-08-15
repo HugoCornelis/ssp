@@ -1456,7 +1456,7 @@ sub new
 	   # simulations because it does not implement the
 	   # get_driver() method.
 
-# 	   optimize => 'by default turned on',
+	   optimize => 'by default turned on, ignored when running in verbose mode',
 	   %$options,
 	  };
 
@@ -2011,7 +2011,8 @@ sub steps
 
     my $optimize = $self->{optimize};
 
-    if ($optimize)
+    if ($optimize
+        and !$options->{verbose})
     {
 	# use the optimizer
 

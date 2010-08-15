@@ -72,6 +72,7 @@ models:
     modelname: /stand_alone
     solverclass: heccer
 name: \'builtin cell configuration, applied to: stand_alone\'
+optimize: \'by default turned on, ignored when running in verbose mode\'
 outputclasses:
   double_2_ascii:
     module_name: Experiment
@@ -173,6 +174,7 @@ models:
     modelname: /stand_alone
     solverclass: heccer
 name: \'builtin cell configuration, applied to: stand_alone\'
+optimize: \'by default turned on, ignored when running in verbose mode\'
 outputclasses:
   double_2_ascii:
     module_name: Experiment
@@ -269,6 +271,7 @@ models:
     modelname: /stand_alone
     solverclass: heccer
 name: \'builtin cell configuration, applied to: stand_alone\'
+optimize: \'by default turned on, ignored when running in verbose mode\'
 outputclasses:
   double_2_ascii:
     module_name: Experiment
@@ -388,6 +391,7 @@ models:
     modelname: /stand_alone
     solverclass: heccer
 name: \'builtin cell configuration, applied to: stand_alone\'
+optimize: \'by default turned on, ignored when running in verbose mode\'
 outputclasses:
   double_2_ascii:
     module_name: Experiment
@@ -625,6 +629,7 @@ models:
     modelname: /hh_neuron
     solverclass: heccer
 name: \'builtin cell configuration, applied to: hh_neuron\'
+optimize: \'by default turned on, ignored when running in verbose mode\'
 outputclasses:
   double_2_ascii:
     module_name: Experiment
