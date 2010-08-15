@@ -377,6 +377,7 @@ sub compile
 	       event_distributor => $event_distributor,
 	       event_queuer => $event_queuer,
 	       modelname => $modelname,
+	       name => $modelname,
 	       solverclass => $solverclass,
 	       service => $service,
 	       scheduler => $self,
