@@ -70,7 +70,7 @@ sub main
 			     },
 		    models => [
 			       {
-				granular_parameters => [
+				runtime_parameters => [
 							(
 							 # initial states
 

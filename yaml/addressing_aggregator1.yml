@@ -36,7 +36,7 @@ apply:
         - verbose: 2
       method: steps
 models:
-  - granular_parameters:
+  - runtime_parameters:
       - component_name: /addressing_aggregator1/segments/c1/cat/cat_gate_activation
         field: state_init
         value: 0.0394781556092807

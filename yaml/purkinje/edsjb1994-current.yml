@@ -11,7 +11,7 @@ apply:
       method: steps
 models:
   - modelname: /Purkinje
-    granular_parameters:
+    runtime_parameters:
       - component_name: /Purkinje/segments/soma
         field: INJECT
         value: 2e-09

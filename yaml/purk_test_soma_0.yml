@@ -7,7 +7,7 @@ apply:
       method: steps
 models:
   - modelname: /purk_test_soma
-    granular_parameters:
+    runtime_parameters:
       - component_name: /purk_test_soma/segments/soma
         field: INJECT
         value: 0

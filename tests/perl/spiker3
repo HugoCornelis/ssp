@@ -74,7 +74,7 @@ sub main
 			     },
 		    models => [
 			       {
-				granular_parameters => [
+				runtime_parameters => [
 							{
 							 component_name => "/$modelname/source/soma",
 							 field => 'INJECT',

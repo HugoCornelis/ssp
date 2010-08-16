@@ -329,39 +329,26 @@ sub compile
 
 	my $event_queuer = $self->{services}->{event_queuer};
 
-	# apply the conceptual parameter settings to the model
+	# apply the runtime_parameter settings to the model
 
-	if ($model->{conceptual_parameters})
+	if ($model->{runtime_parameters})
 	{
-	    my $conceptual_parameter_application
-		= $service->{ssp_service}->apply_conceptual_parameters($model->{conceptual_parameters});
+	    my $runtime_parameters = $model->{runtime_parameters};
 
-	    if (defined $conceptual_parameter_application)
+	    foreach my $runtime_parameter (@$runtime_parameters)
 	    {
-		die "$0: Cannot apply conceptual_parameters: $conceptual_parameter_application";
-	    }
-	}
+		my $runtime_parameter_application
+		    = $service->{ssp_service}->apply_runtime_parameters( [ $runtime_parameter, ], );
 
-	# apply the granular_parameter settings to the model
-
-	if ($model->{granular_parameters})
-	{
-	    my $granular_parameters = $model->{granular_parameters};
-
-	    foreach my $granular_parameter (@$granular_parameters)
-	    {
-		my $granular_parameter_application
-		    = $service->{ssp_service}->apply_granular_parameters( [ $granular_parameter, ], );
-
-		if (defined $granular_parameter_application)
+		if (defined $runtime_parameter_application)
 		{
-		    if ($granular_parameter->{warn_only})
+		    if ($runtime_parameter->{warn_only})
 		    {
-			warn "$0: Cannot apply granular_parameters: $granular_parameter_application";
+			warn "$0: *** Warning: Cannot apply runtime_parameters: $runtime_parameter_application";
 		    }
 		    else
 		    {
-			die "$0: Cannot apply granular_parameters: $granular_parameter_application";
+			die "$0: Cannot apply runtime_parameters: $runtime_parameter_application";
 		    }
 		}
 	    }
@@ -1895,14 +1882,9 @@ sub save
 
     foreach my $model (@{$schedule->{models}})
     {
-	if (!@{$model->{conceptual_parameters}})
+	if (!@{$model->{runtime_parameters}})
 	{
-	    delete $model->{conceptual_parameters};
-	}
-
-	if (!@{$model->{granular_parameters}})
-	{
-	    delete $model->{granular_parameters};
+	    delete $model->{runtime_parameters};
 	}
     }
 
@@ -3032,7 +3014,7 @@ package SSP::Service;
 BEGIN { our @ISA = qw(SSP::Base); }
 
 
-sub apply_conceptual_parameters
+sub apply_runtime_parameters
 {
     my $self = shift;
 
@@ -3040,21 +3022,7 @@ sub apply_conceptual_parameters
 
     my $service_backend = $self->backend();
 
-    my $result = $service_backend->apply_conceptual_parameters($self, $options);
-
-    return $result;
-}
-
-
-sub apply_granular_parameters
-{
-    my $self = shift;
-
-    my $options = shift;
-
-    my $service_backend = $self->backend();
-
-    my $result = $service_backend->apply_granular_parameters($self, $options);
+    my $result = $service_backend->apply_runtime_parameters($self, $options);
 
     return $result;
 }

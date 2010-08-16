@@ -467,13 +467,13 @@ sub main
 
 	# fill in granular parameters for this model
 
-	my $granular_parameters;
+	my $runtime_parameters;
 
 	if ($option_inject_magnitude
 	    and !$option_inject_delay
 	    and !$option_inject_duration)
 	{
-	    $granular_parameters
+	    $runtime_parameters
 		= [
 		   {
 		    component_name => "$model_root/segments/soma",
@@ -491,14 +491,14 @@ sub main
 	}
 	else
 	{
-	    $granular_parameters
+	    $runtime_parameters
 		= [
 		  ];
 	}
 
-	$granular_parameters
+	$runtime_parameters
 	    = [
-	       @$granular_parameters,
+	       @$runtime_parameters,
 	       map
 	       {
 		   my $setting = $_;
@@ -523,7 +523,7 @@ sub main
 	       @$option_parameters,
 	      ];
 
-	$models->[0]->{granular_parameters} = $granular_parameters;
+	$models->[0]->{runtime_parameters} = $runtime_parameters;
 
 	# fill in the model section of the schedule
 

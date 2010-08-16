@@ -69,8 +69,8 @@ apply:
         - verbose: 0
       method: advance
 models:
-  - granular_parameters: \[\]
-    modelname: /channel_response
+  - modelname: /channel_response
+    runtime_parameters: \[\]
     solverclass: heccer
 name: \'builtin cell configuration, applied to: channel_response\'
 optimize: \'by default turned on, ignored when running in verbose mode\'

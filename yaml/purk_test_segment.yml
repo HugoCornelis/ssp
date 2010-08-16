@@ -36,7 +36,7 @@ apply:
         - 10000
       method: steps
 models:
-  - granular_parameters:
+  - runtime_parameters:
       - component_name: /purk_test_segment/segments/test_segment
         field: INJECT
         value: 2e-09

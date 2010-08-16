@@ -68,8 +68,8 @@ apply:
         - verbose: 0
       method: advance
 models:
-  - granular_parameters: \[\]
-    modelname: /stand_alone
+  - modelname: /stand_alone
+    runtime_parameters: \[\]
     solverclass: heccer
 name: \'builtin cell configuration, applied to: stand_alone\'
 optimize: \'by default turned on, ignored when running in verbose mode\'
@@ -162,7 +162,8 @@ apply:
         - verbose: 0
       method: advance
 models:
-  - granular_parameters:
+  - modelname: /stand_alone
+    runtime_parameters:
       - component_name: /stand_alone/segments/soma
         field: INJECT
         value: 2e-8
@@ -171,7 +172,6 @@ models:
         field: INJECT
         value: 2e-8
         warn_only: \'the component_name is a default, its address may be wrong\'
-    modelname: /stand_alone
     solverclass: heccer
 name: \'builtin cell configuration, applied to: stand_alone\'
 optimize: \'by default turned on, ignored when running in verbose mode\'
@@ -264,11 +264,11 @@ apply:
         - verbose: 0
       method: advance
 models:
-  - granular_parameters:
+  - modelname: /stand_alone
+    runtime_parameters:
       - component_name: /stand_alone/segments/soma
         field: INJECT
         value: 2e-8
-    modelname: /stand_alone
     solverclass: heccer
 name: \'builtin cell configuration, applied to: stand_alone\'
 optimize: \'by default turned on, ignored when running in verbose mode\'
@@ -387,8 +387,8 @@ apply:
         - verbose: 0
       method: advance
 models:
-  - granular_parameters: \[\]
-    modelname: /stand_alone
+  - modelname: /stand_alone
+    runtime_parameters: \[\]
     solverclass: heccer
 name: \'builtin cell configuration, applied to: stand_alone\'
 optimize: \'by default turned on, ignored when running in verbose mode\'
@@ -617,7 +617,8 @@ history:
         - (.*?)/bin/ssp
       method: Neurospaces::GUI::gui
 models:
-  - granular_parameters:
+  - modelname: /hh_neuron
+    runtime_parameters:
       - component_name: /hh_neuron/segments/soma
         field: INJECT
         value: 2e-8
@@ -626,7 +627,6 @@ models:
         field: INJECT
         value: 2e-8
         warn_only: \'the component_name is a default, its address may be wrong\'
-    modelname: /hh_neuron
     solverclass: heccer
 name: \'builtin cell configuration, applied to: hh_neuron\'
 optimize: \'by default turned on, ignored when running in verbose mode\'

@@ -38,7 +38,7 @@ apply:
         - verbose: 2
       method: steps
 models:
-  - granular_parameters:
+  - runtime_parameters:
       - component_name: /purk_test/segments/soma
         field: INJECT
         value: 2e-09

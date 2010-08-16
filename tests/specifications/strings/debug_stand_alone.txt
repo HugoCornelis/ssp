@@ -9,7 +9,7 @@ apply:
         - verbose: 0
       method: advance
 models:
-  - granular_parameters: []
+  - runtime_parameters: []
     modelname: /stand_alone
     solverclass: heccer
 name: 'builtin cell configuration, applied to: stand_alone'
@@ -61,7 +61,7 @@ usage: |2
             - verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'
@@ -115,7 +115,7 @@ usage: |2
             - verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'
@@ -199,7 +199,7 @@ usage: |2
             - verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'
@@ -283,7 +283,7 @@ usage: |2
             - verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'
@@ -374,7 +374,7 @@ usage: |2
             - verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'
@@ -466,7 +466,7 @@ usage: |2
             - verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'
@@ -570,7 +570,7 @@ usage: |2
             - verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'
@@ -694,7 +694,7 @@ usage: |2
             - verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'
@@ -819,7 +819,7 @@ usage: |2
             - verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'
@@ -960,7 +960,7 @@ usage: |2
             - verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'
@@ -1103,7 +1103,7 @@ usage: |2
             - verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'
@@ -1252,7 +1252,7 @@ usage: |2
               verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'
@@ -1403,7 +1403,7 @@ usage: |2
             - verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'
@@ -1551,7 +1551,7 @@ usage: |2
             - verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'
@@ -1702,7 +1702,7 @@ usage: |2
             - verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'
@@ -1856,7 +1856,7 @@ output files follow
             - verbose: 0
           method: advance
     models:
-      - granular_parameters: []
+      - runtime_parameters: []
         modelname: /stand_alone
         solverclass: heccer
     name: 'builtin cell configuration, applied to: stand_alone'

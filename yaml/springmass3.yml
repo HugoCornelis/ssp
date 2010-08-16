@@ -38,7 +38,7 @@ apply:
         - verbose: 2
       method: steps
 models:
-  - granular_parameters: []
+  - runtime_parameters: []
     modelname: /springmass3
     solverclass: heccer
 name: springmass3

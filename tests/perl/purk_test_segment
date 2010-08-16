@@ -75,7 +75,7 @@ sub main
 		    models => [
 			       {
 				modelname => "/$modelname",
-				granular_parameters => [
+				runtime_parameters => [
 							{
 							 component_name => "/$modelname/segments/test_segment",
 							 field => 'INJECT',

@@ -11,7 +11,7 @@ apply:
       method: steps
 models:
   - modelname: /Purkinje
-    conceptual_parameters:
+    runtime_parameters:
       - component_name: thickd::gaba::/Purk_GABA
         description: endogenous activity
         field: FREQUENCY

@@ -75,8 +75,8 @@ apply:
         - verbose: 0
       method: advance
 models:
-  - granular_parameters: \[\]
-    modelname: /singlep
+  - modelname: /singlep
+    runtime_parameters: \[\]
     solverclass: heccer
 name: \'builtin cell configuration, applied to: singlep\'
 optimize: \'by default turned on, ignored when running in verbose mode\'
