@@ -14,6 +14,7 @@ application_classes:
       - method: compile
       - method: instantiate_inputs
       - method: instantiate_outputs
+      - method: connect
       - method: initiate
       - method: optimize
     priority: 80
@@ -36,13 +37,14 @@ apply:
         - 10000
       method: steps
 models:
-  - runtime_parameters:
+  - modelname: /purk_test_segment
+    runtime_parameters:
       - component_name: /purk_test_segment/segments/test_segment
         field: INJECT
         value: 2e-09
-    modelname: /purk_test_segment
     solverclass: heccer
 name: purk_test_segment
+optimize: 'by default turned on, ignored when running in verbose mode'
 outputclasses:
   double_2_ascii:
     module_name: Experiment

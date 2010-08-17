@@ -14,7 +14,9 @@ application_classes:
       - method: compile
       - method: instantiate_inputs
       - method: instantiate_outputs
+      - method: connect
       - method: initiate
+      - method: optimize
     priority: 80
   modifiers:
     default: []
@@ -39,6 +41,7 @@ models:
   - modelname: /channel1_nernst1
     solverclass: heccer
 name: channel1_nernst1
+optimize: 'by default turned on, ignored when running in verbose mode'
 outputclasses:
   double_2_ascii:
     module_name: Experiment

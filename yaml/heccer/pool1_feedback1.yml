@@ -14,7 +14,9 @@ application_classes:
       - method: compile
       - method: instantiate_inputs
       - method: instantiate_outputs
+      - method: connect
       - method: initiate
+      - method: optimize
     priority: 80
   modifiers:
     default: []
@@ -41,6 +43,7 @@ apply:
 models:
   - solverclass: heccer
 name: pool1_feedback1
+optimize: 'by default turned on, ignored when running in verbose mode'
 services:
   heccer_intermediary:
     initializers:
@@ -75,5 +78,4 @@ solverclasses:
           tested_things: 6225920
       dStep: 1e-06
     module_name: Heccer
-    package: Heccer::Intermediary::Compiler
     service_name: heccer_intermediary

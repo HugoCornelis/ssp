@@ -70,7 +70,7 @@ my $test
 				command => 'tests/perl/table-kc',
 				command_tests => [
 						  {
-						   description => "Are gates tabulated correctly, simple potassium gates ?",
+						   description => "Are gates tabulated correctly, calcium dependent potassium gates ?",
 						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/table-kc.txt`),
 						   timeout => 9,
 						  },

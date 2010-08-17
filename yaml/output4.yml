@@ -12,9 +12,9 @@ application_classes:
   initializers:
     default:
       - method: compile
-      - method: connect
       - method: instantiate_inputs
       - method: instantiate_outputs
+      - method: connect
       - method: initiate
       - method: optimize
     priority: 80
@@ -35,12 +35,14 @@ apply:
   simulation:
     - arguments:
         - 100
+        - verbose: 1
       method: steps
 models:
-  - runtime_parameters: []
-    modelname: /singlep
+  - modelname: /singlep
+    runtime_parameters: []
     solverclass: heccer
 name: singlep
+optimize: 'by default turned on, ignored when running in verbose mode'
 outputclasses:
   double_2_ascii:
     module_name: Experiment

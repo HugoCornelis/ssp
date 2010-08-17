@@ -14,7 +14,9 @@ application_classes:
       - method: compile
       - method: instantiate_inputs
       - method: instantiate_outputs
+      - method: connect
       - method: initiate
+      - method: optimize
     priority: 80
   modifiers:
     default: []
@@ -36,7 +38,8 @@ apply:
         - verbose: 2
       method: steps
 models:
-  - runtime_parameters:
+  - modelname: /addressing_aggregator1
+    runtime_parameters:
       - component_name: /addressing_aggregator1/segments/c1/cat/cat_gate_activation
         field: state_init
         value: 0.0394781556092807
@@ -70,9 +73,9 @@ models:
       - component_name: /addressing_aggregator1/segments/c1/naf
         field: MODEL_SOURCE_TYPE
         value: 2
-    modelname: /addressing_aggregator1
     solverclass: heccer
 name: addressing_aggregator1
+optimize: 'by default turned on, ignored when running in verbose mode'
 outputclasses:
   double_2_ascii:
     module_name: Experiment
