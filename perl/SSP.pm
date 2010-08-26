@@ -280,8 +280,14 @@ sub compile
 
     my $compilation_priorities
 	= {
-	   events => 1,
-	   numerical => 3,
+	   (
+	    events => 1,
+	    numerical => 3,
+	   ),
+	   (
+	    projections => 1,
+	    neurons => 3,
+	   ),
 	  };
 
     # assign a compile priority to each model
