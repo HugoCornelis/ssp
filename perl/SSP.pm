@@ -37,8 +37,20 @@ int c_register_driver(SV *psvPF, SV *psvPV, char *pcName)
 	return -1;
     }
 
+/*    if ((int)SvRV((SV *)psvPF) == -1 */
+/*	&& (int)SvRV((SV *)psvPV) == -1) */
+/*    { */
+/*	return 0; */
+/*    } */
+
     void *pf = (void *)SvIV(SvRV((SV *)psvPF));
     void *pv = (void *)SvIV(SvRV((SV *)psvPV));
+
+/*    if (pf == (void *)-1 */
+/*	&& pv == (void *)-1) */
+/*    { */
+/*	return 0; */
+/*    } */
 
     pschedule[iSchedule].pf = pf;
     pschedule[iSchedule].pv = pv;
@@ -1582,10 +1594,16 @@ sub register_driver
 
     my $driver_name = shift;
 
-    if (c_register_driver($driver, $driver_data, $driver_name) == -1)
+    if ($driver ne -1
+	and $driver_data ne -1)
     {
-	die "$0: register_driver() failed for $driver_name, error return from c_register_driver()";
+	if (c_register_driver($driver, $driver_data, $driver_name) == -1)
+	{
+	    die "$0: register_driver() failed for $driver_name, error return from c_register_driver()";
+	}
     }
+
+    return undef;
 }
 
 

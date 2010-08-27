@@ -2,61 +2,50 @@ $files = {
            '_<perl/SSP.pm' => [
                                 {
                                   'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	my $compilation_result = $engine->compile($self);
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 391
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	my $error = $object->$method($peer, @$arguments);
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 1773
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	    $ssp_service = SSP::Service->new( { backend => $backend, scheduler => $self, }, );
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => '1222'
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	my $service = $self->{services}->{$solverclasses->{$solverclass}->{service_name}};
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 326
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
                                   'text' => '	$result = $engine->compile($scheduler);
 ',
+                                  'value' => '1',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 2420
-                                }
-                              ],
-           '_<tests/perl/spiker3' => [
-                                       {
-                                         'expr' => undef,
-                                         'value' => '1',
-                                         'text' => 'main();
+                                  'line' => 2428
+                                },
+                                {
+                                  'expr' => undef,
+                                  'text' => '	my $compilation_result = $engine->compile($self);
 ',
-                                         'fname' => 'tests/perl/spiker3',
-                                         'type' => 'user',
-                                         'line' => 211
-                                       }
-                                     ]
+                                  'value' => '1',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => 397
+                                },
+                                {
+                                  'expr' => undef,
+                                  'text' => '	my $service = $self->{services}->{$solverclasses->{$solverclass}->{service_name}};
+',
+                                  'value' => '1',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => 344
+                                },
+                                {
+                                  'expr' => undef,
+                                  'text' => '	    $ssp_service = SSP::Service->new( { backend => $backend, scheduler => $self, }, );
+',
+                                  'value' => '1',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => 1228
+                                },
+                                {
+                                  'expr' => undef,
+                                  'text' => '	my $error = $object->$method($peer, @$arguments);
+',
+                                  'value' => '1',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => 1785
+                                }
+                              ]
          };
 $expr_list = [
                {
@@ -69,4 +58,4 @@ $expr_list = [
                }
              ];
 $eval_saved_text = undef;
-$main_win_geometry = '1397x921+143+78';
+$main_win_geometry = '1272x720+0+0';
