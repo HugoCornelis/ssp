@@ -23,7 +23,9 @@ struct schedulee
 
 static struct schedulee pschedule[MAX_SCHEDULEES];
 
-static int iSchedule = 0;
+static int iSchedulees = 0;
+
+#include <stdio.h>
 
 int c_register_driver(SV *psvPF, SV *psvPV, char *pcName)
 {
@@ -52,17 +54,17 @@ int c_register_driver(SV *psvPF, SV *psvPV, char *pcName)
 /*	return 0; */
 /*    } */
 
-    pschedule[iSchedule].pf = pf;
-    pschedule[iSchedule].pv = pv;
+    pschedule[iSchedulees].pf = pf;
+    pschedule[iSchedulees].pv = pv;
 
-    iSchedule++;
+    iSchedulees++;
 
-    if (iSchedule >= MAX_SCHEDULEES)
+    if (iSchedulees >= MAX_SCHEDULEES)
     {
 	return -1;
     }
 
-    return iSchedule;
+    return iSchedulees;
 }
 
 
@@ -76,7 +78,7 @@ double c_steps(int iSteps, double dSimulationTime, double dStep)
 
 	int j;
 
-	for (j = 0 ; j < iSchedule ; j++)
+	for (j = 0 ; j < iSchedulees ; j++)
 	{
 	    if (pschedule[j].pf(pschedule[j].pv, dSimulationTime) == 0)
 	    {
@@ -343,9 +345,9 @@ sub compile
 
 	my $service = $self->{services}->{$solverclasses->{$solverclass}->{service_name}};
 
-	my $event_distributor = $self->{services}->{event_distributor};
+# 	my $event_distributor = $self->{services}->{event_distributor};
 
-	my $event_queuer = $self->{services}->{event_queuer};
+# 	my $event_queuer = $self->{services}->{event_queuer};
 
 	# apply the runtime_parameter settings to the model
 
@@ -379,8 +381,8 @@ sub compile
 	my $options
 	    = {
 	       %$solverclass_options,
-	       event_distributor => $event_distributor,
-	       event_queuer => $event_queuer,
+# 	       event_distributor => $event_distributor,
+# 	       event_queuer => $event_queuer,
 	       modelname => $modelname,
 	       name => $modelname,
 	       solverclass => $solverclass,
@@ -2356,15 +2358,15 @@ sub compile
 
     my $service_backend = $service->backend();
 
-    my $event_distributor = $self->{event_distributor}->{ssp_service};
+#     my $event_distributor = $self->{event_distributor}->{ssp_service};
 
-    my $event_distributor_backend
-	= $event_distributor && $event_distributor->backend();
+#     my $event_distributor_backend
+# 	= $event_distributor && $event_distributor->backend();
 
-    my $event_queuer = $self->{event_queuer}->{ssp_service};
+#     my $event_queuer = $self->{event_queuer}->{ssp_service};
 
-    my $event_queuer_backend
-	= $event_queuer && $event_queuer->backend();
+#     my $event_queuer_backend
+# 	= $event_queuer && $event_queuer->backend();
 
     eval
     {
@@ -2408,14 +2410,14 @@ $@";
 			       service_backend => $service_backend,
 			       modelname => $modelname,
 			      },
-	      event_distributor => {
-# 				    event_distributor_name => $event_distributor_name,
-				    event_distributor_backend => $event_distributor_backend,
-				   },
-	      event_queuer => {
-# 			       event_queuer_name => $event_queuer_name,
-			       event_queuer_backend => $event_queuer_backend,
-			      },
+# 	      event_distributor => {
+# # 				    event_distributor_name => $event_distributor_name,
+# 				    event_distributor_backend => $event_distributor_backend,
+# 				   },
+# 	      event_queuer => {
+# # 			       event_queuer_name => $event_queuer_name,
+# 			       event_queuer_backend => $event_queuer_backend,
+# 			      },
 	     },
 	    );
 
@@ -2605,7 +2607,7 @@ sub step
 {
     my $self = shift;
 
-    #t my $scheduler = shift;
+    my $scheduler = shift;
 
     my $options = shift;
 
