@@ -67,7 +67,7 @@ sub main
 			     },
 		    models => [
 			       {
-# 				modelname => 'a single compartment',
+				modelname => '/fork4p3',
 				solverclass => "heccer",
 			       },
 			      ],
@@ -119,7 +119,6 @@ sub main
 													   },
 													  ],
 											  iCompartments => 4,
-# 											  pcName => 'a single compartment',
 											 },
 											],
 									  },

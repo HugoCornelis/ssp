@@ -67,7 +67,7 @@ sub main
 			     },
 		    models => [
 			       {
-# 				modelname => 'a single compartment',
+				modelname => '/singlep',
 				solverclass => "heccer",
 			       },
 			      ],
@@ -91,7 +91,6 @@ sub main
 													   },
 													  ],
 											  iCompartments => 1,
-# 											  pcName => 'a single compartment',
 											 },
 											],
 									  },

@@ -67,7 +67,7 @@ sub main
 			     },
 		    models => [
 			       {
-# 				modelname => 'a single compartment',
+				modelname => '/tensizesp',
 				solverclass => "heccer",
 			       },
 			      ],
@@ -185,7 +185,6 @@ sub main
 													   },
 													  ],
 											  iCompartments => 10,
-# 											  pcName => 'a single compartment',
 											 },
 											],
 									  },

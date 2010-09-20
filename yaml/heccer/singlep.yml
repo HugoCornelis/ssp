@@ -41,7 +41,8 @@ apply:
         - 0.1
       method: advance
 models:
-  - solverclass: heccer
+  - modelname: /singlep
+    solverclass: heccer
 name: singlep
 optimize: 'by default turned on, ignored when running in verbose mode'
 services:

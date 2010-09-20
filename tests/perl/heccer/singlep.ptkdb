@@ -3,29 +3,20 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
+                                  'text' => '	    my $package = $service->{package} || $service_module;
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => '1222'
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
                                   'text' => '	my $error = $object->$method($peer, @$arguments);
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
-                                  'line' => 1735
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	if (!ref($object_name))
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 1693
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	$result = $engine->compile($scheduler);
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 2354
+                                  'line' => '1785'
                                 }
                               ],
            '_<tests/perl/heccer/singlep' => [
@@ -36,7 +27,16 @@ $files = {
 ',
                                                 'fname' => 'tests/perl/heccer/singlep',
                                                 'type' => 'user',
-                                                'line' => 143
+                                                'line' => 142
+                                              },
+                                              {
+                                                'expr' => undef,
+                                                'value' => '1',
+                                                'text' => '    $scheduler->run();
+',
+                                                'fname' => 'tests/perl/heccer/singlep',
+                                                'type' => 'user',
+                                                'line' => '138'
                                               }
                                             ]
          };
@@ -51,4 +51,4 @@ $expr_list = [
                }
              ];
 $eval_saved_text = undef;
-$main_win_geometry = '1592x1114+0+0';
+$main_win_geometry = '1592x1000+0+0';

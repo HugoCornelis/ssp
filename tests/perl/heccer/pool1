@@ -69,7 +69,7 @@ sub main
 			     },
 		    models => [
 			       {
-# 				modelname => 'a single compartment',
+				modelname => '/pool1',
 				solverclass => "heccer",
 			       },
 			      ],
@@ -163,7 +163,6 @@ sub main
 													       },
 													      ),
 													     ],
-# 											  pcName => 'a single compartment',
 											 },
 											],
 									  },
