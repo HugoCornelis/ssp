@@ -337,6 +337,10 @@ sub compile
 	   @$models,
 	  ];
 
+#     use Data::Dumper;
+
+#     print Dumper($models);
+
     foreach my $model (@$models)
     {
 	my $modelname = $model->{modelname};
@@ -344,10 +348,6 @@ sub compile
 	my $solverclass = $model->{solverclass};
 
 	my $service = $self->{services}->{$solverclasses->{$solverclass}->{service_name}};
-
-# 	my $event_distributor = $self->{services}->{event_distributor};
-
-# 	my $event_queuer = $self->{services}->{event_queuer};
 
 	# apply the runtime_parameter settings to the model
 
@@ -381,8 +381,6 @@ sub compile
 	my $options
 	    = {
 	       %$solverclass_options,
-# 	       event_distributor => $event_distributor,
-# 	       event_queuer => $event_queuer,
 	       modelname => $modelname,
 	       name => $modelname,
 	       solverclass => $solverclass,
@@ -2358,16 +2356,6 @@ sub compile
 
     my $service_backend = $service->backend();
 
-#     my $event_distributor = $self->{event_distributor}->{ssp_service};
-
-#     my $event_distributor_backend
-# 	= $event_distributor && $event_distributor->backend();
-
-#     my $event_queuer = $self->{event_queuer}->{ssp_service};
-
-#     my $event_queuer_backend
-# 	= $event_queuer && $event_queuer->backend();
-
     eval
     {
 	local $SIG{__DIE__};
@@ -2401,23 +2389,11 @@ $@";
 
 	      %$constructor_settings,
 
-	      #t it would be much better if the constructor uses the
-	      #t services of SSP: model_container, event_distributor and
-	      #t possibly others.
-
 	      model_source => {
 			       service_name => $service_name,
 			       service_backend => $service_backend,
 			       modelname => $modelname,
 			      },
-# 	      event_distributor => {
-# # 				    event_distributor_name => $event_distributor_name,
-# 				    event_distributor_backend => $event_distributor_backend,
-# 				   },
-# 	      event_queuer => {
-# # 			       event_queuer_name => $event_queuer_name,
-# 			       event_queuer_backend => $event_queuer_backend,
-# 			      },
 	     },
 	    );
 
