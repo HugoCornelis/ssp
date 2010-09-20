@@ -50,13 +50,13 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a single spike reported properly, single source, single spike, multiple targets ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/spiker2.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/spiker2.txt | perl -pe 's(source)(/spiker3/source)g' | perl -pe 's(target1)(/spiker3/target1)g' | perl -pe 's(target2)(/spiker3/target2)g'`),
 						   timeout => 18,
 						  },
 						 ],
 				comment => 'See also in heccer: tests/code/spiker2 and the previous test',
 				description => "single source, single spike, multiple targets",
-				disabled => 'working on it',
+# 				disabled => 'working on it',
 			       },
 			       {
 				arguments => [

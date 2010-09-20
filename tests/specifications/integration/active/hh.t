@@ -19,9 +19,8 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a single compartment with regular HH channels solved correctly ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/active/hh1.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/active/hh1.txt | perl -pe 's(unnamed test)(/hh1)g'`),
 						   timeout => 15,
-						   write => undef,
 						  },
 						 ],
 				description => "single compartment with regular HH channels",

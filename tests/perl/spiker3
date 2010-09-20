@@ -145,6 +145,7 @@ sub main
 													  tested_things => (
 															    $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
 # 															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
+															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX_DIAGONALS
 															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
 															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
 															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
@@ -157,28 +158,6 @@ sub main
 						 module_name => 'Heccer',
 						 service_name => 'model_container',
 						},
-# 				      event_distributor => {
-# 							    compilation_priority => 'events',
-# 							    initializers => [
-# 									     {
-# 									      arguments => [],
-# 									      method => 'add_distributor',
-# 									     },
-# 									    ],
-# 							    module_name => 'Heccer',
-# 							    package => 'Heccer::DES',
-# 							   },
-# 				      event_queuer => {
-# 						       compilation_priority => 'events',
-# 						       initializers => [
-# 									{
-# 									 arguments => [],
-# 									 method => 'add_queuer',
-# 									},
-# 								       ],
-# 						       module_name => 'Heccer',
-# 						       package => 'Heccer::DES',
-# 						      },
 				      des => {
 					      compilation_priority => 'events',
 					      module_name => 'Heccer',

@@ -1,5 +1,5 @@
 Initiated
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/tensizesp)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -254,7 +254,7 @@ VM Membrane Potentials (pdVms[8]) : (-0.068)
 VM Membrane Potentials (pdVms[9]) : (-0.068)
 -------
 Iteration 0
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/tensizesp)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -509,7 +509,7 @@ VM Membrane Potentials (pdVms[8]) : (-0.0659991)
 VM Membrane Potentials (pdVms[9]) : (-0.0641646)
 -------
 Iteration 1
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/tensizesp)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -764,7 +764,7 @@ VM Membrane Potentials (pdVms[8]) : (-0.0631464)
 VM Membrane Potentials (pdVms[9]) : (-0.0609536)
 -------
 Iteration 2
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/tensizesp)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -1019,7 +1019,7 @@ VM Membrane Potentials (pdVms[8]) : (-0.0608038)
 VM Membrane Potentials (pdVms[9]) : (-0.0580159)
 -------
 Iteration 3
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/tensizesp)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -1274,7 +1274,7 @@ VM Membrane Potentials (pdVms[8]) : (-0.0582422)
 VM Membrane Potentials (pdVms[9]) : (-0.0552951)
 -------
 Iteration 4
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/tensizesp)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -1529,7 +1529,7 @@ VM Membrane Potentials (pdVms[8]) : (-0.0558623)
 VM Membrane Potentials (pdVms[9]) : (-0.0526871)
 -------
 Iteration 5
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/tensizesp)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -1784,7 +1784,7 @@ VM Membrane Potentials (pdVms[8]) : (-0.0534034)
 VM Membrane Potentials (pdVms[9]) : (-0.0501647)
 -------
 Iteration 6
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/tensizesp)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -2039,7 +2039,7 @@ VM Membrane Potentials (pdVms[8]) : (-0.0510148)
 VM Membrane Potentials (pdVms[9]) : (-0.0476881)
 -------
 Iteration 7
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/tensizesp)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -2294,7 +2294,7 @@ VM Membrane Potentials (pdVms[8]) : (-0.0485973)
 VM Membrane Potentials (pdVms[9]) : (-0.0452463)
 -------
 Iteration 8
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/tensizesp)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -2549,7 +2549,7 @@ VM Membrane Potentials (pdVms[8]) : (-0.0462084)
 VM Membrane Potentials (pdVms[9]) : (-0.0428238)
 -------
 Iteration 9
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/tensizesp)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)

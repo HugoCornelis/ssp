@@ -139,7 +139,7 @@ verbose: ~
 				command_tests => [
 						  {
 						   description => "What does the output look like when we use the Heccer dumper for an analyzer ?",
-						   read => 'Heccer (pcName) : (unnamed test)
+						   read => 'Heccer (pcName) : (/singlep)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)

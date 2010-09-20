@@ -1,5 +1,5 @@
 Initiated
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/purk_test)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -1327,7 +1327,7 @@ VM Membrane Potentials (pdVms[37]) : (-0.068)
 VM Membrane Potentials (pdVms[38]) : (-0.068)
 -------
 Iteration 0
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/purk_test)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -2655,7 +2655,7 @@ VM Membrane Potentials (pdVms[37]) : (-0.0675915)
 VM Membrane Potentials (pdVms[38]) : (-0.0672252)
 -------
 Iteration 1000
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/purk_test)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -3983,7 +3983,7 @@ VM Membrane Potentials (pdVms[37]) : (-0.0686176)
 VM Membrane Potentials (pdVms[38]) : (-0.0683938)
 -------
 Iteration 2000
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/purk_test)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
@@ -5311,7 +5311,7 @@ VM Membrane Potentials (pdVms[37]) : (-0.0566316)
 VM Membrane Potentials (pdVms[38]) : (-0.0589518)
 -------
 Final Iteration
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/purk_test)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)

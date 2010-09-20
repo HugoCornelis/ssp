@@ -1,5 +1,5 @@
 Initiated
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/purk_test_soma)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (96)
@@ -75,7 +75,7 @@ VM Axial Resistances (pdResults[1]) : (0)
 VM Membrane Potentials (pdVms[0]) : (-0.068)
 -------
 Iteration 0
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/purk_test_soma)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (96)
@@ -151,7 +151,7 @@ VM Axial Resistances (pdResults[1]) : (0)
 VM Membrane Potentials (pdVms[0]) : (-0.067956)
 -------
 Iteration 1000
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/purk_test_soma)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (96)
@@ -227,7 +227,7 @@ VM Axial Resistances (pdResults[1]) : (0)
 VM Membrane Potentials (pdVms[0]) : (-0.0519904)
 -------
 Iteration 2000
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/purk_test_soma)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (96)
@@ -303,7 +303,7 @@ VM Axial Resistances (pdResults[1]) : (0)
 VM Membrane Potentials (pdVms[0]) : (-0.0742413)
 -------
 Iteration 3000
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/purk_test_soma)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (96)
@@ -379,7 +379,7 @@ VM Axial Resistances (pdResults[1]) : (0)
 VM Membrane Potentials (pdVms[0]) : (-0.0649188)
 -------
 Iteration 4000
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/purk_test_soma)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (96)
@@ -455,7 +455,7 @@ VM Axial Resistances (pdResults[1]) : (0)
 VM Membrane Potentials (pdVms[0]) : (-0.0529188)
 -------
 Final Iteration
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/purk_test_soma)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (96)

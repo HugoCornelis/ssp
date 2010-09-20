@@ -19,7 +19,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a pool integrated correctly, one compartment, single pool case ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/pool1.txt`),
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/pool1.txt | perl -pe 's(unnamed test)(/pool1)g'`),
 						   timeout => 8,
 						  },
 						 ],
