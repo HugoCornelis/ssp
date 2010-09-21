@@ -1617,39 +1617,6 @@ sub run
 
     $self->salvage();
 
-#     # get initializers and simulation specifications, using defaults
-#     # where needed
-
-#     my $services
-# 	= $self->{apply}->{services}
-# 	    ||
-# 		[
-# 		 { method => 'instantiate_services', },
-# 		];
-
-#     my $modifiers = $self->{apply}->{modifiers} || [];
-
-#     my $initializers
-# 	= $self->{apply}->{initializers}
-# 	    || [
-# 		{ method => 'compile', },
-# 		{ method => 'instantiate_inputs', },
-# 		{ method => 'instantiate_outputs', },
-# 		{ method => 'initiate', },
-# 	       ],
-# 		   ;
-
-#     my $simulation = $self->{apply}->{simulation} || [];
-
-#     my $finishers
-# 	= $self->{apply}->{finishers}
-# 	    || [
-# 		{ method => 'finish', },
-# 	       ],
-# 		   ;
-
-#     my $results = $self->{apply}->{results} || [];
-
     # loop through the application_classes
 
     my $application_classes = $self->{application_classes};
