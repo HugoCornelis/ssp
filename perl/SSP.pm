@@ -3015,7 +3015,7 @@ sub new
 {
     my $package = shift;
 
-    my $options = shift;
+    my $options = shift || {};
 
     my $self = { %$options, };
 
