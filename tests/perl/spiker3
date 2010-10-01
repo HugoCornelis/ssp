@@ -61,6 +61,19 @@ sub main
 	= SSP->new(
 		   {
 		    apply => {
+			      results => [
+					  {
+					   arguments => [
+							 {
+							  commands => [ "cat /tmp/output_vm_source", ],
+							 },
+							 {
+							  commands => [ "cat /tmp/output_spike", ],
+							 },
+							],
+					   method => 'shell',
+					  },
+					 ],
 			      simulation => [
 					     {
 					      arguments => [ 10000, { verbose => 2, }, ],
@@ -100,10 +113,16 @@ sub main
 		    name => $modelname,
 		    outputclasses => {
 				      double_2_ascii => {
+							 compilation_priority => 'numerical',
 							 module_name => 'Experiment',
+							 options => {
+								     filename => "/tmp/output_vm_source",
+								     output_mode => 'steps',
+								    },
 							 package => 'Experiment::Output',
 							},
 				      event_2_ascii => {
+							compilation_priority => 'events',
 							module_name => 'Experiment',
 							options => {
 								    filename => "/tmp/output_spike",

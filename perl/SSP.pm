@@ -447,7 +447,7 @@ sub connect
 
 	if ($error)
 	{
-	    die "$0: connect failed for $schedulee->{name}";
+	    die "$0: connect failed for $schedulee->{name} ($error)";
 	}
     }
 
