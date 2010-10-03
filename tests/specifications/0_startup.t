@@ -23,7 +23,7 @@ my $test
 				description => "simple startup",
 			       },
 			      ],
-       description => "starting the Unix shell command",
+       description => "starting ssp from a unix command shell",
        name => '0_startup.t',
       };
 
