@@ -665,6 +665,78 @@ solverclasses:
 					     ? 0
 					     : "cannot load the neurospaces studio"),
 			       },
+			       {
+				arguments => [
+					      '--cell',
+					      'tests/networks/spiker3.ndf',
+					      '--time',
+					      '0.05',
+					      '--inject-magnitude',
+					      '1e-9',
+					      '--model-name',
+					      '/spiker3/source',
+					      '--output',
+					      '/spiker3/source/soma->Vm',
+					      '--emit-schedules',
+					     ],
+				command => './bin/ssp',
+				command_tests => [
+						  {
+						   description => "Can we use the cell builtin on a single cell in a network?",
+						   read => 'apply:
+  simulation:
+    - arguments:
+        - 0.05
+        - verbose: 0
+      method: advance
+models:
+  - modelname: /spiker3/source
+    runtime_parameters:
+      - component_name: /spiker3/source/segments/soma
+        field: INJECT
+        value: 1e-9
+        warn_only: \'the component_name is a default, its address may be wrong\'
+      - component_name: /spiker3/source/soma
+        field: INJECT
+        value: 1e-9
+        warn_only: \'the component_name is a default, its address may be wrong\'
+    solverclass: heccer
+name: \'builtin cell configuration, applied to: /spiker3/source\'
+optimize: \'by default turned on, ignored when running in verbose mode\'
+outputclasses:
+  double_2_ascii:
+    module_name: Experiment
+    options:
+      filename: ./output/spiker3/source.out
+    package: Experiment::Output
+outputs:
+  - component_name: /spiker3/source/soma
+    field: Vm
+    outputclass: double_2_ascii
+services:
+  model_container:
+    initializers:
+      - arguments:
+          -
+            - ./bin/ssp
+            - -P
+            - tests/networks/spiker3.ndf
+        method: read
+    model_library: /usr/local/neurospaces/models/library
+    module_name: Neurospaces
+solverclasses:
+  heccer:
+    module_name: Heccer
+    service_name: model_container
+',
+						   timeout => 5,
+						  },
+						 ],
+				description => "invocation of the neurospaces studio when using the cell builtin",
+				disabled => ($loaded
+					     ? 0
+					     : "cannot load the neurospaces studio"),
+			       },
 			      ],
        description => "cell builtin schedule",
        name => 'builtins/cell.t',
