@@ -736,6 +736,7 @@ solverclasses:
 						   timeout => 5,
 						  },
 						 ],
+				comment => 'the stimulation protocol used here is the same as in the other spiker test cases.',
 				description => "schedule after application of the cell builtin to a single cell in a network",
 			       },
 			       {
@@ -10763,6 +10764,7 @@ solverclasses:
 						   timeout => 5,
 						  },
 						 ],
+				comment => 'the stimulation protocol used here is the same as in the other spiker test cases.',
 				description => "application of the cell builtin to a single cell in a network",
 			       },
 			      ],
