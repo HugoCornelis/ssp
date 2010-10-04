@@ -682,7 +682,7 @@ solverclasses:
 				command => './bin/ssp',
 				command_tests => [
 						  {
-						   description => "Can we use the cell builtin on a single cell in a network?",
+						   description => "Can we apply the cell builtin to a single cell in a network?",
 						   read => 'apply:
   simulation:
     - arguments:
@@ -732,10 +732,7 @@ solverclasses:
 						   timeout => 5,
 						  },
 						 ],
-				description => "invocation of the neurospaces studio when using the cell builtin",
-				disabled => ($loaded
-					     ? 0
-					     : "cannot load the neurospaces studio"),
+				description => "application of the cell builtin to a single cell in a network",
 			       },
 			      ],
        description => "cell builtin schedule",
