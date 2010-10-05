@@ -685,7 +685,9 @@ solverclasses:
 				command_tests => [
 						  {
 						   description => "What is the schedule when we apply the cell builtin to a single cell in a network?",
-						   read => 'apply:
+						   read => [
+							    '-re',
+							    'apply:
   simulation:
     - arguments:
         - 0.01
@@ -720,7 +722,7 @@ services:
     initializers:
       - arguments:
           -
-            - ./bin/ssp
+            - (.*?)/bin/ssp
             - -P
             - tests/networks/spiker3.ndf
         method: read
@@ -733,6 +735,7 @@ solverclasses:
     module_name: Heccer
     service_name: model_container
 ',
+							   ],
 						   timeout => 5,
 						  },
 						 ],
