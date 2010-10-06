@@ -44,6 +44,7 @@ options:
     --inject-delay       delay of the current injection protocol.
     --inject-duration    duration of the current injection protocol.
     --inject-magnitude   amount of current injected into the soma.
+    --inject-site        site of current injection.
     --model-directory    name of the directory where to look for non-std models.
     --model-filename     filename of the model description file \(when using a builtin configuration\).
     --model-name         name of the model \(when using a builtin configuration\).
@@ -97,28 +98,57 @@ options:
 .*ssp: run simulations, given an ssp configuration, or using a builtin configuration
 
 Known builtin configurations:
-
-
-cell:
-
-
-	Simulate a single neuron model, default is to output the membrane potential of the soma.
-	Use the options to inject current in the soma \(--inject-magnitude\), or alternatively
-	to set a command voltage \(--perfectclamp\).
-	The model\'s soma segment must reside in a SEGMENT_GROUP with name \"segments\".
-
-        The name of the model neuron is inferred from the name of the model description file.
-        \(e.g. a model description file called "examples/hh_neuron.ndf" is assumed to define a model neuron
-        called \"hh_neuron\"\).
-
-Additional Options Overriding Internal Default Settings:
-
-	--model-name overwrite the default model name.
-	--steps sets number of steps
-
-Example usage: ssp --cell examples/hh_neuron.ndf
-', ],
+',
+							   ],
 						   timeout => 3,
+						  },
+						  {
+						   description => "What are the builtin simulation configuration templates ?",
+						   read => '
+
+---
+cell: |+2
+  
+  	Simulate a single neuron model.  Default is to output the membrane potential of the soma.
+  	Use the options to inject current in the soma (--inject-magnitude), or alternatively
+  	to set a command voltage (--perfectclamp).
+  	The model\'s soma segment can reside inside a SEGMENT_GROUP with name "segments",
+  	or alternatively reside inside the cell with name the name of the model neuron.
+  
+          The name of the model neuron is inferred from the name of the model description file.
+          (e.g. a model description file called "examples/hh_neuron.ndf" is assumed to define a model neuron
+          called "hh_neuron").
+  
+  Additional Options Overriding Internal Default Settings:
+  
+  	--model-name overwrite the default model name.
+  	--steps sets number of steps
+  	--time-step time step
+  
+  Example usage: ssp --cell examples/hh_neuron.ndf
+  
+
+network: |+2
+  
+  	Simulate a network model.  Default is to output the membrane potential of the soma of all
+          the neurons in the network.
+  	Use the options to inject current in the soma (--inject-magnitude) of some of the neurons,
+  	or alternatively to set a command voltages (--perfectclamp).
+  	The model\'s soma segment must reside in a SEGMENT_GROUP with name "segments".
+  
+          The name of the model network is inferred from the name of the model description file.
+          (e.g. a model description file called "examples/rsnet.ndf" is assumed to define a model network
+          called "rsnet").
+  
+  Additional Options Overriding Internal Default Settings:
+  
+  	--model-name overwrite the default model name.
+  	--steps sets number of steps
+  	--time-step time step
+  
+  Example usage: ssp --network examples/rsnet.ndf
+  
+',
 						  },
 						 ],
 				description => "builtin configuration message",

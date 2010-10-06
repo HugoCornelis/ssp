@@ -65,9 +65,10 @@ my $option_emit_output = [];
 my $option_emit_schedules;
 my $option_history;
 my $option_history_timestamps;
-my $option_inject_delay;
-my $option_inject_duration;
-my $option_inject_magnitude;
+my $option_inject_delay = [];
+my $option_inject_duration = [];
+my $option_inject_magnitude = [];
+my $option_inject_site = [];
 my $option_model_directory;
 my $option_model_filename;
 my $option_model_name;
@@ -110,10 +111,11 @@ my $builtin_configurations
 					],
 			 },
 		usage => '
-	Simulate a single neuron model, default is to output the membrane potential of the soma.
+	Simulate a single neuron model.  Default is to output the membrane potential of the soma.
 	Use the options to inject current in the soma (--inject-magnitude), or alternatively
 	to set a command voltage (--perfectclamp).
-	The model\'s soma segment must reside in a SEGMENT_GROUP with name "segments".
+	The model\'s soma segment can reside inside a SEGMENT_GROUP with name "segments",
+	or alternatively reside inside the cell with name the name of the model neuron.
 
         The name of the model neuron is inferred from the name of the model description file.
         (e.g. a model description file called "examples/hh_neuron.ndf" is assumed to define a model neuron
@@ -123,10 +125,44 @@ Additional Options Overriding Internal Default Settings:
 
 	--model-name overwrite the default model name.
 	--steps sets number of steps
+	--time-step time step
 
 Example usage: ssp --cell examples/hh_neuron.ndf
+
+
 ',
 	       },
+       network => {
+		   apply => {
+			     simulation => [
+					    {
+					     arguments => [ 0, { verbose => $option_verbose, }, ],
+					     method => 'steps',
+					    },
+					   ],
+			    },
+		   usage => '
+	Simulate a network model.  Default is to output the membrane potential of the soma of all
+        the neurons in the network.
+	Use the options to inject current in the soma (--inject-magnitude) of some of the neurons,
+	or alternatively to set a command voltages (--perfectclamp).
+	The model\'s soma segment must reside in a SEGMENT_GROUP with name "segments".
+
+        The name of the model network is inferred from the name of the model description file.
+        (e.g. a model description file called "examples/rsnet.ndf" is assumed to define a model network
+        called "rsnet").
+
+Additional Options Overriding Internal Default Settings:
+
+	--model-name overwrite the default model name.
+	--steps sets number of steps
+	--time-step time step
+
+Example usage: ssp --network examples/rsnet.ndf
+
+
+',
+		  },
       };
 
 
@@ -469,22 +505,22 @@ sub main
 
 	my $runtime_parameters;
 
-	if ($option_inject_magnitude
-	    and !$option_inject_delay
-	    and !$option_inject_duration)
+	if ($option_inject_magnitude->[0]
+	    and !$option_inject_delay->[0]
+	    and !$option_inject_duration->[0])
 	{
 	    $runtime_parameters
 		= [
 		   {
 		    component_name => "$model_root/segments/soma",
 		    field => 'INJECT',
-		    value => $option_inject_magnitude,
+		    value => $option_inject_magnitude->[0],
 		    warn_only => 'the component_name is a default, its address may be wrong',
 		   },
 		   {
 		    component_name => "$model_root/soma",
 		    field => 'INJECT',
-		    value => $option_inject_magnitude,
+		    value => $option_inject_magnitude->[0],
 		    warn_only => 'the component_name is a default, its address may be wrong',
 		   },
 		  ];
@@ -981,7 +1017,7 @@ sub main
 	# setting the number of steps cannot be combined with inject duration and delay
 
 	if (defined $option_steps
-	    and (defined $option_inject_delay or defined $option_inject_duration))
+	    and (defined $option_inject_delay->[0] or defined $option_inject_duration->[0]))
 	{
 	    die "$0: option inject-delay and option inject-duration cannot be combined with option steps";
 	}
@@ -997,24 +1033,24 @@ sub main
 
 	if (defined $option_time)
 	{
-	    if (not defined $option_inject_delay and not defined $option_inject_duration)
+	    if (not defined $option_inject_delay->[0] and not defined $option_inject_duration->[0])
 	    {
 		$apply_time->{simulation}->[0]->{arguments}->[0] = $option_time;
 	    }
 	    else
 	    {
-		if (!defined $option_inject_delay)
+		if (!defined $option_inject_delay->[0])
 		{
-		    $option_inject_delay = 0;
+		    $option_inject_delay->[0] = 0;
 		}
 
-		my $time_termination = $option_time - $option_inject_delay - $option_inject_duration;
+		my $time_termination = $option_time - $option_inject_delay->[0] - $option_inject_duration->[0];
 
 		$apply_time
 		    = {
 		       simulation => [
 				      {
-				       arguments => [ $option_inject_delay, { verbose => 0, }, ],
+				       arguments => [ $option_inject_delay->[0], { verbose => 0, }, ],
 				       method => 'advance',
 				      },
 				      {
@@ -1023,13 +1059,13 @@ sub main
 						      component_name => "$model_root/segments/soma",
 						      field => 'INJECT',
 						      modelname => "$model_root",
-						      value => $option_inject_magnitude,
+						      value => $option_inject_magnitude->[0],
 						     },
 						    ],
 				       method => 'apply_runtime_parameters',
 				      },
 				      {
-				       arguments => [ $option_inject_duration, { verbose => 0, }, ],
+				       arguments => [ $option_inject_duration->[0], { verbose => 0, }, ],
 				       method => 'advance',
 				      },
 				      {
@@ -1103,9 +1139,10 @@ sub read_cmd_line
 	     "help!" => \$option_help,
 	     "history!" => \$option_history,
 	     "history-timestamps!" => \$option_history_timestamps,
-	     "inject-delay=s" => \$option_inject_delay,
-	     "inject-duration=s" => \$option_inject_duration,
-	     "inject-magnitude=s" => \$option_inject_magnitude,
+	     "inject-delay=s" => $option_inject_delay,
+	     "inject-duration=s" => $option_inject_duration,
+	     "inject-magnitude=s" => $option_inject_magnitude,
+	     "inject-site=s" => $option_inject_site,
 	     "model-directory=s" => \$option_model_directory,
 	     "model-filename=s" => \$option_model_filename,
 	     "model-name=s" => \$option_model_name,
@@ -1174,6 +1211,7 @@ options:
     --inject-delay       delay of the current injection protocol.
     --inject-duration    duration of the current injection protocol.
     --inject-magnitude   amount of current injected into the soma.
+    --inject-site        site of current injection.
     --model-directory    name of the directory where to look for non-std models.
     --model-filename     filename of the model description file (when using a builtin configuration).
     --model-name         name of the model (when using a builtin configuration).
@@ -1221,13 +1259,9 @@ Known builtin configurations:
 
 ";
 
-	foreach my $builtin_configuration_name (keys %$builtin_configurations)
-	{
-	    print "\n$builtin_configuration_name:\n\n";
+	use YAML;
 
-	    print $builtin_configurations->{$builtin_configuration_name}->{usage};
-
-	}
+	print Dump( { map { $_ => $builtin_configurations->{$_}->{usage}, } keys %$builtin_configurations, }, );
 
 	print "\n";
 
