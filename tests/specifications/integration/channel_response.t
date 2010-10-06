@@ -99,12 +99,13 @@ solverclasses:
   heccer:
     module_name: Heccer
     service_name: model_container
-usage: \|2
+usage: \|\+2
   
-  	Simulate a single neuron model, default is to output the membrane potential of the soma.
+  	Simulate a single neuron model.  Default is to output the membrane potential of the soma.
   	Use the options to inject current in the soma \(--inject-magnitude\), or alternatively
   	to set a command voltage \(--perfectclamp\).
-  	The model\'s soma segment must reside in a SEGMENT_GROUP with name "segments".
+  	The model\'s soma segment can reside inside a SEGMENT_GROUP with name "segments",
+  	or alternatively reside inside the cell with name the name of the model neuron.
   
           The name of the model neuron is inferred from the name of the model description file.
           \(e.g. a model description file called "examples/hh_neuron.ndf" is assumed to define a model neuron
@@ -114,8 +115,11 @@ usage: \|2
   
   	--model-name overwrite the default model name.
   	--steps sets number of steps
+  	--time-step time step
   
   Example usage: ssp --cell examples/hh_neuron.ndf
+  
+
 verbose: ~
 ',
 							   ],

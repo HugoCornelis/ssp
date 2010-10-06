@@ -278,6 +278,297 @@ sub execute
 }
 
 
+sub define_dumpers
+{
+    my $self = shift;
+
+    my $model_name = shift;
+
+    my $extended = shift;
+
+    use Heccer;
+
+    my $extended_dump_selection
+	= ($SwiggableHeccer::HECCER_DUMP_INDEXERS_SUMMARY
+	   + $SwiggableHeccer::HECCER_DUMP_INDEXERS_STRUCTURE
+	   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_COMPARTMENTS_PARAMETERS
+	   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_COMPARTMENT_SUMMARY
+	   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_MECHANISM_SUMMARY
+	   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_STRUCTURE
+	   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_SUMMARY
+	   + $SwiggableHeccer::HECCER_DUMP_TABLE_GATE_SUMMARY
+	   + $SwiggableHeccer::HECCER_DUMP_TABLE_GATE_TABLES
+	   + $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
+	   + $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX_DIAGONALS
+	   + $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
+	   + $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
+	   + $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
+	   + $SwiggableHeccer::HECCER_DUMP_VM_CHANNEL_POOL_FLUXES
+	   + $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+	   + $SwiggableHeccer::HECCER_DUMP_VM_AGGREGATORS);
+
+    $self->{analyzers}
+	= {
+	   dumper => {
+		      module_name => 'Heccer',
+		      package => 'Heccer::Dumper',
+		      initializers => [
+				       {
+					arguments => [
+						      { source => "model_container::/$model_name", },
+
+						      #! If I am correct, the next arguments are FILE* (undef for NULL), and dump selection
+
+						      undef,
+
+						      ($extended
+						       ? $extended_dump_selection
+						       : undef),
+						     ],
+					method => 'dump',
+				       },
+				      ],
+		     },
+	  };
+}
+
+
+sub define_input
+{
+    my $self = shift;
+
+    my $perfectclamp_inputclassname = shift;
+
+    my $command = shift;
+
+    my $model_component = shift;
+
+    my $inputclass
+	= {
+	   module_name => "Experiment",
+	   options => {
+		       command => $command,
+		       name => "perfectclamp set to $command",
+		      },
+	   package => "Experiment::PerfectClamp",
+	  };
+
+    $self->{inputclasses}->{$perfectclamp_inputclassname} = $inputclass;
+
+    my $inputs
+	= [
+	   {
+	    component_name => $model_component,
+	    field => "Vm",
+	    inputclass => $perfectclamp_inputclassname,
+	   },
+	  ];
+
+    if (!defined $self->{inputs})
+    {
+	$self->{inputs} = [];
+    }
+
+    push @{$self->{inputs}}, @$inputs;
+}
+
+
+sub define_models
+{
+    my $self = shift;
+
+    my $model_root = shift;
+
+    my $model_name = shift;
+
+    my $solverclass = shift;
+
+    # link model name with solver class
+
+    my $models
+	= [
+	   {
+	    modelname => $model_root,
+	    solverclass => $solverclass,
+	   },
+	  ];
+
+    # fill in granular parameters for this model
+
+    my $runtime_parameters;
+
+    if ($option_inject_magnitude->[0]
+	and !$option_inject_delay->[0]
+	and !$option_inject_duration->[0])
+    {
+	$runtime_parameters
+	    = [
+	       {
+		component_name => "$model_root/segments/soma",
+		field => 'INJECT',
+		value => $option_inject_magnitude->[0],
+		warn_only => 'the component_name is a default, its address may be wrong',
+	       },
+	       {
+		component_name => "$model_root/soma",
+		field => 'INJECT',
+		value => $option_inject_magnitude->[0],
+		warn_only => 'the component_name is a default, its address may be wrong',
+	       },
+	      ];
+    }
+    else
+    {
+	$runtime_parameters
+	    = [
+	      ];
+    }
+
+    $runtime_parameters
+	= [
+	   @$runtime_parameters,
+	   map
+	   {
+	       my $setting = $_;
+
+	       $setting =~ m/^(.*)->(.*)=(.*)$/;
+
+	       my $component_name = $1;
+
+	       my $field = $2;
+
+	       my $value = $3;
+
+	       my $result
+		   = {
+		      component_name => $component_name,
+		      field => $field,
+		      value => $value,
+		     };
+
+	       $result;
+	   }
+	   @$option_parameters,
+	  ];
+
+    $models->[0]->{runtime_parameters} = $runtime_parameters;
+
+    # fill in the model section of the schedule
+
+    $self->{models} = $models;
+}
+
+
+sub define_services
+{
+    my $self = shift;
+
+    my $model_name = shift;
+
+    my $model_filename = shift;
+
+    my $spine_prototype = shift;
+
+    my $services
+	= {
+	   model_container => {
+			       module_name => 'Neurospaces',
+			      },
+	  };
+
+    # if this is a neurospaces .ndf file
+
+    if ($model_filename =~ m(\.ndf$))
+    {
+	# use the 'read' method to initialize the model container
+
+	my $args = [ "$0", "-P", ];
+
+	push @$args, $model_filename;
+
+	$services->{model_container}->{initializers}
+	    = [
+	       {
+		arguments => [ $args, ],
+		method => 'read',
+	       },
+	      ];
+    }
+
+    # else a true morphology file
+
+    else
+    {
+	# use the 'load' method to initializer the model container
+
+	#! this will also convert .p and .swc files respecting the
+	#! conversion library.
+
+	my $args = [ "$0", "-P", ];
+
+	$services->{model_container}->{initializers}
+	    = [
+	       {
+		arguments => [
+			      {
+			       filename => $model_filename,
+			       spine_prototype => $spine_prototype,
+			      },
+			      $args,
+			     ],
+		method => 'load',
+	       },
+	      ];
+
+    }
+
+    $self->{services} = $services;
+}
+
+
+sub define_solverclasses
+{
+    my $self = shift;
+
+    my $solverclass_name = shift;
+
+    my $time_step = shift;
+
+    my $solverclasses
+	= {
+	   heccer => {
+# 		      constructor_settings => {
+# 					       dStep => (2e-5),
+# 					       configuration => {
+# 								 reporting => {
+# 									       granularity => 1000,
+# 									       tested_things => (
+# 												 $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
+# 												 | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
+# 												 | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
+# 												 | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
+# 												 | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
+# 												 | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+# 												),
+# 									      },
+# 								},
+# 					      },
+		      module_name => $solverclass_name,
+		      service_name => 'model_container',
+		     },
+	  };
+
+    if (defined $time_step)
+    {
+	$solverclasses->{heccer}->{constructor_settings}->{dStep} = $time_step;
+    }
+
+    # fill in solver class in the schedule
+
+    $self->{solverclasses} = $solverclasses;
+}
+
+
 sub main
 {
     read_cmd_line();
@@ -330,121 +621,6 @@ sub main
 	    }
 	}
 
-	# construct a schedule from a builtin
-
-	my $scheduler = clone($builtin_configurations->{cell});
-
-	# assign name
-
-	$scheduler->{name} = "builtin cell configuration, applied to: $option_model_name";
-
-	# install dumper analyzers
-
-	if ($option_dump)
-	{
-	    use Heccer;
-
-	    my $extended_dump_selection
-		= ($SwiggableHeccer::HECCER_DUMP_INDEXERS_SUMMARY
-		   + $SwiggableHeccer::HECCER_DUMP_INDEXERS_STRUCTURE
-		   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_COMPARTMENTS_PARAMETERS
-		   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_COMPARTMENT_SUMMARY
-		   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_MECHANISM_SUMMARY
-		   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_STRUCTURE
-		   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_SUMMARY
-		   + $SwiggableHeccer::HECCER_DUMP_TABLE_GATE_SUMMARY
-		   + $SwiggableHeccer::HECCER_DUMP_TABLE_GATE_TABLES
-		   + $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
-		   + $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX_DIAGONALS
-		   + $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
-		   + $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
-		   + $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
-		   + $SwiggableHeccer::HECCER_DUMP_VM_CHANNEL_POOL_FLUXES
-		   + $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
-		   + $SwiggableHeccer::HECCER_DUMP_VM_AGGREGATORS);
-
-	    $scheduler->{analyzers}
-		= {
-		   dumper => {
-			      module_name => 'Heccer',
-			      package => 'Heccer::Dumper',
-			      initializers => [
-					       {
-						arguments => [
-							      { source => "model_container::/$option_model_name", },
-
-							      #! If I am correct, the next arguments are FILE* (undef for NULL), and dump selection
-
-							      undef,
-
-							      ($option_dump_extended
-							       ? $extended_dump_selection
-							       : undef),
-							     ],
-						method => 'dump',
-					       },
-					      ],
-			     },
-		  };
-	}
-
-	# process service options
-
-	my $services
-	    = {
-	       model_container => {
-				   module_name => 'Neurospaces',
-				  },
-	      };
-
-	# if this is a neurospaces .ndf file
-
-	if  ($option_model_filename =~ m(\.ndf$))
-	{
-	    # use the 'read' method to initialize the model container
-
-	    my $args = [ "$0", "-P", ];
-
-	    push @$args, $option_model_filename;
-
-	    $services->{model_container}->{initializers}
-		= [
-		   {
-		    arguments => [ $args, ],
-		    method => 'read',
-		   },
-		  ];
-	}
-
-	# else a true morphology file
-
-	else
-	{
-	    # use the 'load' method to initializer the model container
-
-	    #! this will also convert .p and .swc files respecting the
-	    #! conversion library.
-
-	    my $args = [ "$0", "-P", ];
-
-	    $services->{model_container}->{initializers}
-		= [
-		   {
-		    arguments => [
-				  {
-				   filename => $option_model_filename,
-				   spine_prototype => $option_spine_prototype,
-				  },
-				  $args,
-				 ],
-		    method => 'load',
-		   },
-		  ];
-
-	}
-
-	$scheduler->{services} = $services;
-
 	# infer the model name
 
 	my $model_root = $option_model_name;
@@ -458,150 +634,40 @@ sub main
 	    $model_root = "/$model_root";
 	}
 
-	# link model name with solver class
+	# construct a schedule from a builtin
 
-	my $models
-	    = [
-	       {
-		modelname => $model_root,
-		solverclass => $option_solverclass,
-	       },
-	      ];
+	my $scheduler = clone($builtin_configurations->{cell});
 
-	# fill in granular parameters for this model
+	# assign name
 
-	my $runtime_parameters;
+	$scheduler->{name} = "builtin cell configuration, applied to: $option_model_name";
 
-	if ($option_inject_magnitude->[0]
-	    and !$option_inject_delay->[0]
-	    and !$option_inject_duration->[0])
+	# install dumper analyzers
+
+	if ($option_dump)
 	{
-	    $runtime_parameters
-		= [
-		   {
-		    component_name => "$model_root/segments/soma",
-		    field => 'INJECT',
-		    value => $option_inject_magnitude->[0],
-		    warn_only => 'the component_name is a default, its address may be wrong',
-		   },
-		   {
-		    component_name => "$model_root/soma",
-		    field => 'INJECT',
-		    value => $option_inject_magnitude->[0],
-		    warn_only => 'the component_name is a default, its address may be wrong',
-		   },
-		  ];
-	}
-	else
-	{
-	    $runtime_parameters
-		= [
-		  ];
+	    define_dumpers($scheduler, $option_model_name, $option_dump_extended);
 	}
 
-	$runtime_parameters
-	    = [
-	       @$runtime_parameters,
-	       map
-	       {
-		   my $setting = $_;
+	# process service options
 
-		   $setting =~ m/^(.*)->(.*)=(.*)$/;
+	define_services($scheduler, $option_model_name, $option_model_filename, $option_spine_prototype);
 
-		   my $component_name = $1;
+	# configure models
 
-		   my $field = $2;
+	define_models($scheduler, $model_root, $option_model_name, $option_solverclass);
 
-		   my $value = $3;
-
-		   my $result
-		       = {
-			  component_name => $component_name,
-			  field => $field,
-			  value => $value,
-			 };
-
-		   $result;
-	       }
-	       @$option_parameters,
-	      ];
-
-	$models->[0]->{runtime_parameters} = $runtime_parameters;
-
-	# fill in the model section of the schedule
-
-	$scheduler->{models} = $models;
-
-	# define the solver class
+	# define the solver classes
 
 	my $option_solverclass_name = 'Heccer';
 
-	my $solverclasses
-	    = {
-	       heccer => {
-# 			  constructor_settings => {
-# 						   dStep => (2e-5),
-# 						   configuration => {
-# 								     reporting => {
-# 										   granularity => 1000,
-# 										   tested_things => (
-# 												     $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
-# 												     | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
-# 												     | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
-# 												     | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
-# 												     | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
-# 												     | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
-# 												    ),
-# 										  },
-# 								    },
-# 						  },
-			  module_name => $option_solverclass_name,
-			  service_name => 'model_container',
-			 },
-	      };
-
-	if (defined $option_time_step)
-	{
-	    $solverclasses->{heccer}->{constructor_settings}->{dStep} = $option_time_step;
-	}
-
-	# fill in solver class in the schedule
-
-	$scheduler->{solverclasses} = $solverclasses;
+	define_solverclasses($scheduler, $option_solverclass_name, $option_time_step);
 
 	# define inputclasses and inputs according to the options
 
 	if (defined $option_perfectclamp)
 	{
-	    my $perfectclamp_inputclassname = "perfectclamp";
-
-	    my $inputclass
-		= {
-		   module_name => "Experiment",
-		   options => {
-			       command => $option_perfectclamp,
-			       name => "perfectclamp set to $option_perfectclamp",
-			      },
-		   package => "Experiment::PerfectClamp",
-		  };
-
-	    my $inputs
-		= [
-		   {
-		    component_name => "$model_root/segments/soma",
-		    field => "Vm",
-		    inputclass => $perfectclamp_inputclassname,
-		   },
-		  ];
-
-	    $scheduler->{inputclasses}->{$perfectclamp_inputclassname} = $inputclass;
-
-	    if (!defined $scheduler->{inputs})
-	    {
-		$scheduler->{inputs} = [];
-	    }
-
-	    push @{$scheduler->{inputs}}, @$inputs;
+	    define_input($scheduler, "perfectclamp", $option_perfectclamp, "$model_root/segments/soma");
 	}
 
 	if (defined $option_pulsegen_width1)
@@ -1226,7 +1292,7 @@ sub main
 	    $model_root = "/$model_root";
 	}
 
-	# link model name with solver class
+	#t link model components with solver classes
 
 	my $models
 	    = [
