@@ -468,26 +468,6 @@ sub main
 	       },
 	      ];
 
-	# no conceptual parameters, has been obsoleted
-
-# 	my $conceptual_parameters
-# 	    = [
-# 	       {
-# 		component_name => 'thickd::gaba::/Purk_GABA',
-# 		description => 'endogenous activity',
-# 		field => 'FREQUENCY',
-# 		value => '1',
-# 	       },
-# 	       {
-# 		component_name => 'spine::/Purk_spine/head/par',
-# 		description => 'endogenous activity',
-# 		field => 'FREQUENCY',
-# 		value => '25',
-# 	       },
-# 	      ];
-
-# 	$models->[0]->{conceptual_parameters} = $conceptual_parameters;
-
 	# fill in granular parameters for this model
 
 	my $runtime_parameters;
@@ -1092,6 +1072,771 @@ sub main
     }
     elsif ($option_template_network)
     {
+	if (!defined $option_model_filename)
+	{
+	    $option_model_filename = $option_template_network;
+	}
+
+	if (!defined $option_model_name)
+	{
+	    $option_model_filename =~ m((.*)\.(ndf|p|swc))i;
+
+	    $option_model_name = $1;
+
+	    $option_model_name =~ s(.*/)();
+
+	    if (!defined $option_model_name)
+	    {
+		system "$0 --help";
+
+		die "option_model_name cannot be determined from the option_model_filename due to a regex mismatch, bailing out";
+	    }
+
+	    if ($option_verbose)
+	    {
+		print "Inferring model name from $option_model_filename, model name set to $option_model_name\nUse the --model-name option to overwrite\n";
+	    }
+	}
+
+	# construct a schedule from a builtin
+
+	my $scheduler = clone($builtin_configurations->{network});
+
+	# assign name
+
+	$scheduler->{name} = "builtin network configuration, applied to: $option_model_name";
+
+	# install dumper analyzers
+
+	if ($option_dump)
+	{
+	    use Heccer;
+
+	    my $extended_dump_selection
+		= ($SwiggableHeccer::HECCER_DUMP_INDEXERS_SUMMARY
+		   + $SwiggableHeccer::HECCER_DUMP_INDEXERS_STRUCTURE
+		   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_COMPARTMENTS_PARAMETERS
+		   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_COMPARTMENT_SUMMARY
+		   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_MECHANISM_SUMMARY
+		   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_STRUCTURE
+		   + $SwiggableHeccer::HECCER_DUMP_INTERMEDIARY_SUMMARY
+		   + $SwiggableHeccer::HECCER_DUMP_TABLE_GATE_SUMMARY
+		   + $SwiggableHeccer::HECCER_DUMP_TABLE_GATE_TABLES
+		   + $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
+		   + $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX_DIAGONALS
+		   + $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
+		   + $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
+		   + $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
+		   + $SwiggableHeccer::HECCER_DUMP_VM_CHANNEL_POOL_FLUXES
+		   + $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+		   + $SwiggableHeccer::HECCER_DUMP_VM_AGGREGATORS);
+
+	    $scheduler->{analyzers}
+		= {
+		   dumper => {
+			      module_name => 'Heccer',
+			      package => 'Heccer::Dumper',
+			      initializers => [
+					       {
+						arguments => [
+							      { source => "model_container::/$option_model_name", },
+
+							      #! If I am correct, the next arguments are FILE* (undef for NULL), and dump selection
+
+							      undef,
+
+							      ($option_dump_extended
+							       ? $extended_dump_selection
+							       : undef),
+							     ],
+						method => 'dump',
+					       },
+					      ],
+			     },
+		  };
+	}
+
+	# process service options
+
+	my $services
+	    = {
+	       model_container => {
+				   module_name => 'Neurospaces',
+				  },
+	      };
+
+	# if this is a neurospaces .ndf file
+
+	if  ($option_model_filename =~ m(\.ndf$))
+	{
+	    # use the 'read' method to initialize the model container
+
+	    my $args = [ "$0", "-P", ];
+
+	    push @$args, $option_model_filename;
+
+	    $services->{model_container}->{initializers}
+		= [
+		   {
+		    arguments => [ $args, ],
+		    method => 'read',
+		   },
+		  ];
+	}
+
+	# else a true morphology file
+
+	else
+	{
+	    # use the 'load' method to initializer the model container
+
+	    #! this will also convert .p and .swc files respecting the
+	    #! conversion library.
+
+	    my $args = [ "$0", "-P", ];
+
+	    $services->{model_container}->{initializers}
+		= [
+		   {
+		    arguments => [
+				  {
+				   filename => $option_model_filename,
+				   spine_prototype => $option_spine_prototype,
+				  },
+				  $args,
+				 ],
+		    method => 'load',
+		   },
+		  ];
+
+	}
+
+	$scheduler->{services} = $services;
+
+	# infer the model name
+
+	my $model_root = $option_model_name;
+
+	# add an initial slash to the model name if necessary
+
+	if ($model_root !~ m|^/|)
+	{
+	    print "adding an initial slash to the model name $model_root\n";
+
+	    $model_root = "/$model_root";
+	}
+
+	# link model name with solver class
+
+	my $models
+	    = [
+	       {
+		modelname => $model_root,
+		solverclass => $option_solverclass,
+	       },
+	      ];
+
+	# fill in granular parameters for this model
+
+	my $runtime_parameters;
+
+	if ($option_inject_magnitude->[0]
+	    and !$option_inject_delay->[0]
+	    and !$option_inject_duration->[0])
+	{
+	    $runtime_parameters
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => 'INJECT',
+		    value => $option_inject_magnitude->[0],
+		    warn_only => 'the component_name is a default, its address may be wrong',
+		   },
+		   {
+		    component_name => "$model_root/soma",
+		    field => 'INJECT',
+		    value => $option_inject_magnitude->[0],
+		    warn_only => 'the component_name is a default, its address may be wrong',
+		   },
+		  ];
+	}
+	else
+	{
+	    $runtime_parameters
+		= [
+		  ];
+	}
+
+	$runtime_parameters
+	    = [
+	       @$runtime_parameters,
+	       map
+	       {
+		   my $setting = $_;
+
+		   $setting =~ m/^(.*)->(.*)=(.*)$/;
+
+		   my $component_name = $1;
+
+		   my $field = $2;
+
+		   my $value = $3;
+
+		   my $result
+		       = {
+			  component_name => $component_name,
+			  field => $field,
+			  value => $value,
+			 };
+
+		   $result;
+	       }
+	       @$option_parameters,
+	      ];
+
+	$models->[0]->{runtime_parameters} = $runtime_parameters;
+
+	# fill in the model section of the schedule
+
+	$scheduler->{models} = $models;
+
+	# define the solver class
+
+	my $option_solverclass_name = 'Heccer';
+
+	my $solverclasses
+	    = {
+	       heccer => {
+# 			  constructor_settings => {
+# 						   dStep => (2e-5),
+# 						   configuration => {
+# 								     reporting => {
+# 										   granularity => 1000,
+# 										   tested_things => (
+# 												     $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
+# 												     | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
+# 												     | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
+# 												     | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
+# 												     | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
+# 												     | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+# 												    ),
+# 										  },
+# 								    },
+# 						  },
+			  module_name => $option_solverclass_name,
+			  service_name => 'model_container',
+			 },
+	      };
+
+	if (defined $option_time_step)
+	{
+	    $solverclasses->{heccer}->{constructor_settings}->{dStep} = $option_time_step;
+	}
+
+	# fill in solver class in the schedule
+
+	$scheduler->{solverclasses} = $solverclasses;
+
+	# define inputclasses and inputs according to the options
+
+	if (defined $option_perfectclamp)
+	{
+	    my $perfectclamp_inputclassname = "perfectclamp";
+
+	    my $inputclass
+		= {
+		   module_name => "Experiment",
+		   options => {
+			       command => $option_perfectclamp,
+			       name => "perfectclamp set to $option_perfectclamp",
+			      },
+		   package => "Experiment::PerfectClamp",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $perfectclamp_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$perfectclamp_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+	if (defined $option_pulsegen_width1)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Experiment",
+		   options => {
+			       command => $option_pulsegen_width1,
+			       name => "pulsegen set to $option_pulsegen_width1",
+			      },
+		   package => "Experiment::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+
+	if (defined $option_pulsegen_level1)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Experiment",
+		   options => {
+			       command => $option_pulsegen_level1,
+			       name => "pulsegen set to $option_pulsegen_level1",
+			      },
+		   package => "Experiment::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+	if (defined $option_pulsegen_delay1)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Experiment",
+		   options => {
+			       command => $option_pulsegen_delay1,
+			       name => "pulsegen set to $option_pulsegen_delay1",
+			      },
+		   package => "Experiment::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+	if (defined $option_pulsegen_width2)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Experiment",
+		   options => {
+			       command => $option_pulsegen_width2,
+			       name => "pulsegen set to $option_pulsegen_width2",
+			      },
+		   package => "Experiment::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+
+	if (defined $option_pulsegen_level2)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Experiment",
+		   options => {
+			       command => $option_pulsegen_level2,
+			       name => "pulsegen set to $option_pulsegen_level2",
+			      },
+		   package => "Experiment::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+	if (defined $option_pulsegen_delay2)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Experiment",
+		   options => {
+			       command => $option_pulsegen_delay2,
+			       name => "pulsegen set to $option_pulsegen_delay2",
+			      },
+		   package => "Experiment::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+
+	if (defined $option_pulsegen_baselevel)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Experiment",
+		   options => {
+			       command => $option_pulsegen_baselevel,
+			       name => "pulsegen set to $option_pulsegen_baselevel",
+			      },
+		   package => "Experiment::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+
+	if (defined $option_pulsegen_triggermode)
+	{
+	    my $pulsegen_inputclassname = "pulsegen";
+
+	    my $inputclass
+		= {
+		   module_name => "Experiment",
+		   options => {
+			       command => $option_pulsegen_triggermode,
+			       name => "pulsegen set to $option_pulsegen_triggermode",
+			      },
+		   package => "Experiment::Pulsegen",
+		  };
+
+	    my $inputs
+		= [
+		   {
+		    component_name => "$model_root/segments/soma",
+		    field => "Vm",
+		    inputclass => $pulsegen_inputclassname,
+		   },
+		  ];
+
+	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
+
+	    if (!defined $scheduler->{inputs})
+	    {
+		$scheduler->{inputs} = [];
+	    }
+
+	    push @{$scheduler->{inputs}}, @$inputs;
+	}
+
+
+	# define an output filename
+
+	my $option_output_directory = './output';
+
+	my $option_output_filename = $option_output_directory . $model_root . ".out";
+
+	# create the directory for the output file
+
+	$option_output_filename =~ m((.*)/);
+
+	my $directory = $1;
+
+	if ($1)
+	{
+	    `mkdir -p "$1"`;
+	}
+
+	# we use the output package of the experiment software component
+
+	my $option_output_package = "Experiment" . '::' . 'Output';
+
+	# assemble output class definition
+
+	my $outputclasses
+	    = {
+	       double_2_ascii => {
+				  module_name => "Experiment",
+				  options => {
+					      filename => $option_output_filename,
+					     },
+				  package => $option_output_package,
+				 },
+	      };
+
+	# fill in the output class in the schedule
+
+	$scheduler->{outputclasses} = $outputclasses;
+
+	# link the model outputs with the output class
+
+	if (!@$option_output_fields)
+	{
+	    $option_output_fields = [ "$model_root/segments/soma->Vm", ];
+	}
+
+	my $outputs
+	    = [
+	       map
+	       {
+		   my $address = $_;
+
+		   if ($address !~ m/^(.*)->(.*)$/)
+		   {
+		       die "$0: unknown output specification $address.  Output specifications must be in the format 'component_name'->'field_name' (eg. --output '/Purkinje/segments/soma->Vm')";
+		   }
+
+		   my $component_name = $1;
+
+		   my $field = $2;
+
+		   if ($component_name !~ /^\//)
+		   {
+		       $component_name = "/$component_name";
+		   }
+
+		   my $result
+		       = {
+			  component_name => $component_name,
+			  field => $field,
+			  outputclass => 'double_2_ascii',
+			 };
+
+		   $result;
+	       }
+	       @$option_output_fields,
+	      ];
+
+	$scheduler->{outputs} = $outputs;
+
+	# set the apply options
+
+	# set verbosity level
+
+	my $apply
+	    = {
+	       simulation => [
+			      {
+			       arguments => [ 0, { verbose => 0, }, ],
+			       method => 'steps',
+			      },
+			     ],
+	      };
+
+	my $apply_time
+	    = {
+	       simulation => [
+			      {
+			       arguments => [ 0, { verbose => 0, }, ],
+			       method => 'advance',
+			      },
+			     ],
+	      };
+
+	if (defined $option_verbose)
+	{
+	    $apply->{simulation}->[0]->{arguments}->[1]->{verbose} = $option_verbose;
+	}
+
+	# setting the number of steps cannot be combined with inject duration and delay
+
+	if (defined $option_steps
+	    and (defined $option_inject_delay->[0] or defined $option_inject_duration->[0]))
+	{
+	    die "$0: option inject-delay and option inject-duration cannot be combined with option steps";
+	}
+
+	# set number of steps
+
+	if (defined $option_steps)
+	{
+	    $apply->{simulation}->[0]->{arguments}->[0] = $option_steps;
+	}
+
+	# set simulation time
+
+	if (defined $option_time)
+	{
+	    if (not defined $option_inject_delay->[0] and not defined $option_inject_duration->[0])
+	    {
+		$apply_time->{simulation}->[0]->{arguments}->[0] = $option_time;
+	    }
+	    else
+	    {
+		if (!defined $option_inject_delay->[0])
+		{
+		    $option_inject_delay->[0] = 0;
+		}
+
+		my $time_termination = $option_time - $option_inject_delay->[0] - $option_inject_duration->[0];
+
+		$apply_time
+		    = {
+		       simulation => [
+				      {
+				       arguments => [ $option_inject_delay->[0], { verbose => 0, }, ],
+				       method => 'advance',
+				      },
+				      {
+				       arguments => [
+						     {
+						      component_name => "$model_root/segments/soma",
+						      field => 'INJECT',
+						      modelname => "$model_root",
+						      value => $option_inject_magnitude->[0],
+						     },
+						    ],
+				       method => 'apply_runtime_parameters',
+				      },
+				      {
+				       arguments => [ $option_inject_duration->[0], { verbose => 0, }, ],
+				       method => 'advance',
+				      },
+				      {
+				       arguments => [
+						     {
+						      component_name => "$model_root/segments/soma",
+						      field => 'INJECT',
+						      modelname => "$model_root",
+						      value => 0,
+						     },
+						    ],
+				       method => 'apply_runtime_parameters',
+				      },
+				      {
+				       arguments => [ $time_termination, { verbose => 0, }, ],
+				       method => 'advance',
+				      },
+				     ],
+		      };
+	    }
+	}
+
+	defined $option_steps
+	    ? $scheduler->{apply} = $apply
+		: $scheduler->{apply} = $apply_time;
+
+	# dump the schedule
+
+	if ($option_verbose)
+	{
+	    print Dump("Running schedule") . Dump($scheduler);
+	}
+
+	# and run it
+
+	schedule($scheduler);
     }
 
     # now emit all the output files
