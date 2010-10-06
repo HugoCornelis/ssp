@@ -56,7 +56,6 @@ $SIG{__DIE__}
     };
 
 
-my $option_configuration_cell;
 my $option_daemonize;
 my $option_debug;
 my $option_dump;
@@ -78,19 +77,21 @@ my $option_optimize;
 my $option_output_fields = [];
 my $option_parameters = [];
 my $option_perfectclamp; 
-my $option_pulsegen_level1;
-my $option_pulsegen_width1;
-my $option_pulsegen_delay1;
-my $option_pulsegen_level2;
-my $option_pulsegen_width2;
-my $option_pulsegen_delay2;
 my $option_pulsegen_baselevel;
+my $option_pulsegen_delay1;
+my $option_pulsegen_delay2;
+my $option_pulsegen_level1;
+my $option_pulsegen_level2;
 my $option_pulsegen_triggermode;
+my $option_pulsegen_width1;
+my $option_pulsegen_width2;
 my $option_set_name;
 my $option_set_outputclass_filename;
 my $option_solverclass = 'heccer';
 my $option_spine_prototype;
 my $option_steps;
+my $option_template_cell;
+my $option_template_network;
 my $option_time = 0.050;
 my $option_time_step;
 my $option_transformator = "";
@@ -299,25 +300,13 @@ sub main
 
     # if using one of the builtin configurations
 
-    if ($option_configuration_cell)
+    use Clone qw(clone);
+
+    if ($option_template_cell)
     {
-# 	if (!defined $option_model_filename)
-# 	{
-# 	    system "$0 --help";
-
-# 	    die "option_model_name must be set when using the 'cell' builtin configuration without a filename";
-# 	}
-
-# 	if (!defined $option_model_filename)
-# 	{
-# 	    system "$0 --help";
-
-# 	    die "option_model_filename must be set when using a builtin configuration";
-# 	}
-
 	if (!defined $option_model_filename)
 	{
-	    $option_model_filename = $option_configuration_cell;
+	    $option_model_filename = $option_template_cell;
 	}
 
 	if (!defined $option_model_name)
@@ -342,8 +331,6 @@ sub main
 	}
 
 	# construct a schedule from a builtin
-
-	use Clone qw(clone);
 
 	my $scheduler = clone($builtin_configurations->{cell});
 
@@ -1103,6 +1090,9 @@ sub main
 
 	schedule($scheduler);
     }
+    elsif ($option_template_network)
+    {
+    }
 
     # now emit all the output files
 
@@ -1129,7 +1119,7 @@ sub read_cmd_line
 	= GetOptions
 	    (
 	     "builtins!" => \$option_builtins,
-	     "cell=s" => \$option_configuration_cell,
+	     "cell=s" => \$option_template_cell,
 	     "daemonize!" => \$option_daemonize,
 	     "debug=s" => \$option_debug,
 	     "dump!" => \$option_dump,
@@ -1146,6 +1136,7 @@ sub read_cmd_line
 	     "model-directory=s" => \$option_model_directory,
 	     "model-filename=s" => \$option_model_filename,
 	     "model-name=s" => \$option_model_name,
+	     "network=s" => \$option_template_network,
 	     "neurospaces-models=s" => \$option_neurospaces_models,
 	     "neurospaces-studio" => \$option_neurospaces_studio,
 	     "optimize!" => \$option_optimize,
@@ -1184,7 +1175,8 @@ sub read_cmd_line
     if ($option_help
 	|| !@ARGV
 	&& !$option_builtins
-	&& !$option_configuration_cell)
+	&& !$option_template_cell
+	&& !$option_template_network)
     {
 	print
 	    "
@@ -1195,8 +1187,7 @@ $0: run simulations, given an ssp configuration, or using a builtin configuratio
 try $0 --builtins for information of how to run a simulation easily
 
 options:
-    --builtins           give help about supported builtin configurations.
-    --cell               use the cell builtin configuration, requires the cell model filename as argument.
+    --builtins           give help about supported builtin simulation configurations.
     --daemonize          detach from terminal, close shared resources and run in the background,
                          note that this option currently inhibits any feedback of the process,
                          so be cautious with it.
@@ -1230,6 +1221,8 @@ options:
     --pulsegen-delay2    set the pulse delay for the pulsegen protocol.
     --pulsegen-baselevel set the pulse base level for the pulsegen protocol.
     --pulsegen-triggermode  set the triggermode for the pulsegen protocol.
+    --s-cell             simulate a single cell, requires the cell model filename as argument.
+    --s-network          simulate a network, requires the network model filename as argument.
     --set-name           overwrite the schedule name with the name of the file that contains the schedule.
     --set-outputclass-filename
                          overwrite the outputclass filename with something derived from the name of the

@@ -28,8 +28,7 @@ my $test
 try .*ssp --builtins for information of how to run a simulation easily
 
 options:
-    --builtins           give help about supported builtin configurations.
-    --cell               use the cell builtin configuration, requires the cell model filename as argument.
+    --builtins           give help about supported builtin simulation configurations.
     --daemonize          detach from terminal, close shared resources and run in the background,
                          note that this option currently inhibits any feedback of the process,
                          so be cautious with it.
@@ -63,6 +62,8 @@ options:
     --pulsegen-delay2    set the pulse delay for the pulsegen protocol.
     --pulsegen-baselevel set the pulse base level for the pulsegen protocol.
     --pulsegen-triggermode  set the triggermode for the pulsegen protocol.
+    --s-cell             simulate a single cell, requires the cell model filename as argument.
+    --s-network          simulate a network, requires the network model filename as argument.
     --set-name           overwrite the schedule name with the name of the file that contains the schedule.
     --set-outputclass-filename
                          overwrite the outputclass filename with something derived from the name of the
