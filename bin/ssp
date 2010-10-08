@@ -670,14 +670,14 @@ sub main
 	    define_input_perfectclamp($scheduler, "perfectclamp", $option_perfectclamp, "$model_root/segments/soma");
 	}
 
-	if ($option_pulsegen_baselevel
-	    || $option_pulsegen_delay1
-	    || $option_pulsegen_delay2
-	    || $option_pulsegen_level1
-	    || $option_pulsegen_level2
-	    || $option_pulsegen_triggermode
-	    || $option_pulsegen_width1
-	    || $option_pulsegen_width2)
+	if (defined $option_pulsegen_baselevel
+	    or defined $option_pulsegen_delay1
+	    or defined $option_pulsegen_delay2
+	    or defined $option_pulsegen_level1
+	    or defined $option_pulsegen_level2
+	    or defined $option_pulsegen_triggermode
+	    or defined $option_pulsegen_width1
+	    or defined $option_pulsegen_width2)
 	{
 	    # define the pulsegen input class and input with default options
 
