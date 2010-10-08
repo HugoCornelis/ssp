@@ -333,7 +333,7 @@ sub define_dumpers
 }
 
 
-sub define_input
+sub define_input_perfectclamp
 {
     my $self = shift;
 
@@ -667,21 +667,36 @@ sub main
 
 	if (defined $option_perfectclamp)
 	{
-	    define_input($scheduler, "perfectclamp", $option_perfectclamp, "$model_root/segments/soma");
+	    define_input_perfectclamp($scheduler, "perfectclamp", $option_perfectclamp, "$model_root/segments/soma");
 	}
 
-	if (defined $option_pulsegen_width1)
+	if ($option_pulsegen_baselevel
+	    || $option_pulsegen_delay1
+	    || $option_pulsegen_delay2
+	    || $option_pulsegen_level1
+	    || $option_pulsegen_level2
+	    || $option_pulsegen_triggermode
+	    || $option_pulsegen_width1
+	    || $option_pulsegen_width2)
 	{
+	    # define the pulsegen input class and input with default options
+
 	    my $pulsegen_inputclassname = "pulsegen";
 
 	    my $inputclass
 		= {
-		   module_name => "Experiment",
+		   module_name => 'Experiment',
 		   options => {
-			       command => $option_pulsegen_width1,
-			       name => "pulsegen set to $option_pulsegen_width1",
+			       level1 => 50.0,
+			       width1 => 3.0,
+			       delay1 => 5.0,
+			       level2 => -20.0,
+			       width2 => 5.0,
+			       delay2 => 8.0,
+			       baselevel => 10.0,
+			       triggermode => 2,
 			      },
-		   package => "Experiment::Pulsegen",
+		   package => 'Experiment::PulseGen',
 		  };
 
 	    my $inputs
@@ -693,72 +708,45 @@ sub main
 		   },
 		  ];
 
-	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
-
-	    if (!defined $scheduler->{inputs})
+	    if (defined $option_pulsegen_width1)
 	    {
-		$scheduler->{inputs} = [];
+		$inputclass->{options}->{width1} = $option_pulsegen_width1;
 	    }
 
-	    push @{$scheduler->{inputs}}, @$inputs;
-	}
-
-
-	if (defined $option_pulsegen_level1)
-	{
-	    my $pulsegen_inputclassname = "pulsegen";
-
-	    my $inputclass
-		= {
-		   module_name => "Experiment",
-		   options => {
-			       command => $option_pulsegen_level1,
-			       name => "pulsegen set to $option_pulsegen_level1",
-			      },
-		   package => "Experiment::Pulsegen",
-		  };
-
-	    my $inputs
-		= [
-		   {
-		    component_name => "$model_root/segments/soma",
-		    field => "Vm",
-		    inputclass => $pulsegen_inputclassname,
-		   },
-		  ];
-
-	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
-
-	    if (!defined $scheduler->{inputs})
+	    if (defined $option_pulsegen_level1)
 	    {
-		$scheduler->{inputs} = [];
+		$inputclass->{options}->{level1} = $option_pulsegen_level1;
 	    }
 
-	    push @{$scheduler->{inputs}}, @$inputs;
-	}
+	    if (defined $option_pulsegen_delay1)
+	    {
+		$inputclass->{options}->{delay1} = $option_pulsegen_delay1;
+	    }
 
-	if (defined $option_pulsegen_delay1)
-	{
-	    my $pulsegen_inputclassname = "pulsegen";
+	    if (defined $option_pulsegen_width2)
+	    {
+		$inputclass->{options}->{width2} = $option_pulsegen_width2;
+	    }
 
-	    my $inputclass
-		= {
-		   module_name => "Experiment",
-		   options => {
-			       command => $option_pulsegen_delay1,
-			       name => "pulsegen set to $option_pulsegen_delay1",
-			      },
-		   package => "Experiment::Pulsegen",
-		  };
+	    if (defined $option_pulsegen_level2)
+	    {
+		$inputclass->{options}->{level2} = $option_pulsegen_level2;
+	    }
 
-	    my $inputs
-		= [
-		   {
-		    component_name => "$model_root/segments/soma",
-		    field => "Vm",
-		    inputclass => $pulsegen_inputclassname,
-		   },
-		  ];
+	    if (defined $option_pulsegen_delay2)
+	    {
+		$inputclass->{options}->{delay2} = $option_pulsegen_delay2;
+	    }
+
+	    if (defined $option_pulsegen_baselevel)
+	    {
+		$inputclass->{options}->{baselevel} = $option_pulsegen_baselevel;
+	    }
+
+	    if (defined $option_pulsegen_triggermode)
+	    {
+		$inputclass->{options}->{triggermode} = $option_pulsegen_triggermode;
+	    }
 
 	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
 
@@ -769,175 +757,6 @@ sub main
 
 	    push @{$scheduler->{inputs}}, @$inputs;
 	}
-
-	if (defined $option_pulsegen_width2)
-	{
-	    my $pulsegen_inputclassname = "pulsegen";
-
-	    my $inputclass
-		= {
-		   module_name => "Experiment",
-		   options => {
-			       command => $option_pulsegen_width2,
-			       name => "pulsegen set to $option_pulsegen_width2",
-			      },
-		   package => "Experiment::Pulsegen",
-		  };
-
-	    my $inputs
-		= [
-		   {
-		    component_name => "$model_root/segments/soma",
-		    field => "Vm",
-		    inputclass => $pulsegen_inputclassname,
-		   },
-		  ];
-
-	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
-
-	    if (!defined $scheduler->{inputs})
-	    {
-		$scheduler->{inputs} = [];
-	    }
-
-	    push @{$scheduler->{inputs}}, @$inputs;
-	}
-
-
-	if (defined $option_pulsegen_level2)
-	{
-	    my $pulsegen_inputclassname = "pulsegen";
-
-	    my $inputclass
-		= {
-		   module_name => "Experiment",
-		   options => {
-			       command => $option_pulsegen_level2,
-			       name => "pulsegen set to $option_pulsegen_level2",
-			      },
-		   package => "Experiment::Pulsegen",
-		  };
-
-	    my $inputs
-		= [
-		   {
-		    component_name => "$model_root/segments/soma",
-		    field => "Vm",
-		    inputclass => $pulsegen_inputclassname,
-		   },
-		  ];
-
-	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
-
-	    if (!defined $scheduler->{inputs})
-	    {
-		$scheduler->{inputs} = [];
-	    }
-
-	    push @{$scheduler->{inputs}}, @$inputs;
-	}
-
-	if (defined $option_pulsegen_delay2)
-	{
-	    my $pulsegen_inputclassname = "pulsegen";
-
-	    my $inputclass
-		= {
-		   module_name => "Experiment",
-		   options => {
-			       command => $option_pulsegen_delay2,
-			       name => "pulsegen set to $option_pulsegen_delay2",
-			      },
-		   package => "Experiment::Pulsegen",
-		  };
-
-	    my $inputs
-		= [
-		   {
-		    component_name => "$model_root/segments/soma",
-		    field => "Vm",
-		    inputclass => $pulsegen_inputclassname,
-		   },
-		  ];
-
-	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
-
-	    if (!defined $scheduler->{inputs})
-	    {
-		$scheduler->{inputs} = [];
-	    }
-
-	    push @{$scheduler->{inputs}}, @$inputs;
-	}
-
-
-	if (defined $option_pulsegen_baselevel)
-	{
-	    my $pulsegen_inputclassname = "pulsegen";
-
-	    my $inputclass
-		= {
-		   module_name => "Experiment",
-		   options => {
-			       command => $option_pulsegen_baselevel,
-			       name => "pulsegen set to $option_pulsegen_baselevel",
-			      },
-		   package => "Experiment::Pulsegen",
-		  };
-
-	    my $inputs
-		= [
-		   {
-		    component_name => "$model_root/segments/soma",
-		    field => "Vm",
-		    inputclass => $pulsegen_inputclassname,
-		   },
-		  ];
-
-	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
-
-	    if (!defined $scheduler->{inputs})
-	    {
-		$scheduler->{inputs} = [];
-	    }
-
-	    push @{$scheduler->{inputs}}, @$inputs;
-	}
-
-
-	if (defined $option_pulsegen_triggermode)
-	{
-	    my $pulsegen_inputclassname = "pulsegen";
-
-	    my $inputclass
-		= {
-		   module_name => "Experiment",
-		   options => {
-			       command => $option_pulsegen_triggermode,
-			       name => "pulsegen set to $option_pulsegen_triggermode",
-			      },
-		   package => "Experiment::Pulsegen",
-		  };
-
-	    my $inputs
-		= [
-		   {
-		    component_name => "$model_root/segments/soma",
-		    field => "Vm",
-		    inputclass => $pulsegen_inputclassname,
-		   },
-		  ];
-
-	    $scheduler->{inputclasses}->{$pulsegen_inputclassname} = $inputclass;
-
-	    if (!defined $scheduler->{inputs})
-	    {
-		$scheduler->{inputs} = [];
-	    }
-
-	    push @{$scheduler->{inputs}}, @$inputs;
-	}
-
 
 	# define an output filename
 
