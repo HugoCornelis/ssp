@@ -1,6 +1,6 @@
 file /usr/bin/perl
-# set args -d:ptkdb ./tests/perl/spiker3
-set args ./tests/perl/spiker3
+# set args -d:ptkdb ./tests/perl/spiker4
+set args ./tests/perl/spiker4
 # b swig_pq_set
 # b HeccerConstruct
 # b HeccerConnect

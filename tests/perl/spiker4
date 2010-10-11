@@ -78,7 +78,7 @@ sub main
 					  {
 					   arguments => [
 							 {
-							  commands => [ "cat /tmp/output_vm", ],
+							  commands => [ "cat /tmp/output_vm_source1", ],
 							 },
 							 {
 							  commands => [ "cat /tmp/output_spike", ],
@@ -111,34 +111,40 @@ sub main
 			       {
 				runtime_parameters => [
 							{
-							 component_name => "/$modelname/source/soma",
+							 component_name => "/$modelname/source1/soma",
 							 field => 'INJECT',
 							 value => 2e-9,
 							},
 						       ],
-				modelname => "/$modelname/source",
+				modelname => "/$modelname/source1",
 				solverclass => "heccer",
 			       },
-# 			       {
-# 				modelname => "/$modelname/target1",
-# 				solverclass => "heccer",
-# 			       },
-# 			       {
-# 				modelname => "/$modelname/target2",
-# 				solverclass => "heccer",
-# 			       },
+			       {
+				modelname => "/$modelname/target1",
+				solverclass => "heccer",
+			       },
+			       {
+				modelname => "/$modelname/target2",
+				solverclass => "heccer",
+			       },
+			       {
+				modelname => "/$modelname/projection1",
+				solverclass => "des",
+			       },
 			      ],
 		    name => $modelname,
 		    outputclasses => {
 				      double_2_ascii => {
+							 compilation_priority => 'numerical',
 							 module_name => 'Experiment',
 							 options => {
-								     filename => "/tmp/output_vm",
+								     filename => "/tmp/output_vm_source1",
 								     output_mode => 'steps',
 								    },
 							 package => 'Experiment::Output',
 							},
 				      event_2_ascii => {
+							compilation_priority => 'events',
 							module_name => 'Experiment',
 							options => {
 								    filename => "/tmp/output_spike",
@@ -148,15 +154,12 @@ sub main
 				     },
 		    outputs => [
 				{
-				 component_name => "/$modelname/source/soma",
+				 component_name => "/$modelname/source1/soma",
 				 field => 'Vm',
 				 outputclass => 'double_2_ascii',
 				},
-
-				# this one defines the connection between the heccer spikegen and event output object
-
 				{
-				 component_name => "/$modelname/source/soma/spikegen",
+				 component_name => "/$modelname/source1/soma/spikegen",
 				 field => 'spike',
 				 outputclass => 'event_2_ascii',
 				},
@@ -170,11 +173,11 @@ sub main
 								      },
 								     ],
 						     module_name => 'Neurospaces',
-						     order => 1,
 						    },
 				},
 		    solverclasses => {
 				      heccer => {
+						 compilation_priority => 'numerical',
 						 constructor_settings => {
 									  dStep => (1e-6),
 									  configuration => {
@@ -182,11 +185,13 @@ sub main
 													  granularity => 10000,
 													  tested_things => (
 															    $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
+# 															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
 															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX_DIAGONALS
 															    | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
 															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
 															    | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
 															    | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+# 															    | $SwiggableHeccer::iHECCER_DUMP_ALL_EXTENDED
 															   ),
 													 },
 											   },
@@ -194,6 +199,23 @@ sub main
 						 module_name => 'Heccer',
 						 service_name => 'model_container',
 						},
+				      des => {
+					      compilation_priority => 'events',
+					      constructor_settings => {
+								       configuration => {
+											 reporting => {
+												       granularity => 10000,
+												       tested_things => (
+															 $SwiggableHeccer::DES_DUMP_ALL
+# 															 | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
+															),
+												      },
+											},
+								      },
+					      module_name => 'Heccer',
+					      package => 'Heccer::DES',
+					      service_name => 'model_container',
+					     },
 				     },
 		   },
 		  );

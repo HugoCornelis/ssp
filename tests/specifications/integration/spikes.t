@@ -56,7 +56,6 @@ my $test
 						 ],
 				comment => 'See also in heccer: tests/code/spiker2 and the previous test',
 				description => "single source, single spike, multiple targets",
-# 				disabled => 'working on it',
 			       },
 			       {
 				arguments => [
@@ -64,15 +63,13 @@ my $test
 				command => 'tests/perl/spiker4',
 				command_tests => [
 						  {
-						   description => "Is a single spike reported properly, single spike ?",
-						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/spiker1.txt | perl -pe 's/spiker1/unnamed test/g'`),
+						   description => "Is a single spike reported properly, single source, single spike, multiple targets ?",
+						   read => (join '', `cat /usr/local/heccer/tests/specifications/strings/spiker2.txt | perl -pe 's(source)(/spiker4/source1)g' | perl -pe 's(target1)(/spiker4/target1)g' | perl -pe 's(target2)(/spiker4/target2)g'`),
 						   timeout => 18,
 						  },
 						 ],
-				comment => "This case is the same as spiker1 above, but without an event_distributor.",
-				description => "sodium and potassium channel, single spike (2)",
-				disabled => 'working on it',
-				numerical_compare => 'arithmetic rounding differences due to the model container arithmetic',
+				comment => 'See also in heccer: tests/code/spiker2 and the previous test',
+				description => "double source of which one activated, single spike, multiple targets",
 			       },
 			      ],
        description => "spiking behaviour",
