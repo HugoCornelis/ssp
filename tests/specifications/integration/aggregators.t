@@ -35,7 +35,7 @@ my $test
 				 command_tests => [
 						   {
 						    description => "Are single channel currents summed correctly, double compartment case ?",
-						    read => (join '', `cat /usr/local/heccer/tests/specifications/strings/doublea-aggregator.txt | perl -pe 's(unnamed test)(/doublea_aggregator)g`),
+						    read => (join '', `cat /usr/local/heccer/tests/specifications/strings/doublea-aggregator.txt | perl -pe 's(unnamed test)(/doublea_aggregator)g'`),
 						    timeout => 10,
 						   },
 						  ],
@@ -48,7 +48,7 @@ my $test
 				 command_tests => [
 						   {
 						    description => "Are single channel currents summed correctly, single compartment, three aggregators ?",
-						    read => (join '', `cat /usr/local/heccer/tests/specifications/strings/addressing-aggregator1.txt | perl -pe 's(unnamed test)(/addressing_aggregator1)g`),
+						    read => (join '', `cat /usr/local/heccer/tests/specifications/strings/addressing-aggregator1.txt | perl -pe 's(unnamed test)(/addressing_aggregator1)g'`),
 						    timeout => 10,
 						   },
 						  ],
