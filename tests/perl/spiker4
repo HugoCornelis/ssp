@@ -88,7 +88,7 @@ sub main
 					  },
 					 ],
 			      simulation => [
-					     ($ARGV[0]
+					     ($ARGV[0] and 0
 					      ? (
 						 {
 						  arguments => [ $0, ],
@@ -119,6 +119,22 @@ sub main
 				modelname => "/$modelname/source1",
 				solverclass => "heccer",
 			       },
+			       ($ARGV[0]
+				? (
+				   {
+				    runtime_parameters => [
+							   {
+							    component_name => "/$modelname/source2/soma",
+							    field => 'INJECT',
+							    value => 2e-9,
+							   },
+							  ],
+				    modelname => "/$modelname/source2",
+				    solverclass => "heccer",
+				   },
+				  )
+				: ()
+			       ),
 			       {
 				modelname => "/$modelname/target1",
 				solverclass => "heccer",
