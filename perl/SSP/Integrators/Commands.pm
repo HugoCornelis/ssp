@@ -112,7 +112,7 @@ sub ssp_save_help
 {
     print "description: save a model to an ssp file.\n";
 
-    print "synopsis: ssp_save <element_name> <filename>\n";
+    print "synopsis: ssp_save <element_name> [ <filename> ]\n";
 
     return "*** Ok";
 }

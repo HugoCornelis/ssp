@@ -1897,10 +1897,20 @@ sub save
 
     require YAML;
 
-    eval
+    if (defined $filename)
     {
-	YAML::DumpFile($filename, $schedule);
-    };
+	eval
+	{
+	    YAML::DumpFile($filename, $schedule);
+	};
+    }
+    else
+    {
+	eval
+	{
+	    print YAML::Dump($schedule);
+	};
+    }
 
     return $@;
 }
