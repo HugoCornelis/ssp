@@ -1,0 +1,124 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb -w
+#
+
+use strict;
+
+
+$| = 1;
+
+
+BEGIN
+{
+    #! make check
+
+    push @INC, '../perl';
+
+    #! make distcheck
+
+    push @INC, '../../perl';
+
+    #! normal run
+
+    push @INC, './perl';
+
+    #! after install
+
+    push @INC, '/usr/local/glue/swig/perl';
+}
+
+
+use SSP;
+
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+$ENV{NEUROSPACES_NMC_MODELS} = '/usr/local/neurospaces/models/library';
+
+
+sub main
+{
+    # model specification array
+
+    my $modelname = $0;
+
+    $modelname =~ s/.*\///;
+
+    $modelname =~ s/-/_/g;
+
+    my $args = [ "$0", "-P", "chemesis/$modelname.ndf" ];
+
+    # instantiate a scheduler
+
+    my $scheduler
+	= SSP->new(
+		   {
+		    apply => {
+			      simulation => [
+					     {
+					      arguments => [ 1000, { verbose => 2, }, ],
+					      method => 'steps',
+					     },
+# 					     {
+# 					      arguments => [ 0.1, ],
+# 					      method => 'advance',
+# 					     },
+					    ],
+			     },
+		    models => [
+			       {
+				modelname => "/$modelname",
+				solverclass => "chemesis3",
+			       },
+			      ],
+		    name => $modelname,
+		    services => {
+				 model_container => {
+						     initializers => [
+								      {
+								       arguments => [ $args, ],
+								       method => 'read',
+								      },
+								     ],
+						     module_name => 'Neurospaces',
+						    },
+				},
+		    solverclasses => {
+				      chemesis3 => {
+						    module_name => 'Chemesis3',
+						    service_name => 'model_container',
+						   },
+				     },
+		   },
+		  );
+
+    use YAML;
+
+    my $scheduler_yaml;
+
+    {
+	local $/;
+
+	if (-e "./yaml/$modelname.yml")
+	{
+	    $scheduler_yaml = Load(`cat ./yaml/$modelname.yml`);
+	}
+    }
+
+    # run the schedule
+
+    $scheduler->run();
+}
+
+
+main();
+
+
+exit 0;
+
+

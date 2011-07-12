@@ -3,6 +3,7 @@ file /usr/bin/perl
 set args ./tests/perl/spiker4
 set args ./../bin/ssp '--optimize' '--cell' 'cells/purkinje/edsjb1994.ndf' '--model-name' '/Purkinje' '--inject-magnitude' '1e-9' '--emit-output' 'output/Purkinje.out'
 set args ./tests/perl/hardcoded-tables2
+set args ./tests/perl/cal1
 # b swig_pq_set
 # b HeccerConstruct
 # b HeccerConnect
