@@ -77,6 +77,36 @@ sub main
 			       },
 			      ],
 		    name => $modelname,
+		    outputclasses => {
+				      double_2_ascii => {
+							 module_name => 'Experiment',
+							 options => {
+								     filename => "/tmp/output",
+								     format => ' %.3f',
+								     output_mode => 'steps',
+								    },
+							 package => 'Experiment::Output',
+							},
+				     },
+		    outputs => [
+				(
+				 {
+				  component_name => "/$modelname/somaCa",
+				  field => 'concentration',
+				  outputclass => 'double_2_ascii',
+				 },
+				 {
+				  component_name => "/$modelname/somaCabuf",
+				  field => 'concentration',
+				  outputclass => 'double_2_ascii',
+				 },
+				 {
+				  component_name => "/$modelname/somabuf",
+				  field => 'concentration',
+				  outputclass => 'double_2_ascii',
+				 },
+				),
+			       ],
 		    services => {
 				 model_container => {
 						     initializers => [

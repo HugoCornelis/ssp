@@ -3,15 +3,6 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '	my $service = $self->{services}->{$solverclasses->{$solverclass}->{service_name}};
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 350
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
                                   'text' => '	my $compilation_result = $engine->compile($self);
 ',
                                   'fname' => 'perl/SSP.pm',
@@ -30,15 +21,6 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
-                                  'text' => '    my $engine
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => '2361'
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
                                   'text' => '	my $error = $schedulee->connect($self);
 ',
                                   'fname' => 'perl/SSP.pm',
@@ -48,20 +30,20 @@ $files = {
                                 {
                                   'expr' => undef,
                                   'value' => '1',
+                                  'text' => '    my $engine
+',
+                                  'fname' => 'perl/SSP.pm',
+                                  'type' => 'user',
+                                  'line' => 2361
+                                },
+                                {
+                                  'expr' => undef,
+                                  'value' => '1',
                                   'text' => '	my $error = $object->$method($peer, @$arguments);
 ',
                                   'fname' => 'perl/SSP.pm',
                                   'type' => 'user',
                                   'line' => 1752
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	    $ssp_service = SSP::Service->new( { backend => $backend, scheduler => $self, }, );
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 1228
                                 }
                               ]
          };
