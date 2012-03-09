@@ -650,7 +650,14 @@ sub get_time_step
 
     # loop over all schedulees
 
-    my $schedule = $self->{schedule};
+    my $schedule = $self->{schedule} || [];
+
+    if (!@$schedule)
+    {
+	print "$0: *** Warning: Attempt to determine the time step of an empty schedule\n";
+
+	return $result;
+    }
 
     foreach my $schedulee (@$schedule)
     {
