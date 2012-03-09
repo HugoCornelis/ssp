@@ -91,9 +91,7 @@ html-upload-prepare:
 html-upload: html-upload-prepare
 	scp -pr html/htdocs/* hcornelis,neurospaces@web.sourceforge.net:/home/groups/n/ne/neurospaces/htdocs/
 
-##t use $(swigdir) here
-
-#perldir = $(prefix)/glue/swig/perl
+#perldir = @PMDIR@
 
 #perl_HEADERS = perl/SSP.pm ssp_test.pm
 
