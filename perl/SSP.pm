@@ -1904,7 +1904,8 @@ sub save
 
     require YAML;
 
-    if (defined $filename)
+    if (defined $filename
+	and ($filename ne 'STDOUT')
     {
 	eval
 	{
