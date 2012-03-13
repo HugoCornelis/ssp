@@ -310,6 +310,12 @@ sub compile
 
     my $models = $self->{models};
 
+    if (! defined $models
+	or !@$models)
+    {
+	warn "$0: *** Warning: Cannot run a schedule without models.";
+    }
+
     foreach my $model (@$models)
     {
 	if (!defined $solverclasses->{$model->{solverclass}}->{compilation_priority})
