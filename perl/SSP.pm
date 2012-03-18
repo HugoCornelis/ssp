@@ -1886,7 +1886,8 @@ sub save
 
     foreach my $model (@{$schedule->{models}})
     {
-	if (!@{$model->{runtime_parameters}})
+	if (!$model->{runtime_parameters}
+	    or !@{$model->{runtime_parameters}})
 	{
 	    delete $model->{runtime_parameters};
 	}

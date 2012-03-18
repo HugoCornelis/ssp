@@ -1,25 +1,41 @@
 $files = {
-           '_<perl/SSP.pm' => [
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '    $result = $engine->compile();
+           '_<tests/perl/pool2' => [
+                                     {
+                                       'expr' => undef,
+                                       'value' => '1',
+                                       'text' => '    $scheduler->run();
 ',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => '426'
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '    my $engine
+                                       'fname' => 'tests/perl/pool2',
+                                       'type' => 'user',
+                                       'line' => '133'
+                                     }
+                                   ],
+           '_</usr/local/share/perl/5.10.1/SSP.pm' => [
+                                                        {
+                                                          'expr' => undef,
+                                                          'value' => '1',
+                                                          'text' => '    if ($@)
 ',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 407
-                                }
-                              ]
+                                                          'fname' => '/usr/local/share/perl/5.10.1/SSP.pm',
+                                                          'type' => 'user',
+                                                          'line' => '2358'
+                                                        },
+                                                        {
+                                                          'expr' => undef,
+                                                          'value' => '1',
+                                                          'text' => '	my $error = $object->$method($peer, @$arguments);
+',
+                                                          'fname' => '/usr/local/share/perl/5.10.1/SSP.pm',
+                                                          'type' => 'user',
+                                                          'line' => '1765'
+                                                        }
+                                                      ]
          };
-$expr_list = [];
+$expr_list = [
+               {
+                 'expr' => '$method',
+                 'depth' => -1
+               }
+             ];
 $eval_saved_text = undef;
-$main_win_geometry = '1592x1114+0+0';
+$main_win_geometry = '1592x820+0+0';

@@ -114,7 +114,7 @@ sub ssp_save_help
 
     print "synopsis: ssp_save <element_name> [ <filename> ]\n";
 
-    return "*** Ok";
+    return "*** Ok: ssp_save_help";
 }
 
 
