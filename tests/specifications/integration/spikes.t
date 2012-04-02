@@ -73,6 +73,7 @@ my $test
 			       },
 			      ],
        description => "spiking behaviour",
+       disabled => 'the tests have been replaced with equivalent tests in the gshell',
        name => 'integration/spikes.t',
       };
 
