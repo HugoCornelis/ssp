@@ -20,13 +20,14 @@ AC_PREREQ(2.59)
 # $Format: "AC_INIT(${package}, ${major}.${minor}.${micro}-${label}, ${email})"$
 AC_INIT(ssp, 0.0.0-alpha, hugo.cornelis@gmail.com)
 
+dnl Obtain operating system information.
+AC_CANONICAL_TARGET
+
 AC_CONFIG_SRCDIR([doxygen.cfg])
 
 # $Format: "AM_INIT_AUTOMAKE(${package}, ${major}.${minor}.${micro}-${label})"$
 AM_INIT_AUTOMAKE(ssp, 0.0.0-alpha)
 
-dnl Obtain operating system information.
-AC_CANONICAL_TARGET
 
 
 # see https://metacpan.org/source/ASPIERS/Stow-v2.1.2/configure.ac
