@@ -26,6 +26,20 @@ my $test
 						 ],
 				description => "chemesis3, cal1, three pools one reaction",
 			       },
+			       {
+				arguments => [
+					     ],
+				command => 'tests/perl/cal2',
+				command_tests => [
+						  {
+						   description => "Is a chemesis3 model solved correctly, cal2, three pools one reaction ?",
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/chemesis3/cal2.txt`),
+# 						   read => (join '', `cat /usr/local/chemesis3/tests/specifications/strings/cal2.txt`),
+# 						   timeout => 18,
+						  },
+						 ],
+				description => "chemesis3, cal2, twice three pools one reaction, with diffusion between them",
+			       },
 			      ],
        description => "chemesis3",
        name => 'integration/chemesis3.t',
