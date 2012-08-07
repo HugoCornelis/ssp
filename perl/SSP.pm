@@ -19,7 +19,7 @@ struct schedulee
 };
 
 
-#define MAX_SCHEDULEES 100
+#define MAX_SCHEDULEES 10000
 
 static struct schedulee pschedule[MAX_SCHEDULEES];
 
