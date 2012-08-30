@@ -9,7 +9,7 @@ use strict;
 package SSP;
 
 
-use Inline (C => <<'END_C', CLEAN_AFTER_BUILD => 0, CCFLAGS => '-g', OPTIMIZE => '-g');
+use Inline (C => <<'END_C'); # , CLEAN_AFTER_BUILD => 0, CCFLAGS => '-g', OPTIMIZE => '-g');
 
 
 struct schedulee
