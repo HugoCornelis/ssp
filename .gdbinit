@@ -11,3 +11,4 @@ set args ./tests/perl/cal2
 b EventQueuerDataNew
 
 # set args bin/ssp '--cell' '/tmp/traub91.ndf' '--model-name' 'cell' '--output-fields' '/cell/soma->Vm' --time 0.15 --time-step 5e-5 --optimize --dump
+set args bin/ssp '--cell' '/home/hugo/conversion1.ndf' '--model-name' '/n' '--output-fields' '/cell/soma->Vm' --time 0.15 --time-step 5e-5 --optimize --dump

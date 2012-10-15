@@ -1059,105 +1059,44 @@ sub instantiate_outputs
 
 	my $solver_engine = $self->lookup_solver_engine($solverinfo->{solver});
 
-	# if this is a discrete output
+	# get the output field from the solver (is a double *)
 
-	if ($output->{field} eq 'spike')
+	my $solverfield = $solver_engine->solverfield($solverinfo);
+
+	if (!defined $solverfield)
 	{
-	    #1
-
-	    #t connect the solver with the service
-
-	    #t fills in the iTable member for the spikegen intermediary
-
-	    #t fills in the event send function
-
-	    #2
-
-	    #t connect the service with the output engine
-
-	    #t fills in the output object and OutputGeneratorAnnotatedStep() in the distributor_service
-
-	    # get the output field from the solver (is a double *)
-
-	    my $solverfield = $solver_engine->solverfield($solverinfo);
-
-	    if (!defined $solverfield)
-	    {
-		die "$0: The output " . $output->{component_name} . "->" . $output->{field} . " cannot be found";
-	    }
-
-	    # find the output for the output class
-
-	    my $outputclass_name = $output->{outputclass};
-
-	    my $outputclass = $self->{outputclasses}->{$outputclass_name};
-
-	    if (!defined $outputclass)
-	    {
-		die "$0: The output " . $output->{component_name} . "->" . $output->{field} . " has as outputclass $outputclass_name, but this class cannot be found";
-	    }
-
-	    # add the output field to the output engine
-
-	    #! note that outputclass is not an object
-
-	    my $output_backend = $outputclass->{ssp_outputclass};
-
-	    my $connected
-		= $output_backend->add
-		    (
-		     {
-		      address => $solverfield,
-		      service_request => $output,
-		     },
-		    );
-
-	    if (!$connected)
-	    {
-		die "$0: The output " . $output->{component_name} . "->" . $output->{field} . " cannot be connected to its output engine (which is determined by the output class in the schedule).";
-	    }
+	    die "$0: The output " . $output->{component_name} . "->" . $output->{field} . " cannot be found";
 	}
-	else
+
+	# find the output for the output class
+
+	my $outputclass_name = $output->{outputclass};
+
+	my $outputclass = $self->{outputclasses}->{$outputclass_name};
+
+	if (!defined $outputclass)
 	{
-	    # get the output field from the solver (is a double *)
+	    die "$0: The output " . $output->{component_name} . "->" . $output->{field} . " has as outputclass $outputclass_name, but this class cannot be found";
+	}
 
-	    my $solverfield = $solver_engine->solverfield($solverinfo);
+	# add the output field to the output engine
 
-	    if (!defined $solverfield)
-	    {
-		die "$0: The output " . $output->{component_name} . "->" . $output->{field} . " cannot be found";
-	    }
+	#! note that outputclass is not an object
 
-	    # find the output for the output class
+	my $output_backend = $outputclass->{ssp_outputclass};
 
-	    my $outputclass_name = $output->{outputclass};
+	my $connected
+	    = $output_backend->add
+		(
+		 {
+		  address => $solverfield,
+		  service_request => $output,
+		 },
+		);
 
-	    my $outputclass = $self->{outputclasses}->{$outputclass_name};
-
-	    if (!defined $outputclass)
-	    {
-		die "$0: The output " . $output->{component_name} . "->" . $output->{field} . " has as outputclass $outputclass_name, but this class cannot be found";
-	    }
-
-	    # add the output field to the output engine
-
-	    #! note that outputclass is not an object
-
-	    my $output_backend = $outputclass->{ssp_outputclass};
-
-	    my $connected
-		= $output_backend->add
-		    (
-		     {
-		      address => $solverfield,
-		      service_request => $output,
-		     },
-		    );
-
-	    if (!$connected)
-	    {
-		die "$0: The output " . $output->{component_name} . "->" . $output->{field} . " cannot be connected to its output engine (which is determined by the output class in the schedule).";
-	    }
+	if (!$connected)
+	{
+	    die "$0: The output " . $output->{component_name} . "->" . $output->{field} . " cannot be connected to its output engine (which is determined by the output class in the schedule).";
 	}
     }
 
