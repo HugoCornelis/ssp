@@ -22,7 +22,6 @@ my $test
 						   description => "Is the full purkinje cell model behaviour ok, soma Vm going to resting state ?",
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/builtin-edsjb1994-soma-rest.txt`),
 						   timeout => 300,
-						   write => undef,
 						  },
 						 ],
 				description => "cell builtin schedule applied to the Purkinje cell model, soma Vm going to resting state",
@@ -44,7 +43,6 @@ my $test
 						   description => "Is the full purkinje cell model behaviour ok, soma current injection ?",
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/builtin-edsjb1994-soma-current.txt`),
 						   timeout => 300,
-						   write => undef,
 						  },
 						 ],
 				description => "cell builtin schedule applied to the Purkinje cell model, soma current injection",
@@ -2566,7 +2564,6 @@ my $test
 0.05 -0.06
 ', # (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-perfectclamp.txt`),
 						   timeout => 300,
-						   write => undef,
 						  },
 						 ],
 				description => "cell builtin schedule applied to the Purkinje cell model, constant command voltage",
