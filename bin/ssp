@@ -1982,9 +1982,10 @@ sub schedule
 
     # now check if we indeed have a valid scheduler from that package name
 
-    use UNIVERSAL qw( isa can );
+    use  Scalar::Util qw(blessed);
 
-    if (!isa($scheduler, $package_name))
+    if (not defined blessed($scheduler)
+	or not $scheduler->isa($package_name))
     {
 	# no, construct one
 

@@ -1,33 +1,15 @@
 $files = {
-           '_<perl/SSP.pm' => [
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	my $success = $object->$method($peer, @$arguments, { verbose => 2, }, );
+           '_<./bin/ssp' => [
+                              {
+                                'value' => '1',
+                                'type' => 'user',
+                                'text' => '    if (defined blessed($scheduler)
 ',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => '1628'
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '    if (ref $engine)
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 2168
-                                },
-                                {
-                                  'expr' => undef,
-                                  'value' => '1',
-                                  'text' => '	if (!$engine->compile($self))
-',
-                                  'fname' => 'perl/SSP.pm',
-                                  'type' => 'user',
-                                  'line' => 325
-                                }
-                              ]
+                                'expr' => undef,
+                                'line' => '1987',
+                                'fname' => './bin/ssp'
+                              }
+                            ]
          };
 $expr_list = [
                {
@@ -35,9 +17,9 @@ $expr_list = [
                  'depth' => -1
                },
                {
-                 'expr' => '$subname',
-                 'depth' => -1
+                 'depth' => -1,
+                 'expr' => '$subname'
                }
              ];
 $eval_saved_text = undef;
-$main_win_geometry = '1592x1114+0+0';
+$main_win_geometry = '1592x997+0+0';
