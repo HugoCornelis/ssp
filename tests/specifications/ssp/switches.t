@@ -106,7 +106,6 @@ Known builtin configurations:
 						  {
 						   description => "What are the builtin simulation configuration templates ?",
 						   read => '
-
 ---
 cell: |+2
   
@@ -149,6 +148,8 @@ network: |+2
   
   Example usage: ssp --network examples/rsnet.ndf
   
+
+
 ',
 						  },
 						 ],
