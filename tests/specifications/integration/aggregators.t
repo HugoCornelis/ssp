@@ -60,13 +60,13 @@ my $test
 
 				{
 				 arguments => [
-					       "$::config->{core_directory}/yaml/purk_test_soma.yml",
+					       "$::global_config->{core_directory}/yaml/purk_test_soma.yml",
 					      ],
 				 command => 'bin/ssp',
 				 command_tests => [
 						   {
 						    description => "Is the purkinje cell soma solved correctly, no aggregators ?",
-						    read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purk_test_soma.txt`),
+						    read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/purk_test_soma.txt`),
 						    timeout => 100,
 						   },
 						  ],
@@ -74,13 +74,13 @@ my $test
 				},
 				{
 				 arguments => [
-					       "$::config->{core_directory}/yaml/purk_test_soma_aggregators.yml",
+					       "$::global_config->{core_directory}/yaml/purk_test_soma_aggregators.yml",
 					      ],
 				 command => 'bin/ssp',
 				 command_tests => [
 						   {
 						    description => "Is the purkinje cell soma solved correctly, with aggregators ?",
-						    read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purk_test_soma_aggregators.txt`),
+						    read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/purk_test_soma_aggregators.txt`),
 						    timeout => 100,
 						   },
 						  ],
@@ -88,7 +88,7 @@ my $test
 				},
 				{
 				 arguments => [
-					       "$::config->{core_directory}/yaml/purkinje/edsjb1994-endogenous.yml",
+					       "$::global_config->{core_directory}/yaml/purkinje/edsjb1994-endogenous.yml",
 					      ],
 				 command => 'bin/ssp',
 				 command_tests => [
@@ -99,7 +99,7 @@ my $test
 								     ? "purkinje cell potassium channels not found"
 								     : "")
 								  : "ran1 not defined as rng in heccer config")),
-						    read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt`),
+						    read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt`),
 						    timeout => 500,
 						   },
 						  ],
@@ -107,7 +107,7 @@ my $test
 				},
 				{
 				 arguments => [
-					       "$::config->{core_directory}/yaml/purkinje/edsjb1994-endogenous-aggregators.yml",
+					       "$::global_config->{core_directory}/yaml/purkinje/edsjb1994-endogenous-aggregators.yml",
 					      ],
 				 command => 'bin/ssp',
 				 command_tests => [
@@ -118,7 +118,7 @@ my $test
 								     ? "purkinje cell potassium channels not found"
 								     : "")
 								  : "ran1 not defined as rng in heccer config")),
-						    read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt`),
+						    read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt`),
 						    timeout => 500,
 						   },
 						  ],

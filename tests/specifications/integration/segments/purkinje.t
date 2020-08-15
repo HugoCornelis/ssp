@@ -19,7 +19,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is the simplified purkinje segment solved correctly ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/segments/purk_test_segment.txt`),
+						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/segments/purk_test_segment.txt`),
 						   timeout => 18,
 						   write => undef,
 						  },

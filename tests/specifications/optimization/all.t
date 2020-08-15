@@ -38,7 +38,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Can we run a schedule of a single neuron model from the cell builtin schedule, soma Vm output, soma current injection with set duration and simulation time ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/stand_alone-inject2e-8-0.01-0.03-0.06.txt`),
+						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/stand_alone-inject2e-8-0.01-0.03-0.06.txt`),
 						   timeout => 10,
 						   write => undef,
 						  },
@@ -74,7 +74,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Can we run a schedule of a single neuron model from the cell builtin schedule, debug option turned on ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/debug_stand_alone.txt`),
+						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/debug_stand_alone.txt`),
 						   timeout => 10,
 						   write => undef,
 						  },
@@ -112,7 +112,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is the full purkinje cell model behaviour ok, soma Vm going to resting state ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/builtin-edsjb1994-soma-rest.txt`),
+						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/purkinje/builtin-edsjb1994-soma-rest.txt`),
 						   timeout => 300,
 						   write => undef,
 						  },
@@ -136,7 +136,7 @@ my $test
 						  {
 						   description => "Is the full purkinje cell model behaviour ok, soma current injection ?",
 						   disabled => (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf" ? "purkinje cell potassium channels not found" : ""),
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/builtin-edsjb1994-soma-current.txt`),
+						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/purkinje/builtin-edsjb1994-soma-current.txt`),
 						   timeout => 300,
 						   write => undef,
 						  },

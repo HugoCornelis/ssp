@@ -146,7 +146,7 @@ verbose: ~
 						   description => "What is the current and conductance output of this simulation ?",
 						   read => {
 							    application_output_file => 'output/channel_response.out',
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/channel-response.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/channel-response.txt",
 							   },
 						   wait => 4,
 						  },

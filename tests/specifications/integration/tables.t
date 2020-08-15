@@ -150,7 +150,7 @@ my $test
 						  {
 						   description => "Are gates tabulated correctly, hardcoded tables (1) ?",
 						   disabled => "This test has been replaced with tests/perl/hardcoded-tables2",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/hardcoded-tables1.txt | perl -pe 's(unnamed test)(/hardcoded_tables1)g'`),
+						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/hardcoded-tables1.txt | perl -pe 's(unnamed test)(/hardcoded_tables1)g'`),
 						   timeout => 9,
 						  },
 						 ],
@@ -163,7 +163,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are gates tabulated correctly, hardcoded tables (2) ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/hardcoded-tables2.txt | perl -pe 's(unnamed test)(/hardcoded_tables2)g'`),
+						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/hardcoded-tables2.txt | perl -pe 's(unnamed test)(/hardcoded_tables2)g'`),
 						   timeout => 9,
 						  },
 						 ],

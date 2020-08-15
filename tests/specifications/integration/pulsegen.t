@@ -14,7 +14,7 @@ my $test
        command_definitions => [
 			       {
 				arguments => [
-					      "$::config->{core_directory}/yaml/heccer/pulsegen_freerun.yml",
+					      "$::global_config->{core_directory}/yaml/heccer/pulsegen_freerun.yml",
 					     ],
 				command => 'bin/ssp',
 				command_tests => [
@@ -23,7 +23,7 @@ my $test
 						   wait => 5,
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/pulse0.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/pulse0.txt",
 							   },
 						  },
 						 ],
@@ -47,7 +47,7 @@ my $test
 			       },
 			       {
 				arguments => [
-					      "$::config->{core_directory}/yaml/heccer/pulsegen_exttrig.yml",
+					      "$::global_config->{core_directory}/yaml/heccer/pulsegen_exttrig.yml",
 					     ],
 				command => 'bin/ssp',
 				command_tests => [
@@ -56,7 +56,7 @@ my $test
 						   wait => 5,
 						   read => {
 							    application_output_file => '/tmp/output',
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/pulse1.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/pulse1.txt",
 							   },
 						  },
 						 ],
@@ -80,7 +80,7 @@ my $test
 			       },
 			       {
 				arguments => [
-					      "$::config->{core_directory}/yaml/heccer/pulsegen_extgate.yml",
+					      "$::global_config->{core_directory}/yaml/heccer/pulsegen_extgate.yml",
 					     ],
 				command => 'bin/ssp',
 				command_tests => [
@@ -89,7 +89,7 @@ my $test
 						   wait => 5,
 						   read => {
 							    application_output_file => '/tmp/output',
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/pulse2.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/pulse2.txt",
 							   },
 						  },
 						 ],

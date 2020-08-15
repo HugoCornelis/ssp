@@ -145,7 +145,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are ten passive compartments with different properties and injected current solved correctly ?",
-						   read => (join '', `cat $::config->{tests_directory}/strings/tensizesp.txt`),
+						   read => (join '', `cat $::global_config->{tests_directory}/strings/tensizesp.txt`),
 						   timeout => 18,
 						  },
 						 ],

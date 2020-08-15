@@ -19,7 +19,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a chemesis3 model solved correctly, cal1, three pools one reaction ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/chemesis3/cal1.txt`),
+						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/chemesis3/cal1.txt`),
 # 						   read => (join '', `cat /usr/local/chemesis3/tests/specifications/strings/cal1.txt`),
 # 						   timeout => 18,
 						  },
@@ -33,7 +33,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a chemesis3 model solved correctly, cal2, three pools one reaction ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/chemesis3/cal2.txt`),
+						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/chemesis3/cal2.txt`),
 # 						   read => (join '', `cat /usr/local/chemesis3/tests/specifications/strings/cal2.txt`),
 # 						   timeout => 18,
 						  },

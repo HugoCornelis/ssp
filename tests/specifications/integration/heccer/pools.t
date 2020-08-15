@@ -32,7 +32,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a pool integrated correctly, two compartments, two pools case ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/pool2.txt`),
+						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/pool2.txt`),
 						   timeout => 8,
 						  },
 						 ],
@@ -45,7 +45,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a pool integrated correctly, one compartment, one pool with a feedback loop ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/pool1-feedback1.txt`),
+						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/pool1-feedback1.txt`),
 						   timeout => 8,
 						  },
 						 ],
@@ -58,7 +58,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a pool integrated correctly, one compartment, one pool with a feedback loop, reversed order ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/pool1-feedback2.txt`),
+						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/pool1-feedback2.txt`),
 						   timeout => 8,
 						  },
 						 ],

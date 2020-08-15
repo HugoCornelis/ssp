@@ -20,7 +20,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a single compartment with active channels solved correctly in passive mode ?",
-						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/passive-only1.txt`),
+						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/passive-only1.txt`),
 						   timeout => 10,
 						   write => undef,
 						  },
