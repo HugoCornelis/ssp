@@ -28,21 +28,23 @@ my $test
 						  },
 						 ],
 				description => "pulsegen on a basic compartment, free run mode",
-				preparation => {
-						description => "Delete the output file",
-						preparer =>
-						sub
-						{
-						    `rm -f /tmp/output`;
-						},
-					       },
-				reparation => {
-					       description => "Remove the generated output files in the results directory",
-					       reparer =>
-					       sub
-					       {
-						   `rm -f /tmp/output`;
-					       },
+				harnessing => {
+					       preparation => {
+							       description => "Delete the output file",
+							       preparer =>
+							       sub
+							       {
+								   `rm -f /tmp/output`;
+							       },
+							      },
+					       reparation => {
+							      description => "Remove the generated output files in the results directory",
+							      reparer =>
+							      sub
+							      {
+								  `rm -f /tmp/output`;
+							      },
+							     },
 					      },
 			       },
 			       {
@@ -61,21 +63,23 @@ my $test
 						  },
 						 ],
 				description => "pulsegen on a basic compartment, ext trigger mode",
-				preparation => {
-						description => "Delete the output file",
-						preparer =>
-						sub
-						{
-						    `rm -f /tmp/output`;
-						},
-					       },
-				reparation => {
-					       description => "Remove the generated output files in the results directory",
-					       reparer =>
-					       sub
-					       {
- 						   `rm -f /tmp/output`;
-					       },
+				harnessing => {
+					       preparation => {
+							       description => "Delete the output file",
+							       preparer =>
+							       sub
+							       {
+								   `rm -f /tmp/output`;
+							       },
+							      },
+					       reparation => {
+							      description => "Remove the generated output files in the results directory",
+							      reparer =>
+							      sub
+							      {
+								  `rm -f /tmp/output`;
+							      },
+							     },
 					      },
 			       },
 			       {
@@ -94,21 +98,23 @@ my $test
 						  },
 						 ],
 				description => "pulsegen on a basic compartment, ext gate mode",
-				preparation => {
-						description => "Delete the output file",
-						preparer =>
-						sub
-						{
-						    `rm -f /tmp/output`;
-						},
-					       },
-				reparation => {
-					       description => "Remove the generated output files in the results directory",
-					       reparer =>
-					       sub
-					       {
- 						   `rm -f /tmp/output`;
-					       },
+				harnessing => {
+					       preparation => {
+							       description => "Delete the output file",
+							       preparer =>
+							       sub
+							       {
+								   `rm -f /tmp/output`;
+							       },
+							      },
+					       reparation => {
+							      description => "Remove the generated output files in the results directory",
+							      reparer =>
+							      sub
+							      {
+								  `rm -f /tmp/output`;
+							      },
+							     },
 					      },
 			       },
 			       {
