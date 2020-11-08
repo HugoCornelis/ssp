@@ -24,6 +24,7 @@ my $test
 						  },
 						 ],
 				description => "pool integration, one compartment, single pool",
+				numerical_compare => 'arithmetic rounding differences',
 			       },
 			       {
 				arguments => [
@@ -37,6 +38,7 @@ my $test
 						  },
 						 ],
 				description => "pool integration, two compartments, two pools",
+				numerical_compare => 'arithmetic rounding differences',
 			       },
 			       {
 				arguments => [
@@ -50,6 +52,7 @@ my $test
 						  },
 						 ],
 				description => "pool integration, one compartment, one pool with a feedback loop",
+				numerical_compare => 'arithmetic rounding differences',
 			       },
 			       {
 				arguments => [
@@ -63,6 +66,7 @@ my $test
 						  },
 						 ],
 				description => "pool integration, one compartment, one pool with a feedback loop, reversed order",
+				numerical_compare => 'arithmetic rounding differences',
 			       },
 			       {
 				arguments => [
@@ -76,6 +80,7 @@ my $test
 						  },
 						 ],
 				description => "pool integration, one pool, two feeding channels",
+				numerical_compare => 'arithmetic rounding differences',
 			       },
 			       {
 				arguments => [
@@ -89,6 +94,7 @@ my $test
 						  },
 						 ],
 				description => "solved nernst potential application for channel reversal potentials",
+				numerical_compare => 'arithmetic rounding differences',
 			       },
 			      ],
        description => "pool integration & related",

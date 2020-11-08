@@ -27,6 +27,7 @@ my $test
 						   },
 						  ],
 				 description => "single channel currents summation",
+				 numerical_compare => 'arithmetic rounding differences',
 				},
 				{
 				 arguments => [
@@ -40,6 +41,7 @@ my $test
 						   },
 						  ],
 				 description => "single channel currents summation, double compartment case",
+				 numerical_compare => 'arithmetic rounding differences',
 				},
 				{
 				 arguments => [
@@ -53,6 +55,7 @@ my $test
 						   },
 						  ],
 				 description => "single channel currents summation, single compartment, three aggregators",
+				 numerical_compare => 'arithmetic rounding differences',
 				},
 			       ),
 			       (

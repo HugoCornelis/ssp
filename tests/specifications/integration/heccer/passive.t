@@ -150,6 +150,7 @@ my $test
 						  },
 						 ],
 				description => "ten passive compartments with different properties and injected current",
+				numerical_compare => 'arithmetic rounding differences',
 			       },
 			      ],
        description => "simple passive model testing",

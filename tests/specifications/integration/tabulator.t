@@ -19,8 +19,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
-						   read => '
---- !!perl/hash:Heccer::Tabulator::Result
+						   read => '!!perl/hash:Heccer::Tabulator::Result
 A:
   - 22.5694792145875
   - 74.6294414550961
@@ -88,8 +87,7 @@ hi:
 				command_tests => [
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
-						   read => '
---- !!perl/hash:Heccer::Tabulator::Result
+						   read => '!!perl/hash:Heccer::Tabulator::Result
 A:
   - 22.5694792145875
   - 74.6294414550961
@@ -157,8 +155,7 @@ hi:
 				command_tests => [
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
-						   read => '
---- !!perl/hash:Heccer::Tabulator::Result
+						   read => '!!perl/hash:Heccer::Tabulator::Result
 A:
   - 22.5694792145875
   - 74.6294414550961
@@ -270,8 +267,7 @@ tau:
 				command_tests => [
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
-						   read => '
---- !!perl/hash:Heccer::Tabulator::Result
+						   read => '!!perl/hash:Heccer::Tabulator::Result
 A:
   - 22.5694792145875
   - 74.6294414550961

@@ -24,6 +24,7 @@ my $test
 						  },
 						 ],
 				description => "single compartment with regular HH channels",
+				numerical_compare => 'arithmetic rounding differences',
 			       },
 			      ],
        description => "interaction between regular HH channels testing",
