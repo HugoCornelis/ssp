@@ -1689,6 +1689,11 @@ sub run
 
 	my $arguments = $application->{arguments};
 
+	if (not defined $method)
+	{
+	    die "$0: While running $self->{name}: the results section of the schedule has entries without a method";
+	}
+
 	# apply the method
 
 	#t note that this verbosity level is not the same as the one
