@@ -9,6 +9,39 @@ use strict;
 local $/;
 
 
+my $figures
+    = [
+       {
+	axes => {
+		 x => {
+		       label => "Compartmental membrane potential",
+		       steps => 40000,
+		       step_size => 5e-07,
+		      },
+		 y => {
+		       label => "Time",
+		      },
+		},
+	caption => {
+		    full => "The membrane potential of the Purkinje cell.",
+		    short => "Compartmental membrane potential",
+		   },
+	name => "hh",
+	title => "Compartmental membrane potential over time",
+	variables => [
+		      {
+		       name => "Soma",
+		       regex_parser => '[0-9]+\.[0-9]+ (-?[0-9]+\.[-0-9]+) -?[0-9]+\.[-e0-9]+ -?[0-9]+\.[-0-9]+',
+		      },
+		      {
+		       name => "Main dendrite",
+		       regex_parser => '[0-9]+\.[0-9]+ -?[0-9]+\.[-0-9]+ -?[0-9]+\.[-e0-9]+ (-?[0-9]+\.[-0-9]+)',
+		      },
+		     ],
+       },
+      ];
+
+
 my $test
     = {
        command_definitions => [
@@ -25,6 +58,7 @@ my $test
 								    ? "purkinje cell potassium channels not found"
 								    : "")
 								 : "ran1 not defined as rng in heccer config")),
+						   figures => $figures,
 						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt`),
 						   timeout => 300,
 						   write => undef,
@@ -41,6 +75,7 @@ my $test
 						  {
 						   description => "Is the full purkinje cell model behaviour ok, soma current injection ?",
 						   disabled => (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf" ? "purkinje cell potassium channels not found" : ""),
+						   figures => $figures,
 						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-current.txt`),
 						   timeout => 300,
 						   write => undef,
@@ -49,7 +84,25 @@ my $test
 				description => "full purkinje model, soma current injection",
 			       },
 			      ],
+       comment => "The output time step is too coarse for visualization of spikes.",
        description => "purkinje model testing",
+       documentation => {
+			 explanation => "
+
+These tests load the Purkinje cell model.  They then either activate
+randomly chosen synaptic channels or apply current injection into the
+soma.
+
+Models are instantiated with the Neurospaces model container and they
+are simulated with the Heccer compartmental solver.  SSP uses the APIs
+of these software components to give the user a fluent experience.
+
+",
+			 purpose => "
+These tests integrate SSP, the Neurospaces model container and Heccer.
+
+",
+			},
        name => 'integration/purkinje.t',
       };
 
