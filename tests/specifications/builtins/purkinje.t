@@ -4,6 +4,33 @@
 use strict;
 
 
+my $figures
+    = [
+       {
+	axes => {
+		 x => {
+		       label => "Time",
+		      },
+		 y => {
+		       label => "Compartmental membrane potential",
+		      },
+		},
+	caption => {
+		    full => "The membrane potential of the Purkinje cell.",
+		    short => "Compartmental membrane potential",
+		   },
+	name => "hh-vm",
+	title => "Compartmental membrane potential over time",
+	variables => [
+		      {
+		       name => "Soma",
+		       regex_parser => '[0-9]+\.[0-9]+ (-?[0-9]+\.[-0-9]+)',
+		      },
+		     ],
+       },
+      ];
+
+
 my $test
     = {
        command_definitions => [
@@ -20,6 +47,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is the full purkinje cell model behaviour ok, soma Vm going to resting state ?",
+						   figures => $figures,
 						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/purkinje/builtin-edsjb1994-soma-rest.txt`),
 						   timeout => 300,
 						  },
@@ -41,6 +69,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is the full purkinje cell model behaviour ok, soma current injection ?",
+						   figures => $figures,
 						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/purkinje/builtin-edsjb1994-soma-current.txt`),
 						   timeout => 300,
 						  },
@@ -62,6 +91,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Can we do a perfect clamp on the full purkinje cell model using a constant command voltage ?",
+						   figures => $figures,
 						   read => '2e-05 -0.06
 4e-05 -0.06
 6e-05 -0.06
@@ -2571,6 +2601,9 @@ my $test
 			      ],
        description => "cell builtin schedule applied to the Purkinje cell model",
        name => 'builtins/purkinje.t',
+       tags => [
+		'manual',
+	       ],
       };
 
 
