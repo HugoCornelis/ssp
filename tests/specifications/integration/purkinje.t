@@ -14,19 +14,19 @@ my $figures
        {
 	axes => {
 		 x => {
-		       label => "Compartmental membrane potential",
+		       label => "Time",
 		       steps => 40000,
 		       step_size => 5e-07,
 		      },
 		 y => {
-		       label => "Time",
+		       label => "Compartmental membrane potential",
 		      },
 		},
 	caption => {
 		    full => "The membrane potential of the Purkinje cell.",
 		    short => "Compartmental membrane potential",
 		   },
-	name => "hh",
+	name => "hh-vm",
 	title => "Compartmental membrane potential over time",
 	variables => [
 		      {
@@ -34,8 +34,32 @@ my $figures
 		       regex_parser => '[0-9]+\.[0-9]+ (-?[0-9]+\.[-0-9]+) -?[0-9]+\.[-e0-9]+ -?[0-9]+\.[-0-9]+',
 		      },
 		      {
-		       name => "Main dendrite",
+		       name => "Thick dendrite",
 		       regex_parser => '[0-9]+\.[0-9]+ -?[0-9]+\.[-0-9]+ -?[0-9]+\.[-e0-9]+ (-?[0-9]+\.[-0-9]+)',
+		      },
+		     ],
+       },
+       {
+	axes => {
+		 x => {
+		       label => "Time",
+		       steps => 40000,
+		       step_size => 5e-07,
+		      },
+		 y => {
+		       label => "Compartmental calcium concentration",
+		      },
+		},
+	caption => {
+		    full => "The calcium concentration inside the Purkinje cell.",
+		    short => "Compartmental calcium concentration",
+		   },
+	name => "hh-ca",
+	title => "Compartmental calcium concentration over time",
+	variables => [
+		      {
+		       name => "Soma",
+		       regex_parser => '[0-9]+\.[0-9]+ -?[0-9]+\.[-0-9]+ (-?[0-9]+\.[-e0-9]+) -?[0-9]+\.[-0-9]+',
 		      },
 		     ],
        },
