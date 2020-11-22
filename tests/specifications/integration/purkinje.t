@@ -76,7 +76,7 @@ my $test
 						   description => "Is the full purkinje cell model behaviour ok, soma current injection ?",
 						   disabled => (!-e "/usr/local/neurospaces/models/library/gates/kdr_steadystate.ndf" ? "purkinje cell potassium channels not found" : ""),
 						   figures => $figures,
-						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-current.txt`),
+						   read => (join '', `cat $::global_config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-current-2.txt`),
 						   timeout => 300,
 						   write => undef,
 						  },
@@ -104,6 +104,9 @@ These tests integrate SSP, the Neurospaces model container and Heccer.
 ",
 			},
        name => 'integration/purkinje.t',
+       tags => [
+		'manual',
+	       ],
       };
 
 
