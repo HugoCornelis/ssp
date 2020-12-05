@@ -19,6 +19,25 @@ my $test
 				command_tests => [
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
+						   figures => [
+							       {
+								axes => {
+									 x => {
+									       label => "Compartmental membrane potential",
+									      },
+									 y => {
+									       label => "Activation",
+									      },
+									},
+								caption => {
+									    full => "The activation of Hodgkin-Huxley gates.",
+									    short => "Gate activation",
+									   },
+								class => "hh_gates",
+								name => "hh-vm",
+								title => "Hodgkin-Huxley gate activation against compartmental membrane potential (internal format)",
+							       },
+							      ],
 						   read => '!!perl/hash:Heccer::Tabulator::Result
 A:
   - 22.5694792145875
@@ -87,6 +106,25 @@ hi:
 				command_tests => [
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
+						   figures1 => [
+							       {
+								axes => {
+									 x => {
+									       label => "Compartmental membrane potential",
+									      },
+									 y => {
+									       label => "Activation",
+									      },
+									},
+								caption => {
+									    full => "The activation of Hodgkin-Huxley gates.",
+									    short => "Gate activation",
+									   },
+								class => "hh_gates",
+								name => "hh-vm",
+								title => "Hodgkin-Huxley gate activation against compartmental membrane potential (A-B format)",
+							       },
+							      ],
 						   read => '!!perl/hash:Heccer::Tabulator::Result
 A:
   - 22.5694792145875
@@ -155,6 +193,25 @@ hi:
 				command_tests => [
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
+						   figures1 => [
+							       {
+								axes => {
+									 x => {
+									       label => "Compartmental membrane potential",
+									      },
+									 y => {
+									       label => "Activation",
+									      },
+									},
+								caption => {
+									    full => "The activation of Hodgkin-Huxley gates.",
+									    short => "Gate activation",
+									   },
+								class => "hh_gates",
+								name => "hh-vm",
+								title => "Hodgkin-Huxley gate activation against compartmental membrane potential (steady state, time constant format)",
+							       },
+							      ],
 						   read => '!!perl/hash:Heccer::Tabulator::Result
 A:
   - 22.5694792145875
@@ -267,6 +324,25 @@ tau:
 				command_tests => [
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
+						   figures1 => [
+							       {
+								axes => {
+									 x => {
+									       label => "Compartmental membrane potential",
+									      },
+									 y => {
+									       label => "Activation",
+									      },
+									},
+								caption => {
+									    full => "The activation of Hodgkin-Huxley gates.",
+									    short => "Gate activation",
+									   },
+								class => "hh_gates",
+								name => "hh-vm",
+								title => "Hodgkin-Huxley gate activation against compartmental membrane potential (alpha / beta format)",
+							       },
+							      ],
 						   read => '!!perl/hash:Heccer::Tabulator::Result
 A:
   - 22.5694792145875
@@ -375,6 +451,9 @@ hi:
 			      ],
        description => "Gate tabulation high-level interfacing",
        name => 'integration/tabulator.t',
+       tags => [
+		'manual',
+	       ],
       };
 
 
