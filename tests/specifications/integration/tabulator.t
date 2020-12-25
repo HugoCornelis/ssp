@@ -30,10 +30,10 @@ my $test
 									      },
 									},
 								caption => {
-									    full => "The activation of Hodgkin-Huxley gates.",
+									    full => "The activation of Hodgkin-Huxley gates (Heccer's internal format).",
 									    short => "Gate activation",
 									   },
-								class => "hh_gates",
+								class => "hh_gates_internal",
 								name => "hh-vm",
 								title => "Hodgkin-Huxley gate activation against compartmental membrane potential (internal format)",
 							       },
@@ -324,7 +324,7 @@ tau:
 				command_tests => [
 						  {
 						   description => "Are HH gates tabulated correctly, can we access the tables ?",
-						   figures1 => [
+						   figures => [
 							       {
 								axes => {
 									 x => {
@@ -335,10 +335,10 @@ tau:
 									      },
 									},
 								caption => {
-									    full => "The activation of Hodgkin-Huxley gates.",
+									    full => "The activation of Hodgkin-Huxley gates (alpha / beta format).",
 									    short => "Gate activation",
 									   },
-								class => "hh_gates",
+								class => "hh_gates_alpha_beta",
 								name => "hh-vm",
 								title => "Hodgkin-Huxley gate activation against compartmental membrane potential (alpha / beta format)",
 							       },
