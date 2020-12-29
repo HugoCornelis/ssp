@@ -23,19 +23,30 @@ my $test
 							       {
 								axes => {
 									 x => {
-									       label => "Compartmental membrane potential",
+									       label => "Gate activation between 0 and 1",
 									      },
-									 y => {
-									       label => "Activation",
-									      },
+									 Ay => {
+										label => "A value (arbitrary units)",
+									       },
+									 By => {
+										label => "B value (arbitrary units)",
+									       },
 									},
 								caption => {
-									    full => "The activation of Hodgkin-Huxley gates (Heccer's internal format).",
-									    short => "Gate activation",
+									    full => "Gate Activation Table Values.  Left: A-table, Right: B-table",
+									    short => "Gate Activation Table Values",
 									   },
+								# caption_A => {
+								# 	      full => "Table A of the activation of Hodgkin-Huxley gates (Heccer's internal format).",
+								# 	      short => "Gate activation table A",
+								# 	     },
+								# caption_B => {
+								# 	      full => "Table B of the activation of Hodgkin-Huxley gates (Heccer's internal format).",
+								# 	      short => "Gate activation table B",
+								# 	     },
 								class => "hh_gates_internal",
 								name => "hh-vm",
-								title => "Hodgkin-Huxley gate activation against compartmental membrane potential (internal format)",
+								title => "Hodgkin-Huxley gate activation (internal format)",
 							       },
 							      ],
 						   read => '!!perl/hash:Heccer::Tabulator::Result
@@ -328,15 +339,15 @@ tau:
 							       {
 								axes => {
 									 x => {
-									       label => "Compartmental membrane potential",
+									       label => "Gate rate of change",
 									      },
 									 y => {
 									       label => "Activation",
 									      },
 									},
 								caption => {
-									    full => "The activation of Hodgkin-Huxley gates (alpha / beta format).",
-									    short => "Gate activation",
+									    full => "The rate of activation change of the Hodgkin-Huxley gates (alpha / beta format).",
+									    short => "Gate rate of change",
 									   },
 								class => "hh_gates_alpha_beta",
 								name => "hh-vm",
